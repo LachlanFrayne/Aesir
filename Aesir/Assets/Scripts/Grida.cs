@@ -8,8 +8,9 @@ public class Grida : MonoBehaviour {
 
     public GameObject tilePrefab;
     public Node[,] boardArray = new Node[gridSizeX, gridSizeY];
-    public static int gridSizeX = 10;
-    public static int gridSizeY = 7;
+    public static int gridSizeX = 30;
+    public static int gridSizeY = 30;
+   
 
 
     void Awake()
@@ -35,7 +36,7 @@ public class Grida : MonoBehaviour {
             {
                 if(rowTile < gridSizeY - 1)
                 {
-                    boardArray[columnTile, rowTile].up = boardArray[columnTile, rowTile + 1];       //Sets the up node from the current node
+                    boardArray[columnTile, rowTile].down = boardArray[columnTile, rowTile + 1];       //Sets the down node from the current node
                 }
         
                 if(columnTile < gridSizeX - 1)
@@ -44,7 +45,7 @@ public class Grida : MonoBehaviour {
                 }
                 if (rowTile > 0)
                 {
-                    boardArray[columnTile, rowTile].down = boardArray[columnTile, rowTile - 1];     //Sets the down node from the current node
+                    boardArray[columnTile, rowTile].up = boardArray[columnTile, rowTile - 1];     //Sets the up node from the current node
                 }
         
                 if (columnTile > 0)
@@ -62,5 +63,6 @@ public class Node
     public Node right;
     public Node up;
     public Node down;
+    public Node prev;
     public GameObject self;
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Loki : Entity
 {
     Grida m_grid;
-    public GameObject m_gridObject;
     public Node m_currentNode;
     public Material movementHighlight;
     public Material removeHighlight;
@@ -13,7 +12,7 @@ public class Loki : Entity
 
     void Start()
     {
-        m_grid = m_gridObject.GetComponent<Grida>();
+        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 100))
         {
