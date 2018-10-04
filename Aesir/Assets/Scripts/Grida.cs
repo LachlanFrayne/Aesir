@@ -64,5 +64,6 @@ public class Node
     public Node up;
     public Node down;
     public Node prev;
+    public int gScore;
     public GameObject self;
 }
