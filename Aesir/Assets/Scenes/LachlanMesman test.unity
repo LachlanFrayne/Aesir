@@ -197,7 +197,36 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &486628799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 486628800}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &486628800
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 486628799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1700690733}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &503837537
 GameObject:
@@ -242,17 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6640e5706eab51a4a84a5cd040dba57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 1
-  m_actionPoints: 1
-  m_attackRange: 1
-  basicAttack: 1
-  attackActionPointCost: 1
-  movementActionPointCost: 1
-  m_meleeDamage: 1
-  m_rangeDamage: 1
-  m_gridObject: {fileID: 1116874320}
-  movementHighlight: {fileID: 2100000, guid: 950d00d1e7e965a4697b9c5349955343, type: 2}
-  removeHighlight: {fileID: 2100000, guid: ed38777bac43e5a4a9b106b9628866f9, type: 2}
 --- !u!23 &503837540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -402,17 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188ccdc1c7df569468305c8d4f92b850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 15
-  m_actionPoints: 12
-  m_attackRange: 1
-  basicAttack: 2
-  attackActionPointCost: 3
-  movementActionPointCost: 1
-  m_meleeDamage: 0
-  m_rangeDamage: 0
-  m_gridObject: {fileID: 1116874320}
-  movementHighlight: {fileID: 2100000, guid: 950d00d1e7e965a4697b9c5349955343, type: 2}
-  removeHighlight: {fileID: 2100000, guid: ed38777bac43e5a4a9b106b9628866f9, type: 2}
 --- !u!1 &1116874320
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116874322}
   - component: {fileID: 1116874323}
+  - component: {fileID: 1116874321}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Grid
@@ -429,6 +437,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1116874321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1116874320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64fccc9022398442a93076ea8272c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 236863875}
 --- !u!4 &1116874322
 Transform:
   m_ObjectHideFlags: 0
@@ -440,7 +460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1116874323
 MonoBehaviour:
@@ -453,7 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5187146b8aafc2d42a857ed893291b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 236863875}
 --- !u!1 &1398342158
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +533,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700690729
 GameObject:
@@ -527,6 +546,7 @@ GameObject:
   - component: {fileID: 1700690732}
   - component: {fileID: 1700690731}
   - component: {fileID: 1700690730}
+  - component: {fileID: 1700690734}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -590,13 +610,30 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1700690729}
-  m_LocalRotation: {x: -0.32612047, y: 0.5015861, z: -0.21166134, w: -0.7728237}
-  m_LocalPosition: {x: 19.978264, y: 10.794636, z: 2.6495771}
+  m_LocalRotation: {x: 0.4599915, y: 0.077308126, z: -0.04024406, w: 0.8836355}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 486628800}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16.174002, y: -50.166004, z: 0}
+  m_LocalEulerAnglesHint: {x: 55, y: 10, z: 0}
+--- !u!114 &1700690734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1700690729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020eeca61db29054f933deb06d48fc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_xMax: 149
+  m_xMin: 0
+  m_zMax: 117
+  m_zMin: 0
+  m_height: 15
+  m_speed: 15
 --- !u!1 &1733298204
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +697,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1776172571
 GameObject:
@@ -691,7 +728,7 @@ Transform:
   - {fileID: 1934284619}
   - {fileID: 503837538}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887065941
 GameObject:
@@ -779,7 +816,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -829,17 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5a4b189d8d00f41b0ae4acd2b7528b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 1
-  m_actionPoints: 1
-  m_attackRange: 1
-  basicAttack: 1
-  attackActionPointCost: 1
-  movementActionPointCost: 1
-  m_meleeDamage: 0
-  m_rangeDamage: 0
-  m_gridObject: {fileID: 1116874320}
-  movementHighlight: {fileID: 2100000, guid: 950d00d1e7e965a4697b9c5349955343, type: 2}
-  removeHighlight: {fileID: 2100000, guid: ed38777bac43e5a4a9b106b9628866f9, type: 2}
 --- !u!23 &1934284621
 MeshRenderer:
   m_ObjectHideFlags: 0
