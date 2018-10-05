@@ -13,6 +13,7 @@ public class Thor : Hero
     public Material movementHighlight;
     public Material removeHighlight;
     public Material enemyHighlight;
+    public Material pathForward;
     public GameObject Selection;
     public Text ActionPoint;
     public Text ActionPointsMoveCost;
@@ -111,7 +112,7 @@ public class Thor : Hero
                             {
                                 while(temp.prev != null)
                                 {
-                                    temp.self.GetComponent<Renderer>().material.color = Color.green;
+                                    temp.self.GetComponent<Renderer>().material = pathForward;
                                     path.Add(temp);     //Adds node to path
                                     temp = temp.prev;       //Set temp to temp.prev                                   
                                 }                               

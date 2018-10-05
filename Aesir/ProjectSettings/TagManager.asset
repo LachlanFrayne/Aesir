@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tile
+  - Freya
+  - Thor
+  - Grid
+  - Enemy
+  - Loki
+  - CurrentTile
+  - ThorAttackableTile
+  - ThorWalkableTile
   layers:
   - Default
   - TransparentFX
