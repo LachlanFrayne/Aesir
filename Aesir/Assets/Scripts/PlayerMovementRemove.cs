@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
-    public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight)
+public class PlayerMovementRemove : MonoBehaviour {
+
+    public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material removeHighlight)
     {
         Heap openList = new Heap();
         List<Node> closedList = new List<Node>();
 
-        //startNode.prev = null;
         openList.Add(startNode);
 
 
@@ -23,8 +22,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 continue;
             }
-            currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-            currentNode.self.tag = "ThorWalkableTile";
+            currentNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+            currentNode.self.tag = "Tile";
+            currentNode.gScore = 0;
+            currentNode.prev = null;
+        
 
             if (!closedList.Contains(currentNode.left))
             {
@@ -37,16 +39,20 @@ public class PlayerMovement : MonoBehaviour
                         currentNode.left.prev = currentNode;
                         currentNode.left.gScore = tempGScore;
                     }
+                    currentNode.left.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                    currentNode.left.self.tag = "Tile";
+                    currentNode.left.gScore = 0;
+                    currentNode.left.prev = null;
                 }
                 else
                 {
-                    if(currentNode.left != null)
+                    if (currentNode.left != null)
                     {
                         currentNode.left.prev = currentNode;
                         currentNode.left.gScore = currentNode.gScore + 1;
                         openList.Add(currentNode.left);
                     }
-                    
+
                 }
             }
 
@@ -61,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
                         currentNode.right.prev = currentNode;
 
                         currentNode.right.gScore = tempGScore;
+                        currentNode.right.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                        currentNode.right.self.tag = "Tile";
+                        currentNode.right.gScore = 0;
+                        currentNode.right.prev = null;
                     }
                 }
                 else
@@ -85,6 +95,10 @@ public class PlayerMovement : MonoBehaviour
                         currentNode.up.prev = currentNode;
 
                         currentNode.up.gScore = tempGScore;
+                        currentNode.up.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                        currentNode.up.self.tag = "Tile";
+                        currentNode.up.gScore = 0;
+                        currentNode.up.prev = null;
                     }
                 }
                 else
@@ -109,6 +123,10 @@ public class PlayerMovement : MonoBehaviour
                         currentNode.down.prev = currentNode;
 
                         currentNode.down.gScore = tempGScore;
+                        currentNode.down.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                        currentNode.down.self.tag = "Tile";
+                        currentNode.down.gScore = 0;
+                        currentNode.down.prev = null;
                     }
                 }
                 else

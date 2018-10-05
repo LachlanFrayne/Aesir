@@ -19,11 +19,30 @@ public class Thor : Entity
     bool turn = false;
     bool ability1 = true;
     PlayerMovement playerMovement;
+    PlayerMovementRemove playerMovementRemove;
+    List<Node> path = new List<Node>();
+    List<Node> allTiles = new List<Node>();
+    Collider a;
+    Collider b;
 
     void Start ()
     {
-        playerMovement = GetComponent<PlayerMovement>();
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
+        for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)    
+        {
+            for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+            {
+                allTiles.Add(m_grid.boardArray[columnTile, rowTile]);                
+            }
+        }
+
+
+
+        //playerMovement = new PlayerMovement();
+        //playerMovementRemove = new PlayerMovementRemove(); 
+        playerMovement = GetComponent<PlayerMovement>();
+        playerMovementRemove = GetComponent<PlayerMovementRemove>();
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 100))       //Creates a raycast downwards
         {
@@ -56,17 +75,47 @@ public class Thor : Entity
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
+        
         if (Physics.Raycast(ray1, out hit1, 100))
         {
             if (hit1.collider.tag == "ThorWalkableTile" && turn)
             {
-                for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)     //Goes through the grid 
+                for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)     
                 {
                     for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
                     {
                         if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                         {
                             ActionPointsMoveCost.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();
+
+                            if (a == null)
+                                a = hit1.collider;      //a = the first hit
+                            else
+                                b = hit1.collider;      //b = the second hit
+
+                            if (a != b)         //if the first hit is different then the second hit
+                            {
+                                foreach(Node tile in path)      //Goes through all tiles in the path
+                                {
+                                    tile.self.GetComponent<Renderer>().material = movementHighlight;        //
+                                    tile.self.tag = "ThorWalkableTile";
+                                }
+                                a = null;
+                                b = null;
+                                path.Clear();
+                            }
+                            Node temp;      //Creates a temp node
+                            temp = m_grid.boardArray[columnTile, rowTile];      //Sets it to the hit node
+                          
+                            if(temp.self.tag != "CurrentTile")
+                            {
+                                while(temp.prev != null)
+                                {
+                                    temp.self.GetComponent<Renderer>().material.color = Color.green;
+                                    path.Add(temp);     //Adds node to path
+                                    temp = temp.prev;       //Set temp to temp.prev                                   
+                                }                               
+                            }                          
                         }
                     }
                 }
@@ -107,10 +156,23 @@ public class Thor : Entity
                         {
                             if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)     
                             {
+                                Node tempNode = m_currentNode;
+                                int tempActionPoints = m_actionPoints;
+                               
+
+                                m_actionPoints = m_actionPoints - m_grid.boardArray[columnTile, rowTile].gScore;
+                                playerMovementRemove.dijkstrasSearch(tempNode, tempActionPoints, removeHighlight);
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];
                                 m_currentNode.self.tag = "CurrentTile";
-                                m_actionPoints = m_actionPoints - m_grid.boardArray[columnTile, rowTile].gScore;
-                                turn = false;
+                                //turn = false;
+                                foreach (Node tile in path)      //Goes through all tiles in the path
+                                {
+                                    tile.self.GetComponent<Renderer>().material = removeHighlight;        //
+                                    tile.self.tag = "Tile";
+                                }
+                                a = null;
+                                b = null;
+                                path.Clear();
                             }
                         }
                     }
@@ -171,8 +233,7 @@ public class Thor : Entity
 
     void HighlightMovement()
     {
-         playerMovement.dijkstrasSearch(m_currentNode, 8, movementHighlight);
-        
+         playerMovement.dijkstrasSearch(m_currentNode, m_actionPoints, movementHighlight);      
     }
 
 
@@ -393,7 +454,7 @@ public class Thor : Entity
     void Attack()
     {
         //HighlightAttack("BasicAttack");
-        HighlightAttack("BridalAbility1");
+        HighlightAttack("BridalBasicAttack");
         Selection.SetActive(false);
         SetAttackFalse();
     }
