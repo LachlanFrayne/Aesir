@@ -321,12 +321,20 @@
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
+    <Compile Include="Assets\Scripts\AI\ABDecision.cs" />
+    <Compile Include="Assets\Scripts\AI\BaseDecision.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
     <Compile Include="Assets\Scripts\Freya.cs" />
     <Compile Include="Assets\Scripts\Grida.cs" />
+    <Compile Include="Assets\Scripts\Heap.cs" />
+    <Compile Include="Assets\Scripts\Hero.cs" />
     <Compile Include="Assets\Scripts\Loki.cs" />
+    <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovementRemove.cs" />
+    <Compile Include="Assets\Scripts\test.cs" />
     <Compile Include="Assets\Scripts\Thor.cs" />
     <Compile Include="Assets\Scripts\TurnSystem.cs" />
   </ItemGroup>

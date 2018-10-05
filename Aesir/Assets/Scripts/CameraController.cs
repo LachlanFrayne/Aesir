@@ -11,15 +11,7 @@ public class CameraController : MonoBehaviour {
 
     public int m_height;
     public int m_speed;
-    Rigidbody rb;
 
-    // Use this for initialization
-    void Start ()
-    {
-        rb = GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
 	void Update ()
     {
 
@@ -66,7 +58,7 @@ public class CameraController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                transform.position = hit.transform.position;
+                transform.position = hit.transform.position - new Vector3(5,0,10);      //JM: Needs improvement
             }
         }
 

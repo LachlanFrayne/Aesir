@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Loki : Entity
+public class Loki : Hero
 {
     Grida m_grid;
     public Node m_currentNode;

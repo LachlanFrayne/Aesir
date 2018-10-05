@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Freya : Entity {
+public class Freya : Hero
+{
 
     Grida m_grid;
     public Node m_currentNode;

@@ -8,6 +8,9 @@ public class Enemy : Entity
     public Node m_currentEnemyNode;
     bool turn = false;
 
+    public int m_meleeDamage;
+    public int m_rangeDamage;
+
     void Start()
     {
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
@@ -31,7 +34,7 @@ public class Enemy : Entity
 
     void Update()
     {
-        if(m_health <= 0)
+        if(m_nHealth <= 0)
         {
             Destroy(this.gameObject);
         }

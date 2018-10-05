@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Thor : Entity
+public class Thor : Hero
 {
     Grida m_grid;
     public Node m_currentNode;
@@ -70,7 +70,7 @@ public class Thor : Entity
         if (attack)
             Attack();
 
-        ActionPoint.text = m_actionPoints.ToString();
+        ActionPoint.text = m_nActionPoints.ToString();
 
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -157,10 +157,10 @@ public class Thor : Entity
                             if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)     
                             {
                                 Node tempNode = m_currentNode;
-                                int tempActionPoints = m_actionPoints;
-                               
+                                int tempActionPoints = m_nActionPoints;
 
-                                m_actionPoints = m_actionPoints - m_grid.boardArray[columnTile, rowTile].gScore;
+
+                                m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].gScore;
                                 playerMovementRemove.dijkstrasSearch(tempNode, tempActionPoints, removeHighlight);
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];
                                 m_currentNode.self.tag = "CurrentTile";
@@ -222,7 +222,7 @@ public class Thor : Entity
                     RemoveHighlightAttack();
                     //hit.collider.GetComponent<MeshRenderer>().material.color = Color.red;   //Remove once code that damages is put in    
                     //Add Attack Code
-                    hit.collider.GetComponent<Entity>().m_health = hit.collider.GetComponent<Entity>().m_health - m_basicAttack;
+                    hit.collider.GetComponent<Entity>().m_nHealth = hit.collider.GetComponent<Entity>().m_nHealth - m_nBasicAttack;
 
 
                 }
@@ -233,7 +233,7 @@ public class Thor : Entity
 
     void HighlightMovement()
     {
-         playerMovement.dijkstrasSearch(m_currentNode, m_actionPoints, movementHighlight);      
+         playerMovement.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight);      
     }
 
 
@@ -242,7 +242,7 @@ public class Thor : Entity
         if (attack == "BridalBasicAttack")
         {
             m_tempNode = m_tempNodeBase;        //Sets base 
-            int f = m_attackRange;      //The attackRange
+            int f = m_nAttackRange;      //The attackRange
             int e = 1;
 
             for (int i = 0; i < e; i++)
@@ -392,7 +392,7 @@ public class Thor : Entity
     void RemoveHighlightAttack()
     {
         m_tempNode = m_tempNodeBase;
-        int f = m_attackRange;
+        int f = m_nAttackRange;
         int e = 1;
 
         for (int i = 0; i < e; i++)
