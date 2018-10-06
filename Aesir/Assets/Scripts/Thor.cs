@@ -10,10 +10,7 @@ public class Thor : Hero
     public Node m_currentNode;
     public Node m_tempNode;
     public Node m_tempNodeBase;
-    public Material movementHighlight;
-    public Material removeHighlight;
-    public Material enemyHighlight;
-    public Material pathForward;
+  
     public GameObject Selection;
     public Text ActionPoint;
     public Text ActionPointsMoveCost;
@@ -25,6 +22,16 @@ public class Thor : Hero
     List<Node> allTiles = new List<Node>();
     Collider a;
     Collider b;
+    [Header("Material")]
+    public Material movementHighlight;
+    public Material removeHighlight;
+    public Material enemyHighlight;
+    public Material pathUpDown;
+    public Material pathLeftRight;
+    public Material pathUpLeft;
+    public Material pathUpRight;
+    public Material pathDownLeft;
+    public Material pathDownRight;
 
     void Start ()
     {
@@ -76,12 +83,12 @@ public class Thor : Hero
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
-        
+
         if (Physics.Raycast(ray1, out hit1, 100))
         {
             if (hit1.collider.tag == "ThorWalkableTile" && turn)
             {
-                for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)     
+                for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
                 {
                     for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
                     {
@@ -96,7 +103,7 @@ public class Thor : Hero
 
                             if (a != b)         //if the first hit is different then the second hit
                             {
-                                foreach(Node tile in path)      //Goes through all tiles in the path
+                                foreach (Node tile in path)      //Goes through all tiles in the path
                                 {
                                     tile.self.GetComponent<Renderer>().material = movementHighlight;        //
                                     tile.self.tag = "ThorWalkableTile";
@@ -107,24 +114,133 @@ public class Thor : Hero
                             }
                             Node temp;      //Creates a temp node
                             temp = m_grid.boardArray[columnTile, rowTile];      //Sets it to the hit node
-                          
-                            if(temp.self.tag != "CurrentTile")
+
+                            if (temp.self.tag != "CurrentTile")
                             {
-                                while(temp.prev != null)
+                                while (temp.prev != null)
                                 {
-                                    temp.self.GetComponent<Renderer>().material = pathForward;
-                                    path.Add(temp);     //Adds node to path
-                                    temp = temp.prev;       //Set temp to temp.prev                                   
-                                }                               
-                            }                          
+
+                                    if (temp.prev == temp.down)
+                                    {
+                                        if(temp.prev.prev == temp.prev.left)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathUpLeft;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else if (temp.prev.prev == temp.prev.right)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathDownLeft;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            path.Add(temp);     //Adds node to path
+                                            temp = temp.prev;       //Set temp to temp.prev 
+
+                                        }
+
+                                    }
+                                    else if (temp.prev == temp.up)
+                                    {
+                                        if (temp.prev.prev == temp.prev.left)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathUpRight;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else if (temp.prev.prev == temp.prev.right)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathDownRight;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
+                                            path.Add(temp);     //Adds node to path
+                                            temp = temp.prev;       //Set temp to temp.prev 
+
+                                        }
+
+                                    }
+                                    else if (temp.prev == temp.left)
+                                    {
+
+                                        if (temp.prev.prev == temp.prev.up)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathDownLeft;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else if (temp.prev.prev == temp.prev.down)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathDownRight;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            path.Add(temp);     //Adds node to path
+                                            temp = temp.prev;       //Set temp to temp.prev 
+
+                                        }
+
+                                    }
+                                    else if (temp.prev == temp.right)
+                                    {
+
+                                        if (temp.prev.prev == temp.prev.up)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathUpLeft;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else if (temp.prev.prev == temp.prev.down)
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            temp.prev.self.GetComponent<Renderer>().material = pathUpRight;
+                                            path.Add(temp);     //Adds node to path
+                                            path.Add(temp.prev);
+                                            temp = temp.prev.prev;       //Set temp to temp.prev 
+                                        }
+                                        else
+                                        {
+                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
+                                            path.Add(temp);     //Adds node to path
+                                            temp = temp.prev;       //Set temp to temp.prev 
+
+                                        }
+
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
-
         }
 
-            if (Input.GetMouseButtonUp(0))
+
+
+        if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -145,8 +261,8 @@ public class Thor : Hero
                     RemoveHighlightAttack();
                     turn = false;
                 }
-               
-                
+
+
 
                 if (hit.collider.tag == "ThorWalkableTile" && turn)
                 {
@@ -155,7 +271,7 @@ public class Thor : Hero
                     {
                         for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
                         {
-                            if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)     
+                            if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                             {
                                 Node tempNode = m_currentNode;
                                 int tempActionPoints = m_nActionPoints;
@@ -228,8 +344,7 @@ public class Thor : Hero
 
                 }
             }
-
-        }
+        }                
     }
 
     void HighlightMovement()

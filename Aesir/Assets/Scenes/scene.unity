@@ -954,13 +954,18 @@ MonoBehaviour:
   m_nActionPointMax: 0
   move: 0
   attack: 0
-  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
-  removeHighlight: {fileID: 2100000, guid: e3e760b9b4003f34b8c6448703f3d3b3, type: 2}
-  enemyHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
-  pathForward: {fileID: 2100000, guid: f8474cc51224f4044bb662cc38f8179d, type: 2}
   Selection: {fileID: 1994406629}
   ActionPoint: {fileID: 1164841891}
   ActionPointsMoveCost: {fileID: 279986924}
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: e3e760b9b4003f34b8c6448703f3d3b3, type: 2}
+  enemyHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
+  pathUpDown: {fileID: 2100000, guid: c280b141aa12160438c685517aff6bbc, type: 2}
+  pathLeftRight: {fileID: 2100000, guid: f8474cc51224f4044bb662cc38f8179d, type: 2}
+  pathUpLeft: {fileID: 2100000, guid: 27523c3aa93964841b615199f0ebbb70, type: 2}
+  pathUpRight: {fileID: 2100000, guid: 95e3233d1a5041c4b8962cb886df0a82, type: 2}
+  pathDownLeft: {fileID: 2100000, guid: 9e7f340084b758f4680c2556276ab1a1, type: 2}
+  pathDownRight: {fileID: 2100000, guid: 8fbd47e825bbf454ba4e006b697d3b01, type: 2}
 --- !u!114 &919334059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,11 +1245,17 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1116874320}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6430419864867e4e90c8b2fa24956e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathUpDown: {fileID: 2100000, guid: c280b141aa12160438c685517aff6bbc, type: 2}
+  pathLeftRight: {fileID: 2100000, guid: f8474cc51224f4044bb662cc38f8179d, type: 2}
+  pathUpLeft: {fileID: 2100000, guid: 27523c3aa93964841b615199f0ebbb70, type: 2}
+  pathUpRight: {fileID: 2100000, guid: 95e3233d1a5041c4b8962cb886df0a82, type: 2}
+  pathDownLeft: {fileID: 2100000, guid: 9e7f340084b758f4680c2556276ab1a1, type: 2}
+  pathDownRight: {fileID: 2100000, guid: 8fbd47e825bbf454ba4e006b697d3b01, type: 2}
 --- !u!4 &1116874322
 Transform:
   m_ObjectHideFlags: 0
@@ -1918,13 +1929,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1700690729}
-  m_LocalRotation: {x: 0.34577155, y: -0.6167999, z: 0.3457715, w: 0.61679983}
-  m_LocalPosition: {x: 38.16, y: 22.7, z: 18.14}
+  m_LocalRotation: {x: 0.3457713, y: -0.6168, z: 0.3457713, w: 0.6168}
+  m_LocalPosition: {x: 39.05, y: 27, z: 18.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 121.45099, y: 89.99999, z: 180}
+  m_LocalEulerAnglesHint: {x: 121.45099, y: 90, z: 180}
 --- !u!1 &1733298204
 GameObject:
   m_ObjectHideFlags: 0

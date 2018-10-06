@@ -6,6 +6,15 @@ public class test : MonoBehaviour
 {
     public Node m_currentNode;
     public Node m_tempNodeBase;
+
+    public Material pathUpDown;
+    public Material pathLeftRight;
+    public Material pathUpLeft;
+    public Material pathUpRight;
+    public Material pathDownLeft;
+    public Material pathDownRight;
+
+
     void Update()
     {
         Grida m_grid = GetComponent<Grida>();
@@ -24,8 +33,14 @@ public class test : MonoBehaviour
                         {
                             if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                             {
-                                m_grid.boardArray[columnTile, rowTile].prev.self.GetComponent<MeshRenderer>().material.color = Color.red;
-                                m_grid.boardArray[columnTile, rowTile].self.GetComponent<MeshRenderer>().material.color = Color.blue;
+                                //m_grid.boardArray[columnTile, rowTile].prev.self.GetComponent<MeshRenderer>().material.color = Color.red;
+                                m_grid.boardArray[columnTile, rowTile].self.GetComponent<MeshRenderer>().material = pathDownLeft;
+
+                                //upleft = downleft
+                                //upright = upleft
+                                //downleft = downright
+                                //downright = upright
+                          
                             }
                         }
                     }
