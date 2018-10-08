@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : Entity
+public class Hero : Entity      
 {
     public bool move;
     public bool attack;

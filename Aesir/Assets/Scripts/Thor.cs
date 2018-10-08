@@ -7,21 +7,33 @@ using UnityEngine.EventSystems;
 public class Thor : Hero
 {
     Grida m_grid;
+
     public Node m_currentNode;
     public Node m_tempNode;
     public Node m_tempNodeBase;
   
     public GameObject Selection;
+    public GameObject ActionPointCost;
+    public GameObject Attacks;
+
     public Text ActionPoint;
+    public Text ActionPointMax;
     public Text ActionPointsMoveCost;
+    public Text Health;
+    public Text HealthMax;
+
+    public Image ActionPointsBar;
+    public Image BackgroundThor;
+
     bool turn = false;
-    bool ability1 = true;
     PlayerMovement playerMovement;
     PlayerMovementRemove playerMovementRemove;
+
     List<Node> path = new List<Node>();
-    List<Node> allTiles = new List<Node>();
+
     Collider a;
     Collider b;
+
     [Header("Material")]
     public Material movementHighlight;
     public Material removeHighlight;
@@ -35,21 +47,14 @@ public class Thor : Hero
 
     void Start ()
     {
-        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
-        for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)    
-        {
-            for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-            {
-                allTiles.Add(m_grid.boardArray[columnTile, rowTile]);                
-            }
-        }
+        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
+        playerMovement = GetComponent<PlayerMovement>();        //Reference to PlayerMovement 
+        playerMovementRemove = GetComponent<PlayerMovementRemove>();        //Reference to PlayerMovementRemove
 
-
-
-        //playerMovement = new PlayerMovement();
-        //playerMovementRemove = new PlayerMovementRemove(); 
-        playerMovement = GetComponent<PlayerMovement>();
-        playerMovementRemove = GetComponent<PlayerMovementRemove>();
+        Health.text = m_nHealth.ToString();
+        HealthMax.text = m_nHealthMax.ToString();
+        ActionPoint.text = m_nActionPoints.ToString();
+        ActionPointMax.text = m_nActionPointMax.ToString();
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 100))       //Creates a raycast downwards
@@ -58,28 +63,28 @@ public class Thor : Hero
             {
                 for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)      
                 {
-                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)         
+                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)        //Goes through the grid until it finds the tiles the character is on         
                     {
-                        m_currentNode = m_grid.boardArray[columnTile, rowTile];
-                        m_currentNode.self.tag = "CurrentTile";
-                        transform.position = new Vector3(m_currentNode.self.transform.position.x, .5f, m_currentNode.self.transform.position.z);
-                        m_tempNodeBase = m_currentNode;
+                        m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
+                        m_currentNode.self.tag = "CurrentTile";        //Sets currentNodes tag to "CurrentTile"
+                        transform.position = new Vector3(m_currentNode.self.transform.position.x, .5f, m_currentNode.self.transform.position.z);        //Sets position to the center of the tile
+                        m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
                     }
                 }
             }
         }
-
     }
 
     void Update()
     {
+        ActionPointsBar.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;
+
         if (move)
             Move();
         if (attack)
             Attack();
 
-        ActionPoint.text = m_nActionPoints.ToString();
-
+        ActionPoint.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
@@ -94,7 +99,8 @@ public class Thor : Hero
                     {
                         if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                         {
-                            ActionPointsMoveCost.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();
+                            ActionPointCost.SetActive(true);
+                            ActionPointsMoveCost.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
 
                             if (a == null)
                                 a = hit1.collider;      //a = the first hit
@@ -103,134 +109,23 @@ public class Thor : Hero
 
                             if (a != b)         //if the first hit is different then the second hit
                             {
-                                foreach (Node tile in path)      //Goes through all tiles in the path
+                                foreach (Node tile in path)      //Goes through all tiles in the path and sets them back to walkable
                                 {
-                                    tile.self.GetComponent<Renderer>().material = movementHighlight;        //
+                                    tile.self.GetComponent<Renderer>().material = movementHighlight;
                                     tile.self.tag = "ThorWalkableTile";
                                 }
-                                a = null;
-                                b = null;
-                                path.Clear();
+                                a = null;       //Resets a 
+                                b = null;       //Resets b
+                                path.Clear();       //Clears the path list
                             }
                             Node temp;      //Creates a temp node
                             temp = m_grid.boardArray[columnTile, rowTile];      //Sets it to the hit node
 
-                            if (temp.self.tag != "CurrentTile")
+                            while (temp.prev != null)
                             {
-                                while (temp.prev != null)
-                                {
-
-                                    if (temp.prev == temp.down)
-                                    {
-                                        if(temp.prev.prev == temp.prev.left)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathUpLeft;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else if (temp.prev.prev == temp.prev.right)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathDownLeft;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            path.Add(temp);     //Adds node to path
-                                            temp = temp.prev;       //Set temp to temp.prev 
-
-                                        }
-
-                                    }
-                                    else if (temp.prev == temp.up)
-                                    {
-                                        if (temp.prev.prev == temp.prev.left)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathUpRight;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else if (temp.prev.prev == temp.prev.right)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathDownRight;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathLeftRight;
-                                            path.Add(temp);     //Adds node to path
-                                            temp = temp.prev;       //Set temp to temp.prev 
-
-                                        }
-
-                                    }
-                                    else if (temp.prev == temp.left)
-                                    {
-
-                                        if (temp.prev.prev == temp.prev.up)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathDownLeft;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else if (temp.prev.prev == temp.prev.down)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathDownRight;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            path.Add(temp);     //Adds node to path
-                                            temp = temp.prev;       //Set temp to temp.prev 
-
-                                        }
-
-                                    }
-                                    else if (temp.prev == temp.right)
-                                    {
-
-                                        if (temp.prev.prev == temp.prev.up)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathUpLeft;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else if (temp.prev.prev == temp.prev.down)
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            temp.prev.self.GetComponent<Renderer>().material = pathUpRight;
-                                            path.Add(temp);     //Adds node to path
-                                            path.Add(temp.prev);
-                                            temp = temp.prev.prev;       //Set temp to temp.prev 
-                                        }
-                                        else
-                                        {
-                                            temp.self.GetComponent<Renderer>().material = pathUpDown;
-                                            path.Add(temp);     //Adds node to path
-                                            temp = temp.prev;       //Set temp to temp.prev 
-
-                                        }
-
-                                    }
-                                }
+                                temp.self.GetComponent<Renderer>().material.color = Color.green;
+                                path.Add(temp);        //Adds node to path
+                                temp = temp.prev;       //Set temp to temp.prev 
                             }
                         }
                     }
@@ -248,86 +143,53 @@ public class Thor : Hero
             {
                 if (hit.collider.tag == "Thor")     //If click on character, show selection tab
                 {
+                    BackgroundThor.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
                     Selection.SetActive(true);
+                    Attacks.SetActive(true);
                     turn = true;
                 }
                 if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight 
                 {
-                    RemoveHighlightAttack();
+                    playerMovementRemove.dijkstrasSearch(m_currentNode, m_nActionPoints, removeHighlight);
+                    ActionPointCost.SetActive(false);
                     turn = false;
                 }
                 if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
                 {
-                    RemoveHighlightAttack();
+                    playerMovementRemove.dijkstrasSearch(m_currentNode, m_nActionPoints, removeHighlight);
+                    ActionPointCost.SetActive(false);
                     turn = false;
                 }
 
 
 
-                if (hit.collider.tag == "ThorWalkableTile" && turn)
+                if (hit.collider.tag == "ThorWalkableTile" && turn)        //Used for when you are moving
                 {
-                    transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);
+                    transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
                     for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
                     {
                         for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
                         {
                             if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                             {
-                                Node tempNode = m_currentNode;
-                                int tempActionPoints = m_nActionPoints;
+                                Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
+                                int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
+                                m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
 
-
-                                m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].gScore;
-                                playerMovementRemove.dijkstrasSearch(tempNode, tempActionPoints, removeHighlight);
-                                m_currentNode = m_grid.boardArray[columnTile, rowTile];
-                                m_currentNode.self.tag = "CurrentTile";
-                                //turn = false;
-                                foreach (Node tile in path)      //Goes through all tiles in the path
+                                playerMovementRemove.dijkstrasSearch(tempNode, tempActionPoints, removeHighlight);        //Removes the highlight
+                                m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
+                                m_currentNode.self.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
+                                m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
+                                turn = false;
+                                ActionPointCost.SetActive(false);
+                                foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
                                 {
-                                    tile.self.GetComponent<Renderer>().material = removeHighlight;        //
+                                    tile.self.GetComponent<Renderer>().material = removeHighlight;
                                     tile.self.tag = "Tile";
                                 }
-                                a = null;
-                                b = null;
-                                path.Clear();
-                            }
-                        }
-                    }
-                }
-                if (hit.collider.tag == "ThorAttackableTile" && turn && ability1)
-                {
-                    transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);
-                    for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                    {
-                        for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                        {
-                            if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
-                            {
-                                m_currentNode.self.tag = "Tile";
-                                m_currentNode = m_grid.boardArray[columnTile, rowTile];
-                                m_currentNode.self.tag = "CurrentTile";
-
-                                RemoveHighlightAttack();
-                                if (m_currentNode.left.self.tag == "Tile")
-                                    m_currentNode.left.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.right.self.tag == "Tile")
-                                    m_currentNode.right.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.up.self.tag == "Tile")
-                                    m_currentNode.up.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.down.self.tag == "Tile")
-                                    m_currentNode.down.self.GetComponent<Renderer>().material = enemyHighlight;
-
-                                if (m_currentNode.left.up.self.tag == "Tile")
-                                    m_currentNode.left.up.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.left.down.self.tag == "Tile")
-                                    m_currentNode.left.down.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.right.up.self.tag == "Tile")
-                                    m_currentNode.right.up.self.GetComponent<Renderer>().material = enemyHighlight;
-                                if (m_currentNode.right.down.self.tag == "Tile")
-                                    m_currentNode.right.down.self.GetComponent<Renderer>().material = enemyHighlight;
-
-                                turn = false;
-                                ability1 = false;
+                                a = null;       //Resets a
+                                b = null;       //Resets b
+                                path.Clear();       //Clears the path list
                             }
                         }
                     }
@@ -335,16 +197,11 @@ public class Thor : Hero
 
                 if (hit.collider.tag == "Enemy" && turn)
                 {
-                    //hit.collider.tag = "Thor";      //Remove once code that damages is put in
                     RemoveHighlightAttack();
-                    //hit.collider.GetComponent<MeshRenderer>().material.color = Color.red;   //Remove once code that damages is put in    
-                    //Add Attack Code
-                    hit.collider.GetComponent<Entity>().m_nHealth = hit.collider.GetComponent<Entity>().m_nHealth - m_nBasicAttack;
-
-
+                    hit.collider.GetComponent<Entity>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
                 }
             }
-        }                
+        }
     }
 
     void HighlightMovement()
@@ -352,7 +209,22 @@ public class Thor : Hero
          playerMovement.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight);      
     }
 
+    void Move()
+    {
+        HighlightMovement();
+        Selection.SetActive(false);
+        SetMoveFalse();
 
+    }
+    void Attack()
+    {
+        HighlightAttack("BridalBasicAttack");
+        Selection.SetActive(false);
+        SetAttackFalse();
+    }
+
+
+    /////////////////////////////////////Attacks/////////////////////////////////////////////////////////
     void HighlightAttack(string attack)
     {
         if (attack == "BridalBasicAttack")
@@ -556,22 +428,5 @@ public class Thor : Hero
             if (f > e)
                 e++;
         }
-    }
-
-   
-    
-    void Move()
-    {
-        HighlightMovement();                                  
-        Selection.SetActive(false);
-        SetMoveFalse();
-
-    }
-    void Attack()
-    {
-        //HighlightAttack("BasicAttack");
-        HighlightAttack("BridalBasicAttack");
-        Selection.SetActive(false);
-        SetAttackFalse();
-    }
+    }  
 }

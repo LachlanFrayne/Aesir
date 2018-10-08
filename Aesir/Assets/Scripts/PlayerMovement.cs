@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int gScore = 2;
     public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight)
     {
         Heap openList = new Heap();
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (openList.m_tHeap.Contains(currentNode.left))
                 {
-                    int tempGScore = currentNode.gScore + 1;
+                    int tempGScore = currentNode.gScore + gScore;
 
                     if (tempGScore < currentNode.left.gScore)
                     {
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
                     if(currentNode.left != null)
                     {
                         currentNode.left.prev = currentNode;
-                        currentNode.left.gScore = currentNode.gScore + 1;
+                        currentNode.left.gScore = currentNode.gScore + gScore;
                         openList.Add(currentNode.left);
                     }
                     
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (openList.m_tHeap.Contains(currentNode.right))
                 {
-                    int tempGScore = currentNode.gScore + 1;
+                    int tempGScore = currentNode.gScore + gScore;
 
                     if (tempGScore < currentNode.right.gScore)
                     {
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
                     if (currentNode.right != null)
                     {
                         currentNode.right.prev = currentNode;
-                        currentNode.right.gScore = currentNode.gScore + 1;
+                        currentNode.right.gScore = currentNode.gScore + gScore;
                         openList.Add(currentNode.right);
                     }
                 }
@@ -78,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (openList.m_tHeap.Contains(currentNode.up))
                 {
-                    int tempGScore = currentNode.gScore + 1;
+                    int tempGScore = currentNode.gScore + gScore;
 
                     if (tempGScore < currentNode.up.gScore)
                     {
@@ -92,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
                     if (currentNode.up != null)
                     {
                         currentNode.up.prev = currentNode;
-                        currentNode.up.gScore = currentNode.gScore + 1;
+                        currentNode.up.gScore = currentNode.gScore + gScore;
                         openList.Add(currentNode.up);
                     }
                 }
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (openList.m_tHeap.Contains(currentNode.down))
                 {
-                    int tempGScore = currentNode.gScore + 1;
+                    int tempGScore = currentNode.gScore + gScore;
 
                     if (tempGScore < currentNode.down.gScore)
                     {
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
                     if (currentNode.down != null)
                     {
                         currentNode.down.prev = currentNode;
-                        currentNode.down.gScore = currentNode.gScore + 1;
+                        currentNode.down.gScore = currentNode.gScore + gScore;
                         openList.Add(currentNode.down);
                     }
                 }

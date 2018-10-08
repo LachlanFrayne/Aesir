@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test : MonoBehaviour
+public class test : MonoBehaviour       //Used to find out what the prev node
 {
     public Node m_currentNode;
     public Node m_tempNodeBase;

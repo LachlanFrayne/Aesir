@@ -17,13 +17,11 @@ public class TurnSystem : MonoBehaviour {
     Freya m_freya;
     Loki m_loki;
 
-	// Use this for initialization
 	void Start ()
     {
         m_turn = Turns.playerTurn;
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
     {
         //need to check for actionpoints for players and turn variable for players ASK MESMAN
