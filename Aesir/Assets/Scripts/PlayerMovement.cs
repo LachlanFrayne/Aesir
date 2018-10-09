@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public int gScore = 2;
-    public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight)
+    public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {
+        int gScore = MoveCostPerTile;
         Heap openList = new Heap();
         List<Node> closedList = new List<Node>();
 
@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 continue;
             }
+            if (currentNode.self.tag == "CurrentEnemyTile")
+                continue;
+
             currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
             currentNode.self.tag = "ThorWalkableTile";
 

@@ -22,6 +22,9 @@ public class PlayerMovementRemove : MonoBehaviour {
             {
                 continue;
             }
+            if (currentNode.self.tag == "CurrentTile" || currentNode.self.tag == "CurrentEnemyTile")
+                continue;
+
             currentNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
             currentNode.self.tag = "Tile";
             currentNode.gScore = 0;
