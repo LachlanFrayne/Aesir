@@ -12,22 +12,22 @@ public class Thor : Hero
     public Node m_tempNode;
     public Node m_tempNodeBase;
   
-    public GameObject ActionPointCost;
-    public GameObject ThorMoveSet;
+    public GameObject actionPointCostLabel;
+    public GameObject ThorMoveSetButtons;
 
-    public Text ActionPoint;
-    public Text ActionPointMax;
-    public Text ActionPointsMoveCost;
-    public Text Health;
-    public Text HealthMax;
+    public Text actionPointLabel;
+    public Text actionPointMaxLabel;
+    public Text actionPointsMoveCostLabel;
+    public Text healthLabel;
+    public Text healthMaxLabel;
 
-    public Image ActionPointsBar;
-    public Image BackgroundThor;
+    public Image actionPointsBarImage;
+    public Image backgroundThorImage;
 
-    public Button MoveButton;
-    public Button BasicAttackButton;
-    public Button BridalAbility1Button;
-    public Button Ability2Button;
+    public Button moveButton;
+    public Button basicAttackButton;
+    public Button bridalAbility1Button;
+    public Button ability2Button;
 
     bool basicAttack = false;
     bool ability1Attack = false;
@@ -54,16 +54,32 @@ public class Thor : Hero
 
     void Start ()
     {
-        
+        actionPointCostLabel = GameObject.Find("Action Points Cost");        
+        ThorMoveSetButtons = GameObject.Find("ThorMoveSet");       
+        actionPointLabel = GameObject.Find("Action Points").GetComponent<Text>();      
+        actionPointMaxLabel = GameObject.Find("Action Points Max").GetComponent<Text>();
+        actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost").GetComponent<Text>();        
+        healthLabel = GameObject.Find("Health").GetComponent<Text>();
+        healthMaxLabel = GameObject.Find("Health Max").GetComponent<Text>();
+        actionPointsBarImage = GameObject.Find("Action Points Bar").GetComponent<Image>();
+        backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
+        moveButton = GameObject.Find("Move").GetComponent<Button>();
+        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
+        bridalAbility1Button = GameObject.Find("Ability 1").GetComponent<Button>();
+        ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
+        ThorMoveSetButtons.SetActive(false);
+        actionPointCostLabel.SetActive(false);
+
+
 
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
         playerMovement = GetComponent<PlayerMovement>();        //Reference to PlayerMovement 
         playerMovementRemove = GetComponent<PlayerMovementRemove>();        //Reference to PlayerMovementRemove
 
-        Health.text = m_nHealth.ToString();
-        HealthMax.text = m_nHealthMax.ToString();
-        ActionPoint.text = m_nActionPoints.ToString();
-        ActionPointMax.text = m_nActionPointMax.ToString();
+        healthLabel.text = m_nHealth.ToString();
+        healthMaxLabel.text = m_nHealthMax.ToString();
+        actionPointLabel.text = m_nActionPoints.ToString();
+        actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         SetTile();
     }
@@ -71,23 +87,23 @@ public class Thor : Hero
     void Update()
     {
         if (m_nActionPoints > 0)
-            MoveButton.onClick.AddListener(HighlightMovement);
+            moveButton.onClick.AddListener(HighlightMovement);
         else
-            MoveButton.onClick.RemoveAllListeners();
+            moveButton.onClick.RemoveAllListeners();
 
         if (m_nActionPoints >= m_nBasicAttackCost)
-            BasicAttackButton.onClick.AddListener(delegate { HighlightAttack("BridalBasicAttack"); });
+            basicAttackButton.onClick.AddListener(delegate { HighlightAttack("BridalBasicAttack"); });
         else
-            BasicAttackButton.onClick.RemoveAllListeners();
+            basicAttackButton.onClick.RemoveAllListeners();
 
         if (m_nActionPoints >= m_nAbility1AttackCost)
-            BridalAbility1Button.onClick.AddListener(delegate { HighlightAttack("BridalAbility1"); });
+            bridalAbility1Button.onClick.AddListener(delegate { HighlightAttack("BridalAbility1"); });
         else
-            BridalAbility1Button.onClick.RemoveAllListeners();
+            bridalAbility1Button.onClick.RemoveAllListeners();
 
-        ActionPointsBar.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;    
+        actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;    
 
-        ActionPoint.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+        actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
@@ -102,8 +118,8 @@ public class Thor : Hero
                     {
                         if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                         {
-                            ActionPointCost.SetActive(true);
-                            ActionPointsMoveCost.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
+                            actionPointCostLabel.SetActive(true);
+                            actionPointsMoveCostLabel.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
 
                             if (a == null)
                                 a = hit1.collider;      //a = the first hit
@@ -150,21 +166,18 @@ public class Thor : Hero
                     ability1Attack = false;
                     playerMovementRemove.dijkstrasSearch(m_currentNode,m_nActionPoints, removeHighlight);
                     RemoveHighlightAttack();
-                    //SetTile();
-                    BackgroundThor.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
-                    ThorMoveSet.SetActive(true);
+                    backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
+                    ThorMoveSetButtons.SetActive(true);
                 }
                 if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight 
                 {
                     playerMovementRemove.dijkstrasSearch(m_currentNode, m_nActionPoints, removeHighlight);
-                    //SetTile();
-                    ActionPointCost.SetActive(false);
+                    actionPointCostLabel.SetActive(false);
                 }
                 if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
                 {
                     playerMovementRemove.dijkstrasSearch(m_currentNode, m_nActionPoints, removeHighlight);
-                    //SetTile();
-                    ActionPointCost.SetActive(false);
+                    actionPointCostLabel.SetActive(false);
                 }
 
 
@@ -186,7 +199,7 @@ public class Thor : Hero
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
                                 m_currentNode.self.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
                                 m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
-                                ActionPointCost.SetActive(false);
+                                actionPointCostLabel.SetActive(false);
                                 foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
                                 {
                                     tile.self.GetComponent<Renderer>().material = removeHighlight;
@@ -200,21 +213,15 @@ public class Thor : Hero
                     }
                 }
 
-                if (hit.collider.tag == "Enemy" && basicAttack == true)
+                if (hit.collider.tag == "Enemy" && basicAttack == true || hit.collider.tag == "Enemy" && ability1Attack == true)
                 {
-                    ActionPointCost.SetActive(false);
+                    actionPointCostLabel.SetActive(false);
                     if (basicAttack == true)
                     {
                         m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                         RemoveHighlightAttack();
                         hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
                     }
-                    
-                    
-                }
-                else if(hit.collider.tag == "Enemy" && ability1Attack == true)
-                {
-                    ActionPointCost.SetActive(false);
                     if (ability1Attack == true)
                     {
                         m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
@@ -229,17 +236,17 @@ public class Thor : Hero
     void HighlightMovement()
     {
         playerMovement.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight,m_nMovementActionPointCostPerTile);
-        ThorMoveSet.SetActive(false);
+        ThorMoveSetButtons.SetActive(false);
     }
 
     /////////////////////////////////////Attacks/////////////////////////////////////////////////////////
     void HighlightAttack(string attack)
     {
-        ThorMoveSet.SetActive(false);
+        ThorMoveSetButtons.SetActive(false);
         if (attack == "BridalBasicAttack")
         {
-            ActionPointCost.SetActive(true);
-            ActionPointsMoveCost.text = m_nBasicAttackCost.ToString();
+            actionPointCostLabel.SetActive(true);
+            actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
             basicAttack = true;
 
             m_tempNode = m_tempNodeBase;        //Sets base 
@@ -304,9 +311,9 @@ public class Thor : Hero
 
         if(attack == "BridalAbility1")          //ADD STUN ONCE ENEMY IS WORKING
         {
-            ActionPointCost.SetActive(true);
+            actionPointCostLabel.SetActive(true);
             ability1Attack = true;
-            ActionPointsMoveCost.text = m_nAbility1AttackCost.ToString();
+            actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
             m_currentNode.left.self.GetComponent<Renderer>().material = AttackHighlight;
             if (m_currentNode.left.self.tag == "Tile")
