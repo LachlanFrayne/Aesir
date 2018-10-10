@@ -30,101 +30,130 @@ public class PlayerMovement : MonoBehaviour
             currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
             currentNode.self.tag = "ThorWalkableTile";
 
-            if (!closedList.Contains(currentNode.left))
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            for (int i = 0; i < currentNode.neighbours.Length; i++)
             {
-                if (openList.m_tHeap.Contains(currentNode.left))
+                if (!closedList.Contains(currentNode.neighbours[i]))
                 {
-                    int tempGScore = currentNode.gScore + gScore;
-
-                    if (tempGScore < currentNode.left.gScore)
+                    if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        currentNode.left.prev = currentNode;
-                        currentNode.left.gScore = tempGScore;
+                        int tempGScore = currentNode.gScore + gScore;
+
+                        if (tempGScore < currentNode.neighbours[i].gScore)
+                        {
+                            currentNode.neighbours[i].prev = currentNode;
+                            currentNode.neighbours[i].gScore = tempGScore;
+                        }
                     }
-                }
-                else
-                {
-                    if(currentNode.left != null)
+                    else
                     {
-                        currentNode.left.prev = currentNode;
-                        currentNode.left.gScore = currentNode.gScore + gScore;
-                        openList.Add(currentNode.left);
-                    }
-                    
-                }
-            }
+                        if (currentNode.neighbours[i] != null)
+                        {
+                            currentNode.neighbours[i].prev = currentNode;
+                            currentNode.neighbours[i].gScore = currentNode.gScore + gScore;
+                            openList.Add(currentNode.neighbours[i]);
+                        }
 
-            if (!closedList.Contains(currentNode.right))
-            {
-                if (openList.m_tHeap.Contains(currentNode.right))
-                {
-                    int tempGScore = currentNode.gScore + gScore;
-
-                    if (tempGScore < currentNode.right.gScore)
-                    {
-                        currentNode.right.prev = currentNode;
-
-                        currentNode.right.gScore = tempGScore;
-                    }
-                }
-                else
-                {
-                    if (currentNode.right != null)
-                    {
-                        currentNode.right.prev = currentNode;
-                        currentNode.right.gScore = currentNode.gScore + gScore;
-                        openList.Add(currentNode.right);
                     }
                 }
             }
-
-            if (!closedList.Contains(currentNode.up))
-            {
-                if (openList.m_tHeap.Contains(currentNode.up))
-                {
-                    int tempGScore = currentNode.gScore + gScore;
-
-                    if (tempGScore < currentNode.up.gScore)
-                    {
-                        currentNode.up.prev = currentNode;
-
-                        currentNode.up.gScore = tempGScore;
-                    }
-                }
-                else
-                {
-                    if (currentNode.up != null)
-                    {
-                        currentNode.up.prev = currentNode;
-                        currentNode.up.gScore = currentNode.gScore + gScore;
-                        openList.Add(currentNode.up);
-                    }
-                }
-            }
-
-            if (!closedList.Contains(currentNode.down))
-            {
-                if (openList.m_tHeap.Contains(currentNode.down))
-                {
-                    int tempGScore = currentNode.gScore + gScore;
-
-                    if (tempGScore < currentNode.down.gScore)
-                    {
-                        currentNode.down.prev = currentNode;
-
-                        currentNode.down.gScore = tempGScore;
-                    }
-                }
-                else
-                {
-                    if (currentNode.down != null)
-                    {
-                        currentNode.down.prev = currentNode;
-                        currentNode.down.gScore = currentNode.gScore + gScore;
-                        openList.Add(currentNode.down);
-                    }
-                }
-            }
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            //if (!closedList.Contains(currentNode.left))
+            //{
+            //    if (openList.m_tHeap.Contains(currentNode.left))
+            //    {
+            //        int tempGScore = currentNode.gScore + gScore;
+            //
+            //        if (tempGScore < currentNode.left.gScore)
+            //        {
+            //            currentNode.left.prev = currentNode;
+            //            currentNode.left.gScore = tempGScore;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if(currentNode.left != null)
+            //        {
+            //            currentNode.left.prev = currentNode;
+            //            currentNode.left.gScore = currentNode.gScore + gScore;
+            //            openList.Add(currentNode.left);
+            //        }
+            //        
+            //    }
+            //}
+            //
+            //if (!closedList.Contains(currentNode.right))
+            //{
+            //    if (openList.m_tHeap.Contains(currentNode.right))
+            //    {
+            //        int tempGScore = currentNode.gScore + gScore;
+            //
+            //        if (tempGScore < currentNode.right.gScore)
+            //        {
+            //            currentNode.right.prev = currentNode;
+            //
+            //            currentNode.right.gScore = tempGScore;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (currentNode.right != null)
+            //        {
+            //            currentNode.right.prev = currentNode;
+            //            currentNode.right.gScore = currentNode.gScore + gScore;
+            //            openList.Add(currentNode.right);
+            //        }
+            //    }
+            //}
+            //
+            //if (!closedList.Contains(currentNode.up))
+            //{
+            //    if (openList.m_tHeap.Contains(currentNode.up))
+            //    {
+            //        int tempGScore = currentNode.gScore + gScore;
+            //
+            //        if (tempGScore < currentNode.up.gScore)
+            //        {
+            //            currentNode.up.prev = currentNode;
+            //
+            //            currentNode.up.gScore = tempGScore;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (currentNode.up != null)
+            //        {
+            //            currentNode.up.prev = currentNode;
+            //            currentNode.up.gScore = currentNode.gScore + gScore;
+            //            openList.Add(currentNode.up);
+            //        }
+            //    }
+            //}
+            //
+            //if (!closedList.Contains(currentNode.down))
+            //{
+            //    if (openList.m_tHeap.Contains(currentNode.down))
+            //    {
+            //        int tempGScore = currentNode.gScore + gScore;
+            //
+            //        if (tempGScore < currentNode.down.gScore)
+            //        {
+            //            currentNode.down.prev = currentNode;
+            //
+            //            currentNode.down.gScore = tempGScore;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (currentNode.down != null)
+            //        {
+            //            currentNode.down.prev = currentNode;
+            //            currentNode.down.gScore = currentNode.gScore + gScore;
+            //            openList.Add(currentNode.down);
+            //        }
+            //    }
+            //}
         }
     }
 }

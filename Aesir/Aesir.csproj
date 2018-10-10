@@ -323,6 +323,7 @@
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\Scripts\AI\ABDecision.cs" />
     <Compile Include="Assets\Scripts\AI\BaseDecision.cs" />
+    <Compile Include="Assets\Scripts\AI\TargetInRangeDecision.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
