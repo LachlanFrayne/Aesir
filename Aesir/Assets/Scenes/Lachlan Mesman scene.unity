@@ -947,6 +947,50 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1163000916269412, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Action Points Cost Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032443280792402, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Action Points Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407082612770768, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Action Points Max Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1768510184149244, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Action Points Move Cost Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366906204838176, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Health Max Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245406469912490, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Health Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436622314830438, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Action Points Bar Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570355509729090, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Basic Attack Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849467657231638, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Ability 1 Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201848238031170, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Ability 2 Thor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375544599408336, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
+      propertyPath: m_Name
+      value: Move Thor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1a578be902cdfe4898e2048c67ed0d0, type: 2}
   m_IsPrefabParent: 0

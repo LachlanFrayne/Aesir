@@ -54,19 +54,19 @@ public class Thor : Hero
 
     void Start ()
     {
-        actionPointCostLabel = GameObject.Find("Action Points Cost");        
+        actionPointCostLabel = GameObject.Find("Action Points Cost Thor");        
         ThorMoveSetButtons = GameObject.Find("ThorMoveSet");       
-        actionPointLabel = GameObject.Find("Action Points").GetComponent<Text>();      
-        actionPointMaxLabel = GameObject.Find("Action Points Max").GetComponent<Text>();
-        actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost").GetComponent<Text>();        
-        healthLabel = GameObject.Find("Health").GetComponent<Text>();
-        healthMaxLabel = GameObject.Find("Health Max").GetComponent<Text>();
-        actionPointsBarImage = GameObject.Find("Action Points Bar").GetComponent<Image>();
+        actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();      
+        actionPointMaxLabel = GameObject.Find("Action Points Max Thor").GetComponent<Text>();
+        actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Thor").GetComponent<Text>();        
+        healthLabel = GameObject.Find("Health Thor").GetComponent<Text>();
+        healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
+        actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
         backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
-        moveButton = GameObject.Find("Move").GetComponent<Button>();
-        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
-        bridalAbility1Button = GameObject.Find("Ability 1").GetComponent<Button>();
-        ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
+        moveButton = GameObject.Find("Move Thor").GetComponent<Button>();
+        basicAttackButton = GameObject.Find("Basic Attack Thor").GetComponent<Button>();
+        bridalAbility1Button = GameObject.Find("Ability 1 Thor").GetComponent<Button>();
+        ability2Button = GameObject.Find("Ability 2 Thor").GetComponent<Button>();
         ThorMoveSetButtons.SetActive(false);
         actionPointCostLabel.SetActive(false);
 
