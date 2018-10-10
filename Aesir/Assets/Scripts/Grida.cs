@@ -10,8 +10,6 @@ public class Grida : MonoBehaviour {
     public Node[,] boardArray = new Node[gridSizeX, gridSizeY];
     public static int gridSizeX = 30;
     public static int gridSizeY = 30;
-   
-
 
     void Awake()
     {
