@@ -11,9 +11,9 @@ public class Thor : Hero
     public Node m_currentNode;
     public Node m_tempNode;
     public Node m_tempNodeBase;
-  
+
     public GameObject actionPointCostLabel;
-    public GameObject ThorMoveSetButtons;
+    public GameObject thorMoveSetButtons;
 
     public Text actionPointLabel;
     public Text actionPointMaxLabel;
@@ -52,13 +52,13 @@ public class Thor : Hero
     public Material pathDownLeft;
     public Material pathDownRight;
 
-    void Start ()
+    void Start()
     {
-        actionPointCostLabel = GameObject.Find("Action Points Cost Thor");        
-        ThorMoveSetButtons = GameObject.Find("ThorMoveSet");       
-        actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();      
+        actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
+        thorMoveSetButtons = GameObject.Find("ThorMoveSet");
+        actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();
         actionPointMaxLabel = GameObject.Find("Action Points Max Thor").GetComponent<Text>();
-        actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Thor").GetComponent<Text>();        
+        actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Thor").GetComponent<Text>();
         healthLabel = GameObject.Find("Health Thor").GetComponent<Text>();
         healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
@@ -67,7 +67,7 @@ public class Thor : Hero
         basicAttackButton = GameObject.Find("Basic Attack Thor").GetComponent<Button>();
         bridalAbility1Button = GameObject.Find("Ability 1 Thor").GetComponent<Button>();
         ability2Button = GameObject.Find("Ability 2 Thor").GetComponent<Button>();
-        ThorMoveSetButtons.SetActive(false);
+        thorMoveSetButtons.SetActive(false);
         actionPointCostLabel.SetActive(false);
 
 
@@ -101,7 +101,7 @@ public class Thor : Hero
         else
             bridalAbility1Button.onClick.RemoveAllListeners();
 
-        actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;    
+        actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;
 
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
@@ -164,10 +164,10 @@ public class Thor : Hero
                 {
                     basicAttack = false;
                     ability1Attack = false;
-                    playerMovementRemove.dijkstrasSearch(m_currentNode,m_nActionPoints, removeHighlight);
+                    playerMovementRemove.dijkstrasSearch(m_currentNode, m_nActionPoints, removeHighlight);
                     RemoveHighlightAttack();
                     backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
-                    ThorMoveSetButtons.SetActive(true);
+                    thorMoveSetButtons.SetActive(true);
                 }
                 if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight 
                 {
@@ -235,297 +235,297 @@ public class Thor : Hero
 
     void HighlightMovement()
     {
-        playerMovement.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight,m_nMovementActionPointCostPerTile);
-        ThorMoveSetButtons.SetActive(false);
+        playerMovement.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
+        thorMoveSetButtons.SetActive(false);
     }
 
     /////////////////////////////////////Attacks/////////////////////////////////////////////////////////
     void HighlightAttack(string attack)
     {
-        ThorMoveSetButtons.SetActive(false);
+        thorMoveSetButtons.SetActive(false);
         if (attack == "BridalBasicAttack")
         {
             actionPointCostLabel.SetActive(true);
             actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
             basicAttack = true;
-    //    ThorMoveSet.SetActive(false);
-    //    if (attack == "BridalBasicAttack")
-    //    {
-    //        ActionPointCost.SetActive(true);
-    //        ActionPointsMoveCost.text = m_nBasicAttackCost.ToString();
-    //        basicAttack = true;
+            thorMoveSetButtons.SetActive(false);
+            if (attack == "BridalBasicAttack")
+            {
+                actionPointCostLabel.SetActive(true);
+                actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
+                basicAttack = true;
 
-    //        m_tempNode = m_tempNodeBase;        //Sets base 
-    //        int f = m_nBasicAttackRange;      //The attackRange
-    //        int e = 1;
+                m_tempNode = m_tempNodeBase;        //Sets base 
+                int f = m_nBasicAttackRange;      //The attackRange
+                int e = 1;
 
-    //        for (int i = 0; i < e; i++)
-    //        {
-    //            m_tempNode = m_tempNode.neighbours[3];
-    //            for (int a = 0; a < e; a++)
-    //            {
-    //                m_tempNode = m_tempNode.right.up;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-    //            }
+                for (int i = 0; i < e; i++)
+                {
+                    m_tempNode = m_tempNode.neighbours[3];
+                    for (int a = 0; a < e; a++)
+                    {
+                        m_tempNode = m_tempNode.neighbours[1].neighbours[0];
+                        if (m_tempNode.self.tag == "Tile")
+                        {
+                            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
+                            m_tempNode.self.tag = "ThorAttackableTile";
+                        }
+                        if (m_tempNode.self.tag == "CurrentEnemyTile")
+                            m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    }
 
-    //            for (int b = 0; b < e; b++)
-    //            {
-    //                m_tempNode = m_tempNode.down.right;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    for (int b = 0; b < e; b++)
+                    {
+                        m_tempNode = m_tempNode.neighbours[2].neighbours[1];
+                        if (m_tempNode.self.tag == "Tile")
+                        {
+                            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
+                            m_tempNode.self.tag = "ThorAttackableTile";
+                        }
+                        if (m_tempNode.self.tag == "CurrentEnemyTile")
+                            m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //            }
+                    }
 
-    //            for (int c = 0; c < e; c++)
-    //            {
-    //                m_tempNode = m_tempNode.left.down;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-    //            }
+                    for (int c = 0; c < e; c++)
+                    {
+                        m_tempNode = m_tempNode.neighbours[3].neighbours[2];
+                        if (m_tempNode.self.tag == "Tile")
+                        {
+                            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
+                            m_tempNode.self.tag = "ThorAttackableTile";
+                        }
+                        if (m_tempNode.self.tag == "CurrentEnemyTile")
+                            m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    }
 
-    //            for (int d = 0; d < e; d++)
-    //            {
-    //                m_tempNode = m_tempNode.up.left;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-    //            }
-    //            if (f > e)
-    //                e++;
-    //        }
-    //    }
+                    for (int d = 0; d < e; d++)
+                    {
+                        m_tempNode = m_tempNode.neighbours[0].neighbours[3];
+                        if (m_tempNode.self.tag == "Tile")
+                        {
+                            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
+                            m_tempNode.self.tag = "ThorAttackableTile";
+                        }
+                        if (m_tempNode.self.tag == "CurrentEnemyTile")
+                            m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    }
+                    if (f > e)
+                        e++;
+                }
+            }
 
-        if(attack == "BridalAbility1")          //ADD STUN ONCE ENEMY IS WORKING
-        {
-            actionPointCostLabel.SetActive(true);
-            ability1Attack = true;
-            actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
-    //    if(attack == "BridalAbility1")          //ADD STUN ONCE ENEMY IS WORKING
-    //    {
-    //        ActionPointCost.SetActive(true);
-    //        ability1Attack = true;
-    //        ActionPointsMoveCost.text = m_nAbility1AttackCost.ToString();
+            //if (attack == "BridalAbility1")          //ADD STUN ONCE ENEMY IS WORKING
+            //{
+            //    actionPointCostLabel.SetActive(true);
+            //    ability1Attack = true;
+            //    actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
+            //    if(attack == "BridalAbility1")          //ADD STUN ONCE ENEMY IS WORKING
+            //    {
+            //        ActionPointCost.SetActive(true);
+            //        ability1Attack = true;
+            //        ActionPointsMoveCost.text = m_nAbility1AttackCost.ToString();
 
-    //        m_currentNode.left.self.GetComponent<Renderer>().material = AttackHighlight;
-    //        if (m_currentNode.left.self.tag == "Tile")
-    //        {
-    //            m_currentNode.left.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.left.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.left.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.left.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        m_currentNode.left.self.GetComponent<Renderer>().material = AttackHighlight;
+            //        if (m_currentNode.left.self.tag == "Tile")
+            //        {
+            //            m_currentNode.left.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.left.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.left.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.left.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.right.self.tag == "Tile")
-    //        {
-    //            m_currentNode.right.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.right.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.right.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.right.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.right.self.tag == "Tile")
+            //        {
+            //            m_currentNode.right.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.right.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.right.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.right.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.up.self.tag == "Tile")
-    //        {
-    //            m_currentNode.up.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.up.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.up.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.up.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.up.self.tag == "Tile")
+            //        {
+            //            m_currentNode.up.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.up.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.up.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.up.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.down.self.tag == "Tile")
-    //        {
-    //            m_currentNode.down.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.down.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.down.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.down.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.down.self.tag == "Tile")
+            //        {
+            //            m_currentNode.down.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.down.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.down.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.down.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.left.up.self.tag == "Tile")
-    //        {
-    //            m_currentNode.left.up.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.left.up.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.left.up.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.left.up.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.left.up.self.tag == "Tile")
+            //        {
+            //            m_currentNode.left.up.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.left.up.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.left.up.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.left.up.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.left.down.self.tag == "Tile")
-    //        {
-    //            m_currentNode.left.down.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.left.down.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.left.down.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.left.down.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.left.down.self.tag == "Tile")
+            //        {
+            //            m_currentNode.left.down.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.left.down.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.left.down.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.left.down.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.right.up.self.tag == "Tile")
-    //        {
-    //            m_currentNode.right.up.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.right.up.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.right.up.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.right.up.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //        if (m_currentNode.right.up.self.tag == "Tile")
+            //        {
+            //            m_currentNode.right.up.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.right.up.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.right.up.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.right.up.self.GetComponent<Renderer>().material = EnemyHighlight;
 
-    //        if (m_currentNode.right.down.self.tag == "Tile")
-    //        {
-    //            m_currentNode.right.down.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            m_currentNode.right.down.self.tag = "ThorAttackableTile";
-    //        }
-    //        if (m_currentNode.right.down.self.tag == "CurrentEnemyTile")
-    //            m_currentNode.right.down.self.GetComponent<Renderer>().material = EnemyHighlight;
-    //    }
+            //        if (m_currentNode.right.down.self.tag == "Tile")
+            //        {
+            //            m_currentNode.right.down.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            m_currentNode.right.down.self.tag = "ThorAttackableTile";
+            //        }
+            //        if (m_currentNode.right.down.self.tag == "CurrentEnemyTile")
+            //            m_currentNode.right.down.self.GetComponent<Renderer>().material = EnemyHighlight;
+            //    }
 
 
-    //    if(attack == "Ability1")
-    //    {
-    //        m_tempNode = m_tempNodeBase;        //Sets base 
-    //        int f = 4;      //The attackRange
-    //        int e = 1;
+            //    if(attack == "Ability1")
+            //    {
+            //        m_tempNode = m_tempNodeBase;        //Sets base 
+            //        int f = 4;      //The attackRange
+            //        int e = 1;
 
-    //        for (int i = 0; i < e; i++)
-    //        {
-    //            m_tempNode = m_tempNode.left;
-    //            for (int a = 0; a < e; a++)
-    //            {
-    //                m_tempNode = m_tempNode.right.up;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            }
+            //        for (int i = 0; i < e; i++)
+            //        {
+            //            m_tempNode = m_tempNode.left;
+            //            for (int a = 0; a < e; a++)
+            //            {
+            //                m_tempNode = m_tempNode.right.up;
+            //                if (m_tempNode.self.tag == "Tile")
+            //                {
+            //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            //                    m_tempNode.self.tag = "ThorAttackableTile";
+            //                }
+            //                if (m_tempNode.self.tag == "CurrentEnemyTile")
+            //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            }
 
-    //            for (int b = 0; b < e; b++)
-    //            {
-    //                m_tempNode = m_tempNode.down.right;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            for (int b = 0; b < e; b++)
+            //            {
+            //                m_tempNode = m_tempNode.down.right;
+            //                if (m_tempNode.self.tag == "Tile")
+            //                {
+            //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            //                    m_tempNode.self.tag = "ThorAttackableTile";
+            //                }
+            //                if (m_tempNode.self.tag == "CurrentEnemyTile")
+            //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
 
-    //            }
+            //            }
 
-    //            for (int c = 0; c < e; c++)
-    //            {
+            //            for (int c = 0; c < e; c++)
+            //            {
 
-    //                m_tempNode = m_tempNode.left.down;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            }
+            //                m_tempNode = m_tempNode.left.down;
+            //                if (m_tempNode.self.tag == "Tile")
+            //                {
+            //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            //                    m_tempNode.self.tag = "ThorAttackableTile";
+            //                }
+            //                if (m_tempNode.self.tag == "CurrentEnemyTile")
+            //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            }
 
-    //            for (int d = 0; d < e; d++)
-    //            {
-    //                m_tempNode = m_tempNode.up.left;
-    //                if (m_tempNode.self.tag == "Tile")
-    //                {
-    //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-    //                    m_tempNode.self.tag = "ThorAttackableTile";
-    //                }
-    //                if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-    //            }
-    //            if (f > e)
-    //                e++;
-    //        }
-    //    }
-        
+            //            for (int d = 0; d < e; d++)
+            //            {
+            //                m_tempNode = m_tempNode.up.left;
+            //                if (m_tempNode.self.tag == "Tile")
+            //                {
+            //                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            //                    m_tempNode.self.tag = "ThorAttackableTile";
+            //                }
+            //                if (m_tempNode.self.tag == "CurrentEnemyTile")
+            //                    m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
+            //            }
+            //            if (f > e)
+            //                e++;
+            //        }
+            //    }
+        }
     }
 
     void RemoveHighlightAttack()
     {
-    //    m_tempNode = m_tempNodeBase;
-    //    int f = m_nBasicAttackRange;
-    //    int e = 1;
+        //    m_tempNode = m_tempNodeBase;
+        //    int f = m_nBasicAttackRange;
+        //    int e = 1;
 
-    //    for (int i = 0; i < e; i++)
-    //    {
-    //        m_tempNode = m_tempNode.left;
-    //        m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //        for (int a = 0; a < e; a++)
-    //        {
-    //            m_tempNode = m_tempNode.right.up;
-    //            if (m_tempNode.self.tag == "ThorAttackableTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //                m_tempNode.self.tag = "Tile";
-    //            }
-    //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //            }
-    //        }
-    //        for (int b = 0; b < e; b++)
-    //        {
-    //            m_tempNode = m_tempNode.down.right;
-    //            if (m_tempNode.self.tag == "ThorAttackableTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //                m_tempNode.self.tag = "Tile";
-    //            }
-    //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //            }
+        //    for (int i = 0; i < e; i++)
+        //    {
+        //        m_tempNode = m_tempNode.left;
+        //        m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //        for (int a = 0; a < e; a++)
+        //        {
+        //            m_tempNode = m_tempNode.right.up;
+        //            if (m_tempNode.self.tag == "ThorAttackableTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //                m_tempNode.self.tag = "Tile";
+        //            }
+        //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //            }
+        //        }
+        //        for (int b = 0; b < e; b++)
+        //        {
+        //            m_tempNode = m_tempNode.down.right;
+        //            if (m_tempNode.self.tag == "ThorAttackableTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //                m_tempNode.self.tag = "Tile";
+        //            }
+        //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //            }
 
-    //        }
-    //        for (int c = 0; c < e; c++)
-    //        {
+        //        }
+        //        for (int c = 0; c < e; c++)
+        //        {
 
-    //            m_tempNode = m_tempNode.left.down;
-    //            if (m_tempNode.self.tag == "ThorAttackableTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //                m_tempNode.self.tag = "Tile";
-    //            }
-    //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //            }
-    //        }
-    //        for (int d = 0; d < e; d++)
-    //        {
-    //            m_tempNode = m_tempNode.up.left;
-    //            if (m_tempNode.self.tag == "ThorAttackableTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //                m_tempNode.self.tag = "Tile";
-    //            }
-    //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
-    //            {
-    //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-    //            }
-    //        }
-    //        if (f > e)
-    //            e++;
-    //    }
-    }  
+        //            m_tempNode = m_tempNode.left.down;
+        //            if (m_tempNode.self.tag == "ThorAttackableTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //                m_tempNode.self.tag = "Tile";
+        //            }
+        //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //            }
+        //        }
+        //        for (int d = 0; d < e; d++)
+        //        {
+        //            m_tempNode = m_tempNode.up.left;
+        //            if (m_tempNode.self.tag == "ThorAttackableTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //                m_tempNode.self.tag = "Tile";
+        //            }
+        //            else if (m_tempNode.self.tag == "CurrentEnemyTile")
+        //            {
+        //                m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+        //            }
+        //        }
+        //        if (f > e)
+        //            e++;
+        //    }
+    }
 
     void SetTile()
     {
@@ -548,3 +548,6 @@ public class Thor : Hero
         }
     }
 }
+        
+    
+
