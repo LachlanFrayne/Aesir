@@ -9,6 +9,13 @@ public class ABDecision : BaseDecision
 
     public override void MakeDecision()
     {
-        //JM:STARTHERE
+        if (A)
+        {
+            A.MakeDecision();
+        }
+        else
+        {
+            B.MakeDecision();
+        }
     }
 }
