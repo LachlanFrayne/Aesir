@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+//[ExecuteInEditMode]
 public class Grida : MonoBehaviour {
 
     public GameObject tilePrefab;

@@ -128,12 +128,27 @@ MonoBehaviour:
   m_nBasicAttackRange: 3
   m_nBasicAttackCost: 6
   m_nAbility1Attack: 1
+  m_nAbility1AttackRange: 0
   m_nAbility1AttackCost: 3
   m_nAbility2Attack: 0
+  m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
-  m_nMovementActionPointCostPerTile: 2
+  m_nMovementActionPointCostPerTile: 1
+  m_nThorHealth: 15
+  m_nThorHealthMax: 15
+  m_nThorActionPoints: 12
+  m_nThorActionPointMax: 12
+  m_nThorBasicAttack: 2
+  m_nThorBasicAttackRange: 1
+  m_nThorBasicAttackCost: 3
+  m_nThorAbility1Attack: 6
+  m_nThorAbility1AttackCost: 6
+  m_nThorAbility2Attack: 3
+  m_nThorAbility2AttackCost: 5
+  m_nThorMovementActionPointCostPerTile: 1
   actionPointCostLabel: {fileID: 0}
-  ThorMoveSetButtons: {fileID: 0}
+  bridalThorMoveSetButtons: {fileID: 0}
+  thorMoveSetButtons: {fileID: 0}
   actionPointLabel: {fileID: 0}
   actionPointMaxLabel: {fileID: 0}
   actionPointsMoveCostLabel: {fileID: 0}
@@ -141,10 +156,14 @@ MonoBehaviour:
   healthMaxLabel: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
+  bridalMoveButton: {fileID: 0}
+  bridalBasicAttackButton: {fileID: 0}
+  bridalAbility1Button: {fileID: 0}
   moveButton: {fileID: 0}
   basicAttackButton: {fileID: 0}
-  bridalAbility1Button: {fileID: 0}
+  ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  bridal: 1
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}

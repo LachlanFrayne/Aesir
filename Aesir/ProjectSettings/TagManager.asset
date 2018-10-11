@@ -12,8 +12,9 @@ TagManager:
   - Loki
   - CurrentTile
   - ThorAttackableTile
-  - ThorWalkableTile
   - CurrentEnemyTile
+  - FreyaAttackableTile
+  - WalkableTile
   layers:
   - Default
   - TransparentFX
