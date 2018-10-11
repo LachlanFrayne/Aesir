@@ -618,38 +618,6 @@ public class Thor : Hero
             if (m_currentNode.neighbours[i].self.tag == "CurrentEnemyTile")
                 m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = EnemyHighlight;
         }
-
-        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[0].self.tag = "ThorAttackableTile";
-        }
-        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[2].self.tag = "ThorAttackableTile";
-        }
-        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[0].self.tag = "ThorAttackableTile";
-        }
-        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[2].self.tag = "ThorAttackableTile";
-        }
-        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
     }
     void ThorAbility1()
     {

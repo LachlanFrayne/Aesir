@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65539860617447764}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Freya
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,9 +53,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4620197959953242}
+  - component: {fileID: 114550503194178708}
   m_Layer: 0
   m_Name: Freya_001_Medic_001
-  m_TagString: Untagged
+  m_TagString: Freya
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840937201099206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 11.450267, y: 0.5430949, z: 12.543282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4289126837473478}
@@ -180,3 +181,54 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114550503194178708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840937201099206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b183bcbfb230fa947bcd374dd9045e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_nHealth: 8
+  m_nHealthMax: 8
+  m_nActionPoints: 12
+  m_nActionPointMax: 12
+  m_nBasicAttack: 2
+  m_nBasicAttackRange: 5
+  m_nBasicAttackCost: 3
+  m_nAbility1Attack: 4
+  m_nAbility1AttackRange: 0
+  m_nAbility1AttackCost: 6
+  m_nAbility2Attack: 0
+  m_nAbility2AttackRange: 0
+  m_nAbility2AttackCost: 0
+  m_nMovementActionPointCostPerTile: 2
+  ThorSelected: 0
+  FreyaSelected: 0
+  LokiSelected: 0
+  regen: 2
+  actionPointCostLabel: {fileID: 0}
+  moveSetButtons: {fileID: 0}
+  actionPointLabel: {fileID: 0}
+  actionPointMaxLabel: {fileID: 0}
+  actionPointsMoveCostLabel: {fileID: 0}
+  healthLabel: {fileID: 0}
+  healthMaxLabel: {fileID: 0}
+  actionPointsBarImage: {fileID: 0}
+  backgroundFreyaImage: {fileID: 0}
+  moveButton: {fileID: 0}
+  basicAttackButton: {fileID: 0}
+  ability1Button: {fileID: 0}
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
+  EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+  pathUpDown: {fileID: 0}
+  pathLeftRight: {fileID: 0}
+  pathUpLeft: {fileID: 0}
+  pathUpRight: {fileID: 0}
+  pathDownLeft: {fileID: 0}
+  pathDownRight: {fileID: 0}

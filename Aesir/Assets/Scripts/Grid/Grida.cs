@@ -24,7 +24,7 @@ public class Grida : MonoBehaviour {
             for (int rowTile = 0; rowTile < boardArray.GetLength(1); rowTile++)
             {
                 boardArray[columnTile, rowTile] = new Node();       //Sets everyting in boardArray to a node
-                boardArray[columnTile, rowTile].self = Instantiate(tilePrefab, new Vector3(rowTile * 2.05f, 0, columnTile * 2.05f), Quaternion.Euler(90, 0, 0), gameObject.transform);      //Creates the grid
+                boardArray[columnTile, rowTile].self = Instantiate(tilePrefab, new Vector3(rowTile * 1.05f, 0, columnTile * 1.05f), Quaternion.Euler(90, 0, 0), gameObject.transform);      //Creates the grid
             }
         }
         

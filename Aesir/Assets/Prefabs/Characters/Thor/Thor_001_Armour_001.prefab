@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65864288117036554}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Thor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,9 +53,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4713201342206428}
+  - component: {fileID: 114486843925041948}
   m_Layer: 0
   m_Name: Thor_001_Armour_001
-  m_TagString: Untagged
+  m_TagString: Thor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.050806, y: 0.77262056, z: -4.634653}
+  m_LocalPosition: {x: 14.73, y: 0.77262056, z: 11.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409763530176496}
@@ -178,3 +179,71 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114486843925041948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726695763999860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493403362594db6458eb7bd9bfebfb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_nHealth: 15
+  m_nHealthMax: 15
+  m_nActionPoints: 12
+  m_nActionPointMax: 12
+  m_nBasicAttack: 1
+  m_nBasicAttackRange: 3
+  m_nBasicAttackCost: 6
+  m_nAbility1Attack: 1
+  m_nAbility1AttackRange: 0
+  m_nAbility1AttackCost: 3
+  m_nAbility2Attack: 0
+  m_nAbility2AttackRange: 0
+  m_nAbility2AttackCost: 0
+  m_nMovementActionPointCostPerTile: 2
+  ThorSelected: 0
+  FreyaSelected: 0
+  LokiSelected: 0
+  m_nThorHealth: 15
+  m_nThorHealthMax: 15
+  m_nThorActionPoints: 12
+  m_nThorActionPointMax: 12
+  m_nThorBasicAttack: 2
+  m_nThorBasicAttackRange: 1
+  m_nThorBasicAttackCost: 3
+  m_nThorAbility1Attack: 6
+  m_nThorAbility1AttackCost: 6
+  m_nThorAbility2Attack: 3
+  m_nThorAbility2AttackCost: 5
+  m_nThorMovementActionPointCostPerTile: 1
+  actionPointCostLabel: {fileID: 0}
+  bridalThorMoveSetButtons: {fileID: 0}
+  thorMoveSetButtons: {fileID: 0}
+  actionPointLabel: {fileID: 0}
+  actionPointMaxLabel: {fileID: 0}
+  actionPointsMoveCostLabel: {fileID: 0}
+  healthLabel: {fileID: 0}
+  healthMaxLabel: {fileID: 0}
+  actionPointsBarImage: {fileID: 0}
+  backgroundThorImage: {fileID: 0}
+  bridalMoveButton: {fileID: 0}
+  bridalBasicAttackButton: {fileID: 0}
+  bridalAbility1Button: {fileID: 0}
+  moveButton: {fileID: 0}
+  basicAttackButton: {fileID: 0}
+  ability1Button: {fileID: 0}
+  ability2Button: {fileID: 0}
+  bBridal: 1
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
+  EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+  pathUpDown: {fileID: 2100000, guid: c280b141aa12160438c685517aff6bbc, type: 2}
+  pathLeftRight: {fileID: 2100000, guid: f8474cc51224f4044bb662cc38f8179d, type: 2}
+  pathUpLeft: {fileID: 2100000, guid: 27523c3aa93964841b615199f0ebbb70, type: 2}
+  pathUpRight: {fileID: 2100000, guid: 95e3233d1a5041c4b8962cb886df0a82, type: 2}
+  pathDownLeft: {fileID: 2100000, guid: 9e7f340084b758f4680c2556276ab1a1, type: 2}
+  pathDownRight: {fileID: 2100000, guid: 8fbd47e825bbf454ba4e006b697d3b01, type: 2}
