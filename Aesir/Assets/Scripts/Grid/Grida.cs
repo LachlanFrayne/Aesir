@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+//[ExecuteInEditMode]
 public class Grida : MonoBehaviour {
 
     public GameObject tilePrefab;
@@ -34,21 +34,21 @@ public class Grida : MonoBehaviour {
             {
                 if(rowTile < gridSizeY - 1)
                 {
-                    boardArray[columnTile, rowTile].down = boardArray[columnTile, rowTile + 1];       //Sets the down node from the current node
+                    boardArray[columnTile, rowTile].neighbours[0] = boardArray[columnTile, rowTile + 1];       //Sets the up node from the current node
                 }
         
                 if(columnTile < gridSizeX - 1)
                 {
-                    boardArray[columnTile, rowTile].right = boardArray[columnTile + 1, rowTile];        //Sets the right node from the current node
+                    boardArray[columnTile, rowTile].neighbours[1] = boardArray[columnTile + 1, rowTile];        //Sets the right node from the current node
                 }
                 if (rowTile > 0)
                 {
-                    boardArray[columnTile, rowTile].up = boardArray[columnTile, rowTile - 1];     //Sets the up node from the current node
+                    boardArray[columnTile, rowTile].neighbours[2] = boardArray[columnTile, rowTile - 1];     //Sets the down node from the current node
                 }
         
                 if (columnTile > 0)
                 {
-                    boardArray[columnTile, rowTile].left = boardArray[columnTile - 1, rowTile];     //Sets the left node from the current node
+                    boardArray[columnTile, rowTile].neighbours[3] = boardArray[columnTile - 1, rowTile];     //Sets the left node from the current node
                 }
             }
         }
@@ -57,10 +57,8 @@ public class Grida : MonoBehaviour {
 
 public class Node
 {
-    public Node left;
-    public Node right;
-    public Node up;
-    public Node down;
+    public Node[] neighbours = new Node[4];
+
     public Node prev;
     public int gScore;
     public GameObject self;
