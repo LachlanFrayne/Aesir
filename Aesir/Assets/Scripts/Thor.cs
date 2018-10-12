@@ -214,7 +214,7 @@ public class Thor : Hero
                         if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
                         {
                             actionPointCostLabel.SetActive(true);
-                            actionPointsMoveCostLabel.text = m_grid.boardArray[columnTile, rowTile].gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
+                            actionPointsMoveCostLabel.text = m_grid.boardArray[columnTile, rowTile].m_gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
 
                             if (a == null)
                                 a = hit1.collider;      //a = the first hit
@@ -413,7 +413,7 @@ public class Thor : Hero
                             {
                                 Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
                                 int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
-                                m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
+                                m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
 
                                 hero.dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the hit tile

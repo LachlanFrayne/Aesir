@@ -60,6 +60,8 @@ public class Node
     public Node[] neighbours = new Node[4];
 
     public Node prev;
-    public int gScore;
+    public int m_gScore;
+    public float m_fScore;
+    public float m_hScore;
     public GameObject self;
 }

@@ -60,7 +60,7 @@ public class Hero : Entity
     public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {
         int gScore = MoveCostPerTile;
-        Heap openList = new Heap();
+        Heap openList = new Heap(false);
         List<Node> closedList = new List<Node>();
 
         openList.Add(startNode);
@@ -71,7 +71,7 @@ public class Hero : Entity
 
             closedList.Add(currentNode);
 
-            if (currentNode.gScore > actionPointAvailable)
+            if (currentNode.m_gScore > actionPointAvailable)
             {
                 continue;
             }
@@ -87,12 +87,12 @@ public class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        int tempGScore = currentNode.gScore + gScore;
+                        int tempGScore = currentNode.m_gScore + gScore;
 
-                        if (tempGScore < currentNode.neighbours[i].gScore)
+                        if (tempGScore < currentNode.neighbours[i].m_gScore)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = tempGScore;
+                            currentNode.neighbours[i].m_gScore = tempGScore;
                         }
                     }
                     else
@@ -100,7 +100,7 @@ public class Hero : Entity
                         if (currentNode.neighbours[i] != null)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = currentNode.gScore + gScore;
+                            currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
                             openList.Add(currentNode.neighbours[i]);
                         }
                     }
@@ -112,7 +112,7 @@ public class Hero : Entity
     public void dijkstrasSearchAttack(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {
         int gScore = MoveCostPerTile;
-        Heap openList = new Heap();
+        Heap openList = new Heap(false);
         List<Node> closedList = new List<Node>();
 
         openList.Add(startNode);
@@ -123,7 +123,7 @@ public class Hero : Entity
 
             closedList.Add(currentNode);
 
-            if (currentNode.gScore > actionPointAvailable)
+            if (currentNode.m_gScore > actionPointAvailable)
             {
                 continue;
             }
@@ -139,12 +139,12 @@ public class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        int tempGScore = currentNode.gScore + gScore;
+                        int tempGScore = currentNode.m_gScore + gScore;
 
-                        if (tempGScore < currentNode.neighbours[i].gScore)
+                        if (tempGScore < currentNode.neighbours[i].m_gScore)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = tempGScore;
+                            currentNode.neighbours[i].m_gScore = tempGScore;
                         }
                     }
                     else
@@ -152,7 +152,7 @@ public class Hero : Entity
                         if (currentNode.neighbours[i] != null)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = currentNode.gScore + gScore;
+                            currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
                             openList.Add(currentNode.neighbours[i]);
                         }
                     }
@@ -164,7 +164,7 @@ public class Hero : Entity
     public void dijkstrasSearchRemove(Node startNode, int actionPointAvailable, Material removeHighlight, int MoveCostPerTile)
     {
         int gScore = MoveCostPerTile;
-        Heap openList = new Heap();
+        Heap openList = new Heap(false);
         List<Node> closedList = new List<Node>();
 
         openList.Add(startNode);
@@ -176,7 +176,7 @@ public class Hero : Entity
 
             closedList.Add(currentNode);
 
-            if (currentNode.gScore > actionPointAvailable)
+            if (currentNode.m_gScore > actionPointAvailable)
             {
                 continue;
             }
@@ -185,7 +185,7 @@ public class Hero : Entity
 
             currentNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
             currentNode.self.tag = "Tile";
-            currentNode.gScore = 0;
+            currentNode.m_gScore = 0;
             currentNode.prev = null;
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
@@ -194,16 +194,16 @@ public class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        int tempGScore = currentNode.gScore + gScore;
+                        int tempGScore = currentNode.m_gScore + gScore;
 
-                        if (tempGScore < currentNode.neighbours[i].gScore)
+                        if (tempGScore < currentNode.neighbours[i].m_gScore)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = tempGScore;
+                            currentNode.neighbours[i].m_gScore = tempGScore;
                         }
                         currentNode.neighbours[i].self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                         currentNode.neighbours[i].self.tag = "Tile";
-                        currentNode.neighbours[i].gScore = 0;
+                        currentNode.neighbours[i].m_gScore = 0;
                         currentNode.neighbours[i].prev = null;
                     }
                     else
@@ -211,7 +211,7 @@ public class Hero : Entity
                         if (currentNode.neighbours[i] != null)
                         {
                             currentNode.neighbours[i].prev = currentNode;
-                            currentNode.neighbours[i].gScore = currentNode.gScore + gScore;
+                            currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
                             openList.Add(currentNode.neighbours[i]);
                         }
                     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ABDecision : BaseDecision
+public abstract class ABDecision : BaseDecision
 {
     BaseDecision A;
     BaseDecision B;

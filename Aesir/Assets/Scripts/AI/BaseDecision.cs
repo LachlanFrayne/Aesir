@@ -4,5 +4,12 @@ using UnityEngine;
 
 public abstract class BaseDecision : MonoBehaviour
 {
+    public Enemy m_self;
+
+    private void Start()
+    {
+        m_self = GetComponent<Enemy>();
+    }
+
     public abstract void MakeDecision();
 }

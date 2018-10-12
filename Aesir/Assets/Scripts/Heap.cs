@@ -5,20 +5,70 @@ using UnityEngine;
 class Heap 
 {
     public List<Node> m_tHeap = new List<Node>();
- 
-    public bool CompareFunc(Node a, Node b)
+
+    bool m_aStar;
+    public delegate bool CompareFunction(Node a, Node b);
+
+    CompareFunction CompareFunc;
+
+    public Heap(bool aStar)
     {
-        if (a.gScore < b.gScore)
+        m_aStar = aStar;
+        if (m_aStar)
         {
-            return true;
+            CompareFunc = delegate (Node a, Node b)
+            {
+                if (a.m_fScore < b.m_fScore)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
         }
         else
         {
-            return false;
+            CompareFunc = delegate (Node a, Node b)
+            {
+                if (a.m_gScore < b.m_gScore)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
         }
     }
 
-	public void Add(Node data)
+    //public bool CompareFunc(Node a, Node b)
+    //{
+    //    if (a.m_gScore < b.m_gScore)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
+
+    //public bool CompareFuncAStar(Node a, Node b)
+    //{
+    //    if (a.m_fScore < b.m_fScore)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
+
+    public void Add(Node data)
 	{
 		m_tHeap.Add(data);
 		UpHeap(m_tHeap.Count - 1);
