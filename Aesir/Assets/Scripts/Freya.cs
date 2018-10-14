@@ -130,7 +130,7 @@ public class Freya : Hero
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
-        if (Physics.Raycast(ray1, out hit1, 100))
+        if (Physics.Raycast(ray1, out hit1, 100) && hero.FreyaSelected)
         {
             if (hit1.collider.tag == "WalkableTile")
             {
@@ -192,9 +192,6 @@ public class Freya : Hero
                         bBasicAttack = false;
                         bAbility1Attack = false;
 
-                        hero.dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-
-                        //RemoveHighlightAttack();
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
 
                         moveSetButtons.SetActive(true);
