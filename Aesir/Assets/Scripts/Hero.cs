@@ -131,7 +131,7 @@ public class Hero : Entity
                 continue;
 
             currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-            currentNode.self.tag = "ThorAttackableTile";
+            currentNode.self.tag = "AttackableTile";
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
             {

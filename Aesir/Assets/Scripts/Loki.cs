@@ -97,7 +97,7 @@ public class Loki : Hero
                     {
                         m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
                         m_currentNode.self.tag = "CurrentTile";        //Sets currentNodes tag to "CurrentTile"
-                        transform.position = new Vector3(m_currentNode.self.transform.position.x, .5f, m_currentNode.self.transform.position.z);        //Sets position to the center of the tile
+                        transform.position = new Vector3(m_currentNode.self.transform.position.x, 0, m_currentNode.self.transform.position.z);        //Sets position to the center of the tile
                         m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
                     }
                 }
@@ -190,37 +190,37 @@ public class Loki : Hero
                         bBasicAttack = false;
                         bAbility1Attack = false;
 
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
+                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
 
                         moveSetButtons.SetActive(true);
                     }
                 }
                 if (hit.collider.tag == "Thor")     //If you click on another character, unhighlight 
                 {
-                    if (hero.FreyaSelected)
+                    if (hero.LokiSelected)
                     {
                         hero.FreyaSelected = false;
                         hero.ThorSelected = true;
                         actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
-                        hero.ChangeCharacters("Loki", "Thor");
+                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
+                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
                     }
                 }
                 if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
                 {
-                    if (hero.FreyaSelected)
+                    if (hero.LokiSelected)
                     {
                         hero.FreyaSelected = false;
                         hero.LokiSelected = true;
                         actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
-                        hero.ChangeCharacters("Loki", "Freya");
+                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
+                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
                     }
                 }
 
 
 
-                if (hit.collider.tag == "WalkableTile" && hero.FreyaSelected == true)        //Used for when you are moving
+                if (hit.collider.tag == "WalkableTile" && hero.LokiSelected == true)        //Used for when you are moving
                 {
                     transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
                     for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
@@ -246,25 +246,47 @@ public class Loki : Hero
                                 a = null;       //Resets a
                                 b = null;       //Resets b
                                 path.Clear();       //Clears the path list
+                                SetTile();
                             }
                         }
                     }
                 }
 
-                if (hit.collider.tag == "Enemy" && bBasicAttack == true || hit.collider.tag == "Enemy" && bAbility1Attack == true)
+                if (hit.collider.tag == "Enemy")
                 {
                     actionPointCostLabel.SetActive(false);
-                    if (bBasicAttack == true)
+                    RaycastHit hit2;
+                    if (Physics.Raycast(hit.collider.transform.position, new Vector3(0, -1, 0), out hit2, 100))       //Creates a raycast downwards
                     {
-                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-                    }
-                    if (bAbility1Attack == true)
-                    {
-                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+                        if (hit2.collider.tag == "CurrentAttackableEnemyTile")
+                        {
+                            if (bBasicAttack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+                            if (bAbility1Attack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+                        }
                     }
                 }
             }
@@ -285,64 +307,48 @@ public class Loki : Hero
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
 
-        m_tempNode = m_tempNodeBase;        //Sets base 
-        int f = m_nBasicAttackRange;      //The attackRange
-        int e = 1;
-
-        for (int i = 0; i < e; i++)
+        for (int i = 0; i < m_currentNode.neighbours.Length; i++)
         {
-            m_tempNode = m_tempNode.neighbours[3];
-            for (int a = 0; a < e; a++)
+            if (m_currentNode.neighbours[i].self.tag == "Tile")
             {
-                m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.self.tag == "Tile")
-                {
-                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
-                }
-                if (m_tempNode.self.tag == "CurrentEnemyTile")
-                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = AttackHighlight;
+                m_currentNode.neighbours[i].self.tag = "AttackableTile";
             }
-
-            for (int b = 0; b < e; b++)
-            {
-                m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.self.tag == "Tile")
-                {
-                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
-                }
-                if (m_tempNode.self.tag == "CurrentEnemyTile")
-                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-
-            }
-
-            for (int c = 0; c < e; c++)
-            {
-                m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.self.tag == "Tile")
-                {
-                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
-                }
-                if (m_tempNode.self.tag == "CurrentEnemyTile")
-                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-            }
-
-            for (int d = 0; d < e; d++)
-            {
-                m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.self.tag == "Tile")
-                {
-                    m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
-                }
-                if (m_tempNode.self.tag == "CurrentEnemyTile")
-                    m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
-            }
-            if (f > e)
-                e++;
+            if (m_currentNode.neighbours[i].self.tag == "CurrentEnemyTile")
+                m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = EnemyHighlight;
         }
+
+        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "Tile")
+        {
+            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
+            m_currentNode.neighbours[3].neighbours[0].self.tag = "AttackableTile";
+        }
+        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "CurrentEnemyTile")
+            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
+
+        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "Tile")
+        {
+            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
+            m_currentNode.neighbours[3].neighbours[2].self.tag = "AttackableTile";
+        }
+        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "CurrentEnemyTile")
+            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
+
+        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "Tile")
+        {
+            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
+            m_currentNode.neighbours[1].neighbours[0].self.tag = "AttackableTile";
+        }
+        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "CurrentEnemyTile")
+            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
+
+        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "Tile")
+        {
+            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
+            m_currentNode.neighbours[1].neighbours[2].self.tag = "AttackableTile";
+        }
+        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "CurrentEnemyTile")
+            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
     }
     void Ability1()
     {
@@ -352,48 +358,7 @@ public class Loki : Hero
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
-        for (int i = 0; i < m_currentNode.neighbours.Length; i++)
-        {
-            if (m_currentNode.neighbours[i].self.tag == "Tile")
-            {
-                m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = AttackHighlight;
-                m_currentNode.neighbours[i].self.tag = "FreyaAttackableTile";
-            }
-            if (m_currentNode.neighbours[i].self.tag == "CurrentEnemyTile")
-                m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = EnemyHighlight;
-        }
-
-        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[0].self.tag = "FreyaAttackableTile";
-        }
-        if (m_currentNode.neighbours[3].neighbours[0].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[2].self.tag = "FreyaAttackableTile";
-        }
-        if (m_currentNode.neighbours[3].neighbours[2].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[0].self.tag = "FreyaAttackableTile";
-        }
-        if (m_currentNode.neighbours[1].neighbours[0].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
-
-        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "Tile")
-        {
-            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[2].self.tag = "FreyaAttackableTile";
-        }
-        if (m_currentNode.neighbours[1].neighbours[2].self.tag == "CurrentEnemyTile")
-            m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
+        hero.dijkstrasSearchAttack(m_currentNode, 3, movementHighlight, 1);
     }
 
     void RemoveHighlightAttack()

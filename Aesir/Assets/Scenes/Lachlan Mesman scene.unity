@@ -1407,11 +1407,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4473960117621986, guid: c9b1c1fbe9f9c094b8d2087d28da53a5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.600211
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 4473960117621986, guid: c9b1c1fbe9f9c094b8d2087d28da53a5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 13.56704
+      value: 13.38
       objectReference: {fileID: 0}
     - target: {fileID: 4473960117621986, guid: c9b1c1fbe9f9c094b8d2087d28da53a5, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1435,58 +1435,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
         type: 2}
-      propertyPath: m_nHealth
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nHealthMax
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nActionPoints
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nActionPointMax
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nBasicAttack
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nBasicAttackRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nBasicAttackCost
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
       propertyPath: m_nMovementActionPointCostPerTile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nAbility1AttackRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nAbility1Attack
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
-        type: 2}
-      propertyPath: m_nAbility1AttackCost
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9b1c1fbe9f9c094b8d2087d28da53a5, type: 2}
@@ -3040,7 +2990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.006896496, b: 1, a: 0.216}
+  m_Color: {r: 0, g: 0, b: 1, a: 0.216}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3523,7 +3473,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4713201342206428, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 14.73
+      value: 16.34
       objectReference: {fileID: 0}
     - target: {fileID: 4713201342206428, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3531,7 +3481,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4713201342206428, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 12.58
+      value: 13.573
       objectReference: {fileID: 0}
     - target: {fileID: 4713201342206428, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4760,6 +4710,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114550503194178708, guid: cd091b638e1e33748837d39408add9f1,
+        type: 2}
+      propertyPath: healingHighlight
+      value: 
+      objectReference: {fileID: 2100000, guid: 273698b335400e943ba17cf046ecbe47, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd091b638e1e33748837d39408add9f1, type: 2}
   m_IsPrefabParent: 0

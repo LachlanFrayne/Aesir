@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493035065664966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.715884, y: -0.00021103024, z: 13.56704}
+  m_LocalPosition: {x: 13.715884, y: -0.600211, z: 13.56704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271454127213508}
@@ -189,22 +189,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9708c24a47da8654899560e6898824b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nHealth: 0
-  m_nHealthMax: 0
-  m_nActionPoints: 0
-  m_nActionPointMax: 0
-  m_nBasicAttack: 0
-  m_nBasicAttackRange: 0
-  m_nBasicAttackCost: 0
-  m_nAbility1Attack: 0
-  m_nAbility1AttackRange: 0
-  m_nAbility1AttackCost: 0
+  m_nHealth: 12
+  m_nHealthMax: 12
+  m_nActionPoints: 12
+  m_nActionPointMax: 12
+  m_nBasicAttack: 3
+  m_nBasicAttackRange: 1
+  m_nBasicAttackCost: 3
+  m_nAbility1Attack: 2
+  m_nAbility1AttackRange: 3
+  m_nAbility1AttackCost: 8
   m_nAbility2Attack: 0
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
-  m_nMovementActionPointCostPerTile: 0
+  m_nMovementActionPointCostPerTile: 1
   ThorSelected: 0
   FreyaSelected: 0
   LokiSelected: 0
-  movementHighlight: {fileID: 0}
-  removeHighlight: {fileID: 0}
+  actionPointCostLabel: {fileID: 0}
+  moveSetButtons: {fileID: 0}
+  actionPointLabel: {fileID: 0}
+  actionPointMaxLabel: {fileID: 0}
+  actionPointsMoveCostLabel: {fileID: 0}
+  healthLabel: {fileID: 0}
+  healthMaxLabel: {fileID: 0}
+  actionPointsBarImage: {fileID: 0}
+  backgroundFreyaImage: {fileID: 0}
+  moveButton: {fileID: 0}
+  basicAttackButton: {fileID: 0}
+  ability1Button: {fileID: 0}
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
+  EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+  pathUpDown: {fileID: 0}
+  pathLeftRight: {fileID: 0}
+  pathUpLeft: {fileID: 0}
+  pathUpRight: {fileID: 0}
+  pathDownLeft: {fileID: 0}
+  pathDownRight: {fileID: 0}

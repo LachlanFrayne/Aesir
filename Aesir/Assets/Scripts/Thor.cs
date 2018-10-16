@@ -56,8 +56,6 @@ public class Thor : Hero
     bool bThorAbility2Attack = false;
     public bool bBridal = true;
 
-
-
     Hero hero;
 
     List<Node> path = new List<Node>();
@@ -111,7 +109,7 @@ public class Thor : Hero
         actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
-        hero = new Hero();
+        hero = new Hero();      //Reference to Hero
 
         SetTile();
     }
@@ -178,7 +176,7 @@ public class Thor : Hero
                 ability2Button.onClick.RemoveAllListeners();
 
             
-            if (i == 0)
+            if (i == 0)        //Changes all varibles once thor is upgraded
             {
                 m_nHealth = m_nThorHealth;
                 m_nHealthMax = m_nThorHealthMax;
@@ -194,9 +192,7 @@ public class Thor : Hero
                 m_nMovementActionPointCostPerTile = m_nThorMovementActionPointCostPerTile;
                 
             }
-
         }
-
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
@@ -284,7 +280,7 @@ public class Thor : Hero
                         hero.LokiSelected = true;
                         backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
                         actionPointCostLabel.SetActive(false);
-                        hero.ChangeCharacters("Thor", "Loki");
+                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
                     }
                 }
                 if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
@@ -295,7 +291,7 @@ public class Thor : Hero
                         hero.FreyaSelected = true;
                         backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
                         actionPointCostLabel.SetActive(false);
-                        hero.ChangeCharacters("Thor", "Freya");
+                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
                     }
                 }
 
@@ -333,42 +329,83 @@ public class Thor : Hero
                     }
                 }
 
-                if (hit.collider.tag == "Enemy" && bBridalBasicAttack == true || hit.collider.tag == "Enemy" && bBridalAbility1Attack == true)
+                if (hit.collider.tag == "Enemy")
                 {
                     actionPointCostLabel.SetActive(false);
-                    if (bBridalBasicAttack == true)
+
+                    RaycastHit hit2;
+                    if (Physics.Raycast(hit.collider.transform.position, new Vector3(0, -1, 0), out hit2, 100))       //Creates a raycast downwards
                     {
-                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-                    }
-                    if (bBridalAbility1Attack == true)
-                    {
-                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-                    }
-                }
-                if (hit.collider.tag == "Enemy" && bThorBasicAttack == true || hit.collider.tag == "Enemy" && bThorAbility1Attack == true || hit.collider.tag == "Enemy" && bThorAbility2Attack == true)
-                {
-                    if (bThorBasicAttack == true)
-                    {
-                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-                    }
-                    if (bThorAbility1Attack == true)
-                    {
-                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-                    }
-                    if (bThorAbility2Attack == true)
-                    {
-                        m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
-                        RemoveHighlightAttack();
-                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-                    }
+                        if(hit2.collider.tag == "CurrentAttackableEnemyTile")
+                        {
+                            if (bBridalBasicAttack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+                                
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile"; 
+                            }
+                            if (bBridalAbility1Attack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+
+                            if (bThorBasicAttack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+                            if (bThorAbility1Attack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+                            if (bThorAbility2Attack == true)
+                            {
+                                m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
+                                RemoveHighlightAttack();
+                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
+                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                                    hit2.collider.tag = "CurrentEnemyTile";
+                                else
+                                    hit2.collider.tag = "Tile";
+                            }
+                        }
+                    } 
                 }
             }
         }
@@ -381,6 +418,13 @@ public class Thor : Hero
         else
             thorMoveSetButtons.SetActive(false);
     }
+
+
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////ATTACKS/////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+
 
     void BridalBasicAttack()
     {
@@ -403,10 +447,13 @@ public class Thor : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "ThorAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
+                {
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    m_tempNode.self.tag = "CurrentAttackableEnemyTile";
+                }
             }
 
             for (int b = 0; b < e; b++)
@@ -415,10 +462,13 @@ public class Thor : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "ThorAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
+                {
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    m_tempNode.self.tag = "CurrentAttackableEnemyTile";
+                }
 
             }
 
@@ -428,10 +478,13 @@ public class Thor : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "ThorAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
+                {
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    m_tempNode.self.tag = "CurrentAttackableEnemyTile";
+                }
             }
 
             for (int d = 0; d < e; d++)
@@ -440,10 +493,13 @@ public class Thor : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "ThorAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
+                {
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
+                    m_tempNode.self.tag = "CurrentAttackableEnemyTile";
+                }
             }
             if (f > e)
                 e++;
@@ -461,7 +517,7 @@ public class Thor : Hero
             if (m_currentNode.neighbours[i].self.tag == "Tile")
             {
                 m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = AttackHighlight;
-                m_currentNode.neighbours[i].self.tag = "ThorAttackableTile";
+                m_currentNode.neighbours[i].self.tag = "AttackableTile";
             }
             if (m_currentNode.neighbours[i].self.tag == "CurrentEnemyTile")
                 m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -470,7 +526,7 @@ public class Thor : Hero
         if (m_currentNode.neighbours[3].neighbours[0].self.tag == "Tile")
         {
             m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[0].self.tag = "ThorAttackableTile";
+            m_currentNode.neighbours[3].neighbours[0].self.tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[3].neighbours[0].self.tag == "CurrentEnemyTile")
             m_currentNode.neighbours[3].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -478,7 +534,7 @@ public class Thor : Hero
         if (m_currentNode.neighbours[3].neighbours[2].self.tag == "Tile")
         {
             m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[2].self.tag = "ThorAttackableTile";
+            m_currentNode.neighbours[3].neighbours[2].self.tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[3].neighbours[2].self.tag == "CurrentEnemyTile")
             m_currentNode.neighbours[3].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -486,7 +542,7 @@ public class Thor : Hero
         if (m_currentNode.neighbours[1].neighbours[0].self.tag == "Tile")
         {
             m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[0].self.tag = "ThorAttackableTile";
+            m_currentNode.neighbours[1].neighbours[0].self.tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[1].neighbours[0].self.tag == "CurrentEnemyTile")
             m_currentNode.neighbours[1].neighbours[0].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -494,7 +550,7 @@ public class Thor : Hero
         if (m_currentNode.neighbours[1].neighbours[2].self.tag == "Tile")
         {
             m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[2].self.tag = "ThorAttackableTile";
+            m_currentNode.neighbours[1].neighbours[2].self.tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[1].neighbours[2].self.tag == "CurrentEnemyTile")
             m_currentNode.neighbours[1].neighbours[2].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -512,7 +568,7 @@ public class Thor : Hero
             if (m_currentNode.neighbours[i].self.tag == "Tile")
             {
                 m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = AttackHighlight;
-                m_currentNode.neighbours[i].self.tag = "ThorAttackableTile";
+                m_currentNode.neighbours[i].self.tag = "AttackableTile";
             }
             if (m_currentNode.neighbours[i].self.tag == "CurrentEnemyTile")
                 m_currentNode.neighbours[i].self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -523,70 +579,6 @@ public class Thor : Hero
         thorMoveSetButtons.SetActive(false);
 
         hero.dijkstrasSearchAttack(m_currentNode, 4, movementHighlight, 1);
-
-  
-
-
-
-        //m_tempNode = m_tempNodeBase;        //Sets base 
-        //int f = 4;      //The attackRange
-        //int e = 1;
-        //
-        //for (int i = 0; i < e; i++)
-        //{
-        //    m_tempNode = m_tempNode.neighbours[3];
-        //    for (int a = 0; a < e; a++)
-        //    {
-        //        m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-        //        if (m_tempNode.self.tag == "Tile")
-        //        {
-        //            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-        //            m_tempNode.self.tag = "ThorAttackableTile";
-        //        }
-        //        if (m_tempNode.self.tag == "CurrentEnemyTile")
-        //            m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-        //    }
-        //
-        //    for (int b = 0; b < e; b++)
-        //    {
-        //        m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-        //        if (m_tempNode.self.tag == "Tile")
-        //        {
-        //            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-        //            m_tempNode.self.tag = "ThorAttackableTile";
-        //        }
-        //        if (m_tempNode.self.tag == "CurrentEnemyTile")
-        //            m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-        //
-        //    }
-        //
-        //    for (int c = 0; c < e; c++)
-        //    {
-        //
-        //        m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-        //        if (m_tempNode.self.tag == "Tile")
-        //        {
-        //            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-        //            m_tempNode.self.tag = "ThorAttackableTile";
-        //        }
-        //        if (m_tempNode.self.tag == "CurrentEnemyTile")
-        //            m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-        //    }
-        //
-        //    for (int d = 0; d < e; d++)
-        //    {
-        //        m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-        //        if (m_tempNode.self.tag == "Tile")
-        //        {
-        //            m_tempNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-        //            m_tempNode.self.tag = "ThorAttackableTile";
-        //        }
-        //        if (m_tempNode.self.tag == "CurrentEnemyTile")
-        //            m_tempNode.self.GetComponent<Renderer>().material = AttackHighlight;
-        //    }
-        //    if (f > e)
-        //        e++;
-        //}
     }
     void ThorAbility2()
     {
@@ -607,7 +599,7 @@ public class Thor : Hero
             for (int a = 0; a < e; a++)
             {
                 m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.self.tag == "ThorAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -620,7 +612,7 @@ public class Thor : Hero
             for (int b = 0; b < e; b++)
             {
                 m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.self.tag == "ThorAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -635,7 +627,7 @@ public class Thor : Hero
             {
 
                 m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.self.tag == "ThorAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -648,7 +640,7 @@ public class Thor : Hero
             for (int d = 0; d < e; d++)
             {
                 m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.self.tag == "ThorAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";

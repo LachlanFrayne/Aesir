@@ -14,6 +14,7 @@ TagManager:
   - CurrentEnemyTile
   - WalkableTile
   - AttackableTile
+  - CurrentAttackableEnemyTile
   layers:
   - Default
   - TransparentFX
