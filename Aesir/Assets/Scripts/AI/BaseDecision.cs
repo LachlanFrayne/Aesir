@@ -6,7 +6,7 @@ public abstract class BaseDecision : MonoBehaviour
 {
     public Enemy m_self;
 
-    private void Start()
+    protected void Start()
     {
         m_self = GetComponent<Enemy>();
     }

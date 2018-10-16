@@ -58,7 +58,10 @@ public class CameraController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                transform.position = hit.transform.position - new Vector3(5,0,10);      //JM: Needs improvement
+				if (hit.collider.tag == "Tile")
+				{
+					transform.position = hit.transform.position - new Vector3(5,0,10);      //JM: Needs improvement
+				}
             }
         }
 

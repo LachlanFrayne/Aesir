@@ -53,6 +53,20 @@ public class Grida : MonoBehaviour {
             }
         }
     }
+
+	public void ClearBoardData()
+	{
+		for (int i = 0; i < gridSizeX; i++)
+		{
+			for (int j = 0; j < gridSizeX; j++)
+			{
+				boardArray[i, j].m_gScore = 0;
+				boardArray[i, j].m_hScore = 0;
+				boardArray[i, j].m_fScore = 0;
+				boardArray[i, j].prev = null;
+			}
+		}
+	}
 }
 
 public class Node

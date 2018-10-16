@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : Entity      
+public abstract class Hero : Entity      
 {
     public bool ThorSelected;
     public bool FreyaSelected;

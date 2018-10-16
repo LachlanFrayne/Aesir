@@ -11,7 +11,7 @@ class Heap
 
     CompareFunction CompareFunc;
 
-    public Heap(bool aStar)
+    public Heap(bool aStar)		//if the heap is used for an a* algorithm set to true, else set to false
     {
         m_aStar = aStar;
         if (m_aStar)
