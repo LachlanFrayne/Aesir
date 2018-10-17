@@ -330,6 +330,7 @@
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Freya.cs" />
     <Compile Include="Assets\Scripts\Grid\Grida.cs" />
+    <Compile Include="Assets\Scripts\Grid\Node.cs" />
     <Compile Include="Assets\Scripts\Heap.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
     <Compile Include="Assets\Scripts\Loki.cs" />

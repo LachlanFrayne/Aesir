@@ -75,11 +75,11 @@ public abstract class Hero : Entity
             {
                 continue;
             }
-            if (currentNode.self.tag == "CurrentEnemyTile")
+            if (currentNode.tag == "CurrentEnemyTile")
                 continue;
 
-            currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-            currentNode.self.tag = "WalkableTile";
+            currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            currentNode.tag = "WalkableTile";
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
             {
@@ -127,11 +127,11 @@ public abstract class Hero : Entity
             {
                 continue;
             }
-            if (currentNode.self.tag == "CurrentEnemyTile")
+            if (currentNode.tag == "CurrentEnemyTile")
                 continue;
 
-            currentNode.self.GetComponent<Renderer>().sharedMaterial = movementHighlight;
-            currentNode.self.tag = "AttackableTile";
+            currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            currentNode.tag = "AttackableTile";
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
             {
@@ -180,11 +180,11 @@ public abstract class Hero : Entity
             {
                 continue;
             }
-            if (currentNode.self.tag == "CurrentTile" || currentNode.self.tag == "CurrentEnemyTile")
+            if (currentNode.tag == "CurrentTile" || currentNode.tag == "CurrentEnemyTile")
                 continue;
 
-            currentNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-            currentNode.self.tag = "Tile";
+            currentNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+            currentNode.tag = "Tile";
             currentNode.m_gScore = 0;
             currentNode.prev = null;
 
@@ -201,8 +201,8 @@ public abstract class Hero : Entity
                             currentNode.neighbours[i].prev = currentNode;
                             currentNode.neighbours[i].m_gScore = tempGScore;
                         }
-                        currentNode.neighbours[i].self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                        currentNode.neighbours[i].self.tag = "Tile";
+                        currentNode.neighbours[i].GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                        currentNode.neighbours[i].tag = "Tile";
                         currentNode.neighbours[i].m_gScore = 0;
                         currentNode.neighbours[i].prev = null;
                     }

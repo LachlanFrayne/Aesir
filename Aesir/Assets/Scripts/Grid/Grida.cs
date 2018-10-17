@@ -4,12 +4,13 @@ using UnityEngine;
 
 
 //[ExecuteInEditMode]
-public class Grida : MonoBehaviour {
+public class Grida : Node {
 
     public GameObject tilePrefab;
-    public Node[,] boardArray = new Node[gridSizeX, gridSizeY];
+    public GameObject[,] boardArray = new GameObject[gridSizeX, gridSizeY];
     public static int gridSizeX = 30;
     public static int gridSizeY = 30;
+    public Node[,] nodeBoardArray = new Node[gridSizeX, gridSizeY];
 
     void Awake()
     {
@@ -23,8 +24,9 @@ public class Grida : MonoBehaviour {
         {
             for (int rowTile = 0; rowTile < boardArray.GetLength(1); rowTile++)
             {
-                boardArray[columnTile, rowTile] = new Node();       //Sets everyting in boardArray to a node
-                boardArray[columnTile, rowTile].self = Instantiate(tilePrefab, new Vector3(rowTile * 1.05f, 0, columnTile * 1.05f), Quaternion.Euler(90, 0, 0), gameObject.transform);      //Creates the grid
+                boardArray[columnTile, rowTile] = Instantiate(tilePrefab, new Vector3(rowTile * 1.05f, 0, columnTile * 1.05f), Quaternion.Euler(90, 0, 0), gameObject.transform);      //Creates the grid
+                boardArray[columnTile, rowTile].AddComponent<Node>();
+                nodeBoardArray[columnTile, rowTile] = boardArray[columnTile, rowTile].GetComponent<Node>();
             }
         }
         
@@ -34,21 +36,21 @@ public class Grida : MonoBehaviour {
             {
                 if(rowTile < gridSizeY - 1)
                 {
-                    boardArray[columnTile, rowTile].neighbours[0] = boardArray[columnTile, rowTile + 1];       //Sets the up node from the current node
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[0] = nodeBoardArray[columnTile, rowTile + 1];       //Sets the up node from the current node
                 }
         
                 if(columnTile < gridSizeX - 1)
                 {
-                    boardArray[columnTile, rowTile].neighbours[1] = boardArray[columnTile + 1, rowTile];        //Sets the right node from the current node
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];        //Sets the right node from the current node
                 }
                 if (rowTile > 0)
                 {
-                    boardArray[columnTile, rowTile].neighbours[2] = boardArray[columnTile, rowTile - 1];     //Sets the down node from the current node
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[2] = nodeBoardArray[columnTile, rowTile - 1];     //Sets the down node from the current node
                 }
         
                 if (columnTile > 0)
                 {
-                    boardArray[columnTile, rowTile].neighbours[3] = boardArray[columnTile - 1, rowTile];     //Sets the left node from the current node
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];     //Sets the left node from the current node
                 }
             }
         }
@@ -60,22 +62,13 @@ public class Grida : MonoBehaviour {
 		{
 			for (int j = 0; j < gridSizeX; j++)
 			{
-				boardArray[i, j].m_gScore = 0;
-				boardArray[i, j].m_hScore = 0;
-				boardArray[i, j].m_fScore = 0;
-				boardArray[i, j].prev = null;
+                nodeBoardArray[i, j].m_gScore = 0;
+                nodeBoardArray[i, j].m_hScore = 0;
+                nodeBoardArray[i, j].m_fScore = 0;
+                nodeBoardArray[i, j].prev = null;
 			}
 		}
 	}
 }
 
-public class Node
-{
-    public Node[] neighbours = new Node[4];
 
-    public Node prev;
-    public int m_gScore;
-    public float m_fScore;
-    public float m_hScore;
-    public GameObject self;
-}

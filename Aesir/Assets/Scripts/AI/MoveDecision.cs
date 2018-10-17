@@ -12,7 +12,7 @@ public class MoveDecision : BaseDecision
 	public new void Start()
 	{
 		m_path = new List<Node>();
-		m_thor = GameObject.FindGameObjectWithTag("Thor").GetComponent<Thor>();
+        m_thor = GameObject.FindGameObjectWithTag("Thor").GetComponent<Thor>();
 		base.Start();
 	}
 
@@ -66,7 +66,7 @@ public class MoveDecision : BaseDecision
                         if (currentNode.m_gScore + m_nMoveCostPerTile < n.m_gScore)     //if better path
                         {
                             n.m_gScore = currentNode.m_gScore + m_nMoveCostPerTile;
-                            n.m_hScore = Vector3.Distance(currentNode.self.transform.position, m_thor.transform.position);
+                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_thor.transform.position);
                             n.m_fScore = n.m_hScore + n.m_gScore;
                             n.prev = currentNode;
                         }
@@ -74,7 +74,7 @@ public class MoveDecision : BaseDecision
 					else		//if not in openlist
                     {		//update neighbors info
                         n.m_gScore = currentNode.m_gScore + m_nMoveCostPerTile;
-                        n.m_hScore = Vector3.Distance(currentNode.self.transform.position, m_thor.transform.position);
+                        n.m_hScore = Vector3.Distance(currentNode.transform.position, m_thor.transform.position);
                         n.m_fScore = n.m_hScore + n.m_gScore;
                         n.prev = currentNode;
 

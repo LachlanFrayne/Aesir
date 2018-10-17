@@ -26,11 +26,11 @@ public class Enemy : Entity
             {
                 for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
                 {
-                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile].self)
+                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
                     {
-                        m_currentEnemyNode = m_grid.boardArray[columnTile, rowTile];
-                        m_currentEnemyNode.self.tag = "CurrentEnemyTile";
-                        transform.position = new Vector3(m_currentEnemyNode.self.transform.position.x, .5f, m_currentEnemyNode.self.transform.position.z);
+                        m_currentEnemyNode = m_grid.nodeBoardArray[columnTile, rowTile];
+                        m_currentEnemyNode.tag = "CurrentEnemyTile";
+                        transform.position = new Vector3(m_currentEnemyNode.transform.position.x, .5f, m_currentEnemyNode.transform.position.z);
                     }
                 }
             }
@@ -50,11 +50,11 @@ public class Enemy : Entity
 
 			if(m_move.m_path.Count >= 1)
 			{
-			m_currentEnemyNode.self.tag = "Tile";
+			m_currentEnemyNode.tag = "Tile";
 			m_currentEnemyNode = m_move.m_path[m_move.m_path.Count - 1];
-			m_currentEnemyNode.self.tag = "CurrentEnemyTile";
-			transform.position = new Vector3( m_move.m_path[m_move.m_path.Count - 1].self.transform.position.x, transform.position.y, transform.position.z);
-			transform.position = new Vector3(transform.position.x, transform.position.y, m_move.m_path[m_move.m_path.Count - 1].self.transform.position.z);
+			m_currentEnemyNode.tag = "CurrentEnemyTile";
+			transform.position = new Vector3( m_move.m_path[m_move.m_path.Count - 1].transform.position.x, transform.position.y, transform.position.z);
+			transform.position = new Vector3(transform.position.x, transform.position.y, m_move.m_path[m_move.m_path.Count - 1].transform.position.z);
 			}
 		}
     }
