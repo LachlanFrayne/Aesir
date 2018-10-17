@@ -31,8 +31,6 @@ public class Loki : Hero
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
 
-    Hero hero;
-
     List<Node> path = new List<Node>();
 
     Collider a;
@@ -80,8 +78,6 @@ public class Loki : Hero
         actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
-        hero = new Hero();
-
         SetTile();
     }
     void SetTile()
@@ -128,7 +124,7 @@ public class Loki : Hero
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
-        if (Physics.Raycast(ray1, out hit1, 100) && hero.LokiSelected)
+        if (Physics.Raycast(ray1, out hit1, 100) && LokiSelected)
         {
             if (hit1.collider.tag == "WalkableTile")
             {
@@ -180,12 +176,12 @@ public class Loki : Hero
             {
                 if (hit.collider.tag == "Loki")     //If click on character, show selection tab
                 {
-                    if (hero.FreyaSelected == false && hero.ThorSelected == false)
-                        hero.LokiSelected = true;
+                    if (FreyaSelected == false && ThorSelected == false)
+                        LokiSelected = true;
 
-                    if (hero.LokiSelected)
+                    if (LokiSelected)
                     {
-                        hero.LokiSelected = true;
+                        LokiSelected = true;
 
                         bBasicAttack = false;
                         bAbility1Attack = false;
@@ -197,10 +193,10 @@ public class Loki : Hero
                 }
                 if (hit.collider.tag == "Thor")     //If you click on another character, unhighlight 
                 {
-                    if (hero.LokiSelected)
+                    if (LokiSelected)
                     {
-                        hero.FreyaSelected = false;
-                        hero.ThorSelected = true;
+                        FreyaSelected = false;
+                        ThorSelected = true;
                         actionPointCostLabel.SetActive(false);
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
@@ -208,10 +204,10 @@ public class Loki : Hero
                 }
                 if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
                 {
-                    if (hero.LokiSelected)
+                    if (LokiSelected)
                     {
-                        hero.FreyaSelected = false;
-                        hero.LokiSelected = true;
+                        FreyaSelected = false;
+                        LokiSelected = true;
                         actionPointCostLabel.SetActive(false);
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
@@ -220,7 +216,7 @@ public class Loki : Hero
 
 
 
-                if (hit.collider.tag == "WalkableTile" && hero.LokiSelected == true)        //Used for when you are moving
+                if (hit.collider.tag == "WalkableTile" && LokiSelected == true)        //Used for when you are moving
                 {
                     transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
                     for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
@@ -233,7 +229,7 @@ public class Loki : Hero
                                 int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
                                 m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
 
-                                hero.dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
+                                dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
                                 m_currentNode.self.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
                                 m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
@@ -294,7 +290,7 @@ public class Loki : Hero
     }
     void HighlightMovement()
     {
-        hero.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
+        dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
 
         moveSetButtons.SetActive(false);
     }
@@ -358,7 +354,7 @@ public class Loki : Hero
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
-        hero.dijkstrasSearchAttack(m_currentNode, 3, movementHighlight, 1);
+        dijkstrasSearchAttack(m_currentNode, 3, movementHighlight, 1);
     }
 
     void RemoveHighlightAttack()

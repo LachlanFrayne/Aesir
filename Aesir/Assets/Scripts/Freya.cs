@@ -29,11 +29,8 @@ public class Freya : Hero
     public Button basicAttackButton;
     public Button ability1Button;
 
-
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
-
-    Hero hero;
 
     List<Node> path = new List<Node>();
 
@@ -83,7 +80,6 @@ public class Freya : Hero
         actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
-        hero = new Hero();
 
         SetTile();
     }
@@ -131,7 +127,7 @@ public class Freya : Hero
 
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit1;
-        if (Physics.Raycast(ray1, out hit1, 100) && hero.ThorSelected)
+        if (Physics.Raycast(ray1, out hit1, 100) && ThorSelected)
         {
             if (hit1.collider.tag == "WalkableTile")
             {
@@ -183,12 +179,12 @@ public class Freya : Hero
             {
                 if (hit.collider.tag == "Freya")     //If click on character, show selection tab
                 {
-                    if (hero.LokiSelected == false && hero.ThorSelected == false)
-                        hero.FreyaSelected = true;
+                    if (LokiSelected == false && ThorSelected == false)
+                        FreyaSelected = true;
 
-                    if (hero.FreyaSelected)
+                    if (FreyaSelected)
                     {
-                        hero.FreyaSelected = true;
+                        FreyaSelected = true;
 
                         bBasicAttack = false;
                         bAbility1Attack = false;
@@ -200,10 +196,10 @@ public class Freya : Hero
                 }
                 if (hit.collider.tag == "Thor")     //If you click on another character, unhighlight 
                 {
-                    if (hero.FreyaSelected)
+                    if (FreyaSelected)
                     {
-                        hero.FreyaSelected = false;
-                        hero.ThorSelected = true;
+                        FreyaSelected = false;
+                        ThorSelected = true;
                         actionPointCostLabel.SetActive(false);
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
@@ -211,10 +207,10 @@ public class Freya : Hero
                 }
                 if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight    
                 {
-                    if (hero.FreyaSelected)
+                    if (FreyaSelected)
                     {
-                        hero.FreyaSelected = false;
-                        hero.LokiSelected = true;
+                        FreyaSelected = false;
+                        LokiSelected = true;
                         actionPointCostLabel.SetActive(false);
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
@@ -223,7 +219,7 @@ public class Freya : Hero
 
 
 
-                if (hit.collider.tag == "WalkableTile" && hero.FreyaSelected == true)        //Used for when you are moving
+                if (hit.collider.tag == "WalkableTile" && FreyaSelected == true)        //Used for when you are moving
                 {
                     transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
                     for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
@@ -236,7 +232,7 @@ public class Freya : Hero
                                 int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
                                 m_nActionPoints = m_nActionPoints - m_grid.boardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
 
-                                hero.dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
+                                dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
                                 m_currentNode = m_grid.boardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
                                 m_currentNode.self.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
                                 m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
@@ -297,7 +293,7 @@ public class Freya : Hero
     }
     void HighlightMovement()
     {
-        hero.dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
+        dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
 
         moveSetButtons.SetActive(false);
     }
@@ -323,7 +319,7 @@ public class Freya : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -335,7 +331,7 @@ public class Freya : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -348,7 +344,7 @@ public class Freya : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -360,7 +356,7 @@ public class Freya : Hero
                 if (m_tempNode.self.tag == "Tile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.self.tag = "FreyaAttackableTile";
+                    m_tempNode.self.tag = "AttackableTile";
                 }
                 if (m_tempNode.self.tag == "CurrentEnemyTile")
                     m_tempNode.self.GetComponent<Renderer>().material = EnemyHighlight;
@@ -377,7 +373,7 @@ public class Freya : Hero
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
-        hero.dijkstrasSearchAttack(m_currentNode, 5, healingHighlight, 1);
+        dijkstrasSearchAttack(m_currentNode, 5, healingHighlight, 1);
     }
     
     void RemoveHighlightAttack()
@@ -393,7 +389,7 @@ public class Freya : Hero
             for (int a = 0; a < e; a++)
             {
                 m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.self.tag == "FreyaAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -406,7 +402,7 @@ public class Freya : Hero
             for (int b = 0; b < e; b++)
             {
                 m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.self.tag == "FreyaAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -421,7 +417,7 @@ public class Freya : Hero
             {
 
                 m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.self.tag == "FreyaAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
@@ -434,7 +430,7 @@ public class Freya : Hero
             for (int d = 0; d < e; d++)
             {
                 m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.self.tag == "FreyaAttackableTile")
+                if (m_tempNode.self.tag == "AttackableTile")
                 {
                     m_tempNode.self.GetComponent<Renderer>().sharedMaterial = removeHighlight;
                     m_tempNode.self.tag = "Tile";
