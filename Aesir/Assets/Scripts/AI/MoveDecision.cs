@@ -12,7 +12,10 @@ public class MoveDecision : BaseDecision
 	public new void Start()
 	{
 		m_path = new List<Node>();
-        m_thor = GameObject.FindGameObjectWithTag("Thor").GetComponent<Thor>();
+
+        GameObject temp = GameObject.Find("Thor");
+
+		m_thor = temp.transform.GetComponent<Thor>();
 		base.Start();
 	}
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerTurn : StateMachineBehaviour
@@ -8,7 +9,9 @@ public class PlayerTurn : StateMachineBehaviour
 	public Freya m_freya;
 	public Loki m_loki;
 
-	//JM:STARTHERE, add a listener on an end turn button, and remove in the onexit then complete other states, also fix the thor variable not being set in the moveDecision script
+    public Button endturnbutton;
+
+   
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
@@ -25,11 +28,13 @@ public class PlayerTurn : StateMachineBehaviour
 		m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
 
 		m_freya.m_nHealth += m_freya.regen;
-	}
+
+        endturnbutton.enabled = true;
+    }
 
 	public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-		
+        endturnbutton.enabled = false;
 	}
 
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
