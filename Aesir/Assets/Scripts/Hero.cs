@@ -19,6 +19,7 @@ public abstract class Hero : Entity
     public Node m_tempNodeBase;
 
     public GameObject actionPointCostLabel;
+    public GameObject moveSetButtons;
 
     public Text actionPointLabel;
     public Text actionPointMaxLabel;
@@ -39,11 +40,19 @@ public abstract class Hero : Entity
     Collider a;
     Collider b;
 
-    void Start()
+    public void Start()
     {
         thor = new Thor();
         freya = new Freya();
         loki = new Loki();
+
+        moveSetButtons = GameObject.Find("MoveSet");
+        moveButton = GameObject.Find("Move").GetComponent<Button>();
+        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
+        ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
+        ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
+        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
+
     }
 
     public void Update()
@@ -188,7 +197,7 @@ public abstract class Hero : Entity
                     {
                         m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
                         m_currentNode.tag = "CurrentTile";        //Sets currentNodes tag to "CurrentTile"
-                        transform.position = new Vector3(m_currentNode.transform.position.x, .5f, m_currentNode.transform.position.z);        //Sets position to the center of the tile
+                        transform.position = new Vector3(m_currentNode.transform.position.x, 0, m_currentNode.transform.position.z);        //Sets position to the center of the tile
                         m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
                         m_currentNode.contain = this.gameObject;
                     }

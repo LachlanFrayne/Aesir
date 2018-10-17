@@ -23,10 +23,7 @@ public class Thor : Hero
     int j =0;
 
     public Node m_tempNode;
-
-    public GameObject bridalThorMoveSetButtons;
-    public GameObject moveSetButtons;
-
+    
     public Image actionPointsBarImage;
     public Image backgroundThorImage;
 
@@ -53,8 +50,7 @@ public class Thor : Hero
     void Start()
     {
         actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
-        bridalThorMoveSetButtons = GameObject.Find("BridalThorMoveSet");
-        moveSetButtons = GameObject.Find("MoveSet");
+        
         actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();
         actionPointMaxLabel = GameObject.Find("Action Points Max Thor").GetComponent<Text>();
         actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Thor").GetComponent<Text>();
@@ -62,21 +58,16 @@ public class Thor : Hero
         healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
         backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
-        
-        moveButton = GameObject.Find("Move").GetComponent<Button>();
-        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
-        ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
-        ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
 
-        moveSetButtons.SetActive(false);
         actionPointCostLabel.SetActive(false);
-
-        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
 
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
         actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
+
+        base.Start();
+        //moveSetButtons.SetActive(false);
 
         SetTile();
     }
@@ -84,62 +75,72 @@ public class Thor : Hero
 
     void Update()
     {
-        if (bBridal)
+        if(ThorSelected)
         {
-            if (m_nActionPoints > 1)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                moveButton.onClick.AddListener(HighlightMovement);
-            else
-                moveButton.onClick.RemoveAllListeners();
+            if (bBridal)
+            {
+                if (m_nActionPoints > 1)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    moveButton.onClick.AddListener(HighlightMovement);
+                else
+                    moveButton.onClick.RemoveAllListeners();
 
-            if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                basicAttackButton.onClick.AddListener(BridalBasicAttack);
-            else
-                basicAttackButton.onClick.RemoveAllListeners();
+                if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    basicAttackButton.onClick.AddListener(BridalBasicAttack);
+                else
+                    basicAttackButton.onClick.RemoveAllListeners();
 
-            if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                ability1Button.onClick.AddListener(BridalAbility1);
+                if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    ability1Button.onClick.AddListener(BridalAbility1);
+                else
+                    ability1Button.onClick.RemoveAllListeners();
+            }
             else
-                ability1Button.onClick.RemoveAllListeners();
+            {
+                if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    moveButton.onClick.AddListener(HighlightMovement);
+                else
+                    moveButton.onClick.RemoveAllListeners();
+
+                if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    basicAttackButton.onClick.AddListener(ThorBasicAttack);
+                else
+                    basicAttackButton.onClick.RemoveAllListeners();
+
+                if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                    ability1Button.onClick.AddListener(ThorAbility1);
+                else
+                    ability1Button.onClick.RemoveAllListeners();
+
+                if (m_nActionPoints >= m_nAbility2AttackCost)
+                    ability2Button.onClick.AddListener(ThorAbility2);
+                else
+                    ability2Button.onClick.RemoveAllListeners();
+
+
+                if (i == 0)        //Changes all varibles once thor is upgraded
+                {
+                    m_nHealth = m_nThorHealth;
+                    m_nHealthMax = m_nThorHealthMax;
+                    m_nActionPoints = m_nThorActionPoints;
+                    m_nActionPointMax = m_nThorActionPointMax;
+                    m_nBasicAttack = m_nThorBasicAttack;
+                    m_nBasicAttackRange = m_nThorBasicAttackRange;
+                    m_nBasicAttackCost = m_nThorBasicAttackCost;
+                    m_nAbility1Attack = m_nThorAbility1AttackCost;
+                    m_nAbility1AttackCost = m_nThorAbility1AttackCost;
+                    m_nAbility2Attack = m_nThorAbility2Attack;
+                    m_nAbility2AttackCost = m_nThorAbility2AttackCost;
+                    m_nMovementActionPointCostPerTile = m_nThorMovementActionPointCostPerTile;
+
+                }
+            }      
         }
         else
         {
-            if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                moveButton.onClick.AddListener(HighlightMovement);
-            else
-                moveButton.onClick.RemoveAllListeners();
-
-            if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                basicAttackButton.onClick.AddListener(ThorBasicAttack);
-            else
-                basicAttackButton.onClick.RemoveAllListeners();
-
-            if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                ability1Button.onClick.AddListener(ThorAbility1);
-            else
-                ability1Button.onClick.RemoveAllListeners();
-
-            if (m_nActionPoints >= m_nAbility2AttackCost)
-                ability2Button.onClick.AddListener(ThorAbility2);
-            else
-                ability2Button.onClick.RemoveAllListeners();
-
-
-            if (i == 0)        //Changes all varibles once thor is upgraded
-            {
-                m_nHealth = m_nThorHealth;
-                m_nHealthMax = m_nThorHealthMax;
-                m_nActionPoints = m_nThorActionPoints;
-                m_nActionPointMax = m_nThorActionPointMax;
-                m_nBasicAttack = m_nThorBasicAttack;
-                m_nBasicAttackRange = m_nThorBasicAttackRange;
-                m_nBasicAttackCost = m_nThorBasicAttackCost;
-                m_nAbility1Attack = m_nThorAbility1AttackCost;
-                m_nAbility1AttackCost = m_nThorAbility1AttackCost;
-                m_nAbility2Attack = m_nThorAbility2Attack;
-                m_nAbility2AttackCost = m_nThorAbility2AttackCost;
-                m_nMovementActionPointCostPerTile = m_nThorMovementActionPointCostPerTile;
-
-            }
+            moveButton.onClick.RemoveAllListeners();
+            basicAttackButton.onClick.RemoveAllListeners();
+            ability1Button.onClick.RemoveAllListeners();
+            ability2Button.onClick.RemoveAllListeners();
         }
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
@@ -170,10 +171,7 @@ public class Thor : Hero
 
                         backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
 
-                        if (bBridal)
-                            bridalThorMoveSetButtons.SetActive(true);
-                        else
-                            moveSetButtons.SetActive(true);
+                        moveSetButtons.SetActive(true);
                     }
                 }
                 if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight 
@@ -198,10 +196,6 @@ public class Thor : Hero
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
                     }
                 }
-
-
-                
-
 
                 if (hit.collider.tag == "Enemy")
                 {
@@ -288,10 +282,8 @@ public class Thor : Hero
     void HighlightMovement()
     {
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
-        if (bBridal)
-            bridalThorMoveSetButtons.SetActive(false);
-        else
-            moveSetButtons.SetActive(false);
+
+        moveSetButtons.SetActive(false);
     }
 
 
@@ -303,7 +295,7 @@ public class Thor : Hero
 
     void BridalBasicAttack()
     {
-        bridalThorMoveSetButtons.SetActive(false);
+        moveSetButtons.SetActive(false);
 
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
@@ -382,7 +374,7 @@ public class Thor : Hero
     }
     void BridalAbility1()
     {
-        bridalThorMoveSetButtons.SetActive(false);
+        moveSetButtons.SetActive(false);
         actionPointCostLabel.SetActive(true);
         bBridalAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();

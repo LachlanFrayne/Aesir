@@ -7,22 +7,13 @@ public class Freya : Hero
 {
     public int regen;
 
-    
     public Node m_tempNode;
-
-    public GameObject moveSetButtons;
 
     public Image actionPointsBarImage;
     public Image backgroundFreyaImage;
 
-
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
-
-    List<Node> path = new List<Node>();
-
-    Collider a;
-    Collider b;
 
     [Header("Material")]
     public Material AttackHighlight;
@@ -37,8 +28,7 @@ public class Freya : Hero
 
     void Start()
     {
-        actionPointCostLabel = GameObject.Find("Action Points Cost Freya");
-        moveSetButtons = GameObject.Find("MoveSet");
+        actionPointCostLabel = GameObject.Find("Action Points Cost Freya");       
         actionPointLabel = GameObject.Find("Action Points Freya").GetComponent<Text>();
         actionPointMaxLabel = GameObject.Find("Action Points Max Freya").GetComponent<Text>();
         actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Freya").GetComponent<Text>();
@@ -47,42 +37,46 @@ public class Freya : Hero
         actionPointsBarImage = GameObject.Find("Action Points Bar Freya").GetComponent<Image>();
         backgroundFreyaImage = GameObject.Find("BackgroundFreya").GetComponent<Image>();
 
-        moveButton = GameObject.Find("Move").GetComponent<Button>();
-        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
-        ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
-
-
-        moveSetButtons.SetActive(false);
+       
         actionPointCostLabel.SetActive(false);
-
-        m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
 
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
         actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
+        base.Start();
+        //moveSetButtons.SetActive(false);
 
         SetTile();
     }
 
     void Update()
     {
+        if (FreyaSelected)
+        {
+            if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                moveButton.onClick.AddListener(HighlightMovement);
+            else
+                moveButton.onClick.RemoveAllListeners();
 
-        if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-            moveButton.onClick.AddListener(HighlightMovement);
+            if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                basicAttackButton.onClick.AddListener(BasicAttack);
+            else
+                basicAttackButton.onClick.RemoveAllListeners();
+
+            if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+                ability1Button.onClick.AddListener(Ability1);
+            else
+                ability1Button.onClick.RemoveAllListeners();
+        }
         else
+        {
             moveButton.onClick.RemoveAllListeners();
-
-        if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-            basicAttackButton.onClick.AddListener(BasicAttack);
-        else
             basicAttackButton.onClick.RemoveAllListeners();
-
-        if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-            ability1Button.onClick.AddListener(Ability1);
-        else
             ability1Button.onClick.RemoveAllListeners();
+            ability2Button.onClick.RemoveAllListeners();
+        }
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
@@ -172,6 +166,7 @@ public class Freya : Hero
                 }                
             }
         }
+        base.Update();
     }
     void HighlightMovement()
     {
