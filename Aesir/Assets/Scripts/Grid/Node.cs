@@ -10,4 +10,5 @@ public class Node : MonoBehaviour
     public int m_gScore;
     public float m_fScore;
     public float m_hScore;
+    public GameObject contain;
 }

@@ -7,27 +7,14 @@ public class Freya : Hero
 {
     public int regen;
 
-    Grida m_grid;
-
-    public Node m_currentNode;
+    
     public Node m_tempNode;
-    public Node m_tempNodeBase;
 
-    public GameObject actionPointCostLabel;
     public GameObject moveSetButtons;
-
-    public Text actionPointLabel;
-    public Text actionPointMaxLabel;
-    public Text actionPointsMoveCostLabel;
-    public Text healthLabel;
-    public Text healthMaxLabel;
 
     public Image actionPointsBarImage;
     public Image backgroundFreyaImage;
 
-    public Button moveButton;
-    public Button basicAttackButton;
-    public Button ability1Button;
 
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
@@ -38,8 +25,6 @@ public class Freya : Hero
     Collider b;
 
     [Header("Material")]
-    public Material movementHighlight;
-    public Material removeHighlight;
     public Material AttackHighlight;
     public Material EnemyHighlight;
     public Material pathUpDown;
@@ -53,7 +38,7 @@ public class Freya : Hero
     void Start()
     {
         actionPointCostLabel = GameObject.Find("Action Points Cost Freya");
-        moveSetButtons = GameObject.Find("FreyaMoveSet");
+        moveSetButtons = GameObject.Find("MoveSet");
         actionPointLabel = GameObject.Find("Action Points Freya").GetComponent<Text>();
         actionPointMaxLabel = GameObject.Find("Action Points Max Freya").GetComponent<Text>();
         actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Freya").GetComponent<Text>();
@@ -62,12 +47,9 @@ public class Freya : Hero
         actionPointsBarImage = GameObject.Find("Action Points Bar Freya").GetComponent<Image>();
         backgroundFreyaImage = GameObject.Find("BackgroundFreya").GetComponent<Image>();
 
-        moveButton = GameObject.Find("Move Freya").GetComponent<Button>();
-        ability1Button = GameObject.Find("Ability 1 Freya").GetComponent<Button>();
-
-        moveButton = GameObject.Find("Move Freya").GetComponent<Button>();
-        basicAttackButton = GameObject.Find("Basic Attack Freya").GetComponent<Button>();
-        ability1Button = GameObject.Find("Ability 1 Freya").GetComponent<Button>();
+        moveButton = GameObject.Find("Move").GetComponent<Button>();
+        basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
+        ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
 
 
         moveSetButtons.SetActive(false);
@@ -82,26 +64,6 @@ public class Freya : Hero
 
 
         SetTile();
-    }
-    void SetTile()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 100))       //Creates a raycast downwards
-        {
-            for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)     //Goes through the grid 
-            {
-                for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                {
-                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])        //Goes through the grid until it finds the tiles the character is on         
-                    {
-                        m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
-                        m_currentNode.tag = "CurrentTile";        //Sets currentNodes tag to "CurrentTile"
-                        transform.position = new Vector3(m_currentNode.transform.position.x, .5f, m_currentNode.transform.position.z);        //Sets position to the center of the tile
-                        m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
-                    }
-                }
-            }
-        }
     }
 
     void Update()
@@ -124,52 +86,6 @@ public class Freya : Hero
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
-
-        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit1;
-        if (Physics.Raycast(ray1, out hit1, 100) && ThorSelected)
-        {
-            if (hit1.collider.tag == "WalkableTile")
-            {
-                for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                {
-                    for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                    {
-                        if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
-                        {
-                            actionPointCostLabel.SetActive(true);
-                            actionPointsMoveCostLabel.text = m_grid.nodeBoardArray[columnTile, rowTile].m_gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
-
-                            if (a == null)
-                                a = hit1.collider;      //a = the first hit
-                            else
-                                b = hit1.collider;      //b = the second hit
-
-                            if (a != b)         //if the first hit is different then the second hit
-                            {
-                                foreach (Node tile in path)      //Goes through all tiles in the path and sets them back to walkable
-                                {
-                                    tile.GetComponent<Renderer>().material = movementHighlight;
-                                    tile.tag = "WalkableTile";
-                                }
-                                a = null;       //Resets a 
-                                b = null;       //Resets b
-                                path.Clear();       //Clears the path list
-                            }
-                            Node temp;      //Creates a temp node
-                            temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
-
-                            while (temp.prev != null)
-                            {
-                                temp.GetComponent<Renderer>().material.color = Color.green;
-                                path.Add(temp);        //Adds node to path
-                                temp = temp.prev;       //Set temp to temp.prev 
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -214,40 +130,6 @@ public class Freya : Hero
                         actionPointCostLabel.SetActive(false);
                         backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
                         dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-
-
-
-                if (hit.collider.tag == "WalkableTile" && FreyaSelected == true)        //Used for when you are moving
-                {
-                    transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
-                    for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                    {
-                        for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                        {
-                            if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
-                            {
-                                Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
-                                int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
-                                m_nActionPoints = m_nActionPoints - m_grid.nodeBoardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
-
-                                dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
-                                m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
-                                m_currentNode.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
-                                m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
-                                actionPointCostLabel.SetActive(false);
-                                foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
-                                {
-                                    tile.GetComponent<Renderer>().material = removeHighlight;
-                                    tile.tag = "Tile";
-                                }
-                                a = null;       //Resets a
-                                b = null;       //Resets b
-                                path.Clear();       //Clears the path list
-                                SetTile();
-                            }
-                        }
                     }
                 }
 
