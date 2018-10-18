@@ -77,15 +77,12 @@ public class Freya : Hero
 
         if (FreyaSelected)
         {
-            bBasicAttack = false;
-            bAbility1Attack = false;
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
         }
         if (!FreyaSelected)
         {
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
             actionPointCostLabel.SetActive(false);
-            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
         }
 
 
@@ -95,43 +92,39 @@ public class Freya : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Enemy")
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    actionPointCostLabel.SetActive(false);
-                    RaycastHit hit2;
-                    if (Physics.Raycast(hit.collider.transform.position, new Vector3(0, -1, 0), out hit2, 100))       //Creates a raycast downwards
+                    if (hit.collider.GetComponent<Enemy>() != null)
                     {
-                        if (hit2.collider.tag == "CurrentAttackableEnemyTile")
+                        actionPointCostLabel.SetActive(false);
+
+                        if (bBasicAttack == true)
                         {
-                            if (bBasicAttack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                            m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                            m_grid.ClearBoardData();
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
 
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                            else
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                            bBasicAttack = false;
+                        }
+                        if (bAbility1Attack == true)
+                        {
+                            m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                            RemoveHighlightAttack();
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                            if (bAbility1Attack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
 
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                            else
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                            bAbility1Attack = false;
                         }
                     }
-                }                
+                }
             }
         }
         base.Update();

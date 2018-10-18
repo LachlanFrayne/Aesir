@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class Grida:MonoBehaviour
 {
 
@@ -72,7 +72,7 @@ public class Grida:MonoBehaviour
                 nodeBoardArray[i, j].m_hScore = 0;
                 nodeBoardArray[i, j].m_fScore = 0;
                 nodeBoardArray[i, j].prev = null;
-                
+
                 boardArray[i, j].GetComponent<Renderer>().material = remove;
 			}
 		}

@@ -21,11 +21,11 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        m_enemy.m_move.MakeDecision();      //JM:STARTHERE,need to have enemy list get all enemies at start of enemy turn
-        if(m_enemy.m_nActionPoints <= 0)
-        {
-            animator.SetBool("PlayerTurn", true);
-        }
+        //m_enemy.m_move.MakeDecision();      //JM:STARTHERE,need to have enemy list get all enemies at start of enemy turn
+        //if(m_enemy.m_nActionPoints <= 0)
+        //{
+        //    animator.SetBool("PlayerTurn", true);
+        //}
     }
 
     private void OnDisable()

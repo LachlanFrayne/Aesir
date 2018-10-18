@@ -234,7 +234,8 @@ public abstract class Hero : Entity
                     continue;
             }
 
-            currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            currentNode.GetComponent<Renderer>().material = movementHighlight;
+            currentNode.tag = "CurrentTile";
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
             {
@@ -274,7 +275,7 @@ public abstract class Hero : Entity
         }
     }
 
-    public void dijkstrasSearchAttack(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
+    public void dijkstrasSearchAttack(Node startNode, int actionPointAvailable, Material attackMaterial, int MoveCostPerTile)
     {
         int gScore = MoveCostPerTile;
         Heap openList = new Heap(false);
@@ -296,7 +297,7 @@ public abstract class Hero : Entity
                 if(currentNode.contain != this)
                     continue;
 
-            currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
+            currentNode.GetComponent<Renderer>().sharedMaterial = attackMaterial;
             currentNode.tag = "AttackableTile";
 
             for (int i = 0; i < currentNode.neighbours.Length; i++)
@@ -385,9 +386,4 @@ public abstract class Hero : Entity
             }
         }
     }
-
-    
-
-
-
 }

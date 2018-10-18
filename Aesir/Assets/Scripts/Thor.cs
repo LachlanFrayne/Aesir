@@ -40,12 +40,7 @@ public class Thor : Hero
     [Header("Material")]
     public Material AttackHighlight;
     public Material EnemyHighlight;
-    public Material pathUpDown;
-    public Material pathLeftRight;
-    public Material pathUpLeft;
-    public Material pathUpRight;
-    public Material pathDownLeft;
-    public Material pathDownRight;
+
 
     void Start()
     {
@@ -142,18 +137,12 @@ public class Thor : Hero
 
         if (ThorSelected)
         {
-            bBridalBasicAttack = false;
-            bBridalAbility1Attack = false;
-            bThorBasicAttack = false;               //Const set it to false when they need to stay true fix fix fxi this thx boo
-            bThorAbility1Attack = false;
-            bThorAbility2Attack = false;
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
         }
         if (!ThorSelected)
         {
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
             actionPointCostLabel.SetActive(false);
-            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
         }
 
 
@@ -171,14 +160,14 @@ public class Thor : Hero
                     if (bBridalBasicAttack == true)
                     {
                         m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                        RemoveHighlightAttack();
+                        m_grid.ClearBoardData();
                         hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
 
                         if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
                         else
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bBridalBasicAttack = false;
                     }
                     if (bBridalAbility1Attack == true)
                     {
@@ -191,6 +180,7 @@ public class Thor : Hero
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
                         else
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bBridalAbility1Attack = false;
                     }
 
                     if (bThorBasicAttack == true)
@@ -204,6 +194,7 @@ public class Thor : Hero
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
                         else
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bThorBasicAttack = false;
                     }
                     if (bThorAbility1Attack == true)
                     {
@@ -216,20 +207,21 @@ public class Thor : Hero
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
                         else
                             hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
-                        if (bThorAbility2Attack == true)
-                        {
-                            m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
-                            RemoveHighlightAttack();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
-                            else
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
-                        }
+                        bThorAbility1Attack = false;
                     }
+                    if (bThorAbility2Attack == true)
+                    {
+                        m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bThorAbility2Attack = false;
+                    }
                 }
             }
         }

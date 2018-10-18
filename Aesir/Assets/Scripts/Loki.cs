@@ -16,12 +16,6 @@ public class Loki : Hero
     [Header("Material")]
     public Material AttackHighlight;
     public Material EnemyHighlight;
-    public Material pathUpDown;
-    public Material pathLeftRight;
-    public Material pathUpLeft;
-    public Material pathUpRight;
-    public Material pathDownLeft;
-    public Material pathDownRight;
 
     void Start()
     {
@@ -74,15 +68,12 @@ public class Loki : Hero
 
         if (LokiSelected)
         {
-            bBasicAttack = false;
-            bAbility1Attack = false;
             backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
         }
         if (!LokiSelected)
         {
             backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
             actionPointCostLabel.SetActive(false);
-            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -91,42 +82,37 @@ public class Loki : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Enemy")
+                if (hit.collider.GetComponent<Enemy>() != null)
                 {
                     actionPointCostLabel.SetActive(false);
-                    RaycastHit hit2;
-                    if (Physics.Raycast(hit.collider.transform.position, new Vector3(0, -1, 0), out hit2, 100))       //Creates a raycast downwards
+
+                    if (bBasicAttack == true)
                     {
-                        if (hit2.collider.tag == "CurrentAttackableEnemyTile")
-                        {
-                            if (bBasicAttack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                        m_grid.ClearBoardData();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
 
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                            if (bAbility1Attack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                        }
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bBasicAttack = false;
                     }
+                    if (bAbility1Attack == true)
+                    {
+                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        bAbility1Attack = false;
+                    }
+
+                    
                 }
             }
         }
