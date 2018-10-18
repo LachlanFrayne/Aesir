@@ -144,7 +144,7 @@ public class Thor : Hero
         {
             bBridalBasicAttack = false;
             bBridalAbility1Attack = false;
-            bThorBasicAttack = false;
+            bThorBasicAttack = false;               //Const set it to false when they need to stay true fix fix fxi this thx boo
             bThorAbility1Attack = false;
             bThorAbility2Attack = false;
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
@@ -164,83 +164,72 @@ public class Thor : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Enemy")
+                if (hit.collider.GetComponent<Enemy>() != null)
                 {
                     actionPointCostLabel.SetActive(false);
 
-                    RaycastHit hit2;
-                    if (Physics.Raycast(hit.collider.transform.position, new Vector3(0, -1, 0), out hit2, 100))       //Creates a raycast downwards
+                    if (bBridalBasicAttack == true)
                     {
-                        if (hit2.collider.tag == "CurrentAttackableEnemyTile")
+                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                    }
+                    if (bBridalAbility1Attack == true)
+                    {
+                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                    }
+
+                    if (bThorBasicAttack == true)
+                    {
+                        m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                    }
+                    if (bThorAbility1Attack == true)
+                    {
+                        m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                        RemoveHighlightAttack();
+                        hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+
+                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                        else
+                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                        if (bThorAbility2Attack == true)
                         {
-                            if (bBridalBasicAttack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                            m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
+                            RemoveHighlightAttack();
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
+                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
 
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                            if (bBridalAbility1Attack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-
-                            if (bThorBasicAttack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                            if (bThorAbility1Attack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
-                            if (bThorAbility2Attack == true)
-                            {
-                                m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
-                                RemoveHighlightAttack();
-                                hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                                hit2.collider.GetComponent<Renderer>().material = removeHighlight;
-                                if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                    hit2.collider.tag = "CurrentEnemyTile";
-                                else
-                                    hit2.collider.tag = "Tile";
-                            }
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
+                            else
+                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
                         }
                     }
+
                 }
             }
         }

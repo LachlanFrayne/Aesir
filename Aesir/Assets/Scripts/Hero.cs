@@ -139,7 +139,7 @@ public abstract class Hero : Entity
                     basicAttackButton.onClick.RemoveAllListeners();
                     ability1Button.onClick.RemoveAllListeners();
                     ability2Button.onClick.RemoveAllListeners();
-
+                    m_grid.ClearBoardData();
                     ThorSelected = true;
                     LokiSelected = false;
                     FreyaSelected = false;        
@@ -150,7 +150,7 @@ public abstract class Hero : Entity
                     basicAttackButton.onClick.RemoveAllListeners();
                     ability1Button.onClick.RemoveAllListeners();
                     ability2Button.onClick.RemoveAllListeners();
-
+                    m_grid.ClearBoardData();
                     LokiSelected = true;
                     ThorSelected = false;
                     FreyaSelected = false;
@@ -161,7 +161,7 @@ public abstract class Hero : Entity
                     basicAttackButton.onClick.RemoveAllListeners();
                     ability1Button.onClick.RemoveAllListeners();
                     ability2Button.onClick.RemoveAllListeners();
-
+                    m_grid.ClearBoardData();
                     FreyaSelected = true;
                     ThorSelected = false;
                     LokiSelected = false;
