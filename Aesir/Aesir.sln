@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aesir", "Aesir.csproj", "{DFDD7DBC-AA90-39B8-AD25-8317D95B4C77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aesir.Editor", "Aesir.Editor.csproj", "{D558A21F-4EF0-9FF0-909E-CDB126BF7206}"

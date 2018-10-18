@@ -207,6 +207,22 @@ MonoBehaviour:
   ThorSelected: 0
   FreyaSelected: 0
   LokiSelected: 0
+  m_grid: {fileID: 0}
+  m_currentNode: {fileID: 0}
+  m_tempNodeBase: {fileID: 0}
+  actionPointCostLabel: {fileID: 0}
+  moveSetButtons: {fileID: 0}
+  actionPointLabel: {fileID: 0}
+  actionPointMaxLabel: {fileID: 0}
+  actionPointsMoveCostLabel: {fileID: 0}
+  healthLabel: {fileID: 0}
+  healthMaxLabel: {fileID: 0}
+  moveButton: {fileID: 0}
+  basicAttackButton: {fileID: 0}
+  ability1Button: {fileID: 0}
+  ability2Button: {fileID: 0}
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
   m_nThorHealth: 15
   m_nThorHealthMax: 15
   m_nThorActionPoints: 12
@@ -219,26 +235,10 @@ MonoBehaviour:
   m_nThorAbility2Attack: 3
   m_nThorAbility2AttackCost: 5
   m_nThorMovementActionPointCostPerTile: 1
-  actionPointCostLabel: {fileID: 0}
-  bridalThorMoveSetButtons: {fileID: 0}
-  thorMoveSetButtons: {fileID: 0}
-  actionPointLabel: {fileID: 0}
-  actionPointMaxLabel: {fileID: 0}
-  actionPointsMoveCostLabel: {fileID: 0}
-  healthLabel: {fileID: 0}
-  healthMaxLabel: {fileID: 0}
+  m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
-  bridalMoveButton: {fileID: 0}
-  bridalBasicAttackButton: {fileID: 0}
-  bridalAbility1Button: {fileID: 0}
-  moveButton: {fileID: 0}
-  basicAttackButton: {fileID: 0}
-  ability1Button: {fileID: 0}
-  ability2Button: {fileID: 0}
   bBridal: 1
-  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
-  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
   pathUpDown: {fileID: 2100000, guid: c280b141aa12160438c685517aff6bbc, type: 2}

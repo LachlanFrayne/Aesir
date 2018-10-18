@@ -4,13 +4,16 @@ using UnityEngine;
 
 
 //[ExecuteInEditMode]
-public class Grida : Node {
+public class Grida:MonoBehaviour
+{
 
     public GameObject tilePrefab;
     public GameObject[,] boardArray = new GameObject[gridSizeX, gridSizeY];
     public static int gridSizeX = 30;
     public static int gridSizeY = 30;
     public Node[,] nodeBoardArray = new Node[gridSizeX, gridSizeY];
+
+    public Material remove;
 
     void Awake()
     {
@@ -62,10 +65,15 @@ public class Grida : Node {
 		{
 			for (int j = 0; j < gridSizeX; j++)
 			{
+                if (nodeBoardArray[i, j].contain != null)
+                    continue;
+
                 nodeBoardArray[i, j].m_gScore = 0;
                 nodeBoardArray[i, j].m_hScore = 0;
                 nodeBoardArray[i, j].m_fScore = 0;
                 nodeBoardArray[i, j].prev = null;
+                
+                boardArray[i, j].GetComponent<Renderer>().material = remove;
 			}
 		}
 	}

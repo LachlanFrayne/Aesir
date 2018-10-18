@@ -9,9 +9,6 @@ public abstract class Hero : Entity
     public bool FreyaSelected;
     public bool LokiSelected;
 
-    Thor thor;
-    Freya freya;
-    Loki loki;
 
     public Grida m_grid;
 
@@ -42,9 +39,6 @@ public abstract class Hero : Entity
 
     public void Start()
     {
-        thor = new Thor();
-        freya = new Freya();
-        loki = new Loki();
 
         moveSetButtons = GameObject.Find("MoveSet");
         moveButton = GameObject.Find("Move").GetComponent<Button>();
@@ -53,135 +47,6 @@ public abstract class Hero : Entity
         ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
 
-    }
-
-    public void Update()
-    {
-        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit1;
-        if (Physics.Raycast(ray1, out hit1, 100) && ThorSelected)
-        {
-            if (hit1.collider.GetComponent<Node>() != null)
-            {
-                if (hit1.collider.GetComponent<Node>().prev != null)
-                {
-                    for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                    {
-                        for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                        {
-                            if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
-                            {
-                                actionPointCostLabel.SetActive(true);
-                                actionPointsMoveCostLabel.text = m_grid.nodeBoardArray[columnTile, rowTile].m_gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
-
-                                if (a == null)
-                                    a = hit1.collider;      //a = the first hit
-                                else
-                                    b = hit1.collider;      //b = the second hit
-
-                                if (a != b)         //if the first hit is different then the second hit
-                                {
-                                    foreach (Node tile in path)      //Goes through all tiles in the path and sets them back to walkable
-                                    {
-                                        tile.GetComponent<Renderer>().material = movementHighlight;
-                                    }
-                                    a = null;       //Resets a 
-                                    b = null;       //Resets b
-                                    path.Clear();       //Clears the path list
-                                }
-                                Node temp;      //Creates a temp node
-                                temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
-
-                                while (temp.prev != null)
-                                {
-                                    temp.GetComponent<Renderer>().material.color = Color.green;
-                                    path.Add(temp);        //Adds node to path
-                                    temp = temp.prev;       //Set temp to temp.prev 
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider.GetComponent<Node>() != null)
-                {
-                    if (hit.collider.GetComponent<Node>().prev != null && ThorSelected == true)        //Used for when you are moving
-                    {
-                        transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
-                        for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                        {
-                            for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                            {
-                                if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
-                                {
-                                    Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
-                                    int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
-                                    m_nActionPoints = m_nActionPoints - m_grid.nodeBoardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
-
-                                    dijkstrasSearchRemove(tempNode, tempActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);        //Removes the highlight
-                                    m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the hit tile
-                                    m_currentNode.tag = "CurrentTile";        //Sets currentNode tag = "CurrentTIle"
-                                    m_tempNodeBase = m_currentNode;        //Sets tempNodeBase to new currentNode
-                                    actionPointCostLabel.SetActive(false);
-                                    foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
-                                    {
-                                        tile.GetComponent<Renderer>().material = removeHighlight;
-                                    }
-                                    a = null;       //Resets a
-                                    b = null;       //Resets b
-                                    path.Clear();       //Clears the path list
-                                    SetTile();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void ChangeCharacters(string selectedCharacter, string characterSwappingWith)
-    {
-        if (ThorSelected)
-        {
-            if (selectedCharacter == "Thor" && characterSwappingWith == "Freya")
-            {
-                dijkstrasSearchRemove(thor.m_currentNode, thor.m_nActionPoints, thor.removeHighlight, thor.m_nMovementActionPointCostPerTile);
-            }
-            if (selectedCharacter == "Thor" && characterSwappingWith == "Loki")
-            {
-                dijkstrasSearchRemove(thor.m_currentNode, thor.m_nActionPoints, thor.removeHighlight, thor.m_nMovementActionPointCostPerTile);
-            }
-        }
-        if (FreyaSelected)
-        {
-            if (selectedCharacter == "Freya" && characterSwappingWith == "Thor")
-            {
-                dijkstrasSearchRemove(freya.m_currentNode, freya.m_nActionPoints, freya.removeHighlight, freya.m_nMovementActionPointCostPerTile);
-            }
-            if (selectedCharacter == "Freya" && characterSwappingWith == "Loki")
-            {
-                dijkstrasSearchRemove(freya.m_currentNode, freya.m_nActionPoints, freya.removeHighlight, freya.m_nMovementActionPointCostPerTile);
-            }
-        }
-        if (LokiSelected)
-        {
-            if (selectedCharacter == "Loki" && characterSwappingWith == "Thor")
-            {
-                dijkstrasSearchRemove(loki.m_currentNode, loki.m_nActionPoints, loki.removeHighlight, loki.m_nMovementActionPointCostPerTile);
-            }
-            if (selectedCharacter == "Loki" && characterSwappingWith == "Freya")
-            {
-                dijkstrasSearchRemove(loki.m_currentNode, loki.m_nActionPoints, loki.removeHighlight, loki.m_nMovementActionPointCostPerTile);
-            }
-        }
     }
 
     public void SetTile()
@@ -206,8 +71,147 @@ public abstract class Hero : Entity
         }
     }
 
+    public void Update()
+    {
+        ////////////////////////////////////Path//////////////////////////////////////////////////////
+        Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit1;
+
+        
+        if (Physics.Raycast(ray1, out hit1, 100))
+        {
+            if ((gameObject.tag == "Thor" && ThorSelected) || (gameObject.tag == "Loki" && LokiSelected) || (gameObject.tag == "Freya" && FreyaSelected))
+            {
+                if (hit1.collider.GetComponent<Node>() != null)
+                {
+                    if (hit1.collider.GetComponent<Node>().prev != null)
+                    {
+                        for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
+                        {
+                            for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+                            {
+                                if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
+                                {
+                                    actionPointCostLabel.SetActive(true);
+                                    actionPointsMoveCostLabel.text = m_grid.nodeBoardArray[columnTile, rowTile].m_gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
+
+                                    if (a == null)
+                                        a = hit1.collider;      //a = the first hit
+                                    else
+                                        b = hit1.collider;      //b = the second hit
+
+                                    if (a != b)         //if the first hit is different then the second hit
+                                    {
+                                        foreach (Node tile in path)      //Goes through all tiles in the path and sets them back to walkable
+                                        {
+                                            tile.GetComponent<Renderer>().material = movementHighlight;
+                                        }
+                                        a = null;       //Resets a 
+                                        b = null;       //Resets b
+                                        path.Clear();       //Clears the path list
+                                    }
+                                    Node temp;      //Creates a temp node
+                                    temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
+
+                                    while (temp.prev != null)
+                                    {
+                                        temp.GetComponent<Renderer>().material.color = Color.green;
+                                        path.Add(temp);        //Adds node to path
+                                        temp = temp.prev;       //Set temp to temp.prev 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {          
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if (hit.collider.tag == "Thor")     
+                {
+                    moveButton.onClick.RemoveAllListeners();
+                    basicAttackButton.onClick.RemoveAllListeners();
+                    ability1Button.onClick.RemoveAllListeners();
+                    ability2Button.onClick.RemoveAllListeners();
+
+                    ThorSelected = true;
+                    LokiSelected = false;
+                    FreyaSelected = false;        
+                }
+                if (hit.collider.tag == "Loki")     
+                {
+                    moveButton.onClick.RemoveAllListeners();
+                    basicAttackButton.onClick.RemoveAllListeners();
+                    ability1Button.onClick.RemoveAllListeners();
+                    ability2Button.onClick.RemoveAllListeners();
+
+                    LokiSelected = true;
+                    ThorSelected = false;
+                    FreyaSelected = false;
+                }
+                if (hit.collider.tag == "Freya")      
+                {
+                    moveButton.onClick.RemoveAllListeners();
+                    basicAttackButton.onClick.RemoveAllListeners();
+                    ability1Button.onClick.RemoveAllListeners();
+                    ability2Button.onClick.RemoveAllListeners();
+
+                    FreyaSelected = true;
+                    ThorSelected = false;
+                    LokiSelected = false;
+                }
+
+                ////////////////////////////////////Deletes path and moves player//////////////////////////////////////////////////////
+
+                if ((gameObject.tag == "Thor" && ThorSelected )|| (gameObject.tag == "Loki" && LokiSelected) || (gameObject.tag == "Freya" && FreyaSelected))
+                {
+                    if (hit.collider.GetComponent<Node>() != null)
+                    {
+                        if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
+                        {                   
+                            transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
+
+                            for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
+                            {
+                                for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+                                {
+                                    if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
+                                    {
+                                        m_currentNode.tag = "Tile";
+                                        m_currentNode.contain = null;
+                                   
+                                        Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
+                                        int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
+                                        m_nActionPoints = m_nActionPoints - m_grid.nodeBoardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
+                                        actionPointCostLabel.SetActive(false);
+                                        foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
+                                        {
+                                            tile.GetComponent<Renderer>().material = removeHighlight;
+                                        }
+                                        a = null;       //Resets a
+                                        b = null;       //Resets b
+                                        path.Clear();       //Clears the path list
+                                        m_grid.ClearBoardData();
+                                        SetTile();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {
+        int a = 0;
         int gScore = MoveCostPerTile;
         Heap openList = new Heap(false);
         List<Node> closedList = new List<Node>();
@@ -224,8 +228,11 @@ public abstract class Hero : Entity
             {
                 continue;
             }
-            if (currentNode.tag == "CurrentEnemyTile")
-                continue;
+            if (a != 0)
+            {
+                if (currentNode.contain != null)
+                    continue;
+            }
 
             currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
 
@@ -235,6 +242,8 @@ public abstract class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
+                        if (currentNode.neighbours[i].contain != null)
+                            continue;
                         int tempGScore = currentNode.m_gScore + gScore;
 
                         if (tempGScore < currentNode.neighbours[i].m_gScore)
@@ -247,6 +256,8 @@ public abstract class Hero : Entity
                     {
                         if (currentNode.neighbours[i] != null)
                         {
+                            if (currentNode.neighbours[i].contain != null)
+                                continue;
                             if (currentNode.m_gScore + gScore > actionPointAvailable)
                             {
                                 continue;
@@ -259,6 +270,7 @@ public abstract class Hero : Entity
                     }
                 }
             }
+            a++;
         }
     }
 
@@ -280,8 +292,9 @@ public abstract class Hero : Entity
             {
                 continue;
             }
-            if (currentNode.tag == "CurrentEnemyTile")
-                continue;
+            if (currentNode.contain != null)
+                if(currentNode.contain != this)
+                    continue;
 
             currentNode.GetComponent<Renderer>().sharedMaterial = movementHighlight;
             currentNode.tag = "AttackableTile";

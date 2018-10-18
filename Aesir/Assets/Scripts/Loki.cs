@@ -8,7 +8,7 @@ public class Loki : Hero
     public Node m_tempNode;
 
     public Image actionPointsBarImage;
-    public Image backgroundFreyaImage;
+    public Image backgroundLokiImage;
 
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
@@ -33,10 +33,9 @@ public class Loki : Hero
         healthLabel = GameObject.Find("Health Loki").GetComponent<Text>();
         healthMaxLabel = GameObject.Find("Health Max Loki").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Loki").GetComponent<Image>();
-        backgroundFreyaImage = GameObject.Find("BackgroundLoki").GetComponent<Image>();
+        backgroundLokiImage = GameObject.Find("BackgroundLoki").GetComponent<Image>();
 
         actionPointCostLabel.SetActive(false);
-
 
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
@@ -44,7 +43,6 @@ public class Loki : Hero
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         base.Start();
-        //moveSetButtons.SetActive(false);
 
         SetTile();
     }
@@ -53,6 +51,7 @@ public class Loki : Hero
     {
         if (LokiSelected)
         {
+
             if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
                 moveButton.onClick.AddListener(HighlightMovement);
             else
@@ -68,16 +67,23 @@ public class Loki : Hero
             else
                 ability1Button.onClick.RemoveAllListeners();
         }
-        else
-        {
-            moveButton.onClick.RemoveAllListeners();
-            basicAttackButton.onClick.RemoveAllListeners();
-            ability1Button.onClick.RemoveAllListeners();
-            ability2Button.onClick.RemoveAllListeners();
-        }
+
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        if (LokiSelected)
+        {
+            bBasicAttack = false;
+            bAbility1Attack = false;
+            backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
+        }
+        if (!LokiSelected)
+        {
+            backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
+            actionPointCostLabel.SetActive(false);
+            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
+        }
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -85,46 +91,6 @@ public class Loki : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Loki")     //If click on character, show selection tab
-                {
-                    if (FreyaSelected == false && ThorSelected == false)
-                        LokiSelected = true;
-
-                    if (LokiSelected)
-                    {
-                        LokiSelected = true;
-
-                        bBasicAttack = false;
-                        bAbility1Attack = false;
-
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
-
-                        moveSetButtons.SetActive(true);
-                    }
-                }
-                if (hit.collider.tag == "Thor")     //If you click on another character, unhighlight 
-                {
-                    if (LokiSelected)
-                    {
-                        FreyaSelected = false;
-                        ThorSelected = true;
-                        actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-                if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
-                {
-                    if (LokiSelected)
-                    {
-                        FreyaSelected = false;
-                        LokiSelected = true;
-                        actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-
                 if (hit.collider.tag == "Enemy")
                 {
                     actionPointCostLabel.SetActive(false);
@@ -169,14 +135,10 @@ public class Loki : Hero
     void HighlightMovement()
     {
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
-
-        moveSetButtons.SetActive(false);
     }
 
     void BasicAttack()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
@@ -226,8 +188,6 @@ public class Loki : Hero
     }
     void Ability1()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();

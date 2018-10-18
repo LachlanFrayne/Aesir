@@ -49,6 +49,7 @@ public class Thor : Hero
 
     void Start()
     {
+        
         actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
         
         actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();
@@ -67,7 +68,6 @@ public class Thor : Hero
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         base.Start();
-        //moveSetButtons.SetActive(false);
 
         SetTile();
     }
@@ -75,7 +75,7 @@ public class Thor : Hero
 
     void Update()
     {
-        if(ThorSelected)
+        if (ThorSelected)
         {
             if (bBridal)
             {
@@ -133,18 +133,28 @@ public class Thor : Hero
                     m_nMovementActionPointCostPerTile = m_nThorMovementActionPointCostPerTile;
 
                 }
-            }      
+            }
         }
-        else
-        {
-            moveButton.onClick.RemoveAllListeners();
-            basicAttackButton.onClick.RemoveAllListeners();
-            ability1Button.onClick.RemoveAllListeners();
-            ability2Button.onClick.RemoveAllListeners();
-        }
+       
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        if (ThorSelected)
+        {
+            bBridalBasicAttack = false;
+            bBridalAbility1Attack = false;
+            bThorBasicAttack = false;
+            bThorAbility1Attack = false;
+            bThorAbility2Attack = false;
+            backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
+        }
+        if (!ThorSelected)
+        {
+            backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
+            actionPointCostLabel.SetActive(false);
+            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
+        }
 
 
 
@@ -154,49 +164,6 @@ public class Thor : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Thor")     //If click on character, show selection tab
-                {
-                    if (LokiSelected == false && FreyaSelected == false)
-                        ThorSelected = true;
-
-                    if (ThorSelected)
-                    {
-                        ThorSelected = true;
-
-                        bBridalBasicAttack = false;
-                        bBridalAbility1Attack = false;
-                        bThorBasicAttack = false;
-                        bThorAbility1Attack = false;
-                        bThorAbility2Attack = false;
-
-                        backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
-
-                        moveSetButtons.SetActive(true);
-                    }
-                }
-                if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight 
-                {
-                    if (ThorSelected)
-                    {
-                        ThorSelected = false;
-                        LokiSelected = true;
-                        backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
-                        actionPointCostLabel.SetActive(false);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-                if (hit.collider.tag == "Freya")     //If you click on another character, unhighlight    
-                {
-                    if (ThorSelected)
-                    {
-                        ThorSelected = false;
-                        FreyaSelected = true;
-                        backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
-                        actionPointCostLabel.SetActive(false);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-
                 if (hit.collider.tag == "Enemy")
                 {
                     actionPointCostLabel.SetActive(false);
@@ -279,11 +246,10 @@ public class Thor : Hero
         }
         base.Update();
     }
+
     void HighlightMovement()
     {
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
-
-        moveSetButtons.SetActive(false);
     }
 
 
@@ -295,8 +261,6 @@ public class Thor : Hero
 
     void BridalBasicAttack()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBridalBasicAttack = true;
@@ -374,7 +338,6 @@ public class Thor : Hero
     }
     void BridalAbility1()
     {
-        moveSetButtons.SetActive(false);
         actionPointCostLabel.SetActive(true);
         bBridalAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
@@ -424,8 +387,6 @@ public class Thor : Hero
     }
     void ThorBasicAttack()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         bThorBasicAttack = true;
         actionPointsMoveCostLabel.text = m_nBasicAttack.ToString();
@@ -443,8 +404,6 @@ public class Thor : Hero
     }
     void ThorAbility1()
     {
-        moveSetButtons.SetActive(false);
-
         dijkstrasSearchAttack(m_currentNode, 4, movementHighlight, 1);
     }
     void ThorAbility2()

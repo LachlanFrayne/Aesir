@@ -46,7 +46,6 @@ public class Freya : Hero
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         base.Start();
-        //moveSetButtons.SetActive(false);
 
         SetTile();
     }
@@ -55,6 +54,7 @@ public class Freya : Hero
     {
         if (FreyaSelected)
         {
+
             if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
                 moveButton.onClick.AddListener(HighlightMovement);
             else
@@ -70,16 +70,24 @@ public class Freya : Hero
             else
                 ability1Button.onClick.RemoveAllListeners();
         }
-        else
-        {
-            moveButton.onClick.RemoveAllListeners();
-            basicAttackButton.onClick.RemoveAllListeners();
-            ability1Button.onClick.RemoveAllListeners();
-            ability2Button.onClick.RemoveAllListeners();
-        }
+
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        if (FreyaSelected)
+        {
+            bBasicAttack = false;
+            bAbility1Attack = false;
+            backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
+        }
+        if (!FreyaSelected)
+        {
+            backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
+            actionPointCostLabel.SetActive(false);
+            dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
+        }
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -87,46 +95,6 @@ public class Freya : Hero
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Freya")     //If click on character, show selection tab
-                {
-                    if (LokiSelected == false && ThorSelected == false)
-                        FreyaSelected = true;
-
-                    if (FreyaSelected)
-                    {
-                        FreyaSelected = true;
-
-                        bBasicAttack = false;
-                        bAbility1Attack = false;
-
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
-
-                        moveSetButtons.SetActive(true);
-                    }
-                }
-                if (hit.collider.tag == "Thor")     //If you click on another character, unhighlight 
-                {
-                    if (FreyaSelected)
-                    {
-                        FreyaSelected = false;
-                        ThorSelected = true;
-                        actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-                if (hit.collider.tag == "Loki")     //If you click on another character, unhighlight    
-                {
-                    if (FreyaSelected)
-                    {
-                        FreyaSelected = false;
-                        LokiSelected = true;
-                        actionPointCostLabel.SetActive(false);
-                        backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
-                        dijkstrasSearchRemove(m_currentNode, m_nActionPoints, removeHighlight, m_nMovementActionPointCostPerTile);
-                    }
-                }
-
                 if (hit.collider.tag == "Enemy")
                 {
                     actionPointCostLabel.SetActive(false);
@@ -172,13 +140,10 @@ public class Freya : Hero
     {
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
 
-        moveSetButtons.SetActive(false);
     }
 
     void BasicAttack()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
@@ -244,8 +209,6 @@ public class Freya : Hero
     }
     void Ability1()
     {
-        moveSetButtons.SetActive(false);
-
         actionPointCostLabel.SetActive(true);
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
