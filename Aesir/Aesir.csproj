@@ -336,6 +336,7 @@
     <Compile Include="Assets\Scripts\Loki.cs" />
     <Compile Include="Assets\Scripts\Thor.cs" />
     <Compile Include="Assets\Scripts\Turn system\EndPlayerTurn.cs" />
+    <Compile Include="Assets\Scripts\Turn system\EnemyLinker.cs" />
     <Compile Include="Assets\Scripts\Turn system\EnemyTurn.cs" />
     <Compile Include="Assets\Scripts\Turn system\PlayerTurn.cs" />
     <Compile Include="Assets\Scripts\Turn system\TurnSystem.cs" />

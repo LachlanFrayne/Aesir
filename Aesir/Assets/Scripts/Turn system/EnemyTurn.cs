@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyTurn : StateMachineBehaviour
 {
     public GameObject m_temp;
-    Enemy m_enemy;
+    List<Enemy> m_enemy;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        m_enemy.m_nActionPoints = m_enemy.m_nActionPointMax;
+        foreach(Enemy e in m_enemy)
+        {
+            e.m_nActionPoints = e.m_nActionPointMax;
+        }
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -18,7 +21,7 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        m_enemy.m_move.MakeDecision();
+        m_enemy.m_move.MakeDecision();      //JM:STARTHERE,need to have enemy list get all enemies at start of enemy turn
         if(m_enemy.m_nActionPoints <= 0)
         {
             animator.SetBool("PlayerTurn", true);
