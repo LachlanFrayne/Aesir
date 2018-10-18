@@ -12,7 +12,7 @@ public abstract class Hero : Entity
 
     public Grida m_grid;
 
-    public Node m_currentNode;
+
     public Node m_tempNodeBase;
 
     public GameObject actionPointCostLabel;

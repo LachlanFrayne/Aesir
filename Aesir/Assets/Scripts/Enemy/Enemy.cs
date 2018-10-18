@@ -5,13 +5,13 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public Grida m_grid;
-    public Node m_currentEnemyNode;
+
     bool turn = false;
 
     public int m_meleeDamage;
     public int m_rangeDamage;
 
-	MoveDecision m_move;
+	public MoveDecision m_move;
 
     void Start()
     {
@@ -28,9 +28,9 @@ public class Enemy : Entity
                 {
                     if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
                     {
-                        m_currentEnemyNode = m_grid.nodeBoardArray[columnTile, rowTile];
-                        m_currentEnemyNode.tag = "CurrentEnemyTile";
-                        transform.position = new Vector3(m_currentEnemyNode.transform.position.x, .5f, m_currentEnemyNode.transform.position.z);
+                        m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];
+                        m_currentNode.contain = this.gameObject;
+                        transform.position = new Vector3(m_currentNode.transform.position.x, .5f, m_currentNode.transform.position.z);
                     }
                 }
             }
@@ -48,14 +48,7 @@ public class Enemy : Entity
 		{
 			m_move.MakeDecision();
 
-			if(m_move.m_path.Count >= 1)
-			{
-			m_currentEnemyNode.tag = "Tile";
-			m_currentEnemyNode = m_move.m_path[m_move.m_path.Count - 1];
-			m_currentEnemyNode.tag = "CurrentEnemyTile";
-			transform.position = new Vector3( m_move.m_path[m_move.m_path.Count - 1].transform.position.x, transform.position.y, transform.position.z);
-			transform.position = new Vector3(transform.position.x, transform.position.y, m_move.m_path[m_move.m_path.Count - 1].transform.position.z);
-			}
+			
 		}
     }
 }

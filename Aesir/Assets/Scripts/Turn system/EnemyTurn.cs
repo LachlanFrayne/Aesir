@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyTurn : StateMachineBehaviour
 {
-    //JM:STARTHERE, add a listener on an end turn button, and remove in the onexit then complete other states, also fix the thor variable not being set in the moveDecision script
-
+    public GameObject m_temp;
+    Enemy m_enemy;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-       
+        m_enemy.m_nActionPoints = m_enemy.m_nActionPointMax;
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -18,7 +18,11 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-
+        m_enemy.m_move.MakeDecision();
+        if(m_enemy.m_nActionPoints <= 0)
+        {
+            animator.SetBool("PlayerTurn", true);
+        }
     }
 
     private void OnDisable()

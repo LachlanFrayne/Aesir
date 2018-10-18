@@ -18,6 +18,8 @@ public class Entity : MonoBehaviour
     public int m_nAbility2AttackRange;
     public int m_nAbility2AttackCost;
     public int m_nMovementActionPointCostPerTile;
-    
+
+
+    public Node m_currentNode;
 }
 
