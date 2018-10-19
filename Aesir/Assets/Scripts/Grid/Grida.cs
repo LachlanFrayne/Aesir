@@ -6,12 +6,14 @@ using UnityEngine;
 //[ExecuteInEditMode]
 public class Grida:MonoBehaviour
 {
-
+    public GameObject map;
     public GameObject tilePrefab;
     public GameObject[,] boardArray = new GameObject[gridSizeX, gridSizeY];
     public static int gridSizeX = 30;
     public static int gridSizeY = 30;
     public Node[,] nodeBoardArray = new Node[gridSizeX, gridSizeY];
+
+
 
     public Material remove;
 

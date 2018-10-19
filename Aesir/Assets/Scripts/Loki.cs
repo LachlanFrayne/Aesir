@@ -8,7 +8,9 @@ public class Loki : Hero
     public Node m_tempNode;
 
     public Image actionPointsBarImage;
+    public Image healthBarImage;
     public Image backgroundLokiImage;
+
 
     bool bBasicAttack = false;
     bool bAbility1Attack = false;
@@ -27,6 +29,7 @@ public class Loki : Hero
         healthLabel = GameObject.Find("Health Loki").GetComponent<Text>();
         healthMaxLabel = GameObject.Find("Health Max Loki").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Loki").GetComponent<Image>();
+        healthBarImage = GameObject.Find("Health Bar Loki").GetComponent<Image>();
         backgroundLokiImage = GameObject.Find("BackgroundLoki").GetComponent<Image>();
 
         actionPointCostLabel.SetActive(false);
@@ -43,6 +46,9 @@ public class Loki : Hero
     
     void Update()
     {
+        if (m_nHealth <= 0)
+            Destroy(this.gameObject);
+
         if (bLokiSelected)
         {
 
@@ -65,6 +71,9 @@ public class Loki : Hero
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
+        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 
         if (bLokiSelected)
         {

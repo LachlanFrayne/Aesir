@@ -129,12 +129,12 @@ public abstract class Hero : Entity
         }
 
         if (Input.GetMouseButtonUp(0))
-        {          
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Thor")     
+                if (hit.collider.tag == "Thor")
                 {
                     moveButton.onClick.RemoveAllListeners();
                     basicAttackButton.onClick.RemoveAllListeners();
@@ -143,9 +143,9 @@ public abstract class Hero : Entity
                     m_grid.ClearBoardData();
                     bThorSelected = true;
                     bLokiSelected = false;
-                    bFreyaSelected = false;        
+                    bFreyaSelected = false;
                 }
-                if (hit.collider.tag == "Loki")     
+                if (hit.collider.tag == "Loki")
                 {
                     moveButton.onClick.RemoveAllListeners();
                     basicAttackButton.onClick.RemoveAllListeners();
@@ -156,7 +156,7 @@ public abstract class Hero : Entity
                     bThorSelected = false;
                     bFreyaSelected = false;
                 }
-                if (hit.collider.tag == "Freya")      
+                if (hit.collider.tag == "Freya")
                 {
                     moveButton.onClick.RemoveAllListeners();
                     basicAttackButton.onClick.RemoveAllListeners();
@@ -167,7 +167,14 @@ public abstract class Hero : Entity
                     bThorSelected = false;
                     bLokiSelected = false;
                 }
-
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
                 ////////////////////////////////////Deletes path and moves player//////////////////////////////////////////////////////
                 if (bMove)
                 {

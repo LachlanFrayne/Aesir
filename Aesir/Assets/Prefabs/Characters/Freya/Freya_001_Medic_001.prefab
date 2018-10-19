@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840937201099206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.450267, y: 0.12, z: 12.3}
+  m_LocalPosition: {x: 31.257114, y: 27.976032, z: 6.2095323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4289126837473478}
@@ -200,17 +200,18 @@ MonoBehaviour:
   m_nBasicAttackRange: 5
   m_nBasicAttackCost: 3
   m_nAbility1Attack: 4
-  m_nAbility1AttackRange: 0
+  m_nAbility1AttackRange: 5
   m_nAbility1AttackCost: 6
   m_nAbility2Attack: 0
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
   m_nMovementActionPointCostPerTile: 2
-  ThorSelected: 0
-  FreyaSelected: 0
-  LokiSelected: 0
-  m_grid: {fileID: 0}
   m_currentNode: {fileID: 0}
+  bThorSelected: 0
+  bFreyaSelected: 0
+  bLokiSelected: 0
+  bMove: 0
+  m_grid: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -228,6 +229,7 @@ MonoBehaviour:
   regen: 2
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
+  healthBarImage: {fileID: 0}
   backgroundFreyaImage: {fileID: 0}
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}

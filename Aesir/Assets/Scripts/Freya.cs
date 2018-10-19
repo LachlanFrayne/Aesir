@@ -10,6 +10,7 @@ public class Freya : Hero
     public Node m_tempNode;
 
     public Image actionPointsBarImage;
+    public Image healthBarImage;
     public Image backgroundFreyaImage;
 
     bool bBasicAttack = false;
@@ -35,6 +36,7 @@ public class Freya : Hero
         healthLabel = GameObject.Find("Health Freya").GetComponent<Text>();
         healthMaxLabel = GameObject.Find("Health Max Freya").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Freya").GetComponent<Image>();
+        healthBarImage = GameObject.Find("Health Bar Freya").GetComponent<Image>();
         backgroundFreyaImage = GameObject.Find("BackgroundFreya").GetComponent<Image>();
 
        
@@ -52,6 +54,9 @@ public class Freya : Hero
 
     void Update()
     {
+        if (m_nHealth <= 0)
+            Destroy(this.gameObject);
+
         if (bFreyaSelected)
         {
 
@@ -74,6 +79,9 @@ public class Freya : Hero
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
+        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 
         if (bFreyaSelected)
         {

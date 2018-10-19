@@ -25,6 +25,7 @@ public class Thor : Hero
     public Node m_tempNode;
     
     public Image actionPointsBarImage;
+    public Image healthBarImage;
     public Image backgroundThorImage;
 
 
@@ -53,6 +54,7 @@ public class Thor : Hero
         healthLabel = GameObject.Find("Health Thor").GetComponent<Text>();
         healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
+        healthBarImage = GameObject.Find("Health Bar Thor").GetComponent<Image>();
         backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
 
         actionPointCostLabel.SetActive(false);
@@ -70,6 +72,9 @@ public class Thor : Hero
 
     void Update()
     {
+        if(m_nHealth <= 0)
+            Destroy(this.gameObject);
+
         if (bThorSelected)
         {
             if (bBridal)
@@ -134,6 +139,9 @@ public class Thor : Hero
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
+
+        healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
+        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 
         if (bThorSelected)
         {
@@ -205,10 +213,6 @@ public class Thor : Hero
     }
 
 
-
-    /// <summary>
-    /// ///////////////////////////////////////////////////ATTACKS/////////////////////////////////////////////////////////////////////////////
-    /// </summary>
 
 
     void BridalBasicAttack()
