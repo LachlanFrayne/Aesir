@@ -43,7 +43,7 @@ public class Loki : Hero
     
     void Update()
     {
-        if (LokiSelected)
+        if (bLokiSelected)
         {
 
             if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
@@ -66,11 +66,11 @@ public class Loki : Hero
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
-        if (LokiSelected)
+        if (bLokiSelected)
         {
             backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
         }
-        if (!LokiSelected)
+        if (!bLokiSelected)
         {
             backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
             actionPointCostLabel.SetActive(false);
@@ -91,24 +91,13 @@ public class Loki : Hero
                         m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                         m_grid.ClearBoardData();
                         hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-
-                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
-                        else
-                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
                         bBasicAttack = false;
                     }
                     if (bAbility1Attack == true)
                     {
                         m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                        RemoveHighlightAttack();
+                        m_grid.ClearBoardData();
                         hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                        if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
-                        else
-                            hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
                         bAbility1Attack = false;
                     }
 
@@ -120,11 +109,15 @@ public class Loki : Hero
     }
     void HighlightMovement()
     {
+        m_grid.ClearBoardData();
+        bMove = true;
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
     }
 
     void BasicAttack()
     {
+        m_grid.ClearBoardData();
+        bMove = false;
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
@@ -134,7 +127,6 @@ public class Loki : Hero
             if (m_currentNode.neighbours[i].tag == "Tile")
             {
                 m_currentNode.neighbours[i].GetComponent<Renderer>().material = AttackHighlight;
-                m_currentNode.neighbours[i].tag = "AttackableTile";
             }
             if (m_currentNode.neighbours[i].tag == "CurrentEnemyTile")
                 m_currentNode.neighbours[i].GetComponent<Renderer>().material = EnemyHighlight;
@@ -143,7 +135,6 @@ public class Loki : Hero
         if (m_currentNode.neighbours[3].neighbours[0].tag == "Tile")
         {
             m_currentNode.neighbours[3].neighbours[0].GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[0].tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[3].neighbours[0].tag == "CurrentEnemyTile")
             m_currentNode.neighbours[3].neighbours[0].GetComponent<Renderer>().material = EnemyHighlight;
@@ -151,7 +142,6 @@ public class Loki : Hero
         if (m_currentNode.neighbours[3].neighbours[2].tag == "Tile")
         {
             m_currentNode.neighbours[3].neighbours[2].GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[3].neighbours[2].tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[3].neighbours[2].tag == "CurrentEnemyTile")
             m_currentNode.neighbours[3].neighbours[2].GetComponent<Renderer>().material = EnemyHighlight;
@@ -159,7 +149,6 @@ public class Loki : Hero
         if (m_currentNode.neighbours[1].neighbours[0].tag == "Tile")
         {
             m_currentNode.neighbours[1].neighbours[0].GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[0].tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[1].neighbours[0].tag == "CurrentEnemyTile")
             m_currentNode.neighbours[1].neighbours[0].GetComponent<Renderer>().material = EnemyHighlight;
@@ -167,7 +156,6 @@ public class Loki : Hero
         if (m_currentNode.neighbours[1].neighbours[2].tag == "Tile")
         {
             m_currentNode.neighbours[1].neighbours[2].GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[1].neighbours[2].tag = "AttackableTile";
         }
         if (m_currentNode.neighbours[1].neighbours[2].tag == "CurrentEnemyTile")
             m_currentNode.neighbours[1].neighbours[2].GetComponent<Renderer>().material = EnemyHighlight;
@@ -226,75 +214,6 @@ public class Loki : Hero
                     }
                 }
             }
-        }
-    }
-
-    void RemoveHighlightAttack()
-    {
-        m_tempNode = m_tempNodeBase;
-        int f = m_nBasicAttackRange;
-        int e = 1;
-
-        for (int i = 0; i < e; i++)
-        {
-            m_tempNode = m_tempNode.neighbours[3];
-            m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-            for (int a = 0; a < e; a++)
-            {
-                m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.tag == "FreyaAttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-            }
-            for (int b = 0; b < e; b++)
-            {
-                m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.tag == "FreyaAttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-
-            }
-            for (int c = 0; c < e; c++)
-            {
-
-                m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.tag == "FreyaAttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-            }
-            for (int d = 0; d < e; d++)
-            {
-                m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.tag == "FreyaAttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-            }
-            if (f > e)
-                e++;
         }
     }
 }

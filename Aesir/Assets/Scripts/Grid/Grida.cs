@@ -65,14 +65,10 @@ public class Grida:MonoBehaviour
 		{
 			for (int j = 0; j < gridSizeX; j++)
 			{
-                if (nodeBoardArray[i, j].contain != null)
-                    continue;
-
                 nodeBoardArray[i, j].m_gScore = 0;
                 nodeBoardArray[i, j].m_hScore = 0;
                 nodeBoardArray[i, j].m_fScore = 0;
                 nodeBoardArray[i, j].prev = null;
-
                 boardArray[i, j].GetComponent<Renderer>().material = remove;
 			}
 		}

@@ -52,7 +52,7 @@ public class Freya : Hero
 
     void Update()
     {
-        if (FreyaSelected)
+        if (bFreyaSelected)
         {
 
             if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
@@ -75,11 +75,11 @@ public class Freya : Hero
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
-        if (FreyaSelected)
+        if (bFreyaSelected)
         {
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
         }
-        if (!FreyaSelected)
+        if (!bFreyaSelected)
         {
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
             actionPointCostLabel.SetActive(false);
@@ -103,24 +103,13 @@ public class Freya : Hero
                             m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                             m_grid.ClearBoardData();
                             hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
-
-                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
-                            else
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
                             bBasicAttack = false;
                         }
                         if (bAbility1Attack == true)
                         {
                             m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                            RemoveHighlightAttack();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-
-                            if (hit.collider.GetComponent<Enemy>().m_nHealth > 0)
-
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "CurrentEnemyTile";
-                            else
-                                hit.collider.GetComponent<Enemy>().m_currentNode.tag = "Tile";
+                            m_grid.ClearBoardData();
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;  
                             bAbility1Attack = false;
                         }
                     }
@@ -131,74 +120,18 @@ public class Freya : Hero
     }
     void HighlightMovement()
     {
+        bMove = true;
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
-
     }
 
     void BasicAttack()
     {
+        bMove = false;
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
 
-        m_tempNode = m_tempNodeBase;        //Sets base 
-        int f = m_nBasicAttackRange;      //The attackRange
-        int e = 1;
-
-        for (int i = 0; i < e; i++)
-        {
-            m_tempNode = m_tempNode.neighbours[3];
-            for (int a = 0; a < e; a++)
-            {
-                m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.tag == "Tile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.tag = "AttackableTile";
-                }
-                if (m_tempNode.tag == "CurrentEnemyTile")
-                    m_tempNode.GetComponent<Renderer>().material = EnemyHighlight;
-            }
-
-            for (int b = 0; b < e; b++)
-            {
-                m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.tag == "Tile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.tag = "AttackableTile";
-                }
-                if (m_tempNode.tag == "CurrentEnemyTile")
-                    m_tempNode.GetComponent<Renderer>().material = EnemyHighlight;
-
-            }
-
-            for (int c = 0; c < e; c++)
-            {
-                m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.tag == "Tile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.tag = "AttackableTile";
-                }
-                if (m_tempNode.tag == "CurrentEnemyTile")
-                    m_tempNode.GetComponent<Renderer>().material = EnemyHighlight;
-            }
-
-            for (int d = 0; d < e; d++)
-            {
-                m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.tag == "Tile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = AttackHighlight;
-                    m_tempNode.tag = "AttackableTile";
-                }
-                if (m_tempNode.tag == "CurrentEnemyTile")
-                    m_tempNode.GetComponent<Renderer>().material = EnemyHighlight;
-            }
-            if (f > e)
-                e++;
-        }
+        dijkstrasSearchAttack(m_currentNode, m_nBasicAttackRange, AttackHighlight, 1);
     }
     void Ability1()
     {
@@ -206,75 +139,55 @@ public class Freya : Hero
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
-        dijkstrasSearchAttack(m_currentNode, 5, healingHighlight, 1);
+        dijkstrasSearchHealing(m_currentNode, m_nAbility1AttackRange, healingHighlight, 1);
     }
-    
-    void RemoveHighlightAttack()
+
+    public void dijkstrasSearchHealing(Node startNode, int actionPointAvailable, Material healingHighlight, int MoveCostPerTile)
     {
-        m_tempNode = m_tempNodeBase;
-        int f = m_nBasicAttackRange;
-        int e = 1;
+        int gScore = MoveCostPerTile;
+        Heap openList = new Heap(false);
+        List<Node> closedList = new List<Node>();
 
-        for (int i = 0; i < e; i++)
+        openList.Add(startNode);
+
+        while (openList.m_tHeap.Count > 0)
         {
-            m_tempNode = m_tempNode.neighbours[3];
-            m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-            for (int a = 0; a < e; a++)
-            {
-                m_tempNode = m_tempNode.neighbours[1].neighbours[0];
-                if (m_tempNode.tag == "AttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-            }
-            for (int b = 0; b < e; b++)
-            {
-                m_tempNode = m_tempNode.neighbours[2].neighbours[1];
-                if (m_tempNode.tag == "AttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
+            Node currentNode = openList.Pop();
 
-            }
-            for (int c = 0; c < e; c++)
-            {
+            closedList.Add(currentNode);
 
-                m_tempNode = m_tempNode.neighbours[3].neighbours[2];
-                if (m_tempNode.tag == "AttackableTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                }
-            }
-            for (int d = 0; d < e; d++)
+            if (currentNode.m_gScore > actionPointAvailable)
             {
-                m_tempNode = m_tempNode.neighbours[0].neighbours[3];
-                if (m_tempNode.tag == "AttackableTile")
+                continue;
+            }
+
+            currentNode.GetComponent<Renderer>().material = healingHighlight;
+            for (int i = 0; i < currentNode.neighbours.Length; i++)
+            {
+                if (!closedList.Contains(currentNode.neighbours[i]))
                 {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
-                    m_tempNode.tag = "Tile";
-                }
-                else if (m_tempNode.tag == "CurrentEnemyTile")
-                {
-                    m_tempNode.GetComponent<Renderer>().sharedMaterial = removeHighlight;
+                    if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
+                    {
+                        int tempGScore = currentNode.m_gScore + gScore;
+
+                        if (tempGScore < currentNode.neighbours[i].m_gScore)
+                        {
+                            currentNode.neighbours[i].prev = currentNode;
+                            currentNode.neighbours[i].m_gScore = tempGScore;
+                        }
+                    }
+                    else
+                    {
+                        if (currentNode.neighbours[i] != null)
+                        {
+                            currentNode.neighbours[i].prev = currentNode;
+                            currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
+                            openList.Add(currentNode.neighbours[i]);
+                        }
+                    }
                 }
             }
-            if (f > e)
-                e++;
         }
     }
+
 }
