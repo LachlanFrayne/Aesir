@@ -46,8 +46,7 @@ public class Loki : Hero
     
     void Update()
     {
-        if (m_nHealth <= 0)
-            Destroy(this.gameObject);
+        
 
         if (bLokiSelected)
         {

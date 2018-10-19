@@ -11,6 +11,13 @@ public class MoveDecision : BaseDecision
     {
         m_path = new List<Node>();
 
+        SetTarget();
+
+        base.Start();
+    }
+
+    public void SetTarget()
+    {
         int rand = Random.Range(1, 4);
 
         if (rand == 1)
@@ -25,9 +32,6 @@ public class MoveDecision : BaseDecision
         {
             m_hero = GameObject.Find("Loki").GetComponent<Loki>();
         }
-
-
-        base.Start();
     }
 
 	public override void MakeDecision()
@@ -113,6 +117,11 @@ public class MoveDecision : BaseDecision
                     m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
                 }
             }
+        }
+
+        for(int i = 0; i < 1000 && m_hero == null; i++) 
+        {
+            SetTarget();
         }
 
         m_path.Clear();

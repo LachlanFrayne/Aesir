@@ -54,8 +54,7 @@ public class Freya : Hero
 
     void Update()
     {
-        if (m_nHealth <= 0)
-            Destroy(this.gameObject);
+        
 
         if (bFreyaSelected)
         {

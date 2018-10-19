@@ -39,6 +39,7 @@ public class Enemy : Entity
     {
         if(m_nHealth <= 0)
         {
+            GameObject.Find("TurnManager").GetComponent<EndGame>().m_enemies.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
 

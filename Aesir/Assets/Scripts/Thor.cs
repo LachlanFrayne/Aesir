@@ -72,8 +72,7 @@ public class Thor : Hero
 
     void Update()
     {
-        if(m_nHealth <= 0)
-            Destroy(this.gameObject);
+        
 
         if (bThorSelected)
         {

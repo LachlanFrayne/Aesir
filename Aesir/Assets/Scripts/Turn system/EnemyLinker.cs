@@ -17,4 +17,17 @@ public class EnemyLinker : MonoBehaviour
 
         return m_enemyList;
     }
+    public List<GameObject> GetEnemiesObject()
+    {
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Enemy");
+
+        List<GameObject> m_enemyList = new List<GameObject>();
+
+        foreach (GameObject g in temp)
+        {
+            m_enemyList.Add(g);
+        }
+
+        return m_enemyList;
+    }
 }
