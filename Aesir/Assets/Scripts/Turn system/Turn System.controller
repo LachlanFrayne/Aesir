@@ -13,13 +13,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EnemyTurn
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -47,8 +47,7 @@ MonoBehaviour:
   m_thor: {fileID: 114486843925041948, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
   m_freya: {fileID: 114550503194178708, guid: cd091b638e1e33748837d39408add9f1, type: 2}
   m_loki: {fileID: 114556546164295584, guid: c9b1c1fbe9f9c094b8d2087d28da53a5, type: 2}
-  endturnbutton: {fileID: 114960103020457682, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
-    type: 2}
+  endturnbutton: {fileID: 0}
 --- !u!114 &114967081406671680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +115,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: EnemyTurn
-  m_Speed: 1
+  m_Speed: 1000
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101845007652902940}
@@ -143,7 +142,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerTurn
-  m_Speed: 1
+  m_Speed: 1000
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101229612342424212}

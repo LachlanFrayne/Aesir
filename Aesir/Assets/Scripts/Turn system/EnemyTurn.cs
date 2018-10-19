@@ -8,6 +8,8 @@ public class EnemyTurn : StateMachineBehaviour
     List<Enemy> m_enemy;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
+        m_enemy = animator.gameObject.GetComponent<EnemyLinker>().GetEnemies();
+
         foreach(Enemy e in m_enemy)
         {
             e.m_nActionPoints = e.m_nActionPointMax;
@@ -21,15 +23,24 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        //m_enemy.m_move.MakeDecision();      //JM:STARTHERE,need to have enemy list get all enemies at start of enemy turn
-        //if(m_enemy.m_nActionPoints <= 0)
-        //{
-        //    animator.SetBool("PlayerTurn", true);
-        //}
+        foreach(Enemy e in m_enemy)
+        {
+            e.m_move.MakeDecision();
+        }
+        
+
+        foreach (Enemy e in m_enemy)
+        {
+            if(e.m_nActionPoints > 0)
+            {
+                return;
+            }
+        }
+        animator.SetBool("PlayerTurn", true);
     }
 
     private void OnDisable()
     {
-
+        
     }
 }

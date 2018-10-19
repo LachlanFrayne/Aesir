@@ -9,32 +9,30 @@ public class PlayerTurn : StateMachineBehaviour
 	public Freya m_freya;
 	public Loki m_loki;
 
-    public Button endturnbutton;
+    public GameObject endturnbutton;
 
    
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-		m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
-		m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
-		m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
+        endturnbutton = animator.gameObject.GetComponent<EndPlayerTurn>().GetButton();
+        m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+        m_freya = GameObject.Find("Freya").GetComponent<Freya>();
+        m_loki = GameObject.Find("Loki").GetComponent<Loki>();
 
+        m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
 		m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
-		m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
-		m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
-
-		m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
-		m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
 		m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
 
 		m_freya.m_nHealth += m_freya.regen;
 
-        endturnbutton.enabled = true;
+
+        endturnbutton.SetActive(true);
     }
 
 	public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-        endturnbutton.enabled = false;
+        endturnbutton.SetActive(false);
 	}
 
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

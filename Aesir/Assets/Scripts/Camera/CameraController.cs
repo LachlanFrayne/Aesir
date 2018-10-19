@@ -51,19 +51,19 @@ public class CameraController : MonoBehaviour {
             transform.position = new Vector3(transform.position.x, transform.position.y, m_zMin);
         }
 
-        if (Input.GetMouseButtonDown(0))        //focus on gameobject clicked
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+    //    if (Input.GetMouseButtonDown(0))        //focus on gameobject clicked
+    //    {
+    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-				if (hit.collider.tag == "Tile")
-				{
-					transform.position = hit.transform.position - new Vector3(5,0,10);      //JM: Needs improvement
-				}
-            }
-        }
+    //        if (Physics.Raycast(ray, out hit, 100))
+    //        {
+				//if (hit.collider.tag == "Tile")
+				//{
+				//	transform.position = hit.transform.position - new Vector3(5,0,10);      //JM: Needs improvement
+				//}
+    //        }
+    //    }
 
         transform.position = new Vector3(transform.position.x, m_height, transform.position.z);     //sets y to m_height
     }

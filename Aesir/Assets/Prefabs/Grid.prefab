@@ -52,3 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1695463978917248, guid: 3e9d58cb0f2cd234fac7a621500d9135, type: 2}
+  remove: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}

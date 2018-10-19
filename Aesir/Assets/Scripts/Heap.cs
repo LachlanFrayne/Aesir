@@ -44,30 +44,6 @@ class Heap
         }
     }
 
-    //public bool CompareFunc(Node a, Node b)
-    //{
-    //    if (a.m_gScore < b.m_gScore)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
-    //public bool CompareFuncAStar(Node a, Node b)
-    //{
-    //    if (a.m_fScore < b.m_fScore)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
     public void Add(Node data)
 	{
 		m_tHeap.Add(data);

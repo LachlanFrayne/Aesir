@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveDecision : BaseDecision
 {
-    public int m_nMoveCostPerTile;
     public Thor m_thor;
 
 	public List<Node> m_path;
@@ -40,10 +39,10 @@ public class MoveDecision : BaseDecision
             {
                 break;
             }
-            if (currentNode.m_gScore > m_self.m_nActionPoints)      //if run out of actionpoints
-            {
-                continue;
-            }
+            //if (currentNode.m_gScore > m_self.m_nActionPoints)      //if run out of actionpoints
+            //{
+            //    continue;
+            //}
 
 
 
@@ -63,7 +62,7 @@ public class MoveDecision : BaseDecision
                     }
 					else		//if not in openlist
                     {		//update neighbors info
-                        n.m_gScore = currentNode.m_gScore + m_nMoveCostPerTile;
+                        n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
                         n.m_hScore = Vector3.Distance(currentNode.transform.position, m_thor.transform.position);
                         n.m_fScore = n.m_hScore + n.m_gScore;
                         n.prev = currentNode;
@@ -83,16 +82,17 @@ public class MoveDecision : BaseDecision
 			currentPathNode = currentPathNode.prev;
 		}
 
-        if (m_path.Count >= 1)
+        if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
         {
-            //JM:needs improvement, need to update current node.contain
-            //m_currentEnemyNode.tag = "Tile";
-            m_self.m_currentNode = m_path[m_path.Count - 1];
-            //m_currentEnemyNode.tag = "CurrentEnemyTile";
-            m_self.m_currentNode.contain = null;
-            transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
-            m_self.m_currentNode = m_path[m_path.Count - 1];
-            m_self.m_currentNode.contain = this.gameObject;
+            if (m_path.Count >= 1)
+            {
+                m_self.m_currentNode = m_path[m_path.Count - 1];
+                m_self.m_currentNode.contain = null;
+                transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
+                m_self.m_currentNode.contain = this.gameObject;
+
+                m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+            }
         }
     }
 }
