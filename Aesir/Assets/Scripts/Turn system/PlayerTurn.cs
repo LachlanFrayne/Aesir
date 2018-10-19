@@ -22,7 +22,7 @@ public class PlayerTurn : StateMachineBehaviour
 
         m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
 		m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
-		m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
+	    m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
 
 		m_freya.m_nHealth += m_freya.regen;
 
