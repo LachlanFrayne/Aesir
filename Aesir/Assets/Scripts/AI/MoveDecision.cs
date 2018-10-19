@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class MoveDecision : BaseDecision
 {
-    public Thor m_thor;
-
+    public Hero m_hero;
 	public List<Node> m_path;
 
     public new void Start()
     {
         m_path = new List<Node>();
 
-        GameObject temp = GameObject.Find("Thor");
-        m_thor = temp.transform.GetComponent<Thor>();
+        int rand = Random.Range(1, 4);
+
+        if (rand == 1)
+        {
+            m_hero = GameObject.Find("Thor").GetComponent<Thor>();
+        }
+        if (rand == 2)
+        {
+            m_hero = GameObject.Find("Freya").GetComponent<Freya>();
+        }
+        if (rand == 3)
+        {
+            m_hero = GameObject.Find("Loki").GetComponent<Loki>();
+        }
+
 
         base.Start();
     }
@@ -35,7 +47,7 @@ public class MoveDecision : BaseDecision
             currentNode = openList.Pop();       //update current node with openlist
             closedList.Add(currentNode);        //add current node to closed list
             
-            if (m_thor.m_currentNode == currentNode)        //if at end of path
+            if (m_hero.m_currentNode == currentNode)        //if at end of path
             {
                 break;
             }
@@ -55,7 +67,7 @@ public class MoveDecision : BaseDecision
                         if (currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile < n.m_gScore)     //if better path
                         {
                             n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_thor.transform.position);
+                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_hero.transform.position);
                             n.m_fScore = n.m_hScore + n.m_gScore;
                             n.prev = currentNode;
                         }
@@ -63,7 +75,7 @@ public class MoveDecision : BaseDecision
 					else		//if not in openlist
                     {		//update neighbors info
                         n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-                        n.m_hScore = Vector3.Distance(currentNode.transform.position, m_thor.transform.position);
+                        n.m_hScore = Vector3.Distance(currentNode.transform.position, m_hero.transform.position);
                         n.m_fScore = n.m_hScore + n.m_gScore;
                         n.prev = currentNode;
 
@@ -75,7 +87,7 @@ public class MoveDecision : BaseDecision
         }
 
 
-		Node currentPathNode = m_thor.m_currentNode.prev;
+		Node currentPathNode = m_hero.m_currentNode.prev;
 		while(currentPathNode.prev != null)
 		{
 			m_path.Add(currentPathNode);
@@ -92,6 +104,14 @@ public class MoveDecision : BaseDecision
                 m_self.m_currentNode.contain = this.gameObject;
 
                 m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+            }
+            else
+            {
+                if(m_self.m_nActionPoints > 0)
+                {
+                    m_hero.m_nHealth -= m_self.m_meleeDamage;
+                    m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
+                }
             }
         }
 

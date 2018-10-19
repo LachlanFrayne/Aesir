@@ -110,19 +110,19 @@ MonoBehaviour:
   m_nHealth: 5
   m_nHealthMax: 0
   m_nActionPoints: 3
-  m_nActionPointMax: 3
-  m_nBasicAttack: 0
+  m_nActionPointMax: 2
+  m_nBasicAttack: 1
   m_nBasicAttackRange: 0
-  m_nBasicAttackCost: 0
+  m_nBasicAttackCost: 1
   m_nAbility1Attack: 0
   m_nAbility1AttackRange: 0
   m_nAbility1AttackCost: 0
   m_nAbility2Attack: 0
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
-  m_nMovementActionPointCostPerTile: 0
+  m_nMovementActionPointCostPerTile: 1
   m_currentNode: {fileID: 0}
   m_grid: {fileID: 0}
-  m_meleeDamage: 0
+  m_meleeDamage: 2
   m_rangeDamage: 0
   m_move: {fileID: 0}

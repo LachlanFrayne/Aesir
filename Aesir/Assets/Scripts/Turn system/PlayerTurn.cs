@@ -26,6 +26,10 @@ public class PlayerTurn : StateMachineBehaviour
 
 		m_freya.m_nHealth += m_freya.regen;
 
+        if(m_freya.m_nHealth > m_freya.m_nHealthMax)
+        {
+            m_freya.m_nHealth = m_freya.m_nHealthMax;
+        }
 
         endturnbutton.SetActive(true);
     }

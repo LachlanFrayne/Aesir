@@ -6,8 +6,6 @@ public class Enemy : Entity
 {
     public Grida m_grid;
 
-    bool turn = false;
-
     public int m_meleeDamage;
     public int m_rangeDamage;
 
