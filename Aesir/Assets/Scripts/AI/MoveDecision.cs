@@ -55,6 +55,15 @@ public class MoveDecision : BaseDecision
             {
                 break;
             }
+
+            if (currentNode.contain != m_self.gameObject)
+            {
+                if (currentNode.contain != null)
+                {
+                    continue;
+                }
+            }
+
             //if (currentNode.m_gScore > m_self.m_nActionPoints)      //if run out of actionpoints
             //{
             //    continue;
@@ -62,7 +71,7 @@ public class MoveDecision : BaseDecision
 
 
 
-            foreach(Node n in currentNode.neighbours)
+            foreach (Node n in currentNode.neighbours)
             {
                 if (!closedList.Contains(n))        //if not in closed list
                 {
