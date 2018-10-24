@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndGame : MonoBehaviour {
+public class EndGameTurn : MonoBehaviour {
 
     public List<GameObject> m_enemies;
 
