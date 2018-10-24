@@ -50953,6 +50953,10 @@ Prefab:
       propertyPath: m_Name
       value: Grid (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1204691045958398, guid: e9b3ad6adf930054aa358533cea6773a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9b3ad6adf930054aa358533cea6773a, type: 2}
   m_IsPrefabParent: 0
@@ -98792,7 +98796,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1204691045958398, guid: bbd0fab54a97abb4fb40484c819ec75b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114257047114058436, guid: bbd0fab54a97abb4fb40484c819ec75b,
         type: 2}

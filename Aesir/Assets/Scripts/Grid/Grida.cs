@@ -4,58 +4,76 @@ using UnityEngine;
 
 
 //[ExecuteInEditMode]
+
 public class Grida:MonoBehaviour
 {
     public GameObject map;
     public GameObject tilePrefab;
-    public GameObject[,] boardArray = new GameObject[gridSizeX, gridSizeY];
-    public static int gridSizeX = 30;
-    public static int gridSizeY = 30;
-    public Node[,] nodeBoardArray = new Node[gridSizeX, gridSizeY];
+    public GameObject[,] boardArray;
+    public static int gridSizeX;
+    public static int gridSizeY;
+    public Node[,] nodeBoardArray;
 
-
+    public List<List<GameObject>> grid = new List<List<GameObject>>();
+    public List<GameObject> rows;
 
     public Material remove;
 
     void Awake()
     {
-        GenerateGrid();
-        
+        GenerateGrid();     
     }
 
     void GenerateGrid()
     {
-        for (int columnTile = 0; columnTile < boardArray.GetLength(0); columnTile++)
-        {
-            for (int rowTile = 0; rowTile < boardArray.GetLength(1); rowTile++)
+        int i = 0;
+        foreach (Transform row in transform)
+        { 
+            rows.Add(row.gameObject);
+
+            grid.Add(new List<GameObject>());
+            foreach (Transform tiles in row.transform)
             {
-                boardArray[columnTile, rowTile] = Instantiate(tilePrefab, new Vector3(rowTile * 1.05f, 0, columnTile * 1.05f), Quaternion.Euler(90, 0, 0), gameObject.transform);      //Creates the grid
-                boardArray[columnTile, rowTile].AddComponent<Node>();
-                nodeBoardArray[columnTile, rowTile] = boardArray[columnTile, rowTile].GetComponent<Node>();
+                grid[i].Add(tiles.transform.gameObject);
+            }
+
+            i++;
+        }
+
+        gridSizeX = grid.Count;
+        gridSizeY = grid[0].Count;
+        boardArray = new GameObject[gridSizeX, gridSizeY];
+        nodeBoardArray = new Node[gridSizeX, gridSizeY];
+
+        for (int columnTile = 0; columnTile < grid.Count; columnTile++)
+        {
+            for (int rowTile = 0; rowTile < grid[columnTile].Count; rowTile++)
+            {
+                nodeBoardArray[columnTile, rowTile] = grid[columnTile][rowTile].GetComponent<Node>();
             }
         }
-        
-        for (int columnTile = 0; columnTile < boardArray.GetLength(0); columnTile++)
+
+        //AHLFHKFHLFHKLFAHKLASHKLFAHKLFHKLAHKLAFHKLFHKLFHKLAFHKLFHKLFHKLAF PUT PUT PUT PUT PUIT AJAJAJ LIST LIST GRID INTO BOARD ARRAY :)
+        for (int columnTile = 0; columnTile < grid.Count; columnTile++)
         {
-            for (int rowTile = 0; rowTile < boardArray.GetLength(1); rowTile++)
+            for (int rowTile = 0; rowTile < grid[columnTile].Count; rowTile++)
             {
-                if(rowTile < gridSizeY - 1)
+                if (rowTile < grid[0].Count - 1)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[0] = nodeBoardArray[columnTile, rowTile + 1];       //Sets the up node from the current node
+                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[0] = nodeBoardArray[columnTile, rowTile + 1];
                 }
-        
-                if(columnTile < gridSizeX - 1)
+
+                if (columnTile < grid.Count - 1)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];        //Sets the right node from the current node
+                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];
                 }
                 if (rowTile > 0)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[2] = nodeBoardArray[columnTile, rowTile - 1];     //Sets the down node from the current node
+                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[2] = nodeBoardArray[columnTile, rowTile - 1];
                 }
-        
                 if (columnTile > 0)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];     //Sets the left node from the current node
+                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];
                 }
             }
         }
