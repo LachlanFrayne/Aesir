@@ -49,7 +49,7 @@ public class Grida:MonoBehaviour
         {
             for (int rowTile = 0; rowTile < grid[columnTile].Count; rowTile++)
             {
-                grid[columnTile][rowTile] = boardArray[columnTile, rowTile];
+                boardArray[columnTile, rowTile] = grid[columnTile][rowTile];
                 nodeBoardArray[columnTile, rowTile] = boardArray[columnTile,rowTile].GetComponent<Node>();
             }
         }
@@ -82,9 +82,9 @@ public class Grida:MonoBehaviour
 
 	public void ClearBoardData()
 	{
-		for (int i = 0; i < gridSizeX; i++)
+		for (int i = 0; i < boardArray.GetLength(0); i++)
 		{
-			for (int j = 0; j < gridSizeX; j++)
+			for (int j = 0; j < boardArray.GetLength(1); j++)
 			{
                 nodeBoardArray[i, j].m_gScore = 0;
                 nodeBoardArray[i, j].m_hScore = 0;
