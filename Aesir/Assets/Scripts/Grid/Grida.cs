@@ -49,7 +49,8 @@ public class Grida:MonoBehaviour
         {
             for (int rowTile = 0; rowTile < grid[columnTile].Count; rowTile++)
             {
-                nodeBoardArray[columnTile, rowTile] = grid[columnTile][rowTile].GetComponent<Node>();
+                grid[columnTile][rowTile] = boardArray[columnTile, rowTile];
+                nodeBoardArray[columnTile, rowTile] = boardArray[columnTile,rowTile].GetComponent<Node>();
             }
         }
 
@@ -60,20 +61,20 @@ public class Grida:MonoBehaviour
             {
                 if (rowTile < grid[0].Count - 1)
                 {
-                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[0] = nodeBoardArray[columnTile, rowTile + 1];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[0] = nodeBoardArray[columnTile, rowTile + 1];
                 }
 
                 if (columnTile < grid.Count - 1)
                 {
-                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];
                 }
                 if (rowTile > 0)
                 {
-                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[2] = nodeBoardArray[columnTile, rowTile - 1];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[2] = nodeBoardArray[columnTile, rowTile - 1];
                 }
                 if (columnTile > 0)
                 {
-                    grid[columnTile][rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];
                 }
             }
         }
