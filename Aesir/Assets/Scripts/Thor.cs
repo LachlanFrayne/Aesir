@@ -240,13 +240,16 @@ public class Thor : Hero
 
         for(i=0;i<m_currentNode.neighbours.Length; i++)
         {
+            if (m_currentNode.contain != null && m_currentNode.contain.GetComponent<Enemy>() == null)
+                continue;
+
             m_currentNode.neighbours[i].prev = m_currentNode;
             m_currentNode.neighbours[i].GetComponent<Renderer>().material = AttackHighlight;
             m_currentNode.neighbours[i].neighbours[(i + 1) % 4].prev = m_currentNode.neighbours[i];
             m_currentNode.neighbours[i].neighbours[(i + 1) % 4].GetComponent<Renderer>().material = AttackHighlight;
         }
 
-        //for (int i = 0; i < m_currentNode.neighbours.Length; i++)
+        //for (int i = 0; i < m_currentNode.neighbours.Length; i++)S
         //{
         //    if (m_currentNode.neighbours[i].tag == "Tile")
         //    {
