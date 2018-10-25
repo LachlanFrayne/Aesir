@@ -12,7 +12,6 @@ public abstract class Hero : Entity
 
     public Grida m_grid;
 
-
     public Node m_tempNodeBase;
 
     public GameObject actionPointCostLabel;
@@ -240,7 +239,7 @@ public abstract class Hero : Entity
 
             closedList.Add(currentNode);
 
-            if (currentNode.m_gScore > actionPointAvailable)
+            if (currentNode.m_gScore > actionPointAvailable || currentNode.bObstacle || currentNode.bBlocked)
             {
                 continue;
             }
@@ -258,7 +257,7 @@ public abstract class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        if (currentNode.neighbours[i].contain != null)
+                        if (currentNode.neighbours[i].contain != null || currentNode.neighbours[i].bBlocked || currentNode.neighbours[i].bObstacle)
                             continue;
                         int tempGScore = currentNode.m_gScore + gScore;
 
@@ -272,7 +271,7 @@ public abstract class Hero : Entity
                     {
                         if (currentNode.neighbours[i] != null)
                         {
-                            if (currentNode.neighbours[i].contain != null)
+                            if (currentNode.neighbours[i].contain != null || currentNode.neighbours[i].bBlocked || currentNode.neighbours[i].bObstacle)
                                 continue;
                             if (currentNode.m_gScore + gScore > actionPointAvailable)
                             {
@@ -292,6 +291,7 @@ public abstract class Hero : Entity
 
     public void dijkstrasSearchAttack(Node startNode, int actionPointAvailable, Material attackMaterial, int MoveCostPerTile)
     {
+        int a = 0;
         int gScore = MoveCostPerTile;
         Heap openList = new Heap(false);
         List<Node> closedList = new List<Node>();
@@ -304,9 +304,14 @@ public abstract class Hero : Entity
 
             closedList.Add(currentNode);
 
-            if (currentNode.m_gScore > actionPointAvailable)
+            if (currentNode.m_gScore > actionPointAvailable || currentNode.bBlocked)
             {
                 continue;
+            }
+            if (a != 0)
+            {
+                if (currentNode.contain != null && currentNode.contain.GetComponent<Enemy>() == null)
+                    continue;
             }
 
             currentNode.GetComponent<Renderer>().material = attackMaterial;
@@ -316,6 +321,8 @@ public abstract class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
+                        if (currentNode.neighbours[i].contain != null && currentNode.neighbours[i].contain.GetComponent<Enemy>() == null || currentNode.neighbours[i].bBlocked)
+                            continue;
                         int tempGScore = currentNode.m_gScore + gScore;
 
                         if (tempGScore < currentNode.neighbours[i].m_gScore)
@@ -328,6 +335,12 @@ public abstract class Hero : Entity
                     {
                         if (currentNode.neighbours[i] != null)
                         {
+                            if (currentNode.neighbours[i].contain != null && currentNode.neighbours[i].contain.GetComponent<Enemy>() == null || currentNode.neighbours[i].bBlocked)
+                                continue;
+                            if (currentNode.m_gScore + gScore > actionPointAvailable)
+                            {
+                                continue;
+                            }
                             currentNode.neighbours[i].prev = currentNode;
                             currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
                             openList.Add(currentNode.neighbours[i]);
@@ -335,6 +348,7 @@ public abstract class Hero : Entity
                     }
                 }
             }
+            a++;
         }
     } 
 }

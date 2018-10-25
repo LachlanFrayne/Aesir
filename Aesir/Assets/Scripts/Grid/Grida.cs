@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//[ExecuteInEditMode]
-
 public class Grida:MonoBehaviour
 {
-    public GameObject map;
-    public GameObject tilePrefab;
     public GameObject[,] boardArray;
     public static int gridSizeX;
     public static int gridSizeY;
@@ -54,7 +49,6 @@ public class Grida:MonoBehaviour
             }
         }
 
-        //AHLFHKFHLFHKLFAHKLASHKLFAHKLFHKLAHKLAFHKLFHKLFHKLAFHKLFHKLFHKLAF PUT PUT PUT PUT PUIT AJAJAJ LIST LIST GRID INTO BOARD ARRAY :)
         for (int columnTile = 0; columnTile < grid.Count; columnTile++)
         {
             for (int rowTile = 0; rowTile < grid[columnTile].Count; rowTile++)
@@ -66,7 +60,7 @@ public class Grida:MonoBehaviour
 
                 if (columnTile < grid.Count - 1)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile + 1, rowTile];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile + 1, rowTile];
                 }
                 if (rowTile > 0)
                 {
@@ -74,7 +68,7 @@ public class Grida:MonoBehaviour
                 }
                 if (columnTile > 0)
                 {
-                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[3] = nodeBoardArray[columnTile - 1, rowTile];
+                    boardArray[columnTile, rowTile].GetComponent<Node>().neighbours[1] = nodeBoardArray[columnTile - 1, rowTile];
                 }
             }
         }

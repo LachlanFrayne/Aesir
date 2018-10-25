@@ -127,6 +127,7 @@ public class Freya : Hero
     }
     void HighlightMovement()
     {
+        m_grid.ClearBoardData();
         bMove = true;
         dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
     }

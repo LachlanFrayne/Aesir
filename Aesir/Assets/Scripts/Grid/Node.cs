@@ -11,4 +11,8 @@ public class Node : MonoBehaviour
     public float m_fScore;
     public float m_hScore;
     public GameObject contain;
+
+    [Header("Designer stuff")]
+    public bool bBlocked = false;
+    public bool bObstacle = false;
 }
