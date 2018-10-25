@@ -128,10 +128,10 @@ public class MoveDecision : BaseDecision
             }
         }
 
-        for(int i = 0; i < 1000 && m_hero == null; i++) 
-        {
-            SetTarget();
-        }
+        //for(int i = 0; i < 1000 && m_hero == null; i++) 
+        //{
+        //    SetTarget();
+        //}
 
         m_path.Clear();
         m_self.m_grid.ClearBoardData();

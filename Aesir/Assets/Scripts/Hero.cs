@@ -74,7 +74,7 @@ public abstract class Hero : Entity
     {
         if (m_nHealth <= 0)
         {
-            GameObject.Find("TurnManager").GetComponent<EndGame>().heroes.Remove(this.gameObject);
+            GameObject.Find("TurnManager").GetComponent<EndGameTurn>().heroes.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
             if (bMove)
