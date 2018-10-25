@@ -177,7 +177,9 @@ public class Thor : Hero
                         {
                             m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
                             m_grid.ClearBoardData();
-                            bBridalAbility1Attack = false;
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+							hit.collider.GetComponent<Enemy>().bStunned = true;
+							bBridalAbility1Attack = false;
                         }
 
                         if (bThorBasicAttack == true)
@@ -237,85 +239,94 @@ public class Thor : Hero
         actionPointCostLabel.SetActive(true);
         bBridalAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
+		Node tempNode;
+		Node tempNode2;
 
-        for(i=0;i<m_currentNode.neighbours.Length; i++)
+		for (i=0;i<m_currentNode.neighbours.Length; i++)
         {
-            if (m_currentNode.contain != null && m_currentNode.contain.GetComponent<Enemy>() == null)
-                continue;
+			tempNode = m_currentNode.neighbours[i];
+			tempNode2 = tempNode.neighbours[(i + 1) % 4];
 
-            m_currentNode.neighbours[i].prev = m_currentNode;
-            m_currentNode.neighbours[i].GetComponent<Renderer>().material = AttackHighlight;
-            m_currentNode.neighbours[i].neighbours[(i + 1) % 4].prev = m_currentNode.neighbours[i];
-            m_currentNode.neighbours[i].neighbours[(i + 1) % 4].GetComponent<Renderer>().material = AttackHighlight;
-        }
+			
+			tempNode.GetComponent<Renderer>().material = AttackHighlight;
+			tempNode2.GetComponent<Renderer>().material = AttackHighlight;
 
-        //for (int i = 0; i < m_currentNode.neighbours.Length; i++)S
-        //{
-        //    if (m_currentNode.neighbours[i].tag == "Tile")
-        //    {
-        //        m_currentNode.neighbours[i].GetComponent<Renderer>().material = AttackHighlight;
-        //        m_currentNode.neighbours[i].tag = "AttackableTile";
-        //    }
-        //    if (m_currentNode.neighbours[i].tag == "CurrentEnemyTile")
-        //        m_currentNode.neighbours[i].GetComponent<Renderer>().material = EnemyHighlight;
-        //}
-        //
-        //if (m_currentNode.neighbours[3].neighbours[0].tag == "Tile")
-        //{
-        //    m_currentNode.neighbours[3].neighbours[0].GetComponent<Renderer>().material = AttackHighlight;
-        //    m_currentNode.neighbours[3].neighbours[0].tag = "AttackableTile";
-        //}
-        //if (m_currentNode.neighbours[3].neighbours[0].tag == "CurrentEnemyTile")
-        //    m_currentNode.neighbours[3].neighbours[0].GetComponent<Renderer>().material = EnemyHighlight;
-        //
-        //if (m_currentNode.neighbours[3].neighbours[2].tag == "Tile")
-        //{
-        //    m_currentNode.neighbours[3].neighbours[2].GetComponent<Renderer>().material = AttackHighlight;
-        //    m_currentNode.neighbours[3].neighbours[2].tag = "AttackableTile";
-        //}
-        //if (m_currentNode.neighbours[3].neighbours[2].tag == "CurrentEnemyTile")
-        //    m_currentNode.neighbours[3].neighbours[2].GetComponent<Renderer>().material = EnemyHighlight;
-        //
-        //if (m_currentNode.neighbours[1].neighbours[0].tag == "Tile")
-        //{
-        //    m_currentNode.neighbours[1].neighbours[0].GetComponent<Renderer>().material = AttackHighlight;
-        //    m_currentNode.neighbours[1].neighbours[0].tag = "AttackableTile";
-        //}
-        //if (m_currentNode.neighbours[1].neighbours[0].tag == "CurrentEnemyTile")
-        //    m_currentNode.neighbours[1].neighbours[0].GetComponent<Renderer>().material = EnemyHighlight;
-        //
-        //if (m_currentNode.neighbours[1].neighbours[2].tag == "Tile")
-        //{
-        //    m_currentNode.neighbours[1].neighbours[2].GetComponent<Renderer>().material = AttackHighlight;
-        //    m_currentNode.neighbours[1].neighbours[2].tag = "AttackableTile";
-        //}
-        //if (m_currentNode.neighbours[1].neighbours[2].tag == "CurrentEnemyTile")
-        //    m_currentNode.neighbours[1].neighbours[2].GetComponent<Renderer>().material = EnemyHighlight;
+			tempNode.prev = m_currentNode;
+            tempNode2.prev = m_currentNode.neighbours[i];
+
+			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null)
+			{
+				tempNode.prev = null;
+				tempNode.GetComponent<Renderer>().material = removeHighlight;
+			}
+			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null)
+			{
+				tempNode2.prev = null;
+				tempNode2.GetComponent<Renderer>().material = removeHighlight;
+			}
+
+		}
     }
     void ThorBasicAttack()
     {
-        actionPointCostLabel.SetActive(true);
-        bThorBasicAttack = true;
-        actionPointsMoveCostLabel.text = m_nBasicAttack.ToString();
+		m_grid.ClearBoardData();
+		bMove = false;
+		actionPointCostLabel.SetActive(true);
+		bThorBasicAttack = true;
+		actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
+		Node tempNode;
+		Node tempNode2;
 
-        for (int i = 0; i < m_currentNode.neighbours.Length; i++)
-        {
-            if (m_currentNode.neighbours[i].tag == "Tile")
-            {
-                m_currentNode.neighbours[i].GetComponent<Renderer>().material = AttackHighlight;
-                m_currentNode.neighbours[i].tag = "AttackableTile";
-            }
-            if (m_currentNode.neighbours[i].tag == "CurrentEnemyTile")
-                m_currentNode.neighbours[i].GetComponent<Renderer>().material = EnemyHighlight;
-        }
-    }
+		for (i = 0; i < m_currentNode.neighbours.Length; i++)
+		{
+			tempNode = m_currentNode.neighbours[i];
+			tempNode2 = tempNode.neighbours[(i + 1) % 4];
+
+
+			tempNode.GetComponent<Renderer>().material = AttackHighlight;
+			tempNode2.GetComponent<Renderer>().material = AttackHighlight;
+
+			tempNode.prev = m_currentNode;
+			tempNode2.prev = m_currentNode.neighbours[i];
+
+			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null)
+			{
+				tempNode.prev = null;
+				tempNode.GetComponent<Renderer>().material = removeHighlight;
+			}
+			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null)
+			{
+				tempNode2.prev = null;
+				tempNode2.GetComponent<Renderer>().material = removeHighlight;
+			}
+
+		}
+	}
     void ThorAbility1()
     {
-        dijkstrasSearchAttack(m_currentNode, 4, movementHighlight, 1);
+		m_grid.ClearBoardData();
+		bMove = false;
+		actionPointCostLabel.SetActive(true);
+		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
+		bThorAbility1Attack = true;
+
+		dijkstrasSearchAttack(m_currentNode, 4, movementHighlight, 1);
     }
     void ThorAbility2()
     {
+		m_grid.ClearBoardData();
+		bMove = false;
+		actionPointCostLabel.SetActive(true);
+		actionPointsMoveCostLabel.text = m_nAbility2AttackCost.ToString();
+		bThorAbility2Attack = true;
 
+		for(int i = 0; i < m_currentNode.neighbours.Length; i++)
+		{
+			for(i = 0; i < m_nAbility2AttackRange; i++)
+			{
+
+			}
+		}
     }
 }
         

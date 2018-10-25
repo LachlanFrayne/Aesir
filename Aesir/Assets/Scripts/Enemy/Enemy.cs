@@ -11,6 +11,7 @@ public class Enemy : Entity
 
 	public MoveDecision m_move;
 
+	public bool bStunned = false;
     void Start()
     {
 		
