@@ -10,7 +10,14 @@ public abstract class Hero : Entity
     public bool bLokiSelected;
     public bool bMove;
 
-    public Grida m_grid;
+	public int m_nAbility1Attack;
+	public int m_nAbility1AttackRange;
+	public int m_nAbility1AttackCost;
+	public int m_nAbility2Attack;
+	public int m_nAbility2AttackRange;
+	public int m_nAbility2AttackCost;
+
+	public Grida m_grid;
 
     public Node m_tempNodeBase;
 

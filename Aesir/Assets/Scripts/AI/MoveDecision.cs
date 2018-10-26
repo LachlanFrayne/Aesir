@@ -4,34 +4,13 @@ using UnityEngine;
 
 public class MoveDecision : BaseDecision
 {
-    public Hero m_hero;
 	public List<Node> m_path;
 
     public new void Start()
     {
         m_path = new List<Node>();
 
-        SetTarget();
-
         base.Start();
-    }
-
-    public void SetTarget()
-    {
-        int rand = Random.Range(1, 4);
-
-        if (rand == 1)
-        {
-            m_hero = GameObject.Find("Thor").GetComponent<Thor>();
-        }
-        if (rand == 2)
-        {
-            m_hero = GameObject.Find("Freya").GetComponent<Freya>();
-        }
-        if (rand == 3)
-        {
-            m_hero = GameObject.Find("Loki").GetComponent<Loki>();
-        }
     }
 
 	public override void MakeDecision()
@@ -51,7 +30,7 @@ public class MoveDecision : BaseDecision
             currentNode = openList.Pop();       //update current node with openlist
             closedList.Add(currentNode);        //add current node to closed list
             
-            if (m_hero.m_currentNode == currentNode)        //if at end of path
+            if (m_self.m_targetedHero.m_currentNode == currentNode)        //if at end of path
             {
                 break;
             }
@@ -64,13 +43,6 @@ public class MoveDecision : BaseDecision
                 }
             }
 
-            //if (currentNode.m_gScore > m_self.m_nActionPoints)      //if run out of actionpoints
-            //{
-            //    continue;
-            //}
-
-
-
             foreach (Node n in currentNode.neighbours)
             {
                 if (!closedList.Contains(n))        //if not in closed list
@@ -80,7 +52,7 @@ public class MoveDecision : BaseDecision
                         if (currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile < n.m_gScore)     //if better path
                         {
                             n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_hero.transform.position);
+                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
                             n.m_fScore = n.m_hScore + n.m_gScore;
                             n.prev = currentNode;
                         }
@@ -88,7 +60,7 @@ public class MoveDecision : BaseDecision
 					else		//if not in openlist
                     {		//update neighbors info
                         n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-                        n.m_hScore = Vector3.Distance(currentNode.transform.position, m_hero.transform.position);
+						n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
                         n.m_fScore = n.m_hScore + n.m_gScore;
                         n.prev = currentNode;
 
@@ -100,13 +72,13 @@ public class MoveDecision : BaseDecision
         }
 
 
-		Node currentPathNode = m_hero.m_currentNode.prev;
+		Node currentPathNode = m_self.m_targetedHero.m_currentNode.prev;
 		while(currentPathNode.prev != null)
 		{
 			m_path.Add(currentPathNode);
 			currentPathNode = currentPathNode.prev;
 		}
-
+		/////////////////////////////////////////////////////JM:StartHere
         if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
         {
             if (m_path.Count >= 1)
@@ -122,16 +94,11 @@ public class MoveDecision : BaseDecision
             {
                 if(m_self.m_nActionPoints > 0)
                 {
-                    m_hero.m_nHealth -= m_self.m_meleeDamage;
+                    //m_self.m_targetedHero.m_nHealth -= m_self.m_damage;
                     m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
                 }
             }
         }
-
-        //for(int i = 0; i < 1000 && m_hero == null; i++) 
-        //{
-        //    SetTarget();
-        //}
 
         m_path.Clear();
         m_self.m_grid.ClearBoardData();

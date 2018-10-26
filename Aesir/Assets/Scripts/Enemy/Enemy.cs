@@ -8,16 +8,16 @@ public class Enemy : Entity
 
     public Grida m_grid;
 
-    public int m_meleeDamage;
-    public int m_rangeDamage;
+	public TargetInRangeDecision m_inRangeDecision;
+	public CalculateTargetDecision m_calcTargetDecision;
 
-	public MoveDecision m_move;
 
 	public bool bStunned = false;
     void Start()
     {
 		
-		m_move = gameObject.AddComponent<MoveDecision>();
+		m_inRangeDecision = gameObject.GetComponent<TargetInRangeDecision>();
+		m_calcTargetDecision = gameObject.GetComponent<CalculateTargetDecision>();
 
 		m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
         RaycastHit hit;
@@ -31,7 +31,7 @@ public class Enemy : Entity
                     {
                         m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];
                         m_currentNode.contain = this.gameObject;
-                        transform.position = new Vector3(m_currentNode.transform.position.x, .5f, m_currentNode.transform.position.z);
+                        transform.position = new Vector3(m_currentNode.transform.position.x, 0.0f, m_currentNode.transform.position.z);
                     }
                 }
             }
@@ -40,17 +40,10 @@ public class Enemy : Entity
 
     void Update()
     {
-        if(m_nHealth <= 0)
-        {
-            GameObject.Find("TurnManager").GetComponent<EndGame>().m_enemies.Remove(this.gameObject);
-            Destroy(this.gameObject);
-        }
-
-		if (Input.GetKeyDown(KeyCode.P))
+		if (m_nHealth <= 0)
 		{
-			m_move.MakeDecision();
-
-			
+			GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_enemies.Remove(this.gameObject);
+			Destroy(this.gameObject);
 		}
     }
 }

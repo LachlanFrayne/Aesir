@@ -122,7 +122,7 @@ public class Thor : Hero
                     m_nHealthMax = m_nThorHealthMax;
                     m_nActionPoints = m_nThorActionPoints;
                     m_nActionPointMax = m_nThorActionPointMax;
-                    m_nBasicAttack = m_nThorBasicAttack;
+                    m_nBasicAttackDamage = m_nThorBasicAttack;
                     m_nBasicAttackRange = m_nThorBasicAttackRange;
                     m_nBasicAttackCost = m_nThorBasicAttackCost;
                     m_nAbility1Attack = m_nThorAbility1AttackCost;
@@ -170,7 +170,7 @@ public class Thor : Hero
                         {
                             m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                             m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bBridalBasicAttack = false;
                         }
                         if (bBridalAbility1Attack == true)
@@ -186,7 +186,7 @@ public class Thor : Hero
                         {
                             m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                             m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bThorBasicAttack = false;
                         }
                         if (bThorAbility1Attack == true)

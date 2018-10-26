@@ -16,6 +16,7 @@ TagManager:
   - AttackableTile
   - CurrentAttackableEnemyTile
   - TeleportableTile
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -21,22 +21,35 @@ public class CalculateTargetDecision : BaseDecision
 
 	public override void MakeDecision()		//JM:STARTHERE, need to have MoveDirection.cs use Enemy's m_targetedHero to move toward, also have error check for when a hero is dead :)
 	{
-		//find out all three hero scores
+		float thorTargetScore = 0.0f;
+		float freyaTargetScore = 0.0f;
+		float lokiTargetScore = 0.0f;
 
-		float thorTargetScore = (m_thor.m_nHealthMax / m_thor.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_thor.gameObject.transform.position);
-		float freyaTargetScore = (m_freya.m_nHealthMax / m_freya.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_freya.gameObject.transform.position);
-		float lokiTargetScore = (m_loki.m_nHealthMax / m_loki.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_loki.gameObject.transform.position);
+		if (m_thor != null)		//nullcheck
+		{
+			thorTargetScore = (m_thor.m_nHealthMax / m_thor.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_thor.gameObject.transform.position);
+		}
+		if(m_freya != null)		//null check
+		{
+			freyaTargetScore = (m_freya.m_nHealthMax / m_freya.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_freya.gameObject.transform.position);
+		}
+		if(m_loki != null)		//null check
+		{
+			lokiTargetScore = (m_loki.m_nHealthMax / m_loki.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_loki.gameObject.transform.position);
+		}
 
 		float target = Mathf.Max(thorTargetScore, freyaTargetScore, lokiTargetScore);
 
-		if(target == thorTargetScore)
+		if (target == thorTargetScore)
 		{
 			m_self.m_targetedHero = m_thor;
 		}
+		else
 		if(target == freyaTargetScore)
 		{
 			m_self.m_targetedHero = m_freya;
 		}
+		else
 		if(target == lokiTargetScore)
 		{
 			m_self.m_targetedHero = m_loki;

@@ -4,18 +4,11 @@ using UnityEngine;
 
 public abstract class ABDecision : BaseDecision
 {
-    BaseDecision A;
-    BaseDecision B;
+    public BaseDecision A;
+    public BaseDecision B;
 
-    public override void MakeDecision()
-    {
-        if (A)
-        {
-            A.MakeDecision();
-        }
-        else
-        {
-            B.MakeDecision();
-        }
-    }
+	protected new void Start()
+	{
+		base.Start();
+	}
 }

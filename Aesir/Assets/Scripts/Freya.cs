@@ -109,7 +109,7 @@ public class Freya : Hero
                         {
                             m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
                             m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttack;
+                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bBasicAttack = false;
                         }
                         if (bAbility1Attack == true)

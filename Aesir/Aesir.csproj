@@ -323,6 +323,7 @@
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\EndGame.cs" />
     <Compile Include="Assets\Scripts\AI\ABDecision.cs" />
+    <Compile Include="Assets\Scripts\AI\AttackDecision.cs" />
     <Compile Include="Assets\Scripts\AI\BaseDecision.cs" />
     <Compile Include="Assets\Scripts\AI\CalculateTargetDecision.cs" />
     <Compile Include="Assets\Scripts\AI\MoveDecision.cs" />
@@ -342,7 +343,6 @@
     <Compile Include="Assets\Scripts\Turn system\EnemyLinker.cs" />
     <Compile Include="Assets\Scripts\Turn system\EnemyTurn.cs" />
     <Compile Include="Assets\Scripts\Turn system\PlayerTurn.cs" />
-    <Compile Include="Assets\Scripts\Turn system\TurnSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />

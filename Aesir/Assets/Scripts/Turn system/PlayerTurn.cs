@@ -11,26 +11,41 @@ public class PlayerTurn : StateMachineBehaviour
 
     public GameObject endturnbutton;
 
-   
+	private void Awake()
+	{
+		m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+		m_freya = GameObject.Find("Freya").GetComponent<Freya>();
+		m_loki = GameObject.Find("Loki").GetComponent<Loki>();
+		
+	}
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-        endturnbutton = animator.gameObject.GetComponent<EndPlayerTurn>().GetButton();
-        m_thor = GameObject.Find("Thor").GetComponent<Thor>();
-        m_freya = GameObject.Find("Freya").GetComponent<Freya>();
-        m_loki = GameObject.Find("Loki").GetComponent<Loki>();
+		if(endturnbutton == null)		//should only be called at start of game
+		{
+			endturnbutton = animator.gameObject.GetComponent<EndPlayerTurn>().GetButton();
+		}
 
-        m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
-		m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
-	    m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
+		if (m_thor != null)
+		{
+			m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
+		}
+		if (m_freya != null)
+		{
+			m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
 
-		m_freya.m_nHealth += m_freya.regen;
+			m_freya.m_nHealth += m_freya.regen;		//add health to freya
+			if (m_freya.m_nHealth > m_freya.m_nHealthMax)		//if freya health above max, bring it back down to max
+			{
+				m_freya.m_nHealth = m_freya.m_nHealthMax;
+			}
+		}
+		if (m_loki != null)
+		{
+			m_loki.m_nActionPoints = m_loki.m_nActionPointMax;
+		}
 
-        if(m_freya.m_nHealth > m_freya.m_nHealthMax)
-        {
-            m_freya.m_nHealth = m_freya.m_nHealthMax;
-        }
-
+	
         endturnbutton.SetActive(true);
     }
 
