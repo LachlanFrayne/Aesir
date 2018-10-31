@@ -179,7 +179,7 @@ public class Thor : Hero
                             m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
                             m_grid.ClearBoardData();
 							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-							hit.collider.GetComponent<Enemy>().bStunned = true;
+							hit.collider.GetComponent<Enemy>().m_bStunned = true;
 							bBridalAbility1Attack = false;
                         }
 

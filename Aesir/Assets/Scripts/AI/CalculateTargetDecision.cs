@@ -4,56 +4,42 @@ using UnityEngine;
 
 public class CalculateTargetDecision : BaseDecision
 {
-	public Thor m_thor;
-	public Freya m_freya;
-	public Loki m_loki;
+
+	public List<Entity> m_targets;
+	protected List<float> m_targetScore;
 
 	new void Start()
 	{
 		base.Start();
 
-		m_thor = GameObject.Find("Thor").GetComponent<Thor>();
-		m_freya = GameObject.Find("Freya").GetComponent<Freya>();
-		m_loki = GameObject.Find("Loki").GetComponent<Loki>();
+		m_targets.Add(GameObject.Find("Thor").GetComponent<Thor>());
+		m_targetScore.Add(0);
+
+		m_targets.Add(GameObject.Find("Freya").GetComponent<Freya>());
+		m_targetScore.Add(0);
+
+		m_targets.Add(GameObject.Find("Loki").GetComponent<Loki>());
+		m_targetScore.Add(0);
 
 		MakeDecision();
 	}
 
 	public override void MakeDecision()		//JM:STARTHERE, need to have MoveDirection.cs use Enemy's m_targetedHero to move toward, also have error check for when a hero is dead :)
 	{
-		float thorTargetScore = 0.0f;
-		float freyaTargetScore = 0.0f;
-		float lokiTargetScore = 0.0f;
 
-		if (m_thor != null)		//nullcheck
+		for (int i = 0; i < m_targetScore.Count; i++)
 		{
-			thorTargetScore = (m_thor.m_nHealthMax / m_thor.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_thor.gameObject.transform.position);
-		}
-		if(m_freya != null)		//null check
-		{
-			freyaTargetScore = (m_freya.m_nHealthMax / m_freya.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_freya.gameObject.transform.position);
-		}
-		if(m_loki != null)		//null check
-		{
-			lokiTargetScore = (m_loki.m_nHealthMax / m_loki.m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_loki.gameObject.transform.position);
+			m_targetScore[i] = (m_targets[i].m_nHealthMax / m_targets[i].m_nHealth) / Vector3.Distance(m_self.gameObject.transform.position, m_targets[i].gameObject.transform.position);
 		}
 
-		float target = Mathf.Max(thorTargetScore, freyaTargetScore, lokiTargetScore);
+		float target = Mathf.Max(m_targetScore.ToArray());
 
-		if (target == thorTargetScore)
+		for (int i = 0; i < m_targetScore.Count; i++)
 		{
-			m_self.m_targetedHero = m_thor;
+			if(target == m_targetScore[i])
+			{
+				m_self.m_targetedHero = (Hero)m_targets[i];
+			}
 		}
-		else
-		if(target == freyaTargetScore)
-		{
-			m_self.m_targetedHero = m_freya;
-		}
-		else
-		if(target == lokiTargetScore)
-		{
-			m_self.m_targetedHero = m_loki;
-		}
-
 	}
 }

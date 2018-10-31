@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 95517499164111598}
   - component: {fileID: 114379005815422098}
   - component: {fileID: 114396946092993176}
-  - component: {fileID: 114060385840437142}
+  - component: {fileID: 114112647463644716}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114060385840437142
+--- !u!114 &114112647463644716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

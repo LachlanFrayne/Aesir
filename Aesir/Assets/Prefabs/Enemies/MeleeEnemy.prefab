@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114493150420046942}
   - component: {fileID: 114350926347564148}
   m_Layer: 0
-  m_Name: Enemy_001_Melee_001_Giant 1
+  m_Name: MeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791608151907438}
   m_LocalRotation: {x: -0, y: -0.66164684, z: -0, w: 0.7498156}
-  m_LocalPosition: {x: 13.25, y: 0.224, z: 13.72}
+  m_LocalPosition: {x: 13.25, y: 0.224, z: 16.703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -159,9 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_self: {fileID: 0}
-  m_thor: {fileID: 0}
-  m_freya: {fileID: 0}
-  m_loki: {fileID: 0}
+  m_targets: []
 --- !u!114 &114537541126224422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,18 +173,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nHealth: 5
   m_nHealthMax: 5
-  m_nActionPoints: 3
-  m_nActionPointMax: 3
+  m_nActionPoints: 6
+  m_nActionPointMax: 6
   m_nBasicAttackDamage: 1
-  m_nBasicAttackRange: 1
-  m_nBasicAttackCost: 1
-  m_nMovementActionPointCostPerTile: 1
+  m_nBasicAttackRange: 2
+  m_nBasicAttackCost: 3
+  m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   m_targetedHero: {fileID: 0}
   m_grid: {fileID: 0}
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
-  bStunned: 0
+  m_bStunned: 0
 --- !u!114 &114796332560995744
 MonoBehaviour:
   m_ObjectHideFlags: 1

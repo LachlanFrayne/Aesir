@@ -78,27 +78,23 @@ public class MoveDecision : BaseDecision
 			m_path.Add(currentPathNode);
 			currentPathNode = currentPathNode.prev;
 		}
-		/////////////////////////////////////////////////////JM:StartHere
-        if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
-        {
-            if (m_path.Count >= 1)
-            {
-                m_self.m_currentNode.contain = null;
-                m_self.m_currentNode = m_path[m_path.Count - 1];
-                transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
-                m_self.m_currentNode.contain = this.gameObject;
 
-                m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
-            }
-            else
-            {
-                if(m_self.m_nActionPoints > 0)
-                {
-                    //m_self.m_targetedHero.m_nHealth -= m_self.m_damage;
-                    m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
-                }
-            }
-        }
+		if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
+		{
+			if (m_path.Count >= 1)
+			{
+				m_self.m_currentNode.contain = null;
+				m_self.m_currentNode = m_path[m_path.Count - 1];
+				transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
+				m_self.m_currentNode.contain = this.gameObject;
+
+				m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+			}
+		}
+		else
+		{
+			m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+		}
 
         m_path.Clear();
         m_self.m_grid.ClearBoardData();

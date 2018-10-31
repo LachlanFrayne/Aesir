@@ -13,8 +13,11 @@ public class EnemyTurn : StateMachineBehaviour
 
         foreach(Enemy e in m_enemy)
         {
-            e.m_nActionPoints = e.m_nActionPointMax;
-			e.m_calcTargetDecision.MakeDecision();
+			if (!e.m_bStunned)
+			{
+				e.m_nActionPoints = e.m_nActionPointMax;
+				e.m_calcTargetDecision.MakeDecision();
+			}
         }
     }
 
@@ -37,8 +40,11 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-       
-    }
+		foreach (Enemy e in m_enemy)
+		{
+			e.m_bStunned = false;
+		}
+	}
 
     private void OnDisable()
     {

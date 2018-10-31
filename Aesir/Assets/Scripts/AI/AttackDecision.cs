@@ -18,5 +18,9 @@ public class AttackDecision : BaseDecision
 			m_self.m_targetedHero.m_nHealth -= m_self.m_nBasicAttackDamage;
 			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
 		}
+		else
+		{
+			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
+		}
 	}
 }

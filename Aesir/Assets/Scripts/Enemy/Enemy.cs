@@ -11,8 +11,8 @@ public class Enemy : Entity
 	public TargetInRangeDecision m_inRangeDecision;
 	public CalculateTargetDecision m_calcTargetDecision;
 
+	public bool m_bStunned = false;
 
-	public bool bStunned = false;
     void Start()
     {
 		

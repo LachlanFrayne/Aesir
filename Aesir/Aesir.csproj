@@ -325,6 +325,7 @@
     <Compile Include="Assets\Scripts\AI\ABDecision.cs" />
     <Compile Include="Assets\Scripts\AI\AttackDecision.cs" />
     <Compile Include="Assets\Scripts\AI\BaseDecision.cs" />
+    <Compile Include="Assets\Scripts\AI\CalculateHealerTargetDecision.cs" />
     <Compile Include="Assets\Scripts\AI\CalculateTargetDecision.cs" />
     <Compile Include="Assets\Scripts\AI\MoveDecision.cs" />
     <Compile Include="Assets\Scripts\AI\TargetInRangeDecision.cs" />
