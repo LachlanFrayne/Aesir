@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : CalculateTargetDecision
+public class CalculateHealerTargetDecision : CalculateTargetDecision
 {
 	
-
 	private new void Start()
 	{
-
+		m_self = gameObject.GetComponent<Enemy>();
 		GameObject[] temp = GameObject.FindGameObjectsWithTag("Enemy");
 		
 		foreach(GameObject g in temp)
-		{		//JM:STARTHERE need to check for self as to not be able to heal self, and then apply script to a healer enemy
+		{
 			m_targets.Add(g.GetComponent<Enemy>());
-			m_targetScore.Add(0);
+			m_targetScore.Add(0.0f);
 		}
+		
+		m_targets.Remove(this.gameObject.GetComponent<Enemy>());
+		m_targetScore.Remove(0.0f);
 
+		MakeDecision();
 	}
 }

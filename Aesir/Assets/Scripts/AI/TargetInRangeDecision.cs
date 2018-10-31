@@ -87,6 +87,7 @@ public class TargetInRangeDecision : ABDecision
 		{
 			((AttackDecision)A).m_path = m_path;
 			A.MakeDecision();
+			m_self.m_grid.ClearBoardData();
 		}
 		else
 		{

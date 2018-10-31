@@ -6,20 +6,20 @@ public class CalculateTargetDecision : BaseDecision
 {
 
 	public List<Entity> m_targets;
-	protected List<float> m_targetScore;
+	protected List<float> m_targetScore = new List<float>();
 
 	new void Start()
 	{
 		base.Start();
 
 		m_targets.Add(GameObject.Find("Thor").GetComponent<Thor>());
-		m_targetScore.Add(0);
+		m_targetScore.Add(0.0f);
 
 		m_targets.Add(GameObject.Find("Freya").GetComponent<Freya>());
-		m_targetScore.Add(0);
+		m_targetScore.Add(0.0f);
 
 		m_targets.Add(GameObject.Find("Loki").GetComponent<Loki>());
-		m_targetScore.Add(0);
+		m_targetScore.Add(0.0f);
 
 		MakeDecision();
 	}
@@ -38,7 +38,7 @@ public class CalculateTargetDecision : BaseDecision
 		{
 			if(target == m_targetScore[i])
 			{
-				m_self.m_targetedHero = (Hero)m_targets[i];
+				m_self.m_targetedHero = m_targets[i];
 			}
 		}
 	}

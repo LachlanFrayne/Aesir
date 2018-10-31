@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-	public Hero m_targetedHero;
+	public Entity m_targetedHero;
 
     public Grida m_grid;
 
