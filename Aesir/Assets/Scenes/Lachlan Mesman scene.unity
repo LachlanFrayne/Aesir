@@ -430,11 +430,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114379005815422098, guid: 97a1086eca3cc9c4490daeeeccd89ed6,
-        type: 2}
-      propertyPath: endTurnButton
-      value: 
-      objectReference: {fileID: 1378866786}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97a1086eca3cc9c4490daeeeccd89ed6, type: 2}
   m_IsPrefabParent: 0
@@ -494,11 +489,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4473960117621986, guid: c9b1c1fbe9f9c094b8d2087d28da53a5,
     type: 2}
   m_PrefabInternal: {fileID: 478287983}
---- !u!1 &1378866786 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1754890580575336, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
-    type: 2}
-  m_PrefabInternal: {fileID: 260511456}
 --- !u!1 &1398342158
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,21 +726,15 @@ MonoBehaviour:
   m_nHealthMax: 0
   m_nActionPoints: 0
   m_nActionPointMax: 3
-  m_nBasicAttack: 0
+  m_nBasicAttackDamage: 0
   m_nBasicAttackRange: 0
   m_nBasicAttackCost: 0
-  m_nAbility1Attack: 0
-  m_nAbility1AttackRange: 0
-  m_nAbility1AttackCost: 0
-  m_nAbility2Attack: 0
-  m_nAbility2AttackRange: 0
-  m_nAbility2AttackCost: 0
   m_nMovementActionPointCostPerTile: 1
   m_currentNode: {fileID: 0}
+  m_targetedHero: {fileID: 0}
   m_grid: {fileID: 0}
-  m_meleeDamage: 0
-  m_rangeDamage: 0
-  m_move: {fileID: 0}
+  m_inRangeDecision: {fileID: 0}
+  m_calcTargetDecision: {fileID: 0}
   bStunned: 0
 --- !u!23 &1589839369
 MeshRenderer:

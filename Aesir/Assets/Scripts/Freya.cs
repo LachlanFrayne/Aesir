@@ -97,31 +97,52 @@ public class Freya : Hero
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    if (hit.collider.GetComponent<Enemy>() != null)
-                    {
-                        actionPointCostLabel.SetActive(false);
+			if (Physics.Raycast(ray, out hit, 100))
+			{
+				if (Physics.Raycast(ray, out hit, 100))
+				{
+					if (hit.collider.GetComponent<Enemy>() != null)
+					{
+						actionPointCostLabel.SetActive(false);
 
-                        if (bBasicAttack == true)
-                        {
-                            m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-                            m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
-                            bBasicAttack = false;
-                        }
-                        if (bAbility1Attack == true)
-                        {
-                            m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                            m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;  
-                            bAbility1Attack = false;
-                        }
-                    }
-                }
-            }
+						if (bBasicAttack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
+							bBasicAttack = false;
+						}
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Thor>().m_nHealth = hit.collider.GetComponent<Thor>().m_nHealth + m_nAbility1Attack;
+							hit.collider.GetComponent<Loki>().m_nHealth = hit.collider.GetComponent<Loki>().m_nHealth + m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
+					if (hit.collider.GetComponent<Thor>() != null)
+					{
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Thor>().m_nHealth = hit.collider.GetComponent<Thor>().m_nHealth + m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
+					if (hit.collider.GetComponent<Loki>() != null)
+					{
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Loki>().m_nHealth = hit.collider.GetComponent<Loki>().m_nHealth + m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
+				}
+			}
         }
         base.Update();
     }

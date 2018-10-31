@@ -9,6 +9,7 @@ public abstract class Hero : Entity
     public bool bFreyaSelected;
     public bool bLokiSelected;
     public bool bMove;
+	public bool bAttack;
 
 	public int m_nAbility1Attack;
 	public int m_nAbility1AttackRange;
@@ -38,10 +39,10 @@ public abstract class Hero : Entity
     public Material movementHighlight;
     public Material removeHighlight;
 
-    List<Node> path = new List<Node>();
+    protected List<Node> path = new List<Node>();
 
-    Collider a;
-    Collider b;
+    protected Collider a;
+	protected Collider b;
 
     public void Start()
     {

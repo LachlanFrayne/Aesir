@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class Thor : Hero
 {
@@ -28,14 +26,17 @@ public class Thor : Hero
     public Image healthBarImage;
     public Image backgroundThorImage;
 
+	List<Node> path2 = new List<Node>();
+	List<Node> path3 = new List<Node>();
+	List<Node> path4 = new List<Node>();
 
-
-    bool bBridalBasicAttack = false;
+	bool bBridalBasicAttack = false;
     bool bBridalAbility1Attack = false;
     bool bThorBasicAttack = false;
     bool bThorAbility1Attack = false;
     bool bThorAbility2Attack = false;
     public bool bBridal = true;
+	bool bJump = false;
 
 
     [Header("Material")]
@@ -189,13 +190,13 @@ public class Thor : Hero
                             hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bThorBasicAttack = false;
                         }
-                        if (bThorAbility1Attack == true)
-                        {
-                            m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-                            m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-                            bThorAbility1Attack = false;
-                        }
+                        //if (bThorAbility1Attack == true)
+                        //{
+                        //    m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+                        //    m_grid.ClearBoardData();
+                        //    hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+                        //    bThorAbility1Attack = false;
+                        //}
                         if (bThorAbility2Attack == true)
                         {
                             m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
@@ -209,9 +210,148 @@ public class Thor : Hero
                 {
                     Debug.Log("YEET");
                 }
-            }
+				if (bThorAbility1Attack)
+				{
+					if (hit.collider.GetComponent<Node>() != null)
+					{
+						if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
+						{
+							transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
+
+							for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
+							{
+								for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+								{
+									if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
+									{
+										m_currentNode.tag = "Tile";
+										m_currentNode.contain = null;
+
+										Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
+										int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
+										m_nActionPoints = m_nActionPoints - m_nAbility1Attack;        //Sets ActionPoints to ActionPoints - hit tile gscore
+										actionPointCostLabel.SetActive(false);
+										foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
+										{
+											tile.GetComponent<Renderer>().material = removeHighlight;
+										}
+										a = null;       //Resets a
+										b = null;       //Resets b
+										path.Clear();       //Clears the path list
+										m_grid.ClearBoardData();
+										SetTile();
+
+										
+										m_grid.ClearBoardData();
+
+										Node tempNode1;
+										Node tempNode2;
+
+										for (i = 0; i < m_currentNode.neighbours.Length; i++)
+										{
+											tempNode1 = m_currentNode.neighbours[i];
+											tempNode2 = tempNode1.neighbours[(i + 1) % 4];
+
+											if (tempNode1.contain != null && tempNode1.contain.GetComponent<Enemy>() != null)
+											{
+												tempNode1.contain.GetComponent<Enemy>().m_nHealth = tempNode1.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+											}
+											if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() != null)
+											{
+												tempNode2.contain.GetComponent<Enemy>().m_nHealth = tempNode2.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+											}
+
+										}
+
+										bThorAbility1Attack = false;
+
+
+									}
+								}
+							}
+						}
+					}
+					
+				}
+			}
         }
-        base.Update();
+
+		if (bAttack)
+		{
+			////////////////////////////////////Path//////////////////////////////////////////////////////
+			Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit1;
+			if (Physics.Raycast(ray1, out hit1, 100))
+			{
+				if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
+				{
+					if (hit1.collider.GetComponent<Node>() != null)
+					{
+						if (hit1.collider.GetComponent<Node>().prev != null)
+						{
+							for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
+							{
+								for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+								{
+									if (hit1.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
+									{
+										actionPointCostLabel.SetActive(true);
+										actionPointsMoveCostLabel.text = m_grid.nodeBoardArray[columnTile, rowTile].m_gScore.ToString();       //Sets the ActionPointCost to the gScore of the tile
+
+										if (a == null)
+											a = hit1.collider;      //a = the first hit
+										else
+											b = hit1.collider;      //b = the second hit
+
+										if (a != b)         //if the first hit is different then the second hit
+										{
+											foreach (Node tile in path)      //Goes through all tiles in the path and sets them back to walkable
+											{
+												if(tile.prev == null)
+													tile.GetComponent<Renderer>().material = removeHighlight;
+												else
+													tile.GetComponent<Renderer>().material = movementHighlight;
+											}
+											a = null;       //Resets a 
+											b = null;       //Resets b
+											path.Clear();       //Clears the path list
+										}
+										Node temp;      //Creates a temp node
+										temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
+
+										Node tempNode;
+										Node tempNode2;
+
+										for (i = 0; i < temp.neighbours.Length; i++)
+										{
+											tempNode = temp.neighbours[i];
+											tempNode2 = tempNode.neighbours[(i + 1) % 4];
+
+
+											tempNode.GetComponent<Renderer>().material = AttackHighlight;
+											tempNode2.GetComponent<Renderer>().material = AttackHighlight;
+
+											path.Add(tempNode);
+											path.Add(tempNode2);
+											if (tempNode.contain != null)// && tempNode.contain.GetComponent<Enemy>() == null)
+											{
+												tempNode.prev = null;
+											}
+											if (tempNode2.contain != null)// && tempNode2.contain.GetComponent<Enemy>() == null)
+											{
+												tempNode2.prev = null;
+											}
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		base.Update();
     }
 
     void HighlightMovement()
@@ -264,8 +404,8 @@ public class Thor : Hero
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
 			}
-
 		}
+		path2 = path;
     }
     void ThorBasicAttack()
     {
@@ -306,6 +446,7 @@ public class Thor : Hero
     {
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAttack = true;
 		actionPointCostLabel.SetActive(true);
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 		bThorAbility1Attack = true;
