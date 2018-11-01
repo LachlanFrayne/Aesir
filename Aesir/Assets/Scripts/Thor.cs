@@ -7,8 +7,12 @@ public class Thor : BridalThor
      
     bool bAbility2Attack = false;
 
+	public Node[,] list;
+
      void Start()
     {
+		list = new Node[4, m_nAbility2AttackRange];
+
 		bBasicAttack = false;
 		bAbility1Attack = false;
 		
@@ -205,7 +209,7 @@ public class Thor : BridalThor
 											path.Clear();       //Clears the path list
 										}
 										Node temp;      //Creates a temp node
-										temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
+											temp = m_grid.nodeBoardArray[columnTile, rowTile];      //Sets it to the hit node
 
 										Node tempNode;
 										Node tempNode2;
@@ -237,8 +241,25 @@ public class Thor : BridalThor
 						}
 					}
 				}
+				if(bAbility2Attack && bThorSelected)
+				{
+					for(int i = 0; i<4;i++)
+					{
+						for(int j = 0; j < m_nAbility1AttackRange; j++)
+						if(hit1.collider == list[0,j])
+						{	
+								//YOU ARE UP TO HERE LACHLAN SO DO THIS, MAKE HIT DETECT IF IT IS IN THE LIST
+								Debug.Log("Proud mum you fixed it");
+						}
+					}
+				}
 			}
 		}
+
+
+
+
+
 		base.Update();
     }
 	void HighlightMovement()
@@ -303,9 +324,13 @@ public class Thor : BridalThor
 
 		for(int i = 0; i < m_currentNode.neighbours.Length; i++)
 		{
-			for(i = 0; i < m_nAbility2AttackRange; i++)
-			{
+			Node temp = m_currentNode.neighbours[i];
+			for (int j = 0; j < m_nAbility2AttackRange; j++)
+			{ 
+				temp.GetComponent<Renderer>().material = AttackHighlight;
+				temp = temp.neighbours[i];
 
+				list[i, j] = temp;
 			}
 		}
     }

@@ -89,24 +89,36 @@ public class Loki : Hero
 			{
 				if (hit.collider.GetComponent<Enemy>() != null)
 				{
-					actionPointCostLabel.SetActive(false);
-
-					if (bBasicAttack == true)
+					if (hit.collider.GetComponent<Enemy>().m_currentNode.prev != null)
 					{
-						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
-						bBasicAttack = false;
-					}
-					if (bAbility1Attack == true)
-					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-						bAbility1Attack = false;
-					}
+						actionPointCostLabel.SetActive(false);
 
+						if (bBasicAttack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
+							bBasicAttack = false;
+						}
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
 
+							Node temp = m_currentNode;		//Sets the current nodes for all
+							m_currentNode = hit.collider.GetComponent<Enemy>().m_currentNode;
+							hit.collider.GetComponent<Enemy>().m_currentNode = temp;
+
+							m_currentNode.contain = this.gameObject;
+							hit.collider.GetComponent<Enemy>().m_currentNode.contain = hit.collider.gameObject;
+
+							Vector3 temp1 = transform.position;
+							transform.position = hit.collider.GetComponent<Collider>().transform.position;
+							hit.collider.GetComponent<Collider>().transform.position = temp1;
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
 				}
 			}
 		}

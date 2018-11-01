@@ -67,7 +67,6 @@ public abstract class Hero : Entity
                     if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])        //Goes through the grid until it finds the tiles the character is on         
                     {
                         m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
-                        m_currentNode.tag = "CurrentTile";        //Sets currentNodes tag to "CurrentTile"
                         transform.position = new Vector3(m_currentNode.transform.position.x, 0, m_currentNode.transform.position.z);        //Sets position to the center of the tile
                         m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
                         m_currentNode.contain = this.gameObject;
