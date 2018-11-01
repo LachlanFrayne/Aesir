@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 4244d726cfbec694cafe133a711ab1a5
-timeCreated: 1539834051
+guid: d894e5565044d3c47a6b01083db30d12
+timeCreated: 1541049092
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert1
+    2100000: Banner_mat
     2300000: //RootNode
     3300000: //RootNode
     4300000: Banner_003_Alternate_003
