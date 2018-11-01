@@ -136,7 +136,7 @@ public class Loki : Hero
 		m_grid.ClearBoardData();
 		bMove = false;
 		actionPointCostLabel.SetActive(true);
-		bAbility1Attack = true;
+		bBasicAttack = true;
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 		Node tempNode;
 		Node tempNode2;

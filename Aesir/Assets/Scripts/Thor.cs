@@ -175,7 +175,32 @@ public class Thor : BridalThor
 			RaycastHit hit1;
 			if (Physics.Raycast(ray1, out hit1, 100))
 			{
-				if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
+				if (bAbility2Attack && bThorSelected)
+				{
+					for (int j = 0; j < m_nAbility1AttackRange - 1; j++)
+					{
+						if (hit1.collider.GetComponent<Node>() == list[0, j])
+						{
+							foreach(Node tile in list)
+								tile.GetComponent<Renderer>().material = removeHighlight;
+						}
+						if (hit1.collider.GetComponent<Node>() == list[1, j])
+						{
+							Debug.Log("Proud mum you fixed it 1");
+						}
+						if (hit1.collider.GetComponent<Node>() == list[2, j])
+						{
+							Debug.Log("Proud mum you fixed it 2");
+						}
+						if (hit1.collider.GetComponent<Node>() == list[3, j])
+						{
+							Debug.Log("Proud mum you fixed it 3");
+						}
+
+					}
+					
+				}
+				else if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
 				{
 					if (hit1.collider.GetComponent<Node>() != null)
 					{
@@ -241,18 +266,7 @@ public class Thor : BridalThor
 						}
 					}
 				}
-				if(bAbility2Attack && bThorSelected)
-				{
-					for(int i = 0; i<4;i++)
-					{
-						for(int j = 0; j < m_nAbility1AttackRange; j++)
-						if(hit1.collider == list[0,j])
-						{	
-								//YOU ARE UP TO HERE LACHLAN SO DO THIS, MAKE HIT DETECT IF IT IS IN THE LIST
-								Debug.Log("Proud mum you fixed it");
-						}
-					}
-				}
+			
 			}
 		}
 
@@ -318,6 +332,7 @@ public class Thor : BridalThor
     {
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAttack = true;
 		actionPointCostLabel.SetActive(true);
 		actionPointsMoveCostLabel.text = m_nAbility2AttackCost.ToString();
 		bAbility2Attack = true;
@@ -328,9 +343,9 @@ public class Thor : BridalThor
 			for (int j = 0; j < m_nAbility2AttackRange; j++)
 			{ 
 				temp.GetComponent<Renderer>().material = AttackHighlight;
+				list[i, j] = temp;
 				temp = temp.neighbours[i];
 
-				list[i, j] = temp;
 			}
 		}
     }

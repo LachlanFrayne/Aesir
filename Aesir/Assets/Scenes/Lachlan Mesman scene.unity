@@ -506,6 +506,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114350279036852162, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
+        type: 2}
+      propertyPath: bThor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
   m_IsPrefabParent: 0
@@ -1232,6 +1237,11 @@ Prefab:
     - target: {fileID: 114267388325933052, guid: e9b3ad6adf930054aa358533cea6773a,
         type: 2}
       propertyPath: bObstacle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114181095913240212, guid: e9b3ad6adf930054aa358533cea6773a,
+        type: 2}
+      propertyPath: bBlocked
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

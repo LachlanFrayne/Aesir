@@ -15,4 +15,10 @@ public class Node : MonoBehaviour
     [Header("Designer stuff")]
     public bool bBlocked = false;
     public bool bObstacle = false;
+
+	void Start()
+	{
+		if (bBlocked)
+			this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+	}
 }
