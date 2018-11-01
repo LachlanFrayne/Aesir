@@ -41,7 +41,7 @@ public class TargetInRangeDecision : ABDecision
 			{
 				if (currentNode.contain != null)        //skip over tiles with objects in them
 				{
-					if (currentNode.contain.tag != "Obstacle")      //if tile isn't an obstacle
+					if (!currentNode.bObstacle)      //if tile isn't an obstacle
 					{
 						continue;
 					}
@@ -50,6 +50,19 @@ public class TargetInRangeDecision : ABDecision
 
 			foreach (Node n in currentNode.neighbours)
 			{
+				if(!n)
+				{
+					continue;
+				}
+
+				if (n.bBlocked || n.contain)
+				{
+					if(n.contain != m_self.m_targetedHero.gameObject)
+					{
+						continue;
+					}
+				}
+
 				if (!closedList.Contains(n))        //if not in closed list
 				{
 					if (openList.m_tHeap.Contains(n))       //if in openlist
@@ -62,8 +75,8 @@ public class TargetInRangeDecision : ABDecision
 							n.prev = currentNode;
 						}
 					}
-					else        //if not in openlist
-					{       //update neighbors info
+					else		//if not in openlist
+					{		//update neighbors info
 						n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
 						n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
 						n.m_fScore = n.m_hScore + n.m_gScore;
@@ -77,11 +90,16 @@ public class TargetInRangeDecision : ABDecision
 
 
 		Node currentPathNode = m_self.m_targetedHero.m_currentNode.prev;
-		while (currentPathNode.prev != null)
+		if(currentPathNode)
 		{
-			m_path.Add(currentPathNode);
-			currentPathNode = currentPathNode.prev;
+			while (currentPathNode.prev != null)
+			{
+				m_path.Add(currentPathNode);
+				currentPathNode = currentPathNode.prev;
+			}
 		}
+
+		
 
 		if (m_self.m_targetedHero.m_currentNode.m_gScore <= m_self.m_nBasicAttackRange)		//hero is in enemy's range 
 		{

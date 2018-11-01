@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4a0b1abe44160114f82f916511f95044
+  - enabled: 0
+    path: Assets/Scenes/Joshua test beta.unity
+    guid: 1738e35fa5611ce4bb4ed67559e3b4f0
+  - enabled: 0
     path: Assets/Scenes/Joshua test.unity
     guid: 97879d7e3ab77db40b0d0d5e09032adc
   - enabled: 0

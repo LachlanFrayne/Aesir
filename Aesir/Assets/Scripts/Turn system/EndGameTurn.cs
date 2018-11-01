@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGameTurn : MonoBehaviour {
 
@@ -24,13 +25,13 @@ public class EndGameTurn : MonoBehaviour {
     {
 		if (m_enemies.Count <= 0)
         {
-            Application.Quit();
-            Debug.Log("thanks for playin");
+			SceneManager.LoadScene(0);
+			Debug.Log("thanks for playin");
         }
-        if (heroes.Count <= 0)
+        if (heroes.Count < 3)
         {
-            Application.Quit();
-            Debug.Log("thanks for playin");
+			SceneManager.LoadScene(0);
+			Debug.Log("thanks for playin");
         }
 	}
 }
