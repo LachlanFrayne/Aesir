@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4713201342206428}
   - component: {fileID: 114486843925041948}
+  - component: {fileID: 114350279036852162}
   m_Layer: 0
   m_Name: Thor_001_Armour_001
   m_TagString: Thor
@@ -94,7 +95,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 7.482532}
+  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 10.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409763530176496}
@@ -179,7 +180,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114486843925041948
+--- !u!114 &114350279036852162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -187,28 +188,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1726695763999860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 493403362594db6458eb7bd9bfebfb10, type: 3}
+  m_Script: {fileID: 11500000, guid: 796da113af563bb42b9279cc11d261f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_nHealth: 15
   m_nHealthMax: 15
   m_nActionPoints: 12
   m_nActionPointMax: 12
-  m_nBasicAttack: 1
+  m_nBasicAttackDamage: 2
   m_nBasicAttackRange: 3
   m_nBasicAttackCost: 6
-  m_nAbility1Attack: 1
-  m_nAbility1AttackRange: 0
-  m_nAbility1AttackCost: 3
-  m_nAbility2Attack: 0
-  m_nAbility2AttackRange: 0
-  m_nAbility2AttackCost: 0
   m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   bThorSelected: 0
   bFreyaSelected: 0
   bLokiSelected: 0
   bMove: 0
+  bAttack: 0
+  m_nAbility1Attack: 1
+  m_nAbility1AttackRange: 1
+  m_nAbility1AttackCost: 4
+  m_nAbility2Attack: 0
+  m_nAbility2AttackRange: 0
+  m_nAbility2AttackCost: 0
   m_grid: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
@@ -224,22 +226,61 @@ MonoBehaviour:
   ability2Button: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
-  m_nThorHealth: 15
-  m_nThorHealthMax: 15
-  m_nThorActionPoints: 12
-  m_nThorActionPointMax: 12
-  m_nThorBasicAttack: 2
-  m_nThorBasicAttackRange: 1
-  m_nThorBasicAttackCost: 3
-  m_nThorAbility1Attack: 6
-  m_nThorAbility1AttackCost: 6
-  m_nThorAbility2Attack: 3
-  m_nThorAbility2AttackCost: 5
-  m_nThorMovementActionPointCostPerTile: 1
-  m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
-  bBridal: 1
+  bThor: 0
+  AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
+  EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+--- !u!114 &114486843925041948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726695763999860}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493403362594db6458eb7bd9bfebfb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_nHealth: 15
+  m_nHealthMax: 15
+  m_nActionPoints: 12
+  m_nActionPointMax: 12
+  m_nBasicAttackDamage: 2
+  m_nBasicAttackRange: 1
+  m_nBasicAttackCost: 3
+  m_nMovementActionPointCostPerTile: 2
+  m_currentNode: {fileID: 0}
+  bThorSelected: 0
+  bFreyaSelected: 0
+  bLokiSelected: 0
+  bMove: 0
+  bAttack: 0
+  m_nAbility1Attack: 6
+  m_nAbility1AttackRange: 4
+  m_nAbility1AttackCost: 6
+  m_nAbility2Attack: 3
+  m_nAbility2AttackRange: 3
+  m_nAbility2AttackCost: 5
+  m_grid: {fileID: 0}
+  m_tempNodeBase: {fileID: 0}
+  actionPointCostLabel: {fileID: 0}
+  moveSetButtons: {fileID: 0}
+  actionPointLabel: {fileID: 0}
+  actionPointMaxLabel: {fileID: 0}
+  actionPointsMoveCostLabel: {fileID: 0}
+  healthLabel: {fileID: 0}
+  healthMaxLabel: {fileID: 0}
+  moveButton: {fileID: 0}
+  basicAttackButton: {fileID: 0}
+  ability1Button: {fileID: 0}
+  ability2Button: {fileID: 0}
+  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
+  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  actionPointsBarImage: {fileID: 0}
+  healthBarImage: {fileID: 0}
+  backgroundThorImage: {fileID: 0}
+  bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}

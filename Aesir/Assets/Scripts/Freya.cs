@@ -19,12 +19,6 @@ public class Freya : Hero
     [Header("Material")]
     public Material AttackHighlight;
     public Material EnemyHighlight;
-    public Material pathUpDown;
-    public Material pathLeftRight;
-    public Material pathUpLeft;
-    public Material pathUpRight;
-    public Material pathDownLeft;
-    public Material pathDownRight;
     public Material healingHighlight;
 
     void Start()
@@ -38,8 +32,7 @@ public class Freya : Hero
         actionPointsBarImage = GameObject.Find("Action Points Bar Freya").GetComponent<Image>();
         healthBarImage = GameObject.Find("Health Bar Freya").GetComponent<Image>();
         backgroundFreyaImage = GameObject.Find("BackgroundFreya").GetComponent<Image>();
-
-       
+   
         actionPointCostLabel.SetActive(false);
 
         healthLabel.text = m_nHealth.ToString();
@@ -54,11 +47,8 @@ public class Freya : Hero
 
     void Update()
     {
-        
-
         if (bFreyaSelected)
         {
-
             if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
                 moveButton.onClick.AddListener(HighlightMovement);
             else
@@ -99,9 +89,9 @@ public class Freya : Hero
             RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, 100))
 			{
-				if (Physics.Raycast(ray, out hit, 100))
+				if (hit.collider.GetComponent<Enemy>() != null)
 				{
-					if (hit.collider.GetComponent<Enemy>() != null)
+					if (hit.collider.GetComponent<Enemy>().m_currentNode.prev != null)
 					{
 						actionPointCostLabel.SetActive(false);
 
@@ -112,36 +102,29 @@ public class Freya : Hero
 							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
 							bBasicAttack = false;
 						}
-						if (bAbility1Attack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Thor>().m_nHealth = hit.collider.GetComponent<Thor>().m_nHealth + m_nAbility1Attack;
-							hit.collider.GetComponent<Loki>().m_nHealth = hit.collider.GetComponent<Loki>().m_nHealth + m_nAbility1Attack;
-							bAbility1Attack = false;
-						}
-					}
-					if (hit.collider.GetComponent<Thor>() != null)
-					{
-						if (bAbility1Attack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Thor>().m_nHealth = hit.collider.GetComponent<Thor>().m_nHealth + m_nAbility1Attack;
-							bAbility1Attack = false;
-						}
-					}
-					if (hit.collider.GetComponent<Loki>() != null)
-					{
-						if (bAbility1Attack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Loki>().m_nHealth = hit.collider.GetComponent<Loki>().m_nHealth + m_nAbility1Attack;
-							bAbility1Attack = false;
-						}
 					}
 				}
+				else if (hit.collider.GetComponentInParent<Thor>() != null)
+				{
+					if (bAbility1Attack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+						m_grid.ClearBoardData();
+						hit.collider.GetComponentInParent<Thor>().m_nHealth = hit.collider.GetComponentInParent<Thor>().m_nHealth + m_nAbility1Attack;
+						bAbility1Attack = false;
+					}
+				}
+				else if (hit.collider.GetComponentInParent<Loki>() != null)
+				{
+					if (bAbility1Attack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+						m_grid.ClearBoardData();
+						hit.collider.GetComponentInParent<Loki>().m_nHealth = hit.collider.GetComponentInParent<Loki>().m_nHealth + m_nAbility1Attack;
+						bAbility1Attack = false;
+					}
+				}
+
 			}
         }
         base.Update();
@@ -218,5 +201,4 @@ public class Freya : Hero
             }
         }
     }
-
 }

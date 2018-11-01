@@ -3,36 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Loki : Hero
-{
-	public Node m_tempNode;
+public class BridalThor : Hero {
 
 	public Image actionPointsBarImage;
 	public Image healthBarImage;
-	public Image backgroundLokiImage;
+	public Image backgroundThorImage;
 
-
-	bool bBasicAttack = false;
-	bool bAbility1Attack = false;
+	protected bool bBasicAttack = false;
+	protected bool bAbility1Attack = false;
+	public bool bThor = false;
 
 	[Header("Material")]
 	public Material AttackHighlight;
 	public Material EnemyHighlight;
 
-	void Start()
+	void Start ()
 	{
-		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
-
-		actionPointLabel = GameObject.Find("Action Points Loki").GetComponent<Text>();
-		actionPointMaxLabel = GameObject.Find("Action Points Max Loki").GetComponent<Text>();
-		actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Loki").GetComponent<Text>();
-		healthLabel = GameObject.Find("Health Loki").GetComponent<Text>();
-		healthMaxLabel = GameObject.Find("Health Max Loki").GetComponent<Text>();
-		actionPointsBarImage = GameObject.Find("Action Points Bar Loki").GetComponent<Image>();
-		healthBarImage = GameObject.Find("Health Bar Loki").GetComponent<Image>();
-		backgroundLokiImage = GameObject.Find("BackgroundLoki").GetComponent<Image>();
-
-		actionPointCostLabel.SetActive(false);
+		actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
+		actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();
+		actionPointMaxLabel = GameObject.Find("Action Points Max Thor").GetComponent<Text>();
+		actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Thor").GetComponent<Text>();
+		healthLabel = GameObject.Find("Health Thor").GetComponent<Text>();
+		healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
+		actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
+		healthBarImage = GameObject.Find("Health Bar Thor").GetComponent<Image>();
+		backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
 
 		healthLabel.text = m_nHealth.ToString();
 		healthMaxLabel.text = m_nHealthMax.ToString();
@@ -41,14 +36,32 @@ public class Loki : Hero
 
 		base.Start();
 
+		//gameObject.GetComponent<Thor>().enabled = false;
+
 		SetTile();
 	}
 
 	void Update()
 	{
-		if (bLokiSelected)
+		if(bThor)
+		{			
+			gameObject.GetComponent<Thor>().enabled = true;
+			Thor thor = gameObject.GetComponent<Thor>();
+			thor.actionPointCostLabel = actionPointCostLabel;
+			thor.actionPointLabel = actionPointLabel;
+			thor.actionPointMaxLabel = actionPointMaxLabel;
+			thor.actionPointsMoveCostLabel = actionPointsMoveCostLabel;
+			thor.healthLabel = healthLabel;
+			thor.healthMaxLabel = healthMaxLabel;
+			thor.actionPointsBarImage = actionPointsBarImage;
+			thor.healthBarImage = healthBarImage;
+			thor.backgroundThorImage = backgroundThorImage;
+			this.enabled = false; 
+
+		}
+		if (bThorSelected)
 		{
-			if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			if (m_nActionPoints > 1)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
 				moveButton.onClick.AddListener(HighlightMovement);
 			else
 				moveButton.onClick.RemoveAllListeners();
@@ -62,8 +75,8 @@ public class Loki : Hero
 				ability1Button.onClick.AddListener(Ability1);
 			else
 				ability1Button.onClick.RemoveAllListeners();
-		}
 
+		}
 
 		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
 		actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
@@ -71,13 +84,13 @@ public class Loki : Hero
 		healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 
-		if (bLokiSelected)
+		if (bThorSelected)
 		{
-			backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
+			backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
 		}
-		if (!bLokiSelected)
+		if (!bThorSelected)
 		{
-			backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
+			backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
 			actionPointCostLabel.SetActive(false);
 		}
 
@@ -89,29 +102,32 @@ public class Loki : Hero
 			{
 				if (hit.collider.GetComponent<Enemy>() != null)
 				{
-					actionPointCostLabel.SetActive(false);
-
-					if (bBasicAttack == true)
+					if (hit.collider.GetComponent<Enemy>().m_currentNode.prev != null)
 					{
-						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
-						bBasicAttack = false;
-					}
-					if (bAbility1Attack == true)
-					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-						bAbility1Attack = false;
-					}
+						actionPointCostLabel.SetActive(false);
 
-
+						if (bBasicAttack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
+							bBasicAttack = false;
+						}
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+							hit.collider.GetComponent<Enemy>().m_bStunned = true;
+							bAbility1Attack = false;
+						}
+					}
 				}
 			}
 		}
 		base.Update();
 	}
+
 	void HighlightMovement()
 	{
 		m_grid.ClearBoardData();
@@ -119,7 +135,18 @@ public class Loki : Hero
 		dijkstrasSearch(m_currentNode, m_nActionPoints, movementHighlight, m_nMovementActionPointCostPerTile);
 	}
 
+
 	void BasicAttack()
+	{
+		m_grid.ClearBoardData();
+		bMove = false;
+		actionPointCostLabel.SetActive(true);
+		actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
+		bBasicAttack = true;
+
+		dijkstrasSearchAttack(m_currentNode, m_nBasicAttackRange, AttackHighlight, 1);
+	}
+	void Ability1()
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
@@ -152,15 +179,5 @@ public class Loki : Hero
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
 			}
 		}
-	}
-	void Ability1()
-	{
-		m_grid.ClearBoardData();
-		bMove = false;
-		actionPointCostLabel.SetActive(true);
-		bAbility1Attack = true;
-		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
-
-		dijkstrasSearchAttack(m_currentNode, m_nAbility1AttackRange, AttackHighlight, 1);
 	}
 }

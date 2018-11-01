@@ -329,6 +329,7 @@
     <Compile Include="Assets\Scripts\AI\CalculateTargetDecision.cs" />
     <Compile Include="Assets\Scripts\AI\MoveDecision.cs" />
     <Compile Include="Assets\Scripts\AI\TargetInRangeDecision.cs" />
+    <Compile Include="Assets\Scripts\BridalThor.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />

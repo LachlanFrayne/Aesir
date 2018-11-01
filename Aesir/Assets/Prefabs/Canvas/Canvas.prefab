@@ -1090,7 +1090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 8
 --- !u!114 &114063614114592136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1123,7 +1123,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 8
 --- !u!114 &114097355709646082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.21568628}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 0.216}
+  m_Color: {r: 1, g: 1, b: 0, a: 0.21568628}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114258127197988960
@@ -1646,7 +1646,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 15
 --- !u!114 &114387465107648352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1679,7 +1679,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 15
 --- !u!114 &114433802018778470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1712,7 +1712,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 12
 --- !u!114 &114447494901059964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1778,7 +1778,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 13
+  m_Text: 12
 --- !u!114 &114521181326279780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1844,7 +1844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 12
 --- !u!114 &114529915072153898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1877,7 +1877,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 01
+  m_Text: 4
 --- !u!114 &114546326211068246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1902,7 +1902,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.6666667
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114557302914279146
@@ -2090,7 +2090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 13
+  m_Text: 6
 --- !u!114 &114645641234183022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2349,7 +2349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 0.216}
+  m_Color: {r: 0, g: 0, b: 1, a: 0.21568628}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2611,7 +2611,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 12
 --- !u!114 &114840563276287174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2870,7 +2870,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 8
 --- !u!114 &114957756068522658
 MonoBehaviour:
   m_ObjectHideFlags: 1

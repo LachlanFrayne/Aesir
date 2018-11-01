@@ -46,7 +46,6 @@ public abstract class Hero : Entity
 
     public void Start()
     {
-
         moveSetButtons = GameObject.Find("MoveSet");
         moveButton = GameObject.Find("Move").GetComponent<Button>();
         basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
