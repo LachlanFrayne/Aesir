@@ -78,6 +78,11 @@ public abstract class Hero : Entity
 
     public void Update()
     {
+		if (m_nHealth > m_nHealthMax)
+		{
+			m_nHealth = m_nHealthMax;
+		}
+
         if (m_nHealth <= 0)
         {
             GameObject.Find("TurnManager").GetComponent<EndGameTurn>().heroes.Remove(this.gameObject);

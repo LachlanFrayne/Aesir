@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerTurn : StateMachineBehaviour
 {
-	public Thor m_thor;
+	public BridalThor m_thor;
 	public Freya m_freya;
 	public Loki m_loki;
 
@@ -13,7 +13,7 @@ public class PlayerTurn : StateMachineBehaviour
 
 	private void Awake()
 	{
-		m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+		m_thor = GameObject.Find("Thor").GetComponent<BridalThor>();
 		m_freya = GameObject.Find("Freya").GetComponent<Freya>();
 		m_loki = GameObject.Find("Loki").GetComponent<Loki>();
 		

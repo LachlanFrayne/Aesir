@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 95845360322939910}
   m_Layer: 0
   m_Name: Thor_001_Armour_001
-  m_TagString: Untagged
+  m_TagString: Thor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,8 +53,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4713201342206428}
-  - component: {fileID: 114486843925041948}
   - component: {fileID: 114350279036852162}
+  - component: {fileID: 114486843925041948}
   m_Layer: 0
   m_Name: Thor_001_Armour_001
   m_TagString: Thor
@@ -94,8 +94,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 10.53}
+  m_LocalRotation: {x: -0, y: 0.99999976, z: -0, w: 0.00071765}
+  m_LocalPosition: {x: 9.32, y: 0.7726209, z: 17.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409763530176496}

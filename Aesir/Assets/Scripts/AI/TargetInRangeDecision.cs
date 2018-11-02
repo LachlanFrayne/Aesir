@@ -50,12 +50,12 @@ public class TargetInRangeDecision : ABDecision
 
 			foreach (Node n in currentNode.neighbours)
 			{
-				if(!n)
+				if(!n)		//if node doesnt exist
 				{
 					continue;
 				}
 
-				if (n.bBlocked || n.contain)
+				if (n.bBlocked || n.contain)		//if the node is blocked
 				{
 					if(n.contain != m_self.m_targetedHero.gameObject)
 					{
@@ -67,9 +67,9 @@ public class TargetInRangeDecision : ABDecision
 				{
 					if (openList.m_tHeap.Contains(n))       //if in openlist
 					{
-						if (currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile < n.m_gScore)     //if better path
+						if (currentNode.m_gScore + 1 < n.m_gScore)     //if better path
 						{
-							n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
+							n.m_gScore = currentNode.m_gScore + 1;
 							n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
 							n.m_fScore = n.m_hScore + n.m_gScore;
 							n.prev = currentNode;
@@ -77,7 +77,7 @@ public class TargetInRangeDecision : ABDecision
 					}
 					else		//if not in openlist
 					{		//update neighbors info
-						n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
+						n.m_gScore = currentNode.m_gScore + 1;
 						n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
 						n.m_fScore = n.m_hScore + n.m_gScore;
 						n.prev = currentNode;
