@@ -9,6 +9,8 @@ public class Thor : BridalThor
 
 	public Node[,] list;
 
+	List<Node> ability2List = new List<Node>();
+
      void Start()
     {
 		list = new Node[4, m_nAbility2AttackRange];
@@ -27,7 +29,6 @@ public class Thor : BridalThor
 
 		SetTile();
     }
-
 
     void Update()
     {
@@ -54,7 +55,6 @@ public class Thor : BridalThor
                     ability2Button.onClick.RemoveAllListeners();       
         }
        
-
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
@@ -70,8 +70,6 @@ public class Thor : BridalThor
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
             actionPointCostLabel.SetActive(false);
         }
-
-
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -91,13 +89,6 @@ public class Thor : BridalThor
                             m_grid.ClearBoardData();
                             hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bBasicAttack = false;
-                        }
-                        if (bAbility2Attack == true)
-                        {
-                            m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
-                            m_grid.ClearBoardData();
-                            hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-                            bAbility2Attack = false;
                         }
                     }
                 }
@@ -177,28 +168,54 @@ public class Thor : BridalThor
 			{
 				if (bAbility2Attack && bThorSelected)
 				{
-					for (int j = 0; j < m_nAbility1AttackRange - 1; j++)
+					for (int b = 0; b < m_currentNode.neighbours.Length; b++)
 					{
-						if (hit1.collider.GetComponent<Node>() == list[0, j])
+						Node temp = m_currentNode.neighbours[b];
+						for (int c = 0; c < m_nAbility2AttackRange; c++)
 						{
-							foreach(Node tile in list)
-								tile.GetComponent<Renderer>().material = removeHighlight;
+							temp.GetComponent<Renderer>().material = AttackHighlight;
+							temp = temp.neighbours[b];
 						}
-						if (hit1.collider.GetComponent<Node>() == list[1, j])
-						{
-							Debug.Log("Proud mum you fixed it 1");
-						}
-						if (hit1.collider.GetComponent<Node>() == list[2, j])
-						{
-							Debug.Log("Proud mum you fixed it 2");
-						}
-						if (hit1.collider.GetComponent<Node>() == list[3, j])
-						{
-							Debug.Log("Proud mum you fixed it 3");
-						}
-
 					}
-					
+						
+					for (int i = 0; i < 4; i++)
+					{
+						for(int j = 0; j < m_nAbility2AttackRange; j++)
+						{
+							if(hit1.collider.GetComponent<Node>() == list[i,j])
+							{
+								for (int a = 0; a < m_nAbility2AttackRange; a++)
+								{
+									list[i, a].GetComponent<Renderer>().material.color = Color.green;
+									if (Input.GetMouseButtonUp(0))
+									{
+										if (list[i, a].contain != null)
+										{
+											if (list[i, a].contain.GetComponent<Enemy>() != null)
+											{
+												list[i, a].contain.GetComponent<Enemy>().m_nHealth = list[i, a].contain.GetComponent<Enemy>().m_nHealth - m_nAbility2Attack;
+												m_nActionPoints = m_nActionPoints - m_nAbility2AttackCost;
+												m_grid.ClearBoardData();
+												bAbility2Attack = false;
+												dijkstrasSearchAbility2(list[i, a].contain.GetComponent<Enemy>().m_currentNode, 3, AttackHighlight, 1);
+											
+												foreach(Node tile in ability2List)
+												{
+													if (tile.contain != null)
+													{
+														if (tile.contain.GetComponent<Enemy>() != null)
+														{
+															tile.contain.GetComponent<Enemy>().m_nHealth = tile.contain.GetComponent<Enemy>().m_nHealth - m_nAbility2Attack;
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 				else if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
 				{
@@ -258,7 +275,6 @@ public class Thor : BridalThor
 											{
 												tempNode2.prev = null;
 											}
-
 										}
 									}
 								}
@@ -269,11 +285,6 @@ public class Thor : BridalThor
 			
 			}
 		}
-
-
-
-
-
 		base.Update();
     }
 	void HighlightMovement()
@@ -345,10 +356,58 @@ public class Thor : BridalThor
 				temp.GetComponent<Renderer>().material = AttackHighlight;
 				list[i, j] = temp;
 				temp = temp.neighbours[i];
-
 			}
 		}
     }
+
+	public void dijkstrasSearchAbility2(Node startNode, int actionPointAvailable, Material healingHighlight, int MoveCostPerTile)
+	{
+		int a = 0;
+		int gScore = MoveCostPerTile;
+		Heap openList = new Heap(false);
+		List<Node> closedList = new List<Node>();
+
+		openList.Add(startNode);
+
+		while (openList.m_tHeap.Count > 0)
+		{
+			Node currentNode = openList.Pop();
+
+			closedList.Add(currentNode);
+
+			if (currentNode.m_gScore > actionPointAvailable)
+			{
+				continue;
+			}
+			if(a !=0)
+				ability2List.Add(currentNode);
+
+			for (int i = 0; i < currentNode.neighbours.Length; i++)
+			{
+				if (!closedList.Contains(currentNode.neighbours[i]))
+				{
+					if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
+					{
+						int tempGScore = currentNode.m_gScore + gScore;
+
+						if (tempGScore < currentNode.neighbours[i].m_gScore)
+						{ 
+							currentNode.neighbours[i].m_gScore = tempGScore;
+						}
+					}
+					else
+					{
+						if (currentNode.neighbours[i] != null)
+						{
+							currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
+							openList.Add(currentNode.neighbours[i]);
+						}
+					}
+				}
+			}
+			a++;
+		}
+	}
 }
         
     
