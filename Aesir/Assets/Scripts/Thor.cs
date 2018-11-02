@@ -32,6 +32,8 @@ public class Thor : BridalThor
 
     void Update()
     {
+		//LACHLAN,YOU NEED TO MAKE LOKIS SWAP TO NOT - AWAY THOR ACTION POINTS
+		//MOST LIKLY BECAUSE YOU ARN'T SETTING ALL BOOL TO FALSE AND IT IS BREAKING IT
         if (bThorSelected)
         {          
                 if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
@@ -89,13 +91,11 @@ public class Thor : BridalThor
                             m_grid.ClearBoardData();
                             hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
                             bBasicAttack = false;
-                        }
+							actionPointCostLabel.SetActive(false);
+						}
                     }
                 }
-                else
-                {
-                    Debug.Log("YEET");
-                }
+                
 				if (bAbility1Attack)
 				{
 					if (hit.collider.GetComponent<Node>() != null)

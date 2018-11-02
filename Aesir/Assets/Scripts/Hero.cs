@@ -222,6 +222,7 @@ public abstract class Hero : Entity
                                                 b = null;       //Resets b
                                                 path.Clear();       //Clears the path list
                                                 m_grid.ClearBoardData();
+												bMove = false;
                                                 SetTile();
                                             }
                                         }
