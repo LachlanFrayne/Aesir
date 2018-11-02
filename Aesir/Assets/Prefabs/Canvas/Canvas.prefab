@@ -1090,7 +1090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 8
+  m_Text: 12
 --- !u!114 &114063614114592136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1232,7 +1232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 01
+  m_Text: 0
 --- !u!114 &114196094362047098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1292,7 +1292,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 01
+  m_Text: 0
 --- !u!114 &114214690954895368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114258127197988960
@@ -1877,7 +1877,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 4
+  m_Text: 0
 --- !u!114 &114546326211068246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1902,7 +1902,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.6666667
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114557302914279146
@@ -2090,7 +2090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 12
 --- !u!114 &114645641234183022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3683,7 +3683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.020000001, y: 0.013348943}
   m_AnchorMax: {x: 0.98, y: 0.12671025}
-  m_AnchoredPosition: {x: 0, y: -0.3999939}
+  m_AnchoredPosition: {x: 0, y: -0.39999008}
   m_SizeDelta: {x: 4, y: 0.6300049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224550825414944384

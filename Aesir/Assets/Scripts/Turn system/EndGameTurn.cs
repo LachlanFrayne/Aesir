@@ -25,7 +25,7 @@ public class EndGameTurn : MonoBehaviour {
     {
 		if (m_enemies.Count <= 0)
         {
-			SceneManager.LoadScene(0);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			Debug.Log("thanks for playin");
         }
         if (heroes.Count < 3)

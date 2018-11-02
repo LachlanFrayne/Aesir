@@ -9,22 +9,21 @@ public class PlayerTurn : StateMachineBehaviour
 	public Freya m_freya;
 	public Loki m_loki;
 
-    public GameObject endturnbutton;
+    public Button endturnbutton;
 
 	private void Awake()
 	{
 		m_thor = GameObject.Find("Thor").GetComponent<BridalThor>();
 		m_freya = GameObject.Find("Freya").GetComponent<Freya>();
 		m_loki = GameObject.Find("Loki").GetComponent<Loki>();
-		
+		endturnbutton = GameObject.Find("EndTurnButton").GetComponent<Button>();
 	}
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-		if(endturnbutton == null)		//should only be called at start of game
-		{
-			endturnbutton = animator.gameObject.GetComponent<EndPlayerTurn>().GetButton();
-		}
+		//endturnbutton.onClick.AddListener(animator.GetComponent)
+
+		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);	
 
 		if (m_thor != null)
 		{
@@ -46,12 +45,12 @@ public class PlayerTurn : StateMachineBehaviour
 		}
 
 	
-        endturnbutton.SetActive(true);
+        endturnbutton.gameObject.SetActive(true);
     }
 
 	public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-        endturnbutton.SetActive(false);
+        endturnbutton.gameObject.SetActive(false);
 	}
 
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
