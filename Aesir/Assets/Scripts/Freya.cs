@@ -63,7 +63,12 @@ public class Freya : Hero
                 ability1Button.onClick.AddListener(Ability1);
             else
                 ability1Button.onClick.RemoveAllListeners();
-        }
+
+			if (bFreyaSelected)
+				cancelButton.onClick.AddListener(Cancel);
+			else
+				cancelButton.onClick.RemoveAllListeners();
+		}
 
 
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
@@ -80,7 +85,10 @@ public class Freya : Hero
         {
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
             actionPointCostLabel.SetActive(false);
-        }
+			bMove = false;
+			bBasicAttack = false;
+			bAbility1Attack = false;
+		}
 
 
         if (Input.GetMouseButtonUp(0))
@@ -102,6 +110,16 @@ public class Freya : Hero
 							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
 							bBasicAttack = false;
 						}
+					}
+				}
+				else if (hit.collider.GetComponent<DestructibleObject>() != null)
+				{
+					if (bBasicAttack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+						m_grid.ClearBoardData();
+						hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
+						bBasicAttack = false;
 					}
 				}
 				else if (hit.collider.GetComponentInParent<Thor>() != null)
@@ -138,7 +156,9 @@ public class Freya : Hero
 
     void BasicAttack()
     {
-        bMove = false;
+		m_grid.ClearBoardData();
+		bMove = false;
+		bAbility1Attack = false;
         actionPointCostLabel.SetActive(true);
         actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
         bBasicAttack = true;
@@ -147,6 +167,9 @@ public class Freya : Hero
     }
     void Ability1()
     {
+		m_grid.ClearBoardData();
+		bMove = false;
+		bBasicAttack = false;
         actionPointCostLabel.SetActive(true);
         bAbility1Attack = true;
         actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
@@ -201,4 +224,12 @@ public class Freya : Hero
             }
         }
     }
+	void Cancel()
+	{
+		m_grid.ClearBoardData();
+		bMove = false;
+		bBasicAttack = false;
+		bAbility1Attack = false;
+		actionPointCostLabel.SetActive(false);
+	}
 }

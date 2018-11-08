@@ -35,6 +35,7 @@ public abstract class Hero : Entity
     public Button basicAttackButton;
     public Button ability1Button;
     public Button ability2Button;
+	public Button cancelButton;
 
     public Material movementHighlight;
     public Material removeHighlight;
@@ -51,6 +52,7 @@ public abstract class Hero : Entity
         basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
         ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
         ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
+		cancelButton = GameObject.Find("Cancel").GetComponent<Button>();
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
 
     }
@@ -143,97 +145,99 @@ public abstract class Hero : Entity
                 }
             }
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    if (hit.collider.tag == "Thor")
-                    {
-                        moveButton.onClick.RemoveAllListeners();
-                        basicAttackButton.onClick.RemoveAllListeners();
-                        ability1Button.onClick.RemoveAllListeners();
-                        ability2Button.onClick.RemoveAllListeners();
-                        m_grid.ClearBoardData();
-                        bThorSelected = true;
-                        bLokiSelected = false;
-                        bFreyaSelected = false;
-                    }
-                    if (hit.collider.tag == "Loki")
-                    {
-                        moveButton.onClick.RemoveAllListeners();
-                        basicAttackButton.onClick.RemoveAllListeners();
-                        ability1Button.onClick.RemoveAllListeners();
-                        ability2Button.onClick.RemoveAllListeners();
-                        m_grid.ClearBoardData();
-                        bLokiSelected = true;
-                        bThorSelected = false;
-                        bFreyaSelected = false;
-                    }
-                    if (hit.collider.tag == "Freya")
-                    {
-                        moveButton.onClick.RemoveAllListeners();
-                        basicAttackButton.onClick.RemoveAllListeners();
-                        ability1Button.onClick.RemoveAllListeners();
-                        ability2Button.onClick.RemoveAllListeners();
-                        m_grid.ClearBoardData();
-                        bFreyaSelected = true;
-                        bThorSelected = false;
-                        bLokiSelected = false;
-                    }
-                }
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    ////////////////////////////////////Deletes path and moves player//////////////////////////////////////////////////////
-                    if (bMove)
-                    {
-                        if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
-                        {
-                            if (hit.collider.GetComponent<Node>() != null)
-                            {
-                                if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
-                                {
-                                    transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
+		if (Input.GetMouseButtonUp(0))
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit, 100))
+			{
+				if (hit.collider.tag == "Thor")
+				{
+					moveButton.onClick.RemoveAllListeners();
+					basicAttackButton.onClick.RemoveAllListeners();
+					ability1Button.onClick.RemoveAllListeners();
+					ability2Button.onClick.RemoveAllListeners();
+					cancelButton.onClick.RemoveAllListeners();
+					m_grid.ClearBoardData();
+					bThorSelected = true;
+					bLokiSelected = false;
+					bFreyaSelected = false;
+				}
+				if (hit.collider.tag == "Loki")
+				{
+					moveButton.onClick.RemoveAllListeners();
+					basicAttackButton.onClick.RemoveAllListeners();
+					ability1Button.onClick.RemoveAllListeners();
+					ability2Button.onClick.RemoveAllListeners();
+					cancelButton.onClick.RemoveAllListeners();
+					m_grid.ClearBoardData();
+					bLokiSelected = true;
+					bThorSelected = false;
+					bFreyaSelected = false;
+				}
+				if (hit.collider.tag == "Freya")
+				{
+					moveButton.onClick.RemoveAllListeners();
+					basicAttackButton.onClick.RemoveAllListeners();
+					ability1Button.onClick.RemoveAllListeners();
+					ability2Button.onClick.RemoveAllListeners();
+					cancelButton.onClick.RemoveAllListeners();
+					m_grid.ClearBoardData();
+					bFreyaSelected = true;
+					bThorSelected = false;
+					bLokiSelected = false;
+				}
+			}
+		}
+		if (Input.GetMouseButtonDown(0))
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit, 100))
+			{
+				////////////////////////////////////Deletes path and moves player//////////////////////////////////////////////////////
+				if (bMove)
+				{
+					if ((gameObject.tag == "Thor" && bThorSelected) || (gameObject.tag == "Loki" && bLokiSelected) || (gameObject.tag == "Freya" && bFreyaSelected))
+					{
+						if (hit.collider.GetComponent<Node>() != null)
+						{
+							if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
+							{
+								transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
 
-                                    for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
-                                    {
-                                        for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
-                                        {
-                                            if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
-                                            {
-                                                m_currentNode.tag = "Tile";
-                                                m_currentNode.contain = null;
+								for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
+								{
+									for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
+									{
+										if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
+										{
+											m_currentNode.tag = "Tile";
+											m_currentNode.contain = null;
 
-                                                Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
-                                                int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
-                                                m_nActionPoints = m_nActionPoints - m_grid.nodeBoardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
-                                                actionPointCostLabel.SetActive(false);
-                                                foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
-                                                {
-                                                    tile.GetComponent<Renderer>().material = removeHighlight;
-                                                }
-                                                a = null;       //Resets a
-                                                b = null;       //Resets b
-                                                path.Clear();       //Clears the path list
-                                                m_grid.ClearBoardData();
-												bMove = false;
-                                                SetTile();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        
+											Node tempNode = m_currentNode;      //Creates a tempNode and sets it to currentNode
+											int tempActionPoints = m_nActionPoints;         //Creates a tempActionPoints and sets it to ActionPoints
+											m_nActionPoints = m_nActionPoints - m_grid.nodeBoardArray[columnTile, rowTile].m_gScore;        //Sets ActionPoints to ActionPoints - hit tile gscore
+											actionPointCostLabel.SetActive(false);
+											foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
+											{
+												tile.GetComponent<Renderer>().material = removeHighlight;
+											}
+											a = null;       //Resets a
+											b = null;       //Resets b
+											path.Clear();       //Clears the path list
+											m_grid.ClearBoardData();
+											bMove = false;
+											SetTile();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
     }
 
     public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
@@ -322,9 +326,9 @@ public abstract class Hero : Entity
             }
             if (a != 0)
             {
-                if (currentNode.contain != null && currentNode.contain.GetComponent<Enemy>() == null)
+                if (currentNode.contain != null && (currentNode.contain.GetComponent<Enemy>() == null && currentNode.contain.GetComponent<DestructibleObject>() == null))
                     continue;
-            }
+			}
 
             currentNode.GetComponent<Renderer>().material = attackMaterial;
             for (int i = 0; i < currentNode.neighbours.Length; i++)
@@ -333,7 +337,7 @@ public abstract class Hero : Entity
                 {
                     if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
                     {
-                        if (currentNode.neighbours[i].contain != null && currentNode.neighbours[i].contain.GetComponent<Enemy>() == null || currentNode.neighbours[i].bBlocked)
+                        if (currentNode.neighbours[i].contain != null && (currentNode.neighbours[i].contain.GetComponent<Enemy>() == null && currentNode.neighbours[i].contain.GetComponent<DestructibleObject>() == null) || currentNode.neighbours[i].bBlocked)
                             continue;
                         int tempGScore = currentNode.m_gScore + gScore;
 
@@ -347,7 +351,7 @@ public abstract class Hero : Entity
                     {
                         if (currentNode.neighbours[i] != null)
                         {
-                            if (currentNode.neighbours[i].contain != null && currentNode.neighbours[i].contain.GetComponent<Enemy>() == null || currentNode.neighbours[i].bBlocked)
+                            if (currentNode.neighbours[i].contain != null && (currentNode.neighbours[i].contain.GetComponent<Enemy>() == null && currentNode.neighbours[i].contain.GetComponent<DestructibleObject>() == null) || currentNode.neighbours[i].bBlocked)
                                 continue;
                             if (currentNode.m_gScore + gScore > actionPointAvailable)
                             {

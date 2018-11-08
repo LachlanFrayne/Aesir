@@ -253,15 +253,6 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
@@ -307,12 +298,6 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/s173069/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
@@ -331,6 +316,7 @@
     <Compile Include="Assets\Scripts\AI\TargetInRangeDecision.cs" />
     <Compile Include="Assets\Scripts\BridalThor.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\DestructibleObject.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Freya.cs" />
@@ -349,6 +335,7 @@
     <Compile Include="Assets\Scripts\Turn system\EnemyLinker.cs" />
     <Compile Include="Assets\Scripts\Turn system\EnemyTurn.cs" />
     <Compile Include="Assets\Scripts\Turn system\PlayerTurn.cs" />
+    <Compile Include="Assets\Scripts\WorldSpaceUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />

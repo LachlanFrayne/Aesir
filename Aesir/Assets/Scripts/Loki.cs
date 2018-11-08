@@ -62,6 +62,11 @@ public class Loki : Hero
 				ability1Button.onClick.AddListener(Ability1);
 			else
 				ability1Button.onClick.RemoveAllListeners();
+
+			if (bLokiSelected)
+				cancelButton.onClick.AddListener(Cancel);
+			else
+				cancelButton.onClick.RemoveAllListeners();
 		}
 
 
@@ -79,6 +84,9 @@ public class Loki : Hero
 		{
 			backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
 			actionPointCostLabel.SetActive(false);
+			bMove = false;
+			bBasicAttack = false;
+			bAbility1Attack = false;
 		}
 
 		if (Input.GetMouseButtonUp(0))
@@ -100,24 +108,34 @@ public class Loki : Hero
 							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
 							bBasicAttack = false;
 						}
-						if (bAbility1Attack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
+					}
+					if (bAbility1Attack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+						m_grid.ClearBoardData();
 
-							Node temp = m_currentNode;		//Sets the current nodes for all
-							m_currentNode = hit.collider.GetComponent<Enemy>().m_currentNode;
-							hit.collider.GetComponent<Enemy>().m_currentNode = temp;
+						Node temp = m_currentNode;      //Sets the current nodes for all
+						m_currentNode = hit.collider.GetComponent<Enemy>().m_currentNode;
+						hit.collider.GetComponent<Enemy>().m_currentNode = temp;
 
-							m_currentNode.contain = this.gameObject;
-							hit.collider.GetComponent<Enemy>().m_currentNode.contain = hit.collider.gameObject;
+						m_currentNode.contain = this.gameObject;
+						hit.collider.GetComponent<Enemy>().m_currentNode.contain = hit.collider.gameObject;
 
-							Vector3 temp1 = transform.position;
-							transform.position = hit.collider.GetComponent<Collider>().transform.position;
-							hit.collider.GetComponent<Collider>().transform.position = temp1;
-							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-							bAbility1Attack = false;
-						}
+						Vector3 temp1 = transform.position;
+						transform.position = hit.collider.GetComponent<Collider>().transform.position;
+						hit.collider.GetComponent<Collider>().transform.position = temp1;
+						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+						bAbility1Attack = false;
+					}
+				}
+				else if (hit.collider.GetComponent<DestructibleObject>() != null)
+				{
+					if (bBasicAttack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+						m_grid.ClearBoardData();
+						hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
+						bBasicAttack = false;
 					}
 				}
 			}
@@ -135,6 +153,7 @@ public class Loki : Hero
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAbility1Attack = false;
 		actionPointCostLabel.SetActive(true);
 		bBasicAttack = true;
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
@@ -153,12 +172,12 @@ public class Loki : Hero
 			tempNode.prev = m_currentNode;
 			tempNode2.prev = m_currentNode.neighbours[i];
 
-			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null)
+			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null || tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode.prev = null;
 				tempNode.GetComponent<Renderer>().material = removeHighlight;
 			}
-			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null)
+			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null || tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
@@ -169,10 +188,19 @@ public class Loki : Hero
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
+		bBasicAttack = false;
 		actionPointCostLabel.SetActive(true);
 		bAbility1Attack = true;
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
 		dijkstrasSearchAttack(m_currentNode, m_nAbility1AttackRange, AttackHighlight, 1);
+	}
+	void Cancel()
+	{
+		m_grid.ClearBoardData();
+		bMove = false;
+		bBasicAttack = false;
+		bAbility1Attack = false;
+		actionPointCostLabel.SetActive(false);
 	}
 }

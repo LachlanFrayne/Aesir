@@ -32,30 +32,33 @@ public class Thor : BridalThor
 
     void Update()
     {
-		//LACHLAN,YOU NEED TO MAKE LOKIS SWAP TO NOT - AWAY THOR ACTION POINTS
-		//MOST LIKLY BECAUSE YOU ARN'T SETTING ALL BOOL TO FALSE AND IT IS BREAKING IT
-        if (bThorSelected)
-        {          
-                if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                    moveButton.onClick.AddListener(HighlightMovement);
-                else
-                    moveButton.onClick.RemoveAllListeners();
+		if (bThorSelected)
+		{
+			if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+				moveButton.onClick.AddListener(HighlightMovement);
+			else
+				moveButton.onClick.RemoveAllListeners();
 
-                if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                    basicAttackButton.onClick.AddListener(ThorBasicAttack);
-                else
-                    basicAttackButton.onClick.RemoveAllListeners();
+			if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+				basicAttackButton.onClick.AddListener(ThorBasicAttack);
+			else
+				basicAttackButton.onClick.RemoveAllListeners();
 
-                if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                    ability1Button.onClick.AddListener(ThorAbility1);
-                else
-                    ability1Button.onClick.RemoveAllListeners();
+			if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+				ability1Button.onClick.AddListener(ThorAbility1);
+			else
+				ability1Button.onClick.RemoveAllListeners();
 
-                if (m_nActionPoints >= m_nAbility2AttackCost)
-                    ability2Button.onClick.AddListener(ThorAbility2);
-                else
-                    ability2Button.onClick.RemoveAllListeners();       
-        }
+			if (m_nActionPoints >= m_nAbility2AttackCost)
+				ability2Button.onClick.AddListener(ThorAbility2);
+			else
+				ability2Button.onClick.RemoveAllListeners();
+
+			if (bThorSelected)
+				cancelButton.onClick.AddListener(Cancel);
+			else
+				cancelButton.onClick.RemoveAllListeners();
+		}
        
         actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
@@ -71,7 +74,11 @@ public class Thor : BridalThor
         {
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
             actionPointCostLabel.SetActive(false);
-        }
+			bMove = false;
+			bBasicAttack = false;
+			bAbility1Attack = false;
+			bAbility2Attack = false;
+		}
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -95,7 +102,17 @@ public class Thor : BridalThor
 						}
                     }
                 }
-                
+				else if (hit.collider.GetComponent<DestructibleObject>() != null)
+				{
+					if (bBasicAttack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+						m_grid.ClearBoardData();
+						hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
+						bBasicAttack = false;
+					}
+				}
+
 				if (bAbility1Attack)
 				{
 					if (hit.collider.GetComponent<Node>() != null)
@@ -142,9 +159,17 @@ public class Thor : BridalThor
 											{
 												tempNode1.contain.GetComponent<Enemy>().m_nHealth = tempNode1.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 											}
+											else if (tempNode1.contain != null && tempNode1.contain.GetComponent<Enemy>() != null)
+											{
+												tempNode1.contain.GetComponent<DestructibleObject>().m_nHealth = tempNode1.contain.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
+											}
 											if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() != null)
 											{
 												tempNode2.contain.GetComponent<Enemy>().m_nHealth = tempNode2.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
+											}
+											else if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() != null)
+											{
+												tempNode2.contain.GetComponent<DestructibleObject>().m_nHealth = tempNode2.contain.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
 											}
 
 										}
@@ -297,6 +322,8 @@ public class Thor : BridalThor
     {
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAbility1Attack = false;
+		bAbility2Attack = false;
 		actionPointCostLabel.SetActive(true);
 		bBasicAttack = true;
 		actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
@@ -315,12 +342,12 @@ public class Thor : BridalThor
 			tempNode.prev = m_currentNode;
 			tempNode2.prev = m_currentNode.neighbours[i];
 
-			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null)
+			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null || tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode.prev = null;
 				tempNode.GetComponent<Renderer>().material = removeHighlight;
 			}
-			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null)
+			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null || tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
@@ -332,6 +359,8 @@ public class Thor : BridalThor
     {
 		m_grid.ClearBoardData();
 		bMove = false;
+		bBasicAttack = false;
+		bAbility2Attack = false;
 		bAttack = true;
 		actionPointCostLabel.SetActive(true);
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
@@ -343,6 +372,8 @@ public class Thor : BridalThor
     {
 		m_grid.ClearBoardData();
 		bMove = false;
+		bBasicAttack = false;
+		bAbility1Attack = false;
 		bAttack = true;
 		actionPointCostLabel.SetActive(true);
 		actionPointsMoveCostLabel.text = m_nAbility2AttackCost.ToString();
@@ -407,6 +438,15 @@ public class Thor : BridalThor
 			}
 			a++;
 		}
+	}
+	void Cancel()
+	{
+		m_grid.ClearBoardData();
+		bMove = false;
+		bBasicAttack = false;
+		bAbility1Attack = false;
+		bAbility2Attack = false;
+		actionPointCostLabel.SetActive(false);
 	}
 }
         

@@ -36,8 +36,6 @@ public class BridalThor : Hero {
 
 		base.Start();
 
-		//gameObject.GetComponent<Thor>().enabled = false;
-
 		SetTile();
 	}
 
@@ -75,7 +73,11 @@ public class BridalThor : Hero {
 				ability1Button.onClick.AddListener(Ability1);
 			else
 				ability1Button.onClick.RemoveAllListeners();
-
+			
+			if(bThorSelected)
+				cancelButton.onClick.AddListener(Cancel);
+			else
+				cancelButton.onClick.RemoveAllListeners();
 		}
 
 		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
@@ -92,6 +94,9 @@ public class BridalThor : Hero {
 		{
 			backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
 			actionPointCostLabel.SetActive(false);
+			bMove = false;
+			bBasicAttack = false;
+			bAbility1Attack = false;
 		}
 
 		if (Input.GetMouseButtonUp(0))
@@ -123,6 +128,26 @@ public class BridalThor : Hero {
 						}
 					}
 				}
+				else if(hit.collider.GetComponent<DestructibleObject>() != null)
+				{
+					if (hit.collider.GetComponent<DestructibleObject>().m_currentNode.prev != null)
+					{
+						if (bBasicAttack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
+							bBasicAttack = false;
+						}
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
+				}
 			}
 		}
 		base.Update();
@@ -140,6 +165,7 @@ public class BridalThor : Hero {
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAbility1Attack = false;
 		actionPointCostLabel.SetActive(true);
 		actionPointsMoveCostLabel.text = m_nBasicAttackCost.ToString();
 		bBasicAttack = true;
@@ -150,6 +176,7 @@ public class BridalThor : Hero {
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
+		bBasicAttack = false;
 		actionPointCostLabel.SetActive(true);
 		bAbility1Attack = true;
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
@@ -168,16 +195,25 @@ public class BridalThor : Hero {
 			tempNode.prev = m_currentNode;
 			tempNode2.prev = m_currentNode.neighbours[i];
 
-			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null)
+			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null || tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode.prev = null;
 				tempNode.GetComponent<Renderer>().material = removeHighlight;
 			}
-			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null)
+			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null || tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null)
 			{
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
 			}
 		}
+	}
+
+	void Cancel()
+	{
+		m_grid.ClearBoardData();
+		bMove = false;
+		bBasicAttack = false;
+		bAbility1Attack = false;
+		actionPointCostLabel.SetActive(false);
 	}
 }
