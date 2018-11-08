@@ -11,6 +11,8 @@ public class PlayerTurn : StateMachineBehaviour
 
     public Button endturnbutton;
 
+	public bool m_enemyTurnFirst;
+
 	private void Awake()
 	{
 		m_thor = GameObject.Find("Thor").GetComponent<BridalThor>();
@@ -21,6 +23,11 @@ public class PlayerTurn : StateMachineBehaviour
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
+		if(m_enemyTurnFirst)
+		{
+			m_enemyTurnFirst = false;
+			animator.SetBool("EnemyTurn", true);
+		}
 		//endturnbutton.onClick.AddListener(animator.GetComponent)
 
 		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);	
