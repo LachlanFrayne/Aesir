@@ -20,7 +20,7 @@ public class GridAutoBlock : MonoBehaviour
 					if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
 					{
 						Node currentNode = m_grid.nodeBoardArray[columnTile, rowTile];
-						currentNode.bBlocked = true;
+						currentNode.BlockNode();
 						currentNode.contain = this.gameObject;
 					}
 				}

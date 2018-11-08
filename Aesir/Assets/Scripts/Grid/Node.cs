@@ -21,4 +21,10 @@ public class Node : MonoBehaviour
 		if (bBlocked)
 			this.gameObject.GetComponent<MeshRenderer>().enabled = false;
 	}
+
+	public void BlockNode()
+	{
+		bBlocked = true;
+		this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+	}
 }
