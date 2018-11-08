@@ -195,12 +195,12 @@ public class BridalThor : Hero {
 			tempNode.prev = m_currentNode;
 			tempNode2.prev = m_currentNode.neighbours[i];
 
-			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null || tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null)
+			if (tempNode.contain != null && (tempNode.contain.GetComponent<Enemy>() == null && tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null))
 			{
 				tempNode.prev = null;
 				tempNode.GetComponent<Renderer>().material = removeHighlight;
 			}
-			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null || tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null)
+			if (tempNode2.contain != null && (tempNode2.contain.GetComponent<Enemy>() == null && tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null))
 			{
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;

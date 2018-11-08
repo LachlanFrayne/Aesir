@@ -159,7 +159,7 @@ public class Thor : BridalThor
 											{
 												tempNode1.contain.GetComponent<Enemy>().m_nHealth = tempNode1.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 											}
-											else if (tempNode1.contain != null && tempNode1.contain.GetComponent<Enemy>() != null)
+											else if (tempNode1.contain != null && tempNode1.contain.GetComponent<DestructibleObject>() != null)
 											{
 												tempNode1.contain.GetComponent<DestructibleObject>().m_nHealth = tempNode1.contain.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
 											}
@@ -167,7 +167,7 @@ public class Thor : BridalThor
 											{
 												tempNode2.contain.GetComponent<Enemy>().m_nHealth = tempNode2.contain.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
 											}
-											else if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() != null)
+											else if (tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() != null)
 											{
 												tempNode2.contain.GetComponent<DestructibleObject>().m_nHealth = tempNode2.contain.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
 											}
@@ -342,12 +342,12 @@ public class Thor : BridalThor
 			tempNode.prev = m_currentNode;
 			tempNode2.prev = m_currentNode.neighbours[i];
 
-			if (tempNode.contain != null && tempNode.contain.GetComponent<Enemy>() == null || tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null)
+			if (tempNode.contain != null && (tempNode.contain.GetComponent<Enemy>() == null && tempNode.contain != null && tempNode.contain.GetComponent<DestructibleObject>() == null))
 			{
 				tempNode.prev = null;
 				tempNode.GetComponent<Renderer>().material = removeHighlight;
 			}
-			if (tempNode2.contain != null && tempNode2.contain.GetComponent<Enemy>() == null || tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null)
+			if (tempNode2.contain != null && (tempNode2.contain.GetComponent<Enemy>() == null && tempNode2.contain != null && tempNode2.contain.GetComponent<DestructibleObject>() == null))
 			{
 				tempNode2.prev = null;
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
