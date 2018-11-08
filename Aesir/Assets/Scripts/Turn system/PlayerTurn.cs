@@ -30,12 +30,18 @@ public class PlayerTurn : StateMachineBehaviour
 		}
 		//endturnbutton.onClick.AddListener(animator.GetComponent)
 
-		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);	
+		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);
+
+		if (m_thor.enabled == false)
+		{
+			m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+		}
 
 		if (m_thor != null)
 		{
 			m_thor.m_nActionPoints = m_thor.m_nActionPointMax;
 		}
+		
 		if (m_freya != null)
 		{
 			m_freya.m_nActionPoints = m_freya.m_nActionPointMax;
