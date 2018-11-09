@@ -24,7 +24,7 @@ public class WorldSpaceUI : MonoBehaviour {
 	{
 		foreach (GameObject hero in m_heroes)
 		{
-			Instantiate(uiHealth, new Vector3(hero.transform.position.x, hero.transform.position.y, hero.transform.position.z), hero.transform.rotation,transform);
+			//Instantiate(uiHealth, new Vector3(hero.transform.position.x, hero.transform.position.y, hero.transform.position.z), 0,0,0);
 		}
 	}
 	void Update ()

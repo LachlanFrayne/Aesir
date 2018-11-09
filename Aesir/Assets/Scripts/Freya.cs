@@ -122,16 +122,6 @@ public class Freya : Hero
 						bBasicAttack = false;
 					}
 				}
-				else if (hit.collider.GetComponentInParent<Thor>() != null)
-				{
-					if (bAbility1Attack == true)
-					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponentInParent<Thor>().m_nHealth = hit.collider.GetComponentInParent<Thor>().m_nHealth + m_nAbility1Attack;
-						bAbility1Attack = false;
-					}
-				}
 				else if (hit.collider.GetComponentInParent<Loki>() != null)
 				{
 					if (bAbility1Attack == true)
@@ -142,7 +132,30 @@ public class Freya : Hero
 						bAbility1Attack = false;
 					}
 				}
+				else if(hit.collider.GetComponentInParent<Thor>() != null)
+				{
+					if (hit.collider.GetComponentInParent<Thor>().enabled == false)
+					{
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponentInParent<BridalThor>().m_nHealth = hit.collider.GetComponentInParent<BridalThor>().m_nHealth + m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
+					}
+					else
+					{
+						if (bAbility1Attack == true)
+						{
+							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+							m_grid.ClearBoardData();
+							hit.collider.GetComponentInParent<Thor>().m_nHealth = hit.collider.GetComponentInParent<Thor>().m_nHealth + m_nAbility1Attack;
+							bAbility1Attack = false;
+						}
 
+					}
+				}
 			}
         }
         base.Update();
