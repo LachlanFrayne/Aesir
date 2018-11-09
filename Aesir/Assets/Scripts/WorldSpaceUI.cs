@@ -79,15 +79,20 @@ public class WorldSpaceUI : MonoBehaviour {
 	}
 	void Update ()
 	{	
-		ThorHealthBar.transform.position = new Vector3(thor.transform.position.x, thor.transform.position.y + 2, thor.transform.position.z);
-		LokiHealthBar.transform.position = new Vector3(loki.transform.position.x, loki.transform.position.y + 2, loki.transform.position.z);
-		FreyaHealthBar.transform.position = new Vector3(freya.transform.position.x, freya.transform.position.y + 2, freya.transform.position.z);
-
-		ThorHealthBar.transform.LookAt(ThorHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
-		LokiHealthBar.transform.LookAt(LokiHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
-		FreyaHealthBar.transform.LookAt(FreyaHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
-
-		
-
+		if(thor != null)
+		{
+			ThorHealthBar.transform.position = new Vector3(thor.transform.position.x, thor.transform.position.y + 2, thor.transform.position.z);
+			ThorHealthBar.transform.LookAt(ThorHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
+		}
+		if(loki != null)
+		{
+			LokiHealthBar.transform.position = new Vector3(loki.transform.position.x, loki.transform.position.y + 2, loki.transform.position.z);
+			LokiHealthBar.transform.LookAt(LokiHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
+		}
+		if(freya != null)
+		{
+			FreyaHealthBar.transform.position = new Vector3(freya.transform.position.x, freya.transform.position.y + 2, freya.transform.position.z);
+			FreyaHealthBar.transform.LookAt(FreyaHealthBar.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
+		}
 	}
 }
