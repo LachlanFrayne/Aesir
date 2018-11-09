@@ -31,10 +31,12 @@ public class PlayerTurn : StateMachineBehaviour
 		//endturnbutton.onClick.AddListener(animator.GetComponent)
 
 		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);
-
-		if (m_thor.enabled == false)
+		if (m_thor != null)
 		{
-			m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+			if (m_thor.enabled == false)
+			{
+				m_thor = GameObject.Find("Thor").GetComponent<Thor>();
+			}
 		}
 
 		if (m_thor != null)

@@ -39,9 +39,12 @@ public class CalculateTargetDecision : BaseDecision
 
 	public override void MakeDecision()		//JM:STARTHERE, need to have MoveDirection.cs use Enemy's m_targetedHero to move toward, also have error check for when a hero is dead :)
 	{
-		if(m_targets[0].enabled == false)
+		if (m_targets[0] != null)
 		{
-			m_targets[0] = GameObject.Find("Thor").GetComponent<Thor>();
+			if (m_targets[0].enabled == false)
+			{
+				m_targets[0] = GameObject.Find("Thor").GetComponent<Thor>();
+			}
 		}
 
 		for (int i = 0; i < m_targetScore.Count; i++)
