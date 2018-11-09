@@ -342,6 +342,7 @@
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Freya.cs" />
+    <Compile Include="Assets\Scripts\Grid\ExitNodeHighlight.cs" />
     <Compile Include="Assets\Scripts\Grid\Grida.cs" />
     <Compile Include="Assets\Scripts\Grid\GridAutoBlock.cs" />
     <Compile Include="Assets\Scripts\Grid\GridAutoObstacle.cs" />

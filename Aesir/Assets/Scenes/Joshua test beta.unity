@@ -3523,6 +3523,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: -1.3999939
       objectReference: {fileID: 0}
+    - target: {fileID: 224592096762148454, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.40000153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc5b8434c6fe8d4d93a6428733567d7, type: 2}
   m_IsPrefabParent: 0
@@ -7226,6 +7231,11 @@ Prefab:
       propertyPath: m_exitNode
       value: 
       objectReference: {fileID: 180054547}
+    - target: {fileID: 114379005815422098, guid: 97a1086eca3cc9c4490daeeeccd89ed6,
+        type: 2}
+      propertyPath: m_enemyTurnFirst
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97a1086eca3cc9c4490daeeeccd89ed6, type: 2}
   m_IsPrefabParent: 0

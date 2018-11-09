@@ -11,6 +11,7 @@ public class EndGameTurn : MonoBehaviour {
 
 	public Node m_exitNode;
 
+
 	void Start ()
     {
         m_enemies = GetComponent<EnemyLinker>().GetEnemiesObject();

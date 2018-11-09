@@ -7,9 +7,12 @@ public class EndPlayerTurn : MonoBehaviour {
     public Animator anim;
     public GameObject endTurnButton;
 
-    private void Start()
+	public bool m_enemyTurnFirst;
+
+	private void Start()
     {
         endTurnButton = GameObject.Find("EndTurnButton");
+		anim.GetBehaviour<PlayerTurn>().m_enemyTurnFirst = m_enemyTurnFirst;
     }
 
     public void ExitPlayerTurn()
