@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb4932f1d7495b4f85e678864c9600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_xMax: 400
+  m_xMax: 50
   m_xMin: 0
-  m_zMax: 400
+  m_zMax: 50
   m_zMin: 0
   m_height: 8
   m_speed: 15

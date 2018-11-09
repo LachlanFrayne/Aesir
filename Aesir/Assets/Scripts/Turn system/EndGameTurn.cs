@@ -9,9 +9,6 @@ public class EndGameTurn : MonoBehaviour {
 
     public List<GameObject> m_heroes;
 
-	public Node m_exitNode;
-
-
 	void Start ()
     {
         m_enemies = GetComponent<EnemyLinker>().GetEnemiesObject();
@@ -24,19 +21,17 @@ public class EndGameTurn : MonoBehaviour {
 	
 	void Update ()
     {
-		if (m_heroes.Count < 3)
+		if (m_heroes.Count <= 0)
 		{
 			SceneManager.LoadScene(0);
 			Debug.Log("thanks for playin");
 		}
 
-		if (m_exitNode.contain)
+
+		if (m_enemies.Count <= 0)
 		{
-			if (m_enemies.Count <= 0 && m_exitNode.contain.GetComponent<Hero>() != null)
-			{
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-				Debug.Log("thanks for playin");
-			}
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			Debug.Log("thanks for playin");
 		}
 	}
 }

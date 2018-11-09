@@ -18,6 +18,10 @@ public class EnemyTurn : StateMachineBehaviour
 				e.m_nActionPoints = e.m_nActionPointMax;
 				e.m_calcTargetDecision.MakeDecision();
 			}
+			else
+			{
+				e.m_nActionPoints = 0;
+			}
         }
     }
 
