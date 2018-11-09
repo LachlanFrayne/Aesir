@@ -57,6 +57,9 @@
      <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
      <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
      <Compile Include="Assets\3rd Party\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
+     <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\EditorLabel.cs" />
+     <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\EnableCameraDepthInForward.cs" />
+     <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\SoftNormalsToVertexColor.cs" />
      <Compile Include="Assets\Scripts\AI\ABDecision.cs" />
      <Compile Include="Assets\Scripts\AI\AttackDecision.cs" />
      <Compile Include="Assets\Scripts\AI\BaseDecision.cs" />
@@ -72,6 +75,7 @@
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Entity\Entity.cs" />
      <Compile Include="Assets\Scripts\Freya.cs" />
+     <Compile Include="Assets\Scripts\Grid\ExitNodeHighlight.cs" />
      <Compile Include="Assets\Scripts\Grid\Grida.cs" />
      <Compile Include="Assets\Scripts\Grid\GridAutoBlock.cs" />
      <Compile Include="Assets\Scripts\Grid\GridAutoObstacle.cs" />
@@ -98,27 +102,39 @@
      <None Include="Assets\Materials\DELETE_ME.txt" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\Audio\DELETE_ME.txt" />
+     <None Include="Assets\3rd Party\ShaderForge\Readme.txt" />
      <None Include="Assets\Textures\DELETE_ME.txt" />
      <None Include="Assets\Prefabs\DELETE_ME.txt" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_UnlitSolidColor.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\Vegetation.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_ReferenceUnlit.shader" />
      <None Include="Assets\Shaders\DELETE_ME.txt" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\VertexAnimation.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\DiffuseTextureBlend.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_StandardVertexColor.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\Refraction.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_VertexPicker.shader" />
      <None Include="Assets\DELETE_ME.txt" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_HideVertices.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\Parallax.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_UnlitVertexColor.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_FacePicker.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\LightWrapping.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\VertexColorRounding.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\About\pc_AboutEntry_ProBuilder.txt" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\TessellationDisplacement.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\Tiles.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\PixelRotator.shader" />
+     <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\CustomLighting.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\readme.txt" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_SmoothingPreview.shader" />
      <None Include="Assets\Meshes\DELETE_ME.txt" />
+     <None Include="Assets\Shaders\FrameAnimTest2Normalised.shader" />
      <None Include="Assets\Animations\DELETE_ME.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -209,6 +225,9 @@
  </Reference>
  <Reference Include="ProBuilderEditor-Unity5">
  <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Editor/ProBuilderEditor-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ShaderForge">
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ShaderForge/Editor/ShaderForge.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/s181312/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
