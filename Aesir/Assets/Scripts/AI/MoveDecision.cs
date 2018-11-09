@@ -45,7 +45,20 @@ public class MoveDecision : BaseDecision
 
             foreach (Node n in currentNode.neighbours)
             {
-                if (!closedList.Contains(n))        //if not in closed list
+				if (!n)     //if node doesnt exist
+				{
+					continue;
+				}
+
+				if (n.bBlocked || n.contain || n.bObstacle)        //if the node is blocked
+				{
+					if (n.contain != m_self.m_targetedHero.gameObject)
+					{
+						continue;
+					}
+				}
+
+				if (!closedList.Contains(n))        //if not in closed list
                 {
                     if (openList.m_tHeap.Contains(n))       //if in openlist
                     {
@@ -73,6 +86,13 @@ public class MoveDecision : BaseDecision
 
 
 		Node currentPathNode = m_self.m_targetedHero.m_currentNode.prev;
+
+		if(currentPathNode == null)
+		{
+			m_self.m_nActionPoints = 0;
+			return;
+		}
+
 		while(currentPathNode.prev != null)
 		{
 			m_path.Add(currentPathNode);
