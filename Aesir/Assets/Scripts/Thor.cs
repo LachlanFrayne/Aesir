@@ -22,7 +22,9 @@ public class Thor : BridalThor
 		
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
-        actionPointLabel.text = m_nActionPoints.ToString();
+		worldSpaceUI.thorHealthMaxOverheadLabel.text = healthMaxLabel.text;
+
+		actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         base.Start();
@@ -64,9 +66,12 @@ public class Thor : BridalThor
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
-        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
+		worldSpaceUI.thorHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
 
-        if (bThorSelected)
+		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
+		worldSpaceUI.thorHealthOverheadLabel.text = healthLabel.text;
+
+		if (bThorSelected)
         {
             backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
         }

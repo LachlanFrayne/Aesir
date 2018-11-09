@@ -23,7 +23,9 @@ public class Freya : Hero
 
     void Start()
     {
-        actionPointCostLabel = GameObject.Find("Action Points Cost Freya");       
+		worldSpaceUI = GameObject.Find("GameObject").GetComponent<WorldSpaceUI>();
+
+		actionPointCostLabel = GameObject.Find("Action Points Cost Freya");       
         actionPointLabel = GameObject.Find("Action Points Freya").GetComponent<Text>();
         actionPointMaxLabel = GameObject.Find("Action Points Max Freya").GetComponent<Text>();
         actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Freya").GetComponent<Text>();
@@ -37,7 +39,8 @@ public class Freya : Hero
 
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
-        actionPointLabel.text = m_nActionPoints.ToString();
+		worldSpaceUI.freyaHealthMaxOverheadLabel.text = healthMaxLabel.text;
+		actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
         base.Start();
@@ -75,9 +78,12 @@ public class Freya : Hero
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
-        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
+		worldSpaceUI.freyaHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
 
-        if (bFreyaSelected)
+        healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
+		worldSpaceUI.freyaHealthOverheadLabel.text = healthLabel.text;
+
+		if (bFreyaSelected)
         {
             backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
         }

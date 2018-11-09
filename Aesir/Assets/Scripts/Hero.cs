@@ -40,7 +40,9 @@ public abstract class Hero : Entity
     public Material movementHighlight;
     public Material removeHighlight;
 
-    protected List<Node> path = new List<Node>();
+	public WorldSpaceUI worldSpaceUI;
+
+	protected List<Node> path = new List<Node>();
 
     protected Collider a;
 	protected Collider b;

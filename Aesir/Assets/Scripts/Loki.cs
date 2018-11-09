@@ -12,6 +12,7 @@ public class Loki : Hero
 	public Image backgroundLokiImage;
 
 
+
 	bool bBasicAttack = false;
 	bool bAbility1Attack = false;
 
@@ -21,8 +22,9 @@ public class Loki : Hero
 
 	void Start()
 	{
-		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
+		worldSpaceUI = GameObject.Find("GameObject").GetComponent<WorldSpaceUI>();
 
+		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
 		actionPointLabel = GameObject.Find("Action Points Loki").GetComponent<Text>();
 		actionPointMaxLabel = GameObject.Find("Action Points Max Loki").GetComponent<Text>();
 		actionPointsMoveCostLabel = GameObject.Find("Action Points Move Cost Loki").GetComponent<Text>();
@@ -36,6 +38,8 @@ public class Loki : Hero
 
 		healthLabel.text = m_nHealth.ToString();
 		healthMaxLabel.text = m_nHealthMax.ToString();
+		worldSpaceUI.lokiHealthMaxOverheadLabel.text = healthMaxLabel.text;
+
 		actionPointLabel.text = m_nActionPoints.ToString();
 		actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
@@ -70,11 +74,14 @@ public class Loki : Hero
 		}
 
 
-		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
+		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar		
 		actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
 		healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
+		worldSpaceUI.lokiHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
+
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
+		worldSpaceUI.lokiHealthOverheadLabel.text = healthLabel.text;
 
 		if (bLokiSelected)
 		{
