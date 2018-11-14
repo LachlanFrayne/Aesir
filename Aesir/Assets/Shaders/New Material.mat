@@ -64,9 +64,9 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FrameOffset: 0
-    - _FrameRate: 256
-    - _Frames: 9
+    - _FrameOffset: -0
+    - _FrameRate: 20
+    - _Frames: 1
     - _Frames_Height: 16
     - _Frames_Width: 16
     - _GlossMapScale: 1

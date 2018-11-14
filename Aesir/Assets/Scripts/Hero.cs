@@ -42,10 +42,12 @@ public abstract class Hero : Entity
 
 	public WorldSpaceUI worldSpaceUI;
 
-	protected List<Node> path = new List<Node>();
+	protected LinkedList<Node> path = new LinkedList<Node>();
 
     protected Collider a;
 	protected Collider b;
+
+	public float speed = 1f;
 
     public void Start()
     {
@@ -135,7 +137,7 @@ public abstract class Hero : Entity
                                             while (temp.prev != null)
                                             {
                                                 temp.GetComponent<Renderer>().material.color = Color.green;
-                                                path.Add(temp);        //Adds node to path
+                                                path.AddFirst(temp);        //Adds node to path
                                                 temp = temp.prev;       //Set temp to temp.prev 
                                             }
                                         }
@@ -214,6 +216,7 @@ public abstract class Hero : Entity
 									{
 										if (hit.collider.gameObject == m_grid.boardArray[columnTile, rowTile])
 										{
+											
 											m_currentNode.tag = "Tile";
 											m_currentNode.contain = null;
 
@@ -225,6 +228,9 @@ public abstract class Hero : Entity
 											{
 												tile.GetComponent<Renderer>().material = removeHighlight;
 											}
+
+											//StartCoroutine(Wait());
+											
 											a = null;       //Resets a
 											b = null;       //Resets b
 											path.Clear();       //Clears the path list
@@ -242,7 +248,17 @@ public abstract class Hero : Entity
 		}
     }
 
-    public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
+	//IEnumerator Wait()
+	//{
+	//	foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
+	//	{
+	//		transform.position = Vector3.Lerp(transform.position, tile.transform.position, speed * Time.deltaTime);
+	//		//transform.position = tile.transform.position;
+	//		yield return new WaitForSeconds(1);
+	//	}	
+	//}
+
+	public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {
         int a = 0;
         int gScore = MoveCostPerTile;
