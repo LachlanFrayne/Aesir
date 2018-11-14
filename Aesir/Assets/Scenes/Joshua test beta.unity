@@ -2685,6 +2685,92 @@ Transform:
   m_PrefabParentObject: {fileID: 4594155065684922, guid: 93e4446dc6fb37c4c933417ac3adb5ea,
     type: 2}
   m_PrefabInternal: {fileID: 547069279}
+--- !u!1 &559315132 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1546131977195806, guid: a4e6cd864962d8b4f83a512513a3795a,
+    type: 2}
+  m_PrefabInternal: {fileID: 619812986}
+--- !u!82 &559315134
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559315132}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: fa41b443f87f83b4d9147fa5a82df98f,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &590874133
 Prefab:
   m_ObjectHideFlags: 0
@@ -3503,25 +3589,14 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224519367925355348, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
+    - target: {fileID: 224592096762148454, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: -0.3999939
       objectReference: {fileID: 0}
-    - target: {fileID: 224112793320477456, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.4199829
-      objectReference: {fileID: 0}
-    - target: {fileID: 224570224529821114, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -1.3999939
-      objectReference: {fileID: 0}
-    - target: {fileID: 224592096762148454, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.40000153
+    - target: {fileID: 1921926601562574, guid: 1fc5b8434c6fe8d4d93a6428733567d7, type: 2}
+      propertyPath: m_Name
+      value: DialogTextBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc5b8434c6fe8d4d93a6428733567d7, type: 2}
@@ -5171,34 +5246,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf6779f9c2d86e3429cdb0d2138dc1e9, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1275072163
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1275072164}
-  m_Layer: 0
-  m_Name: Dialog Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1275072164
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1275072163}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9.45, y: 0, z: 16.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1276118909
 Prefab:
   m_ObjectHideFlags: 0
@@ -5969,6 +6016,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4189779530214464, guid: bf6779f9c2d86e3429cdb0d2138dc1e9,
     type: 2}
   m_PrefabInternal: {fileID: 1662714497}
+--- !u!1 &1449322779 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1713042312441972, guid: 97a1086eca3cc9c4490daeeeccd89ed6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1710933779}
+--- !u!114 &1449322785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1449322779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4c3d86158d2c3428b655c3894c3de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogText: heyo mister potato how do you do today! ibfgewfoiheihvgoihherfohgoiwerhghoihoi
+  dialogAudio: {fileID: 8300000, guid: ec53fd26c43633c4a94570166d1d5d54, type: 3}
 --- !u!4 &1454342894 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4189779530214464, guid: bf6779f9c2d86e3429cdb0d2138dc1e9,
@@ -8292,7 +8357,7 @@ Prefab:
     - target: {fileID: 224243832382857882, guid: a9590a794c7698b4f98304d62e1c28cd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 224243832382857882, guid: a9590a794c7698b4f98304d62e1c28cd,
         type: 2}
