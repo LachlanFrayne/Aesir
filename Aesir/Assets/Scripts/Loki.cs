@@ -71,8 +71,11 @@ public class Loki : Hero
 				cancelButton.onClick.AddListener(Cancel);
 			else
 				cancelButton.onClick.RemoveAllListeners();
+
+			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
 		}
 
+		
 
 		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar		
 		actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints

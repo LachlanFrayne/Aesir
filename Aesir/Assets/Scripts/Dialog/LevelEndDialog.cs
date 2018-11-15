@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelStartDialog : MonoBehaviour
-{
+public class LevelEndDialog : MonoBehaviour {
 
-	[TextArea(3,10)]
+	[TextArea(3, 10)]
 	public string dialogText;
 	public AudioClip dialogAudio;
 	public GameObject dialogPanel;

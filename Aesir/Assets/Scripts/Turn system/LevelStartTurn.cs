@@ -17,6 +17,9 @@ public class LevelStartTurn : StateMachineBehaviour
 		levelStartDialog.StartDialog();
 
 		timer = levelStartDialog.dialogAudio.length;
+
+		levelStartDialog.dialogPanel.SetActive(true);
+		levelStartDialog.dialogBox.text = "";
 	}
 
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -27,7 +30,17 @@ public class LevelStartTurn : StateMachineBehaviour
 		{
 			animator.SetBool("PlayerTurn", true);
 		}
+
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			animator.SetBool("PlayerTurn", true);
+		}
 	}
 
-	
+	public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+	{
+		levelStartDialog.StopAllCoroutines();
+
+		levelStartDialog.dialogPanel.SetActive(false);
+	}
 }

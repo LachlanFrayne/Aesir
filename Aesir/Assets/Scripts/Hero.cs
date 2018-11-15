@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct AnimationPreset
+{
+	public int _animation;
+	public int _frameRate;
+	public int _frames;
+	public int animationDuration;
+}
+
 public abstract class Hero : Entity      
 {
     public bool bThorSelected;
@@ -39,6 +48,7 @@ public abstract class Hero : Entity
 
     public Material movementHighlight;
     public Material removeHighlight;
+	public Material selectedHeroMat;
 
 	public WorldSpaceUI worldSpaceUI;
 
@@ -48,6 +58,9 @@ public abstract class Hero : Entity
 	protected Collider b;
 
 	public float speed = 1f;
+
+	public List<AnimationPreset> m_animPresets;
+	private Animator m_turnChecker;
 
     public void Start()
     {
@@ -59,6 +72,7 @@ public abstract class Hero : Entity
 		cancelButton = GameObject.Find("Cancel").GetComponent<Button>();
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
 
+		m_turnChecker = GameObject.Find("TurnManager").GetComponent<Animator>();
     }
 
     public void SetTile()
@@ -94,6 +108,11 @@ public abstract class Hero : Entity
             GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
+
+		if (!(m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn")))
+		{
+			return;
+		}
             if (bMove)
             {
                 ////////////////////////////////////Path//////////////////////////////////////////////////////
@@ -209,6 +228,7 @@ public abstract class Hero : Entity
 							if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
 							{
 								transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
+								StartCoroutine(RunAnim(m_animPresets[0]));
 
 								for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
 								{
@@ -257,6 +277,28 @@ public abstract class Hero : Entity
 	//		yield return new WaitForSeconds(1);
 	//	}	
 	//}
+
+	IEnumerator RunAnim(AnimationPreset anim)
+	{
+		Material mat = new Material(GetComponent<Renderer>().material);
+
+		SetAnim(anim);
+
+		yield return new WaitForSeconds(anim.animationDuration);
+
+		GetComponent<Renderer>().material = mat;
+	}
+
+	public void SetAnim(AnimationPreset anim)
+	{
+		//Material temp = new Material(Shader.Find("Shader Forge/FrameAnimTest2Normalised"));
+
+		Material temp = GetComponent<Renderer>().material;
+
+		temp.SetFloat("_Animation", anim._animation);
+		temp.SetFloat("_FrameRate", anim._frameRate);
+		temp.SetFloat("_Frames", anim._frames);
+	}
 
 	public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
     {

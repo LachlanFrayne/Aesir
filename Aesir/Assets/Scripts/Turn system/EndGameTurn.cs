@@ -30,7 +30,8 @@ public class EndGameTurn : MonoBehaviour {
 
 		if (m_enemies.Count <= 0)
 		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			GetComponent<Animator>().SetBool("LevelEnd", true);
 			Debug.Log("thanks for playin");
 		}
 	}

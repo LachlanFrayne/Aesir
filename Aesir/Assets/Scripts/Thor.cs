@@ -60,9 +60,13 @@ public class Thor : BridalThor
 				cancelButton.onClick.AddListener(Cancel);
 			else
 				cancelButton.onClick.RemoveAllListeners();
+
+			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
 		}
-       
-        actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
+
+
+
+		actionPointsBarImage.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;       //Sets the amount of the actionPointsBar
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
