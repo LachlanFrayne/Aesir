@@ -1,11 +1,38 @@
 fileFormatVersion: 2
 guid: 6e36b2680ff774049b3c6381b932196d
-timeCreated: 1538712938
+timeCreated: 1542345953
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_currentNode: {instanceID: 0}
+  - m_grid: {instanceID: 0}
+  - m_tempNodeBase: {instanceID: 0}
+  - actionPointCostLabel: {instanceID: 0}
+  - moveSetButtons: {instanceID: 0}
+  - actionPointLabel: {instanceID: 0}
+  - actionPointMaxLabel: {instanceID: 0}
+  - actionPointsMoveCostLabel: {instanceID: 0}
+  - healthLabel: {instanceID: 0}
+  - healthMaxLabel: {instanceID: 0}
+  - moveButton: {instanceID: 0}
+  - basicAttackButton: {instanceID: 0}
+  - ability1Button: {instanceID: 0}
+  - ability2Button: {instanceID: 0}
+  - cancelButton: {instanceID: 0}
+  - movementHighlight: {instanceID: 0}
+  - removeHighlight: {instanceID: 0}
+  - selectedHeroMat: {instanceID: 0}
+  - moveEnableImage: {instanceID: 0}
+  - moveDisableImage: {instanceID: 0}
+  - attackEnableImage: {instanceID: 0}
+  - attackDisableImage: {instanceID: 0}
+  - ability1EnableImage: {instanceID: 0}
+  - ability1DisableImage: {instanceID: 0}
+  - ability2EnableImage: {instanceID: 0}
+  - ability2DisableImage: {instanceID: 0}
+  - worldSpaceUI: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

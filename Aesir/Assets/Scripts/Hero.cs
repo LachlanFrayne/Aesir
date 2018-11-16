@@ -50,14 +50,14 @@ public abstract class Hero : Entity
     public Material removeHighlight;
 	public Material selectedHeroMat;
 
-	public Image moveEnableImage;
-	public Image moveDisableImage;
-	public Image attackEnableImage;
-	public Image attackDisableImage;
-	public Image ability1EnableImage;
-	public Image ability1DisableImage;
-	public Image ability2EnableImage;
-	public Image ability2DisableImage;
+	public Sprite moveEnableImage;
+	public Sprite moveDisableImage;
+	public Sprite attackEnableImage;
+	public Sprite attackDisableImage;
+	public Sprite ability1EnableImage;
+	public Sprite ability1DisableImage;
+	public Sprite ability2EnableImage;
+	public Sprite ability2DisableImage;
 
 
 	public WorldSpaceUI worldSpaceUI;

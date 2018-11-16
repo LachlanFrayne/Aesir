@@ -7601,7 +7601,7 @@ Prefab:
         type: 2}
       propertyPath: dialogAudio
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: ec53fd26c43633c4a94570166d1d5d54, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97a1086eca3cc9c4490daeeeccd89ed6, type: 2}
   m_IsPrefabParent: 0
