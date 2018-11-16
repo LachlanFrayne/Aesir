@@ -74,7 +74,7 @@ MonoBehaviour:
       focusDistance: 20
       aperture: 0.1
       focalLength: 1
-      useCameraFov: 0
+      useCameraFov: 1
       kernelSize: 2
   motionBlur:
     m_Enabled: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
         temperature: 0
         tint: 0
         hueShift: 0
-        saturation: 1
-        contrast: 1
+        saturation: 1.2
+        contrast: 1.2
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -296,14 +296,14 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0.3561359, g: 0.033088244, b: 0.375, a: 1}
+      color: {r: 0.3648252, g: 0.06466263, b: 0.38235295, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.502
-      smoothness: 0.221
+      intensity: 0.399
+      smoothness: 0.251
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
-      rounded: 0
+      rounded: 1
   dithering:
     m_Enabled: 0
   monitors:

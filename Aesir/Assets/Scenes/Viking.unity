@@ -3579,6 +3579,10 @@ MonoBehaviour:
   cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 1
+  m_animPresets: []
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
@@ -3633,6 +3637,10 @@ MonoBehaviour:
   cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 1
+  m_animPresets: []
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}

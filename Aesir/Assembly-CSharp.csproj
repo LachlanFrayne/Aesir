@@ -115,6 +115,7 @@
      <Compile Include="Assets\Scripts\BridalThor.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\DestructibleObject.cs" />
+     <Compile Include="Assets\Scripts\Dialog\LevelEndDialog.cs" />
      <Compile Include="Assets\Scripts\Dialog\LevelStartDialog.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Entity\Entity.cs" />
@@ -124,6 +125,7 @@
      <Compile Include="Assets\Scripts\Grid\GridAutoBlock.cs" />
      <Compile Include="Assets\Scripts\Grid\GridAutoObstacle.cs" />
      <Compile Include="Assets\Scripts\Grid\Node.cs" />
+     <Compile Include="Assets\Scripts\Grid\ThorHammerNode.cs" />
      <Compile Include="Assets\Scripts\Heap.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\Loki.cs" />
