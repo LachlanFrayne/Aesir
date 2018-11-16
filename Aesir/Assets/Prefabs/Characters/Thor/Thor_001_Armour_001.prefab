@@ -94,8 +94,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
-  m_LocalRotation: {x: -0, y: 0.99999976, z: -0, w: 0.00071765}
-  m_LocalPosition: {x: 9.32, y: 0.7726209, z: 17.69}
+  m_LocalRotation: {x: -0, y: 0.69767404, z: -0, w: 0.71641535}
+  m_LocalPosition: {x: 9.57, y: 0, z: 9.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409763530176496}
@@ -224,11 +224,30 @@ MonoBehaviour:
   basicAttackButton: {fileID: 0}
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 2100000, guid: 4ddf244ecc03f9c40ae3efcd86aaeb9b, type: 2}
+  moveEnableImage: {fileID: 0}
+  moveDisableImage: {fileID: 0}
+  attackEnableImage: {fileID: 0}
+  attackDisableImage: {fileID: 0}
+  ability1EnableImage: {fileID: 0}
+  ability1DisableImage: {fileID: 0}
+  ability2EnableImage: {fileID: 0}
+  ability2DisableImage: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 1
+  m_animPresets:
+  - _animation: 0
+    _frameRate: 0
+    _frames: 0
+    animationDuration: 0
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
+  bBasicAttack: 0
+  bAbility1Attack: 0
   bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
@@ -247,7 +266,7 @@ MonoBehaviour:
   m_nHealthMax: 15
   m_nActionPoints: 12
   m_nActionPointMax: 12
-  m_nBasicAttackDamage: 2
+  m_nBasicAttackDamage: 1
   m_nBasicAttackRange: 1
   m_nBasicAttackCost: 3
   m_nMovementActionPointCostPerTile: 2
@@ -276,11 +295,27 @@ MonoBehaviour:
   basicAttackButton: {fileID: 0}
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  moveEnableImage: {fileID: 0}
+  moveDisableImage: {fileID: 0}
+  attackEnableImage: {fileID: 0}
+  attackDisableImage: {fileID: 0}
+  ability1EnableImage: {fileID: 0}
+  ability1DisableImage: {fileID: 0}
+  ability2EnableImage: {fileID: 0}
+  ability2DisableImage: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 1
+  m_animPresets: []
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
+  bBasicAttack: 0
+  bAbility1Attack: 0
   bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+  bAbility2Attack: 0

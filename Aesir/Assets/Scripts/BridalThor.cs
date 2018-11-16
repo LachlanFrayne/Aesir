@@ -9,8 +9,8 @@ public class BridalThor : Hero {
 	public Image healthBarImage;
 	public Image backgroundThorImage;
 
-	protected bool bBasicAttack = false;
-	protected bool bAbility1Attack = false;
+	public bool bBasicAttack = false;
+	public bool bAbility1Attack = false;
 	public bool bThor = false;
 
 	[Header("Material")]
@@ -64,25 +64,49 @@ public class BridalThor : Hero {
 		}
 		if (bThorSelected)
 		{
-			if (m_nActionPoints > 1)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				moveButton.onClick.AddListener(HighlightMovement);
+				moveButton.image = moveEnableImage;
+			}
 			else
+			{
 				moveButton.onClick.RemoveAllListeners();
+				moveButton.image = moveDisableImage;
+			}
 
 			if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				basicAttackButton.onClick.AddListener(BasicAttack);
+				basicAttackButton.image = attackEnableImage;
+			}
 			else
+			{
 				basicAttackButton.onClick.RemoveAllListeners();
+				basicAttackButton.image = attackDisableImage;
+			}
 
 			if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				ability1Button.onClick.AddListener(Ability1);
+				ability1Button.image = ability1EnableImage;
+			}
 			else
+			{
 				ability1Button.onClick.RemoveAllListeners();
-			
-			if(bThorSelected)
+				ability1Button.image = ability1DisableImage;
+			}
+
+			if (bThorSelected)
+			{
 				cancelButton.onClick.AddListener(Cancel);
+
+			}
 			else
+			{
 				cancelButton.onClick.RemoveAllListeners();
+
+			}
 
 			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
 		}

@@ -103,7 +103,6 @@ public class TargetInRangeDecision : ABDecision
 
 		if (m_self.m_targetedHero.m_currentNode.m_gScore <= m_self.m_nBasicAttackRange)		//hero is in enemy's range 
 		{
-			((AttackDecision)A).m_path = m_path;
 			A.MakeDecision();
 			m_self.m_grid.ClearBoardData();
 		}

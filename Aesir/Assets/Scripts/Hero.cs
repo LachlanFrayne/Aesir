@@ -50,6 +50,16 @@ public abstract class Hero : Entity
     public Material removeHighlight;
 	public Material selectedHeroMat;
 
+	public Image moveEnableImage;
+	public Image moveDisableImage;
+	public Image attackEnableImage;
+	public Image attackDisableImage;
+	public Image ability1EnableImage;
+	public Image ability1DisableImage;
+	public Image ability2EnableImage;
+	public Image ability2DisableImage;
+
+
 	public WorldSpaceUI worldSpaceUI;
 
 	protected LinkedList<Node> path = new LinkedList<Node>();

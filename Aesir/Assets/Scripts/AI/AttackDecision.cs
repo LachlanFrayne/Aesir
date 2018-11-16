@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackDecision : BaseDecision
 {
-	public List<Node> m_path;		//dont really know the point of this but if in future obstacles
 
 	new void Start()
 	{

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Thor : BridalThor
 {
      
-    bool bAbility2Attack = false;
+    public bool bAbility2Attack = false;
 
 	public Node[,] list;
 
@@ -37,29 +37,58 @@ public class Thor : BridalThor
 		if (bThorSelected)
 		{
 			if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				moveButton.onClick.AddListener(HighlightMovement);
+				moveButton.image = moveEnableImage;
+			}
 			else
+			{
 				moveButton.onClick.RemoveAllListeners();
+				moveButton.image = moveDisableImage;
+			}
 
 			if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				basicAttackButton.onClick.AddListener(ThorBasicAttack);
+				basicAttackButton.image = attackEnableImage;
+			}
 			else
+			{
 				basicAttackButton.onClick.RemoveAllListeners();
+				basicAttackButton.image = attackDisableImage;
+			}
 
 			if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
 				ability1Button.onClick.AddListener(ThorAbility1);
+				ability1Button.image = ability1EnableImage;
+			}
 			else
+			{
 				ability1Button.onClick.RemoveAllListeners();
-
+				ability1Button.image = ability1DisableImage;
+			}
 			if (m_nActionPoints >= m_nAbility2AttackCost)
+			{
 				ability2Button.onClick.AddListener(ThorAbility2);
+				ability2Button.image = ability2EnableImage;
+			}
 			else
+			{
 				ability2Button.onClick.RemoveAllListeners();
+				ability2Button.image = ability2DisableImage;
+			}
 
 			if (bThorSelected)
+			{
 				cancelButton.onClick.AddListener(Cancel);
+
+			}
 			else
+			{
 				cancelButton.onClick.RemoveAllListeners();
+
+			}
 
 			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
 		}

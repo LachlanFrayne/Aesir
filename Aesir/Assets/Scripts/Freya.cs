@@ -13,8 +13,8 @@ public class Freya : Hero
     public Image healthBarImage;
     public Image backgroundFreyaImage;
 
-    bool bBasicAttack = false;
-    bool bAbility1Attack = false;
+    public bool bBasicAttack = false;
+    public bool bAbility1Attack = false;
 
     [Header("Material")]
     public Material AttackHighlight;
@@ -52,26 +52,49 @@ public class Freya : Hero
     {
         if (bFreyaSelected)
         {
-            if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                moveButton.onClick.AddListener(HighlightMovement);
-            else
-                moveButton.onClick.RemoveAllListeners();
+			if (m_nActionPoints > 0)        //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
+				moveButton.onClick.AddListener(HighlightMovement);
+				moveButton.image = moveEnableImage;
+			}
+			else
+			{
+				moveButton.onClick.RemoveAllListeners();
+				moveButton.image = moveDisableImage;
+			}
 
-            if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                basicAttackButton.onClick.AddListener(BasicAttack);
-            else
-                basicAttackButton.onClick.RemoveAllListeners();
+			if (m_nActionPoints >= m_nBasicAttackCost)      //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
+				basicAttackButton.onClick.AddListener(BasicAttack);
+				basicAttackButton.image = attackEnableImage;
+			}
+			else
+			{
+				basicAttackButton.onClick.RemoveAllListeners();
+				basicAttackButton.image = attackDisableImage;
+			}
 
-            if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
-                ability1Button.onClick.AddListener(Ability1);
-            else
-                ability1Button.onClick.RemoveAllListeners();
+			if (m_nActionPoints >= m_nAbility1AttackCost)       //If you have enough actionPoints, add a listener, if you don't have enough remove the listener
+			{
+				ability1Button.onClick.AddListener(Ability1);
+				ability1Button.image = ability1EnableImage;
+			}
+			else
+			{
+				ability1Button.onClick.RemoveAllListeners();
+				ability1Button.image = ability1DisableImage;
+			}
 
 			if (bFreyaSelected)
+			{
 				cancelButton.onClick.AddListener(Cancel);
+
+			}
 			else
+			{
 				cancelButton.onClick.RemoveAllListeners();
 
+			}
 			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
 		}
 

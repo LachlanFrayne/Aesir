@@ -3380,11 +3380,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 114760022501418834, guid: d390ba9e9dbed0d448bddb00fcf5444e,
-        type: 2}
-      propertyPath: m_nBasicAttackRange
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d390ba9e9dbed0d448bddb00fcf5444e, type: 2}
   m_IsPrefabParent: 0
@@ -5227,11 +5222,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114550503194178708, guid: cd091b638e1e33748837d39408add9f1,
-        type: 2}
-      propertyPath: m_animPresets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4620197959953242, guid: cd091b638e1e33748837d39408add9f1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 6.58
@@ -5268,23 +5258,6 @@ Prefab:
       propertyPath: m_Name
       value: Freya
       objectReference: {fileID: 0}
-    - target: {fileID: 4620197959953242, guid: cd091b638e1e33748837d39408add9f1, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 87.27801
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065318930420324, guid: cd091b638e1e33748837d39408add9f1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.551
-      objectReference: {fileID: 0}
-    - target: {fileID: 4289126837473478, guid: cd091b638e1e33748837d39408add9f1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114550503194178708, guid: cd091b638e1e33748837d39408add9f1,
-        type: 2}
-      propertyPath: selectedHeroMat
-      value: 
-      objectReference: {fileID: 2100000, guid: 4ddf244ecc03f9c40ae3efcd86aaeb9b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd091b638e1e33748837d39408add9f1, type: 2}
   m_IsPrefabParent: 0
@@ -9105,11 +9078,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114350279036852162, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
-        type: 2}
-      propertyPath: m_animPresets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4713201342206428, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
       propertyPath: m_LocalPosition.x
       value: 9.57
@@ -9146,26 +9114,6 @@ Prefab:
       propertyPath: m_Name
       value: Thor
       objectReference: {fileID: 0}
-    - target: {fileID: 114486843925041948, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
-        type: 2}
-      propertyPath: m_nBasicAttackDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114486843925041948, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114350279036852162, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114350279036852162, guid: 1fd57a8a34ad75f4289ebe0854fce0f9,
-        type: 2}
-      propertyPath: selectedHeroMat
-      value: 
-      objectReference: {fileID: 2100000, guid: 4ddf244ecc03f9c40ae3efcd86aaeb9b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fd57a8a34ad75f4289ebe0854fce0f9, type: 2}
   m_IsPrefabParent: 0
