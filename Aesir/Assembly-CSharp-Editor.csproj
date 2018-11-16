@@ -393,25 +393,25 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KdTreeLib">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
  </Reference>
  <Reference Include="pb_Stl">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
  </Reference>
  <Reference Include="Poly2Tri">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderEditor-Unity5">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ProCore/ProBuilder/Editor/ProBuilderEditor-Unity5.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ProCore/ProBuilder/Editor/ProBuilderEditor-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ShaderForge">
- <HintPath>C:/Users/s181312/Documents/SVN/Aesir/trunk/Aesir/Assets/3rd Party/ShaderForge/Editor/ShaderForge.dll</HintPath>
+ <HintPath>C:/Users/s181312/Documents/SVN/Aesir/Aesir/Assets/3rd Party/ShaderForge/Editor/ShaderForge.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/s181312/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
