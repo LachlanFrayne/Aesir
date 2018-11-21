@@ -59,6 +59,7 @@ public class BridalThor : Hero {
 			thor.healthBarImage = healthBarImage;
 			thor.backgroundThorImage = backgroundThorImage;
 			thor.worldSpaceUI = worldSpaceUI;
+
 			this.enabled = false; 
 
 		}
@@ -107,8 +108,10 @@ public class BridalThor : Hero {
 				cancelButton.onClick.RemoveAllListeners();
 
 			}
-
-			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			if (m_currentNode != null)
+			{
+				m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			}
 		}
 
 		

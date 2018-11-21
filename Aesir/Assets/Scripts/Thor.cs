@@ -90,7 +90,10 @@ public class Thor : BridalThor
 
 			}
 
-			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			if (m_currentNode != null)
+			{
+				m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			}
 		}
 
 

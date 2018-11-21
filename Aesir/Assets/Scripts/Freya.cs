@@ -95,7 +95,10 @@ public class Freya : Hero
 				cancelButton.onClick.RemoveAllListeners();
 
 			}
-			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			if (m_currentNode != null)
+			{
+				m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			}
 		}
 
 		

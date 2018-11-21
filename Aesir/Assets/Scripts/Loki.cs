@@ -96,7 +96,10 @@ public class Loki : Hero
 
 			}
 
-			m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			if (m_currentNode != null)
+			{
+				m_currentNode.gameObject.GetComponent<Renderer>().material = selectedHeroMat;
+			}
 		}
 
 		
@@ -227,7 +230,54 @@ public class Loki : Hero
 		bAbility1Attack = true;
 		actionPointsMoveCostLabel.text = m_nAbility1AttackCost.ToString();
 
-		dijkstrasSearchAttack(m_currentNode, m_nAbility1AttackRange, AttackHighlight, 1);
+		dijkstrasSearchTeleport(m_currentNode, m_nAbility1AttackRange, AttackHighlight, 1);
+	}
+	public void dijkstrasSearchTeleport(Node startNode, int actionPointAvailable, Material healingHighlight, int MoveCostPerTile)
+	{
+		int gScore = MoveCostPerTile;
+		Heap openList = new Heap(false);
+		List<Node> closedList = new List<Node>();
+
+		openList.Add(startNode);
+
+		while (openList.m_tHeap.Count > 0)
+		{
+			Node currentNode = openList.Pop();
+
+			closedList.Add(currentNode);
+
+			if (currentNode.m_gScore > actionPointAvailable)
+			{
+				continue;
+			}
+
+			currentNode.GetComponent<Renderer>().material = healingHighlight;
+			for (int i = 0; i < currentNode.neighbours.Length; i++)
+			{
+				if (!closedList.Contains(currentNode.neighbours[i]))
+				{
+					if (openList.m_tHeap.Contains(currentNode.neighbours[i]))
+					{
+						int tempGScore = currentNode.m_gScore + gScore;
+
+						if (tempGScore < currentNode.neighbours[i].m_gScore)
+						{
+							currentNode.neighbours[i].prev = currentNode;
+							currentNode.neighbours[i].m_gScore = tempGScore;
+						}
+					}
+					else
+					{
+						if (currentNode.neighbours[i] != null)
+						{
+							currentNode.neighbours[i].prev = currentNode;
+							currentNode.neighbours[i].m_gScore = currentNode.m_gScore + gScore;
+							openList.Add(currentNode.neighbours[i]);
+						}
+					}
+				}
+			}
+		}
 	}
 	void Cancel()
 	{

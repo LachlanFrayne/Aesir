@@ -19,6 +19,7 @@ public abstract class Hero : Entity
     public bool bLokiSelected;
     public bool bMove;
 	public bool bAttack;
+	private bool bFinished = false;
 
 	public int m_nAbility1Attack;
 	public int m_nAbility1AttackRange;
@@ -118,6 +119,12 @@ public abstract class Hero : Entity
             GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
+
+		if (bFinished == true)
+		{
+			path.Clear();       //Clears the path list
+			bFinished = false;
+		}
 
 		if (!(m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn")))
 		{
@@ -237,7 +244,7 @@ public abstract class Hero : Entity
 						{
 							if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
 							{
-								transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
+								//transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
 								StartCoroutine(RunAnim(m_animPresets[0]));
 
 								for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
@@ -259,14 +266,13 @@ public abstract class Hero : Entity
 												tile.GetComponent<Renderer>().material = removeHighlight;
 											}
 
-											//StartCoroutine(Wait());
+											StartCoroutine(Wait());
+
 											
-											a = null;       //Resets a
-											b = null;       //Resets b
-											path.Clear();       //Clears the path list
-											m_grid.ClearBoardData();
-											bMove = false;
-											SetTile();
+												a = null;       //Resets a
+												b = null;       //Resets b
+												m_grid.ClearBoardData();
+												bMove = false;
 										}
 									}
 								}
@@ -278,32 +284,51 @@ public abstract class Hero : Entity
 		}
     }
 
-	//IEnumerator Wait()
-	//{
-	//	foreach (Node tile in path)      //Goes through all tiles in the path and removes the material and tag 
-	//	{
-	//		transform.position = Vector3.Lerp(transform.position, tile.transform.position, speed * Time.deltaTime);
-	//		//transform.position = tile.transform.position;
-	//		yield return new WaitForSeconds(1);
-	//	}	
-	//}
+	IEnumerator Wait()
+	{
+		m_currentNode.GetComponent<Renderer>().material = removeHighlight;
+		m_currentNode = null;
+		foreach (Node tile in path)     
+		{
+			Vector3 playerPosition = transform.position;
+			Vector3 tilePosition = tile.transform.position;
+			float startTime = Time.time;
+			float journeyLength = Vector3.Distance(playerPosition, tilePosition);
+			StartCoroutine(Lerp(playerPosition, tilePosition, startTime, journeyLength));
+			yield return new WaitForSeconds(journeyLength / speed);
+		}
+
+		bFinished = true;
+		SetTile();
+	}
+	//Check if first tile is being added to list
+	IEnumerator Lerp(Vector3 playerPosition, Vector3 tilePosition, float startTime, float journeyLength)
+	{
+		while (playerPosition != tilePosition)
+		{
+			float distCovered = ((Time.time - startTime) * speed);
+			float fracJourney = distCovered / journeyLength;
+			transform.position = Vector3.Lerp(playerPosition, tilePosition, fracJourney);
+			yield return null;
+		}
+	}
 
 	IEnumerator RunAnim(AnimationPreset anim)
 	{
-		Material mat = new Material(GetComponent<Renderer>().material);
+		Material mat = new Material(GetComponentInChildren<Renderer>().material);
 
 		SetAnim(anim);
 
 		yield return new WaitForSeconds(anim.animationDuration);
 
-		GetComponent<Renderer>().material = mat;
+		GetComponentInChildren<Renderer>().material = mat;
 	}
 
 	public void SetAnim(AnimationPreset anim)
 	{
 		//Material temp = new Material(Shader.Find("Shader Forge/FrameAnimTest2Normalised"));
 
-		Material temp = GetComponent<Renderer>().material;
+		Material temp = GetComponentInChildren<Renderer>().material;
 
 		temp.SetFloat("_Animation", anim._animation);
 		temp.SetFloat("_FrameRate", anim._frameRate);
