@@ -14,7 +14,12 @@ ModelImporter:
     3300000: Menu_004_Scene_004
     4300000: Menu_004_Scene_004
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 718114b5562851848b8f28f07a6186cb, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -67,7 +72,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 0
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0

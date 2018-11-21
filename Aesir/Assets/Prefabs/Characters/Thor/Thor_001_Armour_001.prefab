@@ -27,6 +27,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1597409339024584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4665379252495578}
+  - component: {fileID: 33041155754726138}
+  - component: {fileID: 64929209745437784}
+  - component: {fileID: 23105104780838968}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1684016856649036
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1726695763999860
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684016856649036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4713201342206428}
@@ -82,27 +100,75 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1531276686942030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.409, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4713201342206428}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4665379252495578
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597409339024584}
+  m_LocalRotation: {x: 0.6415355, y: 0.28649816, z: -0.28252745, w: 0.6530921}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.07246967, y: 1, z: 0.2051733}
+  m_Children: []
+  m_Father: {fileID: 4713201342206428}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 89.01, y: 42.689003, z: -4.7650003}
 --- !u!4 &4713201342206428
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
-  m_LocalRotation: {x: -0, y: 0.69767404, z: -0, w: 0.71641535}
-  m_LocalPosition: {x: 9.57, y: 0, z: 9.48}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.84, y: 0.17262053, z: 10.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409763530176496}
   - {fileID: 4520476000242984}
+  - {fileID: 4665379252495578}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23105104780838968
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597409339024584}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 43b870f786003a844a86c9b584134f1b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23629239966580918
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -144,6 +210,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33041155754726138
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597409339024584}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33196927199330074
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -151,6 +224,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684016856649036}
   m_Mesh: {fileID: 4300000, guid: 2711c8e472d89064283b8cafc5b55ef1, type: 3}
+--- !u!64 &64929209745437784
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597409339024584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65864288117036554
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -161,8 +248,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.21332, y: 1.5797756, z: 0.59633684}
-  m_Center: {x: 0.045407176, y: 0.017526507, z: -0.0060584545}
+  m_Size: {x: 0.6237655, y: 1.8002014, z: 0.59633684}
+  m_Center: {x: 0.044202864, y: 0.12773943, z: -0.006058455}
 --- !u!95 &95845360322939910
 Animator:
   serializedVersion: 3
@@ -228,14 +315,18 @@ MonoBehaviour:
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
   selectedHeroMat: {fileID: 2100000, guid: 4ddf244ecc03f9c40ae3efcd86aaeb9b, type: 2}
-  moveEnableImage: {fileID: 0}
-  moveDisableImage: {fileID: 0}
-  attackEnableImage: {fileID: 0}
-  attackDisableImage: {fileID: 0}
-  ability1EnableImage: {fileID: 0}
-  ability1DisableImage: {fileID: 0}
-  ability2EnableImage: {fileID: 0}
-  ability2DisableImage: {fileID: 0}
+  moveEnableImage: {fileID: 21300000, guid: 7b51940d7dd7a9a4fb80700c54d6a911, type: 3}
+  moveDisableImage: {fileID: 21300000, guid: 6352929ecaf385a418ffe42136bc77b0, type: 3}
+  attackEnableImage: {fileID: 21300000, guid: 2a9c8f48635115340bfae5c9c6eeafae, type: 3}
+  attackDisableImage: {fileID: 21300000, guid: c7e6984c69dde554dbb92851b7716819, type: 3}
+  ability1EnableImage: {fileID: 21300000, guid: 2bbdf13327ad7cd41afd27589518da89,
+    type: 3}
+  ability1DisableImage: {fileID: 21300000, guid: 825d5aaae3517754b9f55e1c13b35d94,
+    type: 3}
+  ability2EnableImage: {fileID: 21300000, guid: 75211e32784283a41ab954edd2a60622,
+    type: 3}
+  ability2DisableImage: {fileID: 21300000, guid: 75211e32784283a41ab954edd2a60622,
+    type: 3}
   worldSpaceUI: {fileID: 0}
   speed: 1
   m_animPresets:

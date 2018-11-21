@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 4c658d592940bae458f5ee2d3b2d1b65
+timeCreated: 1541731619
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Handrail_001
+    100004: HandRails_001
+    100006: Handrails_002
+    100008: Handrails_003
+    100010: nurbsToPoly35
+    100012: nurbsToPoly38
+    100014: nurbsToPoly39
+    100016: nurbsToPoly40
+    100018: nurbsToPoly41
+    100020: nurbsToPoly42
+    100022: pCube6
+    100024: persp1
+    100026: Stairs_001_Corner_001
+    100028: Stairs_002_Lower_001
+    100030: Stairs_003_Upper_001
+    100032: Stairs_004_Prefab_001
+    400000: //RootNode
+    400002: Handrail_001
+    400004: HandRails_001
+    400006: Handrails_002
+    400008: Handrails_003
+    400010: nurbsToPoly35
+    400012: nurbsToPoly38
+    400014: nurbsToPoly39
+    400016: nurbsToPoly40
+    400018: nurbsToPoly41
+    400020: nurbsToPoly42
+    400022: pCube6
+    400024: persp1
+    400026: Stairs_001_Corner_001
+    400028: Stairs_002_Lower_001
+    400030: Stairs_003_Upper_001
+    400032: Stairs_004_Prefab_001
+    2000000: persp1
+    2100000: lambert1
+    2300000: Handrail_001
+    2300002: HandRails_001
+    2300004: Handrails_002
+    2300006: Handrails_003
+    2300008: nurbsToPoly35
+    2300010: nurbsToPoly38
+    2300012: nurbsToPoly39
+    2300014: nurbsToPoly40
+    2300016: nurbsToPoly41
+    2300018: nurbsToPoly42
+    2300020: pCube6
+    2300022: Stairs_001_Corner_001
+    2300024: Stairs_002_Lower_001
+    2300026: Stairs_003_Upper_001
+    2300028: Stairs_004_Prefab_001
+    3300000: Handrail_001
+    3300002: HandRails_001
+    3300004: Handrails_002
+    3300006: Handrails_003
+    3300008: nurbsToPoly35
+    3300010: nurbsToPoly38
+    3300012: nurbsToPoly39
+    3300014: nurbsToPoly40
+    3300016: nurbsToPoly41
+    3300018: nurbsToPoly42
+    3300020: pCube6
+    3300022: Stairs_001_Corner_001
+    3300024: Stairs_002_Lower_001
+    3300026: Stairs_003_Upper_001
+    3300028: Stairs_004_Prefab_001
+    4300000: Stairs_001_Corner_001
+    4300002: Stairs_002_Lower_001
+    4300004: Stairs_003_Upper_001
+    4300006: Stairs_004_Prefab_001
+    4300008: HandRails_001
+    4300010: Handrails_002
+    4300012: Handrails_003
+    4300014: Handrail_001
+    4300016: nurbsToPoly35
+    4300018: nurbsToPoly38
+    4300020: nurbsToPoly39
+    4300022: nurbsToPoly40
+    4300024: nurbsToPoly41
+    4300026: nurbsToPoly42
+    4300028: pCube6
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
