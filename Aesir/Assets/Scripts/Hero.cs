@@ -326,8 +326,6 @@ public abstract class Hero : Entity
 
 	public void SetAnim(AnimationPreset anim)
 	{
-		//Material temp = new Material(Shader.Find("Shader Forge/FrameAnimTest2Normalised"));
-
 		Material temp = GetComponentInChildren<Renderer>().material;
 
 		temp.SetFloat("_Animation", anim._animation);

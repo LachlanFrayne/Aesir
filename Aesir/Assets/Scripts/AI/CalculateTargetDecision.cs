@@ -69,4 +69,8 @@ public class CalculateTargetDecision : BaseDecision
 			}
 		}
 	}
+	public override IEnumerator StartDecision()
+	{
+		throw new System.NotImplementedException();
+	}
 }

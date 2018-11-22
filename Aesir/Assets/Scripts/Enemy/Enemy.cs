@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Entity
 {
@@ -18,9 +19,15 @@ public class Enemy : Entity
 	private Animator m_turnChecker;
 	public Material m_enemyRangeHighlightMaterial;
 
+	private Image m_APBar;
+	private Image m_HPBar;
+	private Image m_MGRef;
+	public Sprite m_mugShot;
+
 	public bool m_bStunned = false;
 
-	bool m_currentlySelected = false;
+	bool m_currentlyInFocus = false;
+	bool m_currentlyHighlighted = false;
 
 	void Start()
 	{
@@ -33,6 +40,10 @@ public class Enemy : Entity
 		m_turnChecker = GameObject.Find("TurnManager").GetComponent<Animator>();
 
 		m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();
+
+		m_APBar = GameObject.Find("EnemyPUActionPointBar").GetComponent<Image>();
+		m_HPBar = GameObject.Find("EnemyPUHealthPointBar").GetComponent<Image>();
+		m_MGRef = GameObject.Find("EnemyPUMugShot").GetComponent<Image>();
 
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 100))
@@ -62,6 +73,8 @@ public class Enemy : Entity
 
 		///////////////////////////////////////////////////////////enemy attack range visualizer////////////////////////////////////////////////////////////
 
+		
+
 		if (!m_thor.enabled)
 		{
 			m_thor = m_thor.gameObject.GetComponent<Thor>();
@@ -77,32 +90,43 @@ public class Enemy : Entity
 				{
 					//if (m_thor.GetType() == typeof(Thor))
 					//{
-					//	if (!m_loki.bMove || !m_loki.bBasicAttack || !m_loki.bAbility1Attack ||
-					//		!m_freya.bMove || !m_freya.bBasicAttack || !m_freya.bAbility1Attack ||
-					//		!m_thor.bMove || !m_thor.bBasicAttack || !m_thor.bAbility1Attack || !((Thor)m_thor).bAbility2Attack)
+					//	if (m_loki.bMove || m_loki.bBasicAttack || m_loki.bAbility1Attack ||
+					//		m_freya.bMove || m_freya.bBasicAttack || m_freya.bAbility1Attack ||
+					//		m_thor.bMove || m_thor.bBasicAttack || m_thor.bAbility1Attack || ((Thor)m_thor).bAbility2Attack)
 					//	{
 					//		m_currentlySelected = true;
 					//	}
 					//}
-					//else if (!m_loki.bMove || !m_loki.bBasicAttack || !m_loki.bAbility1Attack ||
-					//		 !m_freya.bMove || !m_freya.bBasicAttack || !m_freya.bAbility1Attack ||
-					//		 !m_thor.bMove || !m_thor.bBasicAttack || !m_thor.bAbility1Attack)
+					//else if (m_loki.bMove || m_loki.bBasicAttack || m_loki.bAbility1Attack ||
+					//		 m_freya.bMove || m_freya.bBasicAttack || m_freya.bAbility1Attack ||
+					//		 m_thor.bMove || m_thor.bBasicAttack || m_thor.bAbility1Attack)
 					//{
 
-
-						m_currentlySelected = true;
-
 					//}
+
+					m_currentlyInFocus = true;
+					m_currentlyHighlighted = true;
+				}
+				else if(hit.transform.gameObject.GetComponent<Enemy>())
+				{
+					if(hit.transform.gameObject.GetComponent<Enemy>() != this)
+					m_currentlyInFocus = false;
 				}
 			}
 		}
 		else
 		{
-			m_currentlySelected = false;
+			m_currentlyHighlighted = false;
 		}
 
+		if(m_currentlyInFocus)
+		{
+			m_HPBar.fillAmount = (1f / m_nHealthMax) * m_nHealth;
+			m_APBar.fillAmount = (1f / m_nActionPointMax) * m_nActionPoints;
+			m_MGRef.sprite = m_mugShot;
+		}
 
-		if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn") && m_currentlySelected)
+		if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn") && m_currentlyHighlighted)
 		{
 			m_grid.ClearBoardData();
 
@@ -141,7 +165,7 @@ public class Enemy : Entity
 						continue;
 					}
 
-					if (n.bBlocked || n.contain)        //if the node is blocked
+					if (n.bBlocked)        //if the node is blocked
 					{
 						continue;
 					}

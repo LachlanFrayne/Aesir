@@ -12,4 +12,5 @@ public abstract class BaseDecision : MonoBehaviour
     }
 
     public abstract void MakeDecision();
+	public abstract IEnumerator StartDecision();
 }
