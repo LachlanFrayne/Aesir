@@ -304,23 +304,30 @@ public abstract class Hero : Entity
 			Vector3 tilePosition = tile.transform.position;
 			float startTime = Time.time;
 			float journeyLength = Vector3.Distance(playerPosition, tilePosition);
+			
+			//Animation causing scale to go back to default
+			StartCoroutine(Lerp(playerPosition, tilePosition, startTime, journeyLength));
+			yield return new WaitForSeconds(journeyLength / speed);
 
 			if (path.IndexOf(tile) + 1 < path.Count)
 			{
 				if (tile.neighbours[0] == path[path.IndexOf(tile) + 1] || tile.neighbours[1] == path[path.IndexOf(tile) + 1])
 				{
-					transform.GetChild(0).localScale = new Vector3(transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-					//Debug.Log("Turn right");
+					if (transform.GetChild(0).localScale.x < 0)
+					{
+						transform.GetChild(0).localScale = new Vector3(transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+						Debug.Log("Turn right");
+					}
 				}
 				else if (tile.neighbours[2] == path[path.IndexOf(tile) + 1] || tile.neighbours[3] == path[path.IndexOf(tile) + 1])
 				{
-					transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-					//Debug.Log("Turn left");
+					if (transform.GetChild(0).localScale.x > 0)
+					{
+						transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+						Debug.Log("Turn left");
+					}
 				}
 			}
-			//Animation causing scale to go back to default
-			StartCoroutine(Lerp(playerPosition, tilePosition, startTime, journeyLength));
-			yield return new WaitForSeconds(journeyLength / speed);
 		}
 
 		bFinished = true;
