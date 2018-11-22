@@ -283,7 +283,7 @@ MonoBehaviour:
   m_nHealthMax: 8
   m_nActionPoints: 12
   m_nActionPointMax: 12
-  m_nBasicAttackDamage: 0
+  m_nBasicAttackDamage: 4
   m_nBasicAttackRange: 5
   m_nBasicAttackCost: 3
   m_nMovementActionPointCostPerTile: 2
