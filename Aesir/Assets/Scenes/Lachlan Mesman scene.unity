@@ -1076,6 +1076,10 @@ Prefab:
       propertyPath: m_Name
       value: Freya
       objectReference: {fileID: 0}
+    - target: {fileID: 4620197959953242, guid: cd091b638e1e33748837d39408add9f1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd091b638e1e33748837d39408add9f1, type: 2}
   m_IsPrefabParent: 0
@@ -1126,6 +1130,7 @@ MonoBehaviour:
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
   m_enemyRangeHighlightMaterial: {fileID: 0}
+  m_mugShot: {fileID: 0}
   m_bStunned: 0
 --- !u!23 &1589839369
 MeshRenderer:

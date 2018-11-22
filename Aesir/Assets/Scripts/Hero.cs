@@ -310,12 +310,12 @@ public abstract class Hero : Entity
 				if (tile.neighbours[0] == path[path.IndexOf(tile) + 1] || tile.neighbours[1] == path[path.IndexOf(tile) + 1])
 				{
 					transform.GetChild(0).localScale = new Vector3(transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-					Debug.Log("Turn right");
+					//Debug.Log("Turn right");
 				}
 				else if (tile.neighbours[2] == path[path.IndexOf(tile) + 1] || tile.neighbours[3] == path[path.IndexOf(tile) + 1])
 				{
 					transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-					Debug.Log("Turn left");
+					//Debug.Log("Turn left");
 				}
 			}
 			//Animation causing scale to go back to default
