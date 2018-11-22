@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840937201099206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.904, y: 0, z: 6.092}
+  m_LocalPosition: {x: 32.51, y: 27.976032, z: 6.2095323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4836839207985998}
@@ -127,13 +127,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1946982328386192}
-  m_LocalRotation: {x: 0.6074468, y: 0.355045, z: -0.34985408, w: 0.6185092}
+  m_LocalRotation: {x: 0.40103436, y: -0.5855162, z: 0.5749455, w: 0.4071608}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.089138895, y: 1, z: 0.20517012}
   m_Children: []
   m_Father: {fileID: 4620197959953242}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.01, y: 55.036003, z: -4.76}
+  m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
 --- !u!23 &23606331407000134
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -293,6 +293,7 @@ MonoBehaviour:
   bLokiSelected: 0
   bMove: 0
   bAttack: 0
+  bAttacking: 0
   m_nAbility1Attack: 4
   m_nAbility1AttackRange: 5
   m_nAbility1AttackCost: 6
@@ -300,6 +301,9 @@ MonoBehaviour:
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
   m_grid: {fileID: 0}
+  bridalThor: {fileID: 0}
+  freya: {fileID: 0}
+  loki: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -329,12 +333,36 @@ MonoBehaviour:
   ability2DisableImage: {fileID: 21300000, guid: 75211e32784283a41ab954edd2a60622,
     type: 3}
   worldSpaceUI: {fileID: 0}
-  speed: 1
+  speed: 3
   m_animPresets:
-  - _animation: 0
-    _frameRate: 0
-    _frames: 0
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
     animationDuration: 0
+  - _animation: 2
+    _frameRate: 13
+    _frames: 5
+    animationDuration: 0
+  - _animation: 3
+    _frameRate: 13
+    _frames: 6
+    animationDuration: 0
+  - _animation: 4
+    _frameRate: 13
+    _frames: 4
+    animationDuration: 0
+  - _animation: 5
+    _frameRate: 13
+    _frames: 4
+    animationDuration: 0
+  - _animation: 6
+    _frameRate: 13
+    _frames: 6
+    animationDuration: 0
+  - _animation: 7
+    _frameRate: 13
+    _frames: 6
+    animationDuration: 3
   regen: 2
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}

@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpriteSheet:
-        m_Texture: {fileID: 2800000, guid: 703ab5684db28784890840bd40705cdd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 23ba7591dadd55e4cb622fe01771285b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -65,9 +65,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FrameOffset: 0
-    - _FrameRate: 15
+    - _FrameRate: 13
     - _Frames: 4
-    - _Frames_Height: 4
+    - _Frames_Height: 8
     - _Frames_Width: 6
     - _GlossMapScale: 1
     - _Glossiness: 0.5

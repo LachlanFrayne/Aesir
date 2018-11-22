@@ -205,6 +205,7 @@ public class Freya : Hero
     void BasicAttack()
     {
 		m_grid.ClearBoardData();
+		bAttacking = true;
 		bMove = false;
 		bAbility1Attack = false;
         actionPointCostLabel.SetActive(true);
@@ -216,6 +217,7 @@ public class Freya : Hero
     void Ability1()
     {
 		m_grid.ClearBoardData();
+		bAttacking = true;
 		bMove = false;
 		bBasicAttack = false;
         actionPointCostLabel.SetActive(true);

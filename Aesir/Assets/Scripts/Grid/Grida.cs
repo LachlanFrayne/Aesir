@@ -25,13 +25,11 @@ public class Grida:MonoBehaviour
         foreach (Transform row in transform)
         { 
             rows.Add(row.gameObject);
-
             grid.Add(new List<GameObject>());
             foreach (Transform tiles in row.transform)
             {
                 grid[i].Add(tiles.transform.gameObject);
             }
-
             i++;
         }
 

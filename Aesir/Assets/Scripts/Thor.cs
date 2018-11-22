@@ -331,8 +331,8 @@ public class Thor : BridalThor
 											tempNode.GetComponent<Renderer>().material = AttackHighlight;
 											tempNode2.GetComponent<Renderer>().material = AttackHighlight;
 
-											path.AddFirst(tempNode);
-											path.AddFirst(tempNode2);
+											path.Add(tempNode);
+											path.Add(tempNode2);
 											if (tempNode.contain != null)// && tempNode.contain.GetComponent<Enemy>() == null)
 											{
 												tempNode.prev = null;

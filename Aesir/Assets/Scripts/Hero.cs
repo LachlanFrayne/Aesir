@@ -20,6 +20,7 @@ public abstract class Hero : Entity
     public bool bMove;
 	public bool bAttack;
 	private bool bFinished = false;
+	public bool bAttacking;
 
 	public int m_nAbility1Attack;
 	public int m_nAbility1AttackRange;
@@ -29,6 +30,10 @@ public abstract class Hero : Entity
 	public int m_nAbility2AttackCost;
 
 	public Grida m_grid;
+
+	public Hero bridalThor;
+	public Hero freya;
+	public Hero loki;
 
     public Node m_tempNodeBase;
 
@@ -63,12 +68,12 @@ public abstract class Hero : Entity
 
 	public WorldSpaceUI worldSpaceUI;
 
-	protected LinkedList<Node> path = new LinkedList<Node>();
+	protected List<Node> path = new List<Node>();
 
     protected Collider a;
 	protected Collider b;
 
-	public float speed = 1f;
+	public float speed;
 
 	public List<AnimationPreset> m_animPresets;
 	private Animator m_turnChecker;
@@ -82,9 +87,11 @@ public abstract class Hero : Entity
         ability2Button = GameObject.Find("Ability 2").GetComponent<Button>();
 		cancelButton = GameObject.Find("Cancel").GetComponent<Button>();
         m_grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grida>();        //Reference to Grida
-
 		m_turnChecker = GameObject.Find("TurnManager").GetComponent<Animator>();
-    }
+		bridalThor = GameObject.Find("Thor").GetComponent<BridalThor>();
+		freya = GameObject.Find("Freya").GetComponent<Freya>();
+		loki = GameObject.Find("Loki").GetComponent<Loki>();
+	}
 
     public void SetTile()
     {
@@ -173,7 +180,7 @@ public abstract class Hero : Entity
                                             while (temp.prev != null)
                                             {
                                                 temp.GetComponent<Renderer>().material.color = Color.green;
-                                                path.AddFirst(temp);        //Adds node to path
+                                                path.Insert(0,temp);        //Adds node to path
                                                 temp = temp.prev;       //Set temp to temp.prev 
                                             }
                                         }
@@ -191,41 +198,44 @@ public abstract class Hero : Entity
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, 100))
 			{
-				if (hit.collider.tag == "Thor")
+				if (bAttacking != true)
 				{
-					moveButton.onClick.RemoveAllListeners();
-					basicAttackButton.onClick.RemoveAllListeners();
-					ability1Button.onClick.RemoveAllListeners();
-					ability2Button.onClick.RemoveAllListeners();
-					cancelButton.onClick.RemoveAllListeners();
-					m_grid.ClearBoardData();
-					bThorSelected = true;
-					bLokiSelected = false;
-					bFreyaSelected = false;
-				}
-				if (hit.collider.tag == "Loki")
-				{
-					moveButton.onClick.RemoveAllListeners();
-					basicAttackButton.onClick.RemoveAllListeners();
-					ability1Button.onClick.RemoveAllListeners();
-					ability2Button.onClick.RemoveAllListeners();
-					cancelButton.onClick.RemoveAllListeners();
-					m_grid.ClearBoardData();
-					bLokiSelected = true;
-					bThorSelected = false;
-					bFreyaSelected = false;
-				}
-				if (hit.collider.tag == "Freya")
-				{
-					moveButton.onClick.RemoveAllListeners();
-					basicAttackButton.onClick.RemoveAllListeners();
-					ability1Button.onClick.RemoveAllListeners();
-					ability2Button.onClick.RemoveAllListeners();
-					cancelButton.onClick.RemoveAllListeners();
-					m_grid.ClearBoardData();
-					bFreyaSelected = true;
-					bThorSelected = false;
-					bLokiSelected = false;
+					if (hit.collider.tag == "Thor")
+					{
+						moveButton.onClick.RemoveAllListeners();
+						basicAttackButton.onClick.RemoveAllListeners();
+						ability1Button.onClick.RemoveAllListeners();
+						ability2Button.onClick.RemoveAllListeners();
+						cancelButton.onClick.RemoveAllListeners();
+						m_grid.ClearBoardData();
+						bThorSelected = true;
+						bLokiSelected = false;
+						bFreyaSelected = false;
+					}
+					if (hit.collider.tag == "Loki")
+					{
+						moveButton.onClick.RemoveAllListeners();
+						basicAttackButton.onClick.RemoveAllListeners();
+						ability1Button.onClick.RemoveAllListeners();
+						ability2Button.onClick.RemoveAllListeners();
+						cancelButton.onClick.RemoveAllListeners();
+						m_grid.ClearBoardData();
+						bLokiSelected = true;
+						bThorSelected = false;
+						bFreyaSelected = false;
+					}
+					if (hit.collider.tag == "Freya")
+					{
+						moveButton.onClick.RemoveAllListeners();
+						basicAttackButton.onClick.RemoveAllListeners();
+						ability1Button.onClick.RemoveAllListeners();
+						ability2Button.onClick.RemoveAllListeners();
+						cancelButton.onClick.RemoveAllListeners();
+						m_grid.ClearBoardData();
+						bFreyaSelected = true;
+						bThorSelected = false;
+						bLokiSelected = false;
+					}
 				}
 			}
 		}
@@ -244,9 +254,6 @@ public abstract class Hero : Entity
 						{
 							if (hit.collider.GetComponent<Node>().prev != null)        //Used for when you are moving
 							{
-								//transform.position = new Vector3(hit.collider.GetComponent<MeshRenderer>().bounds.center.x, 0.5f, hit.collider.GetComponent<MeshRenderer>().bounds.center.z);       //Moves player to hit tile
-								StartCoroutine(RunAnim(m_animPresets[0]));
-
 								for (int columnTile = 0; columnTile < m_grid.boardArray.GetLength(0); columnTile++)
 								{
 									for (int rowTile = 0; rowTile < m_grid.boardArray.GetLength(1); rowTile++)
@@ -268,11 +275,10 @@ public abstract class Hero : Entity
 
 											StartCoroutine(Wait());
 
-											
-												a = null;       //Resets a
-												b = null;       //Resets b
-												m_grid.ClearBoardData();
-												bMove = false;
+											a = null;       //Resets a
+											b = null;       //Resets b
+											m_grid.ClearBoardData();
+											bMove = false;
 										}
 									}
 								}
@@ -288,25 +294,47 @@ public abstract class Hero : Entity
 	{
 		m_currentNode.GetComponent<Renderer>().material = removeHighlight;
 		m_currentNode = null;
+		Node endNode = path[path.Count - 1];
+		StartCoroutine(RunAnim(m_animPresets[6]));
+		speed = ((float)endNode.m_gScore / (float)m_nMovementActionPointCostPerTile) / m_animPresets[6].animationDuration;
+
 		foreach (Node tile in path)     
 		{
 			Vector3 playerPosition = transform.position;
 			Vector3 tilePosition = tile.transform.position;
 			float startTime = Time.time;
 			float journeyLength = Vector3.Distance(playerPosition, tilePosition);
+
+			if (path.IndexOf(tile) + 1 < path.Count)
+			{
+				if (tile.neighbours[0] == path[path.IndexOf(tile) + 1] || tile.neighbours[1] == path[path.IndexOf(tile) + 1])
+				{
+					transform.GetChild(0).localScale = new Vector3(transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+					Debug.Log("Turn right");
+				}
+				else if (tile.neighbours[2] == path[path.IndexOf(tile) + 1] || tile.neighbours[3] == path[path.IndexOf(tile) + 1])
+				{
+					transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+					Debug.Log("Turn left");
+				}
+			}
+			//Animation causing scale to go back to default
 			StartCoroutine(Lerp(playerPosition, tilePosition, startTime, journeyLength));
 			yield return new WaitForSeconds(journeyLength / speed);
 		}
 
 		bFinished = true;
+		
 		SetTile();
 	}
-	//Check if first tile is being added to list
+
 	IEnumerator Lerp(Vector3 playerPosition, Vector3 tilePosition, float startTime, float journeyLength)
 	{
-		while (playerPosition != tilePosition)
+		while (transform.position != tilePosition)
 		{
+
 			float distCovered = ((Time.time - startTime) * speed);
+			
 			float fracJourney = distCovered / journeyLength;
 			transform.position = Vector3.Lerp(playerPosition, tilePosition, fracJourney);
 			yield return null;

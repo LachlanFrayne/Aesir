@@ -165,6 +165,52 @@ public class Loki : Hero
 						bAbility1Attack = false;
 					}
 				}
+				else if (hit.collider.GetComponentInParent<Freya>() != null)
+				{
+					if (bAbility1Attack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+						m_grid.ClearBoardData();
+
+						Node temp = m_currentNode;      //Sets the current nodes for all
+						m_currentNode = hit.collider.GetComponentInParent<Freya>().m_currentNode;
+						hit.collider.GetComponentInParent<Freya>().m_currentNode = temp;
+
+						m_currentNode.contain = this.gameObject;
+						hit.collider.GetComponentInParent<Freya>().m_currentNode.contain = hit.collider.gameObject;
+
+						Vector3 temp1 = transform.position;
+						transform.position = hit.collider.GetComponentInParent<Freya>().transform.position;
+						hit.collider.GetComponentInParent<Freya>().transform.position = temp1;
+						bAbility1Attack = false;
+						bAttacking = false;
+						bridalThor.bAttacking = false;
+						freya.bAttacking = false;
+					}
+				}
+				else if (hit.collider.GetComponentInParent<BridalThor>() != null)
+				{
+					if (bAbility1Attack == true)
+					{
+						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+						m_grid.ClearBoardData();
+
+						Node temp = m_currentNode;      //Sets the current nodes for all
+						m_currentNode = hit.collider.GetComponentInParent<BridalThor>().m_currentNode;
+						hit.collider.GetComponentInParent<BridalThor>().m_currentNode = temp;
+
+						m_currentNode.contain = this.gameObject;
+						hit.collider.GetComponentInParent<BridalThor>().m_currentNode.contain = hit.collider.gameObject;
+
+						Vector3 temp1 = transform.position;
+						transform.position = hit.collider.GetComponentInParent<BridalThor>().transform.position;
+						hit.collider.GetComponentInParent<BridalThor>().transform.position = temp1;
+						bAbility1Attack = false;
+						bAttacking = false;
+						bridalThor.bAttacking = false;
+						freya.bAttacking = false;
+					}
+				}
 				else if (hit.collider.GetComponent<DestructibleObject>() != null)
 				{
 					if (bBasicAttack == true)
@@ -190,6 +236,7 @@ public class Loki : Hero
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
+		bAttacking = true;
 		bAbility1Attack = false;
 		actionPointCostLabel.SetActive(true);
 		bBasicAttack = true;
@@ -224,6 +271,18 @@ public class Loki : Hero
 	void Ability1()
 	{
 		m_grid.ClearBoardData();
+		bAttacking = true;
+		freya.bAttacking = true;
+		if(bridalThor != null)
+		{
+			if (bridalThor.enabled == false)
+			{
+				bridalThor = GameObject.Find("Thor").GetComponent<Thor>();
+				bridalThor.bAttacking = true;
+			}
+			else
+				bridalThor.bAttacking = true;
+		}
 		bMove = false;
 		bBasicAttack = false;
 		actionPointCostLabel.SetActive(true);
