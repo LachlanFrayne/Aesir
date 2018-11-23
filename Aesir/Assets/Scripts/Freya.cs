@@ -23,7 +23,7 @@ public class Freya : Hero
 
     void Start()
     {
-		worldSpaceUI = GameObject.Find("GameObject").GetComponent<WorldSpaceUI>();
+		worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Freya");       
         actionPointLabel = GameObject.Find("Action Points Freya").GetComponent<Text>();

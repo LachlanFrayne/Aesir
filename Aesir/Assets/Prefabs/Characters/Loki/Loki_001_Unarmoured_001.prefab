@@ -312,7 +312,7 @@ MonoBehaviour:
   m_nBasicAttackDamage: 4
   m_nBasicAttackRange: 1
   m_nBasicAttackCost: 4
-  m_nMovementActionPointCostPerTile: 1
+  m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   bThorSelected: 0
   bFreyaSelected: 0
@@ -361,10 +361,41 @@ MonoBehaviour:
   worldSpaceUI: {fileID: 0}
   speed: 1
   m_animPresets:
-  - _animation: 0
-    _frameRate: 0
-    _frames: 0
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
     animationDuration: 0
+  - _animation: 2
+    _frameRate: 13
+    _frames: 5
+    _offset: 0
+    animationDuration: 0
+  - _animation: 3
+    _frameRate: 10
+    _frames: 5
+    _offset: 0
+    animationDuration: 1
+  - _animation: 4
+    _frameRate: 13
+    _frames: 2
+    _offset: 0
+    animationDuration: 0
+  - _animation: 5
+    _frameRate: 5
+    _frames: 6
+    _offset: 0
+    animationDuration: 3
+  - _animation: 6
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
+  - _animation: 7
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 3
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}

@@ -367,31 +367,38 @@ MonoBehaviour:
   - _animation: 1
     _frameRate: 13
     _frames: 4
+    _offset: 0
     animationDuration: 0
   - _animation: 2
     _frameRate: 13
     _frames: 5
+    _offset: 0
     animationDuration: 0
   - _animation: 3
     _frameRate: 13
     _frames: 6
+    _offset: 0
     animationDuration: 0
   - _animation: 4
     _frameRate: 13
     _frames: 4
+    _offset: 0
     animationDuration: 0
   - _animation: 5
     _frameRate: 13
     _frames: 4
+    _offset: 0
     animationDuration: 0
   - _animation: 6
     _frameRate: 13
     _frames: 6
+    _offset: 0
     animationDuration: 0
   - _animation: 7
     _frameRate: 13
     _frames: 6
-    animationDuration: 3
+    _offset: 0
+    animationDuration: 2
   regen: 2
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}

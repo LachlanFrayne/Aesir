@@ -337,6 +337,37 @@ MonoBehaviour:
   - _animation: 1
     _frameRate: 13
     _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
     animationDuration: 2
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}

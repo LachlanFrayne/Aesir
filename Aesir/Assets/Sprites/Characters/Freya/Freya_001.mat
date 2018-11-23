@@ -60,12 +60,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Animation: 1
+    - _Animation_copy: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FrameOffset: 0
-    - _FrameRate: 11
+    - _FrameRate: 13
     - _Frames: 4
     - _Frames_Height: 8
     - _Frames_Width: 6

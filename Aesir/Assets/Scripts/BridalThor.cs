@@ -19,7 +19,7 @@ public class BridalThor : Hero {
 
 	void Start ()
 	{
-		worldSpaceUI = GameObject.Find("GameObject").GetComponent<WorldSpaceUI>();
+		worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
 		actionPointLabel = GameObject.Find("Action Points Thor").GetComponent<Text>();

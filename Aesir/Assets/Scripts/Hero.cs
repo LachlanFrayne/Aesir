@@ -9,7 +9,8 @@ public struct AnimationPreset
 	public int _animation;
 	public int _frameRate;
 	public int _frames;
-	public int animationDuration;
+	public float _offset;
+	public float animationDuration;
 }
 
 public abstract class Hero : Entity      
@@ -124,7 +125,7 @@ public abstract class Hero : Entity
         if (m_nHealth <= 0)
         {
             GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
-            Destroy(this.gameObject);
+			StartCoroutine(Death(m_animPresets[4]));
         }
 
 		if (bFinished == true)
@@ -273,6 +274,21 @@ public abstract class Hero : Entity
 												tile.GetComponent<Renderer>().material = removeHighlight;
 											}
 
+											if (m_currentNode.neighbours[0] == path[0] || m_currentNode.neighbours[1] == path[0])
+											{
+												if (transform.GetChild(0).localScale.x < 0)
+												{
+													transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+												}
+											}
+											else if (m_currentNode.neighbours[2] == path[0] || m_currentNode.neighbours[3] == path[0])
+											{
+												if (transform.GetChild(0).localScale.x > 0)
+												{
+													transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+												}
+											}
+										   
 											StartCoroutine(Wait());
 
 											a = null;       //Resets a
@@ -298,6 +314,8 @@ public abstract class Hero : Entity
 		StartCoroutine(RunAnim(m_animPresets[6]));
 		speed = ((float)endNode.m_gScore / (float)m_nMovementActionPointCostPerTile) / m_animPresets[6].animationDuration;
 
+		
+
 		foreach (Node tile in path)     
 		{
 			Vector3 playerPosition = transform.position;
@@ -315,7 +333,7 @@ public abstract class Hero : Entity
 				{
 					if (transform.GetChild(0).localScale.x < 0)
 					{
-						transform.GetChild(0).localScale = new Vector3(transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+						transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
 						Debug.Log("Turn right");
 					}
 				}
@@ -329,9 +347,7 @@ public abstract class Hero : Entity
 				}
 			}
 		}
-
-		bFinished = true;
-		
+		bFinished = true;	
 		SetTile();
 	}
 
@@ -347,25 +363,27 @@ public abstract class Hero : Entity
 			yield return null;
 		}
 	}
-
-	IEnumerator RunAnim(AnimationPreset anim)
+	Material mat;
+	public IEnumerator RunAnim(AnimationPreset anim)
 	{
-		Material mat = new Material(GetComponentInChildren<Renderer>().material);
+		mat = new Material(GetComponentInChildren<Renderer>().material);  //Sets mat to idle
 
 		SetAnim(anim);
-
 		yield return new WaitForSeconds(anim.animationDuration);
 
-		GetComponentInChildren<Renderer>().material = mat;
+
+
+		GetComponentInChildren<Renderer>().material = mat;	//Sets back to idle after animation
+
 	}
 
 	public void SetAnim(AnimationPreset anim)
 	{
-		Material temp = GetComponentInChildren<Renderer>().material;
-
+		Material temp = (GetComponentInChildren<Renderer>().material);
 		temp.SetFloat("_Animation", anim._animation);
 		temp.SetFloat("_FrameRate", anim._frameRate);
 		temp.SetFloat("_Frames", anim._frames);
+		temp.SetVector("pos", new Vector4(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
@@ -494,5 +512,13 @@ public abstract class Hero : Entity
             }
             a++;
         }
-    } 
+    }
+
+	IEnumerator Death(AnimationPreset anim)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
+
+		Destroy(this.gameObject);
+	}
 }

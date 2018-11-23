@@ -22,7 +22,7 @@ public class Loki : Hero
 
 	void Start()
 	{
-		worldSpaceUI = GameObject.Find("GameObject").GetComponent<WorldSpaceUI>();
+		worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
 		actionPointLabel = GameObject.Find("Action Points Loki").GetComponent<Text>();
@@ -140,10 +140,7 @@ public class Loki : Hero
 
 						if (bBasicAttack == true)
 						{
-							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
-							bBasicAttack = false;
+							StartCoroutine(basicAttack(m_animPresets[2], hit.collider.GetComponent<Enemy>()));	
 						}
 					}
 					if (bAbility1Attack == true)
@@ -169,46 +166,14 @@ public class Loki : Hero
 				{
 					if (bAbility1Attack == true)
 					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-
-						Node temp = m_currentNode;      //Sets the current nodes for all
-						m_currentNode = hit.collider.GetComponentInParent<Freya>().m_currentNode;
-						hit.collider.GetComponentInParent<Freya>().m_currentNode = temp;
-
-						m_currentNode.contain = this.gameObject;
-						hit.collider.GetComponentInParent<Freya>().m_currentNode.contain = hit.collider.gameObject;
-
-						Vector3 temp1 = transform.position;
-						transform.position = hit.collider.GetComponentInParent<Freya>().transform.position;
-						hit.collider.GetComponentInParent<Freya>().transform.position = temp1;
-						bAbility1Attack = false;
-						bAttacking = false;
-						bridalThor.bAttacking = false;
-						freya.bAttacking = false;
+						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Freya>()));
 					}
 				}
 				else if (hit.collider.GetComponentInParent<BridalThor>() != null)
 				{
 					if (bAbility1Attack == true)
 					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-
-						Node temp = m_currentNode;      //Sets the current nodes for all
-						m_currentNode = hit.collider.GetComponentInParent<BridalThor>().m_currentNode;
-						hit.collider.GetComponentInParent<BridalThor>().m_currentNode = temp;
-
-						m_currentNode.contain = this.gameObject;
-						hit.collider.GetComponentInParent<BridalThor>().m_currentNode.contain = hit.collider.gameObject;
-
-						Vector3 temp1 = transform.position;
-						transform.position = hit.collider.GetComponentInParent<BridalThor>().transform.position;
-						hit.collider.GetComponentInParent<BridalThor>().transform.position = temp1;
-						bAbility1Attack = false;
-						bAttacking = false;
-						bridalThor.bAttacking = false;
-						freya.bAttacking = false;
+						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<BridalThor>()));
 					}
 				}
 				else if (hit.collider.GetComponent<DestructibleObject>() != null)
@@ -268,6 +233,17 @@ public class Loki : Hero
 			}
 		}
 	}
+
+	IEnumerator basicAttack(AnimationPreset anim, Enemy enemy)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
+		m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+		m_grid.ClearBoardData();
+		enemy.m_nHealth = enemy.m_nHealth - m_nBasicAttackDamage;
+		bBasicAttack = false;
+	}
+
 	void Ability1()
 	{
 		m_grid.ClearBoardData();
@@ -291,6 +267,32 @@ public class Loki : Hero
 
 		dijkstrasSearchTeleport(m_currentNode, m_nAbility1AttackRange, AttackHighlight, 1);
 	}
+
+	IEnumerator ability1Attack(AnimationPreset anim, Entity entity)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
+
+		m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+		m_grid.ClearBoardData();
+
+		Node temp = m_currentNode;      //Sets the current nodes for all
+		m_currentNode = entity.m_currentNode;
+		entity.m_currentNode = temp;
+
+		m_currentNode.contain = this.gameObject;
+		entity.m_currentNode.contain = entity.gameObject;
+
+		Vector3 temp1 = transform.position;
+		transform.position = entity.transform.position;
+		entity.transform.position = temp1;
+		bAbility1Attack = false;
+		bAttacking = false;
+		bridalThor.bAttacking = false;
+		loki.bAttacking = false;
+		freya.bAttacking = false;
+	}
+
 	public void dijkstrasSearchTeleport(Node startNode, int actionPointAvailable, Material healingHighlight, int MoveCostPerTile)
 	{
 		int gScore = MoveCostPerTile;
