@@ -30,4 +30,18 @@ public class EnemyLinker : MonoBehaviour
 
         return m_enemyList;
     }
+
+	public IEnumerator EnemyDecisionManager(Animator animator)
+	{
+		foreach (Enemy e in GetComponent<Animator>().GetBehaviour<EnemyTurn>().m_enemy)
+		{
+			while (e.m_nActionPoints > 0)
+			{
+				//e.m_inRangeDecision.MakeDecision();
+				yield return e.m_inRangeDecision.StartCoroutine(e.m_inRangeDecision.StartDecision());
+			}
+		}
+
+		animator.SetBool("PlayerTurn", true);
+	}
 }

@@ -194,38 +194,59 @@ public class MoveDecision : BaseDecision
 
 		Node currentPathNode = m_self.m_targetedHero.m_currentNode.prev;
 
-		if (currentPathNode == null)
+		if (currentPathNode == null)        //this means that the enemy cant get to the hero
 		{
 			m_self.m_nActionPoints = 0;
 			//return; JM:StartHere
-			yield return null;
-		}
-
-		while (currentPathNode.prev != null)
-		{
-			m_path.Add(currentPathNode);
-			currentPathNode = currentPathNode.prev;
-		}
-
-		if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
-		{
-			if (m_path.Count >= 1)
-			{
-				m_self.m_currentNode.contain = null;
-				m_self.m_currentNode = m_path[m_path.Count - 1];
-				transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
-				m_self.m_currentNode.contain = this.gameObject;
-
-				m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
-			}
 		}
 		else
 		{
-			m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
-		}
 
-		m_path.Clear();
-		m_self.m_grid.ClearBoardData();
+
+			while (currentPathNode.prev != null)
+			{
+				m_path.Add(currentPathNode);
+				currentPathNode = currentPathNode.prev;
+			}
+
+			if (m_self.m_nActionPoints >= m_self.m_nMovementActionPointCostPerTile)
+			{
+				if (m_path.Count >= 1)
+				{
+					m_self.m_currentNode.contain = null;
+					m_self.m_currentNode = m_path[m_path.Count - 1];
+					//transform.position = new Vector3(m_path[m_path.Count - 1].transform.position.x, transform.position.y, m_path[m_path.Count - 1].transform.position.z);
+
+					yield return StartCoroutine(Lerp(transform.position, m_path[m_path.Count - 1].transform.position, Time.time, Vector3.Distance(transform.position, m_path[m_path.Count - 1].transform.position), 4));
+
+					m_self.m_currentNode.contain = this.gameObject;
+
+					m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+				}
+			}
+			else
+			{
+				m_self.m_nActionPoints -= m_self.m_nMovementActionPointCostPerTile;
+			}
+
+			m_path.Clear();
+			m_self.m_grid.ClearBoardData();
+		}
+	}
+
+	IEnumerator Lerp(Vector3 playerPosition, Vector3 tilePosition, float startTime, float journeyLength, float speed)
+	{
+		m_self.GetComponentInChildren<Animator>().SetBool("Walk", true);
+		while (transform.position != tilePosition)
+		{
+			
+			float distCovered = ((Time.time - startTime) * speed);
+
+			float fracJourney = distCovered / journeyLength;
+			transform.position = Vector3.Lerp(playerPosition, tilePosition, fracJourney);
+			yield return null;
+		}
+		m_self.GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 }
 

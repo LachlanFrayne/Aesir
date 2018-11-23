@@ -25,6 +25,16 @@ public class AttackDecision : BaseDecision
 
 	public override IEnumerator StartDecision()
 	{
-		throw new System.NotImplementedException();
+		if (m_self.m_nActionPoints >= m_self.m_nBasicAttackCost)
+		{
+			m_self.m_targetedHero.m_nHealth -= m_self.m_nBasicAttackDamage;
+			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
+			yield return new WaitForSeconds(1);
+		}
+		else
+		{
+			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
+		}
+	
 	}
 }

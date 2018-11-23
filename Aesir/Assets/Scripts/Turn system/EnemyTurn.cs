@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemyTurn : StateMachineBehaviour
 {
     public GameObject m_temp;
-    List<Enemy> m_enemy;
+    public List<Enemy> m_enemy;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
 		m_enemy = animator.gameObject.GetComponent<EnemyLinker>().GetEnemies();
 
+		//animator.gameObject.GetComponent<EnemyLinker>().EnemyTurnCoroutine();
+		EnemyLinker link = animator.GetComponent<EnemyLinker>();
 
 		foreach (Enemy e in m_enemy)
 		{
@@ -23,6 +25,8 @@ public class EnemyTurn : StateMachineBehaviour
 				e.m_nActionPoints = 0;
 			}
 		}
+
+		link.StartCoroutine(link.EnemyDecisionManager(animator));
 
 	}
 
@@ -44,24 +48,5 @@ public class EnemyTurn : StateMachineBehaviour
         
     }
 
-	IEnumerator EnemyDecisionManager(Animator animator)
-	{
-		foreach (Enemy e in m_enemy)
-		{
-			while (e.m_nActionPoints > 0)
-			{
-				//e.m_inRangeDecision.MakeDecision();
-				yield return e.m_inRangeDecision.StartCoroutine(e.m_inRangeDecision.StartDecision()); 
-			}
-		}
-
-		foreach (Enemy e in m_enemy)
-		{
-			if (e.m_nActionPoints > 0)
-			{
-				//return;
-			}
-		}
-		animator.SetBool("PlayerTurn", true);
-	}
+	
 }
