@@ -13,9 +13,6 @@ public class Freya : Hero
     public Image healthBarImage;
     public Image backgroundFreyaImage;
 
-    public bool bBasicAttack = false;
-    public bool bAbility1Attack = false;
-
     [Header("Material")]
     public Material AttackHighlight;
     public Material EnemyHighlight;
@@ -218,6 +215,8 @@ public class Freya : Hero
     {
 		m_grid.ClearBoardData();
 		bAttacking = true;
+		loki.bAttacking = true;
+		bridalThor.bAttacking = true;
 		bMove = false;
 		bBasicAttack = false;
         actionPointCostLabel.SetActive(true);

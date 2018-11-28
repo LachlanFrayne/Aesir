@@ -22,6 +22,9 @@ public abstract class Hero : Entity
 	public bool bAttack;
 	private bool bFinished = false;
 	public bool bAttacking;
+	public bool bBasicAttack = false;
+	public bool bAbility1Attack = false;
+	public bool bAbility2Attack = false;
 
 	public int m_nAbility1Attack;
 	public int m_nAbility1AttackRange;
@@ -371,10 +374,7 @@ public abstract class Hero : Entity
 		SetAnim(anim);
 		yield return new WaitForSeconds(anim.animationDuration);
 
-
-
 		GetComponentInChildren<Renderer>().material = mat;	//Sets back to idle after animation
-
 	}
 
 	public void SetAnim(AnimationPreset anim)
@@ -383,7 +383,6 @@ public abstract class Hero : Entity
 		temp.SetFloat("_Animation", anim._animation);
 		temp.SetFloat("_FrameRate", anim._frameRate);
 		temp.SetFloat("_Frames", anim._frames);
-		temp.SetVector("pos", new Vector4(0.5f, 0.5f, 0.5f, 0.5f));
 	}
 
 	public void dijkstrasSearch(Node startNode, int actionPointAvailable, Material movementHighlight, int MoveCostPerTile)
@@ -513,6 +512,21 @@ public abstract class Hero : Entity
             a++;
         }
     }
+
+	public void GetHit(int damage)
+	{
+		m_nHealth -= damage;
+	}
+
+	public IEnumerator basicAttack(AnimationPreset anim, Enemy enemy)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
+		m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
+		m_grid.ClearBoardData();
+		enemy.GetHit(m_nBasicAttackDamage);
+		bBasicAttack = false;
+	}
 
 	IEnumerator Death(AnimationPreset anim)
 	{

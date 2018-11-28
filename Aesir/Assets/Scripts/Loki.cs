@@ -11,11 +11,6 @@ public class Loki : Hero
 	public Image healthBarImage;
 	public Image backgroundLokiImage;
 
-
-
-	public bool bBasicAttack = false;
-	public bool bAbility1Attack = false;
-
 	[Header("Material")]
 	public Material AttackHighlight;
 	public Material EnemyHighlight;
@@ -140,6 +135,8 @@ public class Loki : Hero
 
 						if (bBasicAttack == true)
 						{
+							Node node = hit.collider.GetComponent<Enemy>().m_currentNode.prev;
+							
 							StartCoroutine(basicAttack(m_animPresets[2], hit.collider.GetComponent<Enemy>()));	
 						}
 					}
@@ -234,15 +231,7 @@ public class Loki : Hero
 		}
 	}
 
-	IEnumerator basicAttack(AnimationPreset anim, Enemy enemy)
-	{
-		StartCoroutine(RunAnim(anim));
-		yield return new WaitForSeconds(anim.animationDuration);
-		m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-		m_grid.ClearBoardData();
-		enemy.m_nHealth = enemy.m_nHealth - m_nBasicAttackDamage;
-		bBasicAttack = false;
-	}
+	
 
 	void Ability1()
 	{

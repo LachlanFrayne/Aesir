@@ -9,8 +9,6 @@ public class BridalThor : Hero {
 	public Image healthBarImage;
 	public Image backgroundThorImage;
 
-	public bool bBasicAttack = false;
-	public bool bAbility1Attack = false;
 	public bool bThor = false;
 
 	[Header("Material")]
