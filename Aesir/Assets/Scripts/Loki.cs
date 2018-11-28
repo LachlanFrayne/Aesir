@@ -135,8 +135,27 @@ public class Loki : Hero
 
 						if (bBasicAttack == true)
 						{
-							Node node = hit.collider.GetComponent<Enemy>().m_currentNode.prev;
-							
+							Node node = hit.collider.GetComponent<Enemy>().m_currentNode;
+							while(node.prev.contain != this.gameObject)
+							{
+								node = node.prev;
+							}
+
+							if (m_currentNode.neighbours[0] == node || m_currentNode.neighbours[1] == node)
+							{
+								if (transform.GetChild(0).localScale.x < 0)
+								{
+									transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+								}
+							}
+							else if (m_currentNode.neighbours[2] == node || m_currentNode.neighbours[3] == node)
+							{
+								if (transform.GetChild(0).localScale.x > 0)
+								{
+									transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+								}
+							}
+
 							StartCoroutine(basicAttack(m_animPresets[2], hit.collider.GetComponent<Enemy>()));	
 						}
 					}

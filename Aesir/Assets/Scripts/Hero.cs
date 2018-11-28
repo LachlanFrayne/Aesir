@@ -516,6 +516,13 @@ public abstract class Hero : Entity
 	public void GetHit(int damage)
 	{
 		m_nHealth -= damage;
+		StartCoroutine(Hit(m_animPresets[3]));
+	}
+
+	IEnumerator Hit(AnimationPreset anim)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
 	}
 
 	public IEnumerator basicAttack(AnimationPreset anim, Enemy enemy)

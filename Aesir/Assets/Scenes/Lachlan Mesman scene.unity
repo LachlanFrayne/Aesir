@@ -253,12 +253,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb4932f1d7495b4f85e678864c9600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_xMax: 50
+  m_xMax: 30
   m_xMin: 0
-  m_zMax: 50
+  m_zMax: 30
   m_zMin: 0
-  m_height: 8
-  m_speed: 15
+  m_height: 7
+  m_speed: 20
   m_borderSize: 0
 --- !u!1001 &260511456
 Prefab:
@@ -443,6 +443,16 @@ Prefab:
     - target: {fileID: 1696429531498590, guid: 1fc5b8434c6fe8d4d93a6428733567d7, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224813824262009042, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000024199486
+      objectReference: {fileID: 0}
+    - target: {fileID: 224813824262009042, guid: 1fc5b8434c6fe8d4d93a6428733567d7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.425999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc5b8434c6fe8d4d93a6428733567d7, type: 2}
@@ -1815,14 +1825,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6359a2e77aa70d540aacdcbdab844ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nHealth: 10
+  m_nHealth: 0
   m_nHealthMax: 0
   m_nActionPoints: 0
-  m_nActionPointMax: 3
+  m_nActionPointMax: 0
   m_nBasicAttackDamage: 0
   m_nBasicAttackRange: 0
   m_nBasicAttackCost: 0
-  m_nMovementActionPointCostPerTile: 1
+  m_nMovementActionPointCostPerTile: 0
   m_currentNode: {fileID: 0}
   m_targetedHero: {fileID: 0}
   m_grid: {fileID: 0}
@@ -2094,14 +2104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796da113af563bb42b9279cc11d261f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nHealth: 15
-  m_nHealthMax: 15
-  m_nActionPoints: 12
-  m_nActionPointMax: 12
-  m_nBasicAttackDamage: 2
-  m_nBasicAttackRange: 3
-  m_nBasicAttackCost: 6
-  m_nMovementActionPointCostPerTile: 2
+  m_nHealth: 0
+  m_nHealthMax: 0
+  m_nActionPoints: 0
+  m_nActionPointMax: 0
+  m_nBasicAttackDamage: 0
+  m_nBasicAttackRange: 0
+  m_nBasicAttackCost: 0
+  m_nMovementActionPointCostPerTile: 0
   m_currentNode: {fileID: 0}
   bThorSelected: 0
   bFreyaSelected: 0
@@ -2109,9 +2119,12 @@ MonoBehaviour:
   bMove: 0
   bAttack: 0
   bAttacking: 0
-  m_nAbility1Attack: 1
-  m_nAbility1AttackRange: 1
-  m_nAbility1AttackCost: 4
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
+  m_nAbility1Attack: 0
+  m_nAbility1AttackRange: 0
+  m_nAbility1AttackCost: 0
   m_nAbility2Attack: 0
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
@@ -2132,9 +2145,9 @@ MonoBehaviour:
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
   cancelButton: {fileID: 0}
-  movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
-  removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
-  selectedHeroMat: {fileID: 2100000, guid: 4ddf244ecc03f9c40ae3efcd86aaeb9b, type: 2}
+  movementHighlight: {fileID: 0}
+  removeHighlight: {fileID: 0}
+  selectedHeroMat: {fileID: 0}
   moveEnableImage: {fileID: 0}
   moveDisableImage: {fileID: 0}
   attackEnableImage: {fileID: 0}
@@ -2144,21 +2157,14 @@ MonoBehaviour:
   ability2EnableImage: {fileID: 0}
   ability2DisableImage: {fileID: 0}
   worldSpaceUI: {fileID: 0}
-  speed: 3
-  m_animPresets:
-  - _animation: 0
-    _frameRate: 0
-    _frames: 0
-    _offset: 0
-    animationDuration: 0
+  speed: 0
+  m_animPresets: []
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
-  bBasicAttack: 0
-  bAbility1Attack: 0
   bThor: 0
-  AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
-  EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
+  AttackHighlight: {fileID: 0}
+  EnemyHighlight: {fileID: 0}
 --- !u!1 &1918458525
 GameObject:
   m_ObjectHideFlags: 0

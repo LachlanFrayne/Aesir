@@ -320,6 +320,9 @@ MonoBehaviour:
   bMove: 0
   bAttack: 0
   bAttacking: 0
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
   m_nAbility1Attack: 2
   m_nAbility1AttackRange: 3
   m_nAbility1AttackCost: 8
@@ -380,7 +383,7 @@ MonoBehaviour:
     _frameRate: 13
     _frames: 2
     _offset: 0
-    animationDuration: 0
+    animationDuration: 1
   - _animation: 5
     _frameRate: 5
     _frames: 6
@@ -400,7 +403,5 @@ MonoBehaviour:
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundLokiImage: {fileID: 0}
-  bBasicAttack: 0
-  bAbility1Attack: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
