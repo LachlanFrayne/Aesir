@@ -85,7 +85,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bd4587ddf6cfe7842ab417ca438d3751, type: 2}
+  - {fileID: 2100000, guid: 666f1aebfc111cd4896f42213f13f136, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +111,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578544005026426}
-  m_Mesh: {fileID: 4300000, guid: 8aa011e62750b2146b4421fac0357b8a, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 666f1aebfc111cd4896f42213f13f136, type: 3}
 --- !u!95 &95246956776272740
 Animator:
   serializedVersion: 3

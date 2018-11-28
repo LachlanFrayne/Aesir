@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_self: {fileID: 0}
+  m_path: []
 --- !u!114 &114493150420046942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +176,7 @@ MonoBehaviour:
   m_nActionPoints: 6
   m_nActionPointMax: 6
   m_nBasicAttackDamage: 1
-  m_nBasicAttackRange: 1
+  m_nBasicAttackRange: 2
   m_nBasicAttackCost: 3
   m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
@@ -183,8 +184,6 @@ MonoBehaviour:
   m_grid: {fileID: 0}
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
-  m_enemyRangeHighlightMaterial: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b,
-    type: 2}
   m_bStunned: 0
 --- !u!114 &114796332560995744
 MonoBehaviour:

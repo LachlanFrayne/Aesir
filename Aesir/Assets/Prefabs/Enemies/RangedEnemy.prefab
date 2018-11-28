@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418051298151632}
   m_LocalRotation: {x: -0, y: -0.66164684, z: -0, w: 0.7498156}
-  m_LocalPosition: {x: 13.33, y: 0.224, z: 9.6}
+  m_LocalPosition: {x: 10.13, y: 0.224, z: 9.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_self: {fileID: 0}
+  m_path: []
 --- !u!114 &114760022501418834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,8 +184,6 @@ MonoBehaviour:
   m_grid: {fileID: 0}
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
-  m_enemyRangeHighlightMaterial: {fileID: 2100000, guid: 8cc3f18f83aa7964d98de09cc6f1c5b4,
-    type: 2}
   m_bStunned: 0
 --- !u!114 &114767264278223080
 MonoBehaviour:

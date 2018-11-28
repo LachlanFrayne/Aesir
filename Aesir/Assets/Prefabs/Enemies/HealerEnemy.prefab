@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_self: {fileID: 0}
+  m_path: []
 --- !u!114 &114359316919136672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,6 +197,4 @@ MonoBehaviour:
   m_grid: {fileID: 0}
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
-  m_enemyRangeHighlightMaterial: {fileID: 2100000, guid: 273698b335400e943ba17cf046ecbe47,
-    type: 2}
   m_bStunned: 0
