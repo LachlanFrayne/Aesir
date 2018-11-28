@@ -191,5 +191,13 @@ public class Enemy : Entity
 			}
 		}
 	}
+
+	public void GetHit(int damage)		//hit or miss, i guess they never miss huh?, you got a boyfriend, i bet he doesn't kiss ya, MUAH, 
+	{
+		m_nHealth -= damage;
+
+		GetComponentInChildren<Animator>().SetBool("GetHit", true);
+	}
+
 }
 
