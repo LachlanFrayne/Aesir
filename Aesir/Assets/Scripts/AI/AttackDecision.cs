@@ -27,9 +27,16 @@ public class AttackDecision : BaseDecision
 	{
 		if (m_self.m_nActionPoints >= m_self.m_nBasicAttackCost)
 		{
-			m_self.m_targetedHero.GetComponent<Hero>().GetHit(m_self.m_nBasicAttackDamage);
-			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
+			if (m_self.m_targetedHero.GetType() == typeof(Hero))
+			{
+				m_self.m_targetedHero.GetComponent<Hero>().GetHit(m_self.m_nBasicAttackDamage);
+			}
+			else
+			{
+				m_self.m_targetedHero.m_nHealth -= m_self.m_nBasicAttackDamage;
+			}
 
+			m_self.m_nActionPoints -= m_self.m_nBasicAttackCost;
 			m_self.GetComponentInChildren<Animator>().SetBool("Hit", true);
 			yield return new WaitForSeconds(1);
 		}

@@ -65,16 +65,8 @@ public class Enemy : Entity
 
 	void Update()
 	{
-		if (m_nHealth <= 0)
-		{
-			GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_enemies.Remove(this.gameObject);
-			Destroy(this.gameObject);
-		}
-
 		///////////////////////////////////////////////////////////enemy attack range visualizer////////////////////////////////////////////////////////////
-
 		
-
 		if (!m_thor.enabled)
 		{
 			m_thor = m_thor.gameObject.GetComponent<Thor>();
@@ -196,7 +188,21 @@ public class Enemy : Entity
 	{
 		m_nHealth -= damage;
 
-		GetComponentInChildren<Animator>().SetBool("GetHit", true);
+
+
+		if (m_nHealth <= 0)
+		{
+			GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_enemies.Remove(this.gameObject);
+
+			GetComponentInChildren<Animator>().SetBool("GetHit", true);
+			GetComponentInChildren<Animator>().SetBool("Death", true);
+
+			Destroy(this.gameObject, GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length * 4);
+		}
+		else
+		{
+			GetComponentInChildren<Animator>().SetBool("GetHit", true);
+		}
 	}
 
 }

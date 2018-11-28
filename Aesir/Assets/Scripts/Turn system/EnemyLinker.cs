@@ -31,6 +31,12 @@ public class EnemyLinker : MonoBehaviour
         return m_enemyList;
     }
 
+	//public List<GameObject> GetUI()
+	//{
+	//	List<GameObject> ui;
+	//	return;
+	//}
+
 	public IEnumerator EnemyDecisionManager(Animator animator)
 	{
 		foreach (Enemy e in GetComponent<Animator>().GetBehaviour<EnemyTurn>().m_enemy)

@@ -35,7 +35,7 @@ public class LevelStartDialog : MonoBehaviour
 		{
 			dialogBox.text += letter;
 
-			yield return new WaitForSeconds((dialogAudio.length / dialogText.Length) / 12.0f);
+			yield return null;//new WaitForSeconds((dialogAudio.length / dialogText.Length) / 12.0f);
 		}
 	}
 }
