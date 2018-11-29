@@ -11,18 +11,51 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1726695763999860}
   m_IsPrefabParent: 1
---- !u!1 &1531276686942030
+--- !u!1 &1005548123182278
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4110483546822054}
+  - component: {fileID: 33240698014606450}
+  - component: {fileID: 64934884189266534}
+  - component: {fileID: 23254909402809682}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1019505416261290
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4520476000242984}
-  - component: {fileID: 65864288117036554}
+  - component: {fileID: 4196594618493076}
+  - component: {fileID: 65165922549420760}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Thor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1117238148389410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4893798370576490}
+  m_Layer: 0
+  m_Name: GameObject1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +77,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1726695763999860
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +95,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4110483546822054
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005548123182278}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0014337003, y: 0.017218173, z: -0.99985075}
+  m_LocalScale: {x: 0.089138925, y: 1, z: 0.20517012}
+  m_Children: []
+  m_Father: {fileID: 4893798370576490}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
+--- !u!4 &4196594618493076
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019505416261290}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.41737747, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4713201342206428}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4409763530176496
 Transform:
   m_ObjectHideFlags: 1
@@ -69,19 +128,6 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684016856649036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4713201342206428}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4520476000242984
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1531276686942030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -94,15 +140,64 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
-  m_LocalRotation: {x: -0, y: 0.99999976, z: -0, w: 0.00071765}
-  m_LocalPosition: {x: 9.32, y: 0.7726209, z: 17.69}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 5.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4893798370576490}
   - {fileID: 4409763530176496}
-  - {fileID: 4520476000242984}
+  - {fileID: 4196594618493076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4893798370576490
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117238148389410}
+  m_LocalRotation: {x: 0.40103436, y: -0.5855162, z: 0.5749455, w: 0.4071608}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4110483546822054}
+  m_Father: {fileID: 4713201342206428}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
+--- !u!23 &23254909402809682
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005548123182278}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 43b870f786003a844a86c9b584134f1b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23629239966580918
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -151,18 +246,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684016856649036}
   m_Mesh: {fileID: 4300000, guid: 2711c8e472d89064283b8cafc5b55ef1, type: 3}
---- !u!65 &65864288117036554
+--- !u!33 &33240698014606450
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005548123182278}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64934884189266534
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005548123182278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65165922549420760
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1531276686942030}
+  m_GameObject: {fileID: 1019505416261290}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.21332, y: 1.5797756, z: 0.59633684}
-  m_Center: {x: 0.045407176, y: 0.017526507, z: -0.0060584545}
+  m_Size: {x: 0.6343667, y: 2.066137, z: 0.6070479}
+  m_Center: {x: 0.059926298, y: 0.53306854, z: 0.02805069}
 --- !u!95 &95845360322939910
 Animator:
   serializedVersion: 3
@@ -205,6 +321,10 @@ MonoBehaviour:
   bLokiSelected: 0
   bMove: 0
   bAttack: 0
+  bAttacking: 0
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
   m_nAbility1Attack: 1
   m_nAbility1AttackRange: 1
   m_nAbility1AttackCost: 4
@@ -212,6 +332,9 @@ MonoBehaviour:
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
   m_grid: {fileID: 0}
+  bridalThor: {fileID: 0}
+  freya: {fileID: 0}
+  loki: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -224,8 +347,56 @@ MonoBehaviour:
   basicAttackButton: {fileID: 0}
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  moveEnableImage: {fileID: 0}
+  moveDisableImage: {fileID: 0}
+  attackEnableImage: {fileID: 0}
+  attackDisableImage: {fileID: 0}
+  ability1EnableImage: {fileID: 0}
+  ability1DisableImage: {fileID: 0}
+  ability2EnableImage: {fileID: 0}
+  ability2DisableImage: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 0
+  m_animPresets:
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 0
+  - _animation: 2
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 0
+  - _animation: 3
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 0
+  - _animation: 4
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 0
+  - _animation: 5
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 0
+  - _animation: 6
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
+  - _animation: 7
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}
@@ -257,6 +428,10 @@ MonoBehaviour:
   bLokiSelected: 0
   bMove: 0
   bAttack: 0
+  bAttacking: 0
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
   m_nAbility1Attack: 6
   m_nAbility1AttackRange: 4
   m_nAbility1AttackCost: 6
@@ -264,6 +439,9 @@ MonoBehaviour:
   m_nAbility2AttackRange: 3
   m_nAbility2AttackCost: 5
   m_grid: {fileID: 0}
+  bridalThor: {fileID: 0}
+  freya: {fileID: 0}
+  loki: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -276,8 +454,21 @@ MonoBehaviour:
   basicAttackButton: {fileID: 0}
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  moveEnableImage: {fileID: 0}
+  moveDisableImage: {fileID: 0}
+  attackEnableImage: {fileID: 0}
+  attackDisableImage: {fileID: 0}
+  ability1EnableImage: {fileID: 0}
+  ability1DisableImage: {fileID: 0}
+  ability2EnableImage: {fileID: 0}
+  ability2DisableImage: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 0
+  m_animPresets: []
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
   backgroundThorImage: {fileID: 0}

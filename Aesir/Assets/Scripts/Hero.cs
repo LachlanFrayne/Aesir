@@ -513,6 +513,30 @@ public abstract class Hero : Entity
         }
     }
 
+	public void FaceTowards(Entity entity)
+	{
+		Node node = entity.m_currentNode;
+		while (node.prev.contain != this.gameObject)
+		{
+			node = node.prev;
+		}
+
+		if (m_currentNode.neighbours[0] == node || m_currentNode.neighbours[1] == node)
+		{
+			if (transform.GetChild(0).localScale.x < 0)
+			{
+				transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+			}
+		}
+		else if (m_currentNode.neighbours[2] == node || m_currentNode.neighbours[3] == node)
+		{
+			if (transform.GetChild(0).localScale.x > 0)
+			{
+				transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+			}
+		}
+	}
+
 	public void GetHit(int damage)
 	{
 		m_nHealth -= damage;

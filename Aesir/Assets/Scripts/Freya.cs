@@ -136,47 +136,18 @@ public class Freya : Hero
 
 						if (bBasicAttack == true)
 						{
-							Node node = hit.collider.GetComponent<Enemy>().m_currentNode;
-							while (node.prev.contain != this.gameObject)
-							{
-								node = node.prev;
-							}
-
-							if (m_currentNode.neighbours[0] == node || m_currentNode.neighbours[1] == node)
-							{
-								if (transform.GetChild(0).localScale.x < 0)
-								{
-									transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-								}
-							}
-							else if (m_currentNode.neighbours[2] == node || m_currentNode.neighbours[3] == node)
-							{
-								if (transform.GetChild(0).localScale.x > 0)
-								{
-									transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-								}
-							}
+							FaceTowards(hit.collider.GetComponent<Entity>());
 
 							StartCoroutine(basicAttack(m_animPresets[2], hit.collider.GetComponent<Enemy>()));
 						}
-					}
-				}
-				else if (hit.collider.GetComponent<DestructibleObject>() != null)
-				{
-					if (bBasicAttack == true)
-					{
-						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
-						bBasicAttack = false;
 					}
 				}
 				else if (hit.collider.GetComponentInParent<Loki>() != null)
 				{
 					if (bAbility1Attack == true)
 					{
-						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Loki>()));
-						
+						FaceTowards(hit.collider.GetComponent<Entity>());
+						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Loki>()));						
 					}
 				}
 				else if(hit.collider.GetComponentInParent<Thor>() != null)
@@ -185,24 +156,17 @@ public class Freya : Hero
 					{
 						if (bAbility1Attack == true)
 						{
+							FaceTowards(hit.collider.GetComponent<Entity>());
 							StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<BridalThor>()));
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponentInParent<BridalThor>().m_nHealth = hit.collider.GetComponentInParent<BridalThor>().m_nHealth + m_nAbility1Attack;
-							bAbility1Attack = false;
 						}
 					}
 					else
 					{
 						if (bAbility1Attack == true)
 						{
+							FaceTowards(hit.collider.GetComponent<Entity>());
 							StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Thor>()));
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponentInParent<Thor>().m_nHealth = hit.collider.GetComponentInParent<Thor>().m_nHealth + m_nAbility1Attack;
-							bAbility1Attack = false;
 						}
-
 					}
 				}
 			}
@@ -293,9 +257,6 @@ public class Freya : Hero
 
 	IEnumerator ability1Attack(AnimationPreset anim, Hero hero)
 	{
-		StartCoroutine(RunAnim(anim));
-		yield return new WaitForSeconds(anim.animationDuration);
-
 		StartCoroutine(RunAnim(anim));
 		yield return new WaitForSeconds(anim.animationDuration);
 
