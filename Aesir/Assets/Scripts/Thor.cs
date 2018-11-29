@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Thor : BridalThor
 {
+     
+    public bool bAbility2Attack = false;
+
 	public Node[,] list;
 
 	List<Node> ability2List = new List<Node>();

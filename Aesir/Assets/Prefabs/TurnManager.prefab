@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 114379005815422098}
   - component: {fileID: 114396946092993176}
   - component: {fileID: 114112647463644716}
-  - component: {fileID: 114448591988727966}
-  - component: {fileID: 114167134585682846}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -74,23 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemies: []
-  m_heroes: []
---- !u!114 &114167134585682846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713042312441972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b925469ef43511f458b4f95416d7f05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: 
-  dialogAudio: {fileID: 0}
-  dialogPanel: {fileID: 0}
-  source: {fileID: 0}
-  dialogBox: {fileID: 0}
+  heroes: []
 --- !u!114 &114379005815422098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,7 +86,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 95517499164111598}
   endTurnButton: {fileID: 0}
-  m_enemyTurnFirst: 0
 --- !u!114 &114396946092993176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,20 +97,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654fb4fd4fe0e9b4f8acd3e8a58a32ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114448591988727966
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713042312441972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4c3d86158d2c3428b655c3894c3de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: ' they finally arrive at the chapel, where thor''s hammer awaits, but
-    the giants are still captivated by bridal thor''s beauty and block the entrance'
-  dialogAudio: {fileID: 0}
-  dialogPanel: {fileID: 0}
-  source: {fileID: 0}
-  dialogBox: {fileID: 0}

@@ -141,7 +141,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898905515676670}
-  m_Mesh: {fileID: 4300000, guid: dd9246f75d0ea1c41948c0dc34520e14, type: 3}
+  m_Mesh: {fileID: 4300000, guid: c2f8f76c638036244b83ff880b0b1941, type: 3}
 --- !u!65 &65022122123345650
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -162,7 +162,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898905515676670}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: dd9246f75d0ea1c41948c0dc34520e14, type: 3}
+  m_Avatar: {fileID: 9000000, guid: c2f8f76c638036244b83ff880b0b1941, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
