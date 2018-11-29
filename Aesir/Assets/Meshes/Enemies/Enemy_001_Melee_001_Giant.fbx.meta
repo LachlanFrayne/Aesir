@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-guid: dd9246f75d0ea1c41948c0dc34520e14
-timeCreated: 1543378650
+guid: c2f8f76c638036244b83ff880b0b1941
+timeCreated: 1539213015
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: StingrayPBS1
+    2100000: Enemy_001_Melee_001_Giant_texture
+    2100002: lambert1
     2300000: //RootNode
     3300000: //RootNode
     4300000: Enemy_001_Melee_001_Giant1
