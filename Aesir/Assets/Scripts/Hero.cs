@@ -131,7 +131,7 @@ public abstract class Hero : Entity
 
 		transform.LookAt(new Vector3(camera.transform.position.x, transform.position.y, camera.transform.position.z));
 
-		if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn"))
+		if (!m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn"))
 		{
 			bLokiSelected = false;
 			bThorSelected = false;

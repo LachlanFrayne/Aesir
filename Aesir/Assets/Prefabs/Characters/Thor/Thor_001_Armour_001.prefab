@@ -141,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 5.62}
+  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 12.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4893798370576490}
@@ -517,4 +517,3 @@ MonoBehaviour:
   bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
-  bAbility2Attack: 0
