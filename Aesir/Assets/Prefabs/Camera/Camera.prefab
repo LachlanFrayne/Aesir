@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4415201354536354}
-  - component: {fileID: 82588280048174690}
+  - component: {fileID: 82723028177411786}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1595101384475262}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -2.29, y: 8, z: 4.67}
+  m_LocalPosition: {x: -3.4, y: 8, z: 7.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4415201354536354}
@@ -116,7 +116,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1595101384475262}
   m_Enabled: 1
---- !u!82 &82588280048174690
+--- !u!82 &82723028177411786
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -127,7 +127,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: fa41b443f87f83b4d9147fa5a82df98f,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
