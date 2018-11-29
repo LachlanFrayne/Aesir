@@ -35,13 +35,6 @@ public class EnemyLinker : MonoBehaviour
 	{
 		Transform canvas = GameObject.Find("Canvas").transform;
 
-		//List<GameObject> ui = new List<GameObject>();
-
-		//foreach (GameObject g in canvas.transform)
-		//{
-		//	ui.Add(g);
-		//}
-
 		return canvas;
 	}
 

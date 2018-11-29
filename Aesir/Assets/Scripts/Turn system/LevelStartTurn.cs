@@ -21,7 +21,7 @@ public class LevelStartTurn : StateMachineBehaviour
 		levelStartDialog.dialogPanel.SetActive(true);
 		levelStartDialog.dialogBox.text = "";
 
-		//List<GameObject> ui = animator.GetComponent<EnemyLinker>().GetUI();
+		
 		Transform ui = animator.GetComponent<EnemyLinker>().GetUI();
 
 		ui.Find("");
