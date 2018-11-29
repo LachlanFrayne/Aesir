@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\FrameAnimTest2Normalised.shader">
     <Files>
-      <File FileName="Assets\Shaders\FrameAnimTest2Normalised.shader" Line="9" Column="45" />
+      <File FileName="Assets\Shaders\FrameAnimTest2Normalised.shader" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Freya.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BridalThor.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Turn system\LevelStartTurn.cs" Line="1" Column="1" />

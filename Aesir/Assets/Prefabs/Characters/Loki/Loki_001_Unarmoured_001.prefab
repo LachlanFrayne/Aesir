@@ -110,27 +110,27 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160226243162438}
-  m_LocalRotation: {x: -0.3326388, y: 0.62000066, z: -0.6308645, w: -0.32704848}
+  m_LocalRotation: {x: 0.70097154, y: 0, z: 0, w: 0.7131893}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852662208358356}
   m_Father: {fileID: 4473960117621986}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.01, y: 55.036, z: -180.577}
+  m_LocalEulerAnglesHint: {x: 89.01, y: 0, z: 0}
 --- !u!4 &4852662208358356
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1631301771806276}
-  m_LocalRotation: {x: 0.0000013411044, y: -0, z: 0.00000086426724, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.13214362, y: -0.19486463, z: -0.9967593}
   m_LocalScale: {x: 0.11920505, y: 1, z: 0.20517012}
   m_Children: []
   m_Father: {fileID: 4777593548288258}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.01, y: 55.036003, z: -180.577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23982171719086276
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
   m_grid: {fileID: 0}
+  camera: {fileID: 0}
   bridalThor: {fileID: 0}
   freya: {fileID: 0}
   loki: {fileID: 114556546164295584}
@@ -303,9 +304,10 @@ MonoBehaviour:
     _frames: 6
     _offset: 0
     animationDuration: 2
+  deathParticle: {fileID: 1874325792678094, guid: 77740f75a85ea0d4cbceae2dc3cd566b,
+    type: 2}
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
-  backgroundLokiImage: {fileID: 0}
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}

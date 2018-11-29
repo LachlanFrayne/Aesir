@@ -11,19 +11,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1840937201099206}
   m_IsPrefabParent: 1
---- !u!1 &1112459139012818
+--- !u!1 &1286909688635254
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4065318930420324}
-  - component: {fileID: 33717400977240514}
-  - component: {fileID: 23984099719811456}
-  - component: {fileID: 95653745593984266}
+  - component: {fileID: 4000401800078162}
   m_Layer: 0
-  m_Name: Freya_001_Medic_001
+  m_Name: GameObject1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +42,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1511955893797840
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4245851881219180}
+  - component: {fileID: 33444607785533128}
+  - component: {fileID: 64051599548473670}
+  - component: {fileID: 23451778348606460}
+  m_Layer: 0
+  m_Name: FreyaPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1840937201099206
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,19 +76,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4065318930420324
+--- !u!4 &4000401800078162
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112459139012818}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 1286909688635254}
+  m_LocalRotation: {x: 0.70097154, y: -0, z: -0, w: 0.7131893}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4245851881219180}
   m_Father: {fileID: 4620197959953242}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 89.01, y: 0, z: 0}
+--- !u!4 &4245851881219180
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511955893797840}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: -1.637}
+  m_LocalScale: {x: 0.10112046, y: 0.99999994, z: 0.29781303}
+  m_Children: []
+  m_Father: {fileID: 4000401800078162}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
 --- !u!4 &4289126837473478
 Transform:
   m_ObjectHideFlags: 1
@@ -85,7 +114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4620197959953242}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4620197959953242
 Transform:
@@ -94,20 +123,20 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840937201099206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.257114, y: 27.976032, z: 6.2095323}
+  m_LocalPosition: {x: 32.51, y: 27.976032, z: 6.2095323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4000401800078162}
   - {fileID: 4289126837473478}
-  - {fileID: 4065318930420324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23984099719811456
+--- !u!23 &23451778348606460
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112459139012818}
+  m_GameObject: {fileID: 1511955893797840}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -116,16 +145,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100002, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100004, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100006, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100008, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100010, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100012, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100014, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100016, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  - {fileID: 2100018, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
+  - {fileID: 2100000, guid: 39c62ffcdcee140469b28d2080891add, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,7 +153,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
+  m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -145,13 +165,27 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33717400977240514
+--- !u!33 &33444607785533128
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112459139012818}
-  m_Mesh: {fileID: 4300000, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
+  m_GameObject: {fileID: 1511955893797840}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64051599548473670
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511955893797840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65539860617447764
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -164,23 +198,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.53161144, y: 1.045399, z: 0.4229219}
   m_Center: {x: 0.008548737, y: 0.022699475, z: -0.0048462152}
---- !u!95 &95653745593984266
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112459139012818}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 56084c4bb919ead4ab3394b42cbe2b79, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114550503194178708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,22 +213,31 @@ MonoBehaviour:
   m_nHealthMax: 8
   m_nActionPoints: 12
   m_nActionPointMax: 12
-  m_nBasicAttack: 2
+  m_nBasicAttackDamage: 0
   m_nBasicAttackRange: 5
   m_nBasicAttackCost: 3
-  m_nAbility1Attack: 4
-  m_nAbility1AttackRange: 5
-  m_nAbility1AttackCost: 6
-  m_nAbility2Attack: 0
-  m_nAbility2AttackRange: 0
-  m_nAbility2AttackCost: 0
   m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   bThorSelected: 0
   bFreyaSelected: 0
   bLokiSelected: 0
   bMove: 0
+  bAttack: 0
+  bAttacking: 0
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
+  m_nAbility1Attack: 4
+  m_nAbility1AttackRange: 5
+  m_nAbility1AttackCost: 6
+  m_nAbility2Attack: 0
+  m_nAbility2AttackRange: 0
+  m_nAbility2AttackCost: 0
   m_grid: {fileID: 0}
+  camera: {fileID: 0}
+  bridalThor: {fileID: 0}
+  freya: {fileID: 0}
+  loki: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -224,19 +250,62 @@ MonoBehaviour:
   basicAttackButton: {fileID: 0}
   ability1Button: {fileID: 0}
   ability2Button: {fileID: 0}
+  cancelButton: {fileID: 0}
   movementHighlight: {fileID: 2100000, guid: e026f3d3cd3b9144ab941d89e72a09a0, type: 2}
   removeHighlight: {fileID: 2100000, guid: c106d098d4482604cb00efe5f5ce170c, type: 2}
+  selectedHeroMat: {fileID: 0}
+  moveEnableImage: {fileID: 0}
+  moveDisableImage: {fileID: 0}
+  attackEnableImage: {fileID: 0}
+  attackDisableImage: {fileID: 0}
+  ability1EnableImage: {fileID: 0}
+  ability1DisableImage: {fileID: 0}
+  ability2EnableImage: {fileID: 0}
+  ability2DisableImage: {fileID: 0}
+  worldSpaceUI: {fileID: 0}
+  speed: 1
+  m_animPresets:
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 0
+  - _animation: 2
+    _frameRate: 13
+    _frames: 5
+    _offset: 0
+    animationDuration: 0
+  - _animation: 3
+    _frameRate: 10
+    _frames: 6
+    _offset: 0
+    animationDuration: 1
+  - _animation: 4
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 1
+  - _animation: 5
+    _frameRate: 5
+    _frames: 4
+    _offset: 0
+    animationDuration: 3
+  - _animation: 6
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
+  - _animation: 7
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
+  deathParticle: {fileID: 1874325792678094, guid: 77740f75a85ea0d4cbceae2dc3cd566b,
+    type: 2}
   regen: 2
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
-  backgroundFreyaImage: {fileID: 0}
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
-  pathUpDown: {fileID: 0}
-  pathLeftRight: {fileID: 0}
-  pathUpLeft: {fileID: 0}
-  pathUpRight: {fileID: 0}
-  pathDownLeft: {fileID: 0}
-  pathDownRight: {fileID: 0}
   healingHighlight: {fileID: 2100000, guid: 273698b335400e943ba17cf046ecbe47, type: 2}
