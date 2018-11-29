@@ -65,11 +65,18 @@ public class Enemy : Entity
 
 	void Update()
 	{
-		///////////////////////////////////////////////////////////enemy attack range visualizer////////////////////////////////////////////////////////////
-		
-		if (!m_thor.enabled)
+		if (m_nHealth > m_nHealthMax)
 		{
-			m_thor = m_thor.gameObject.GetComponent<Thor>();
+			m_nHealth = m_nHealthMax;
+		}
+
+		///////////////////////////////////////////////////////////enemy attack range visualizer////////////////////////////////////////////////////////////
+		if (m_thor != null)
+		{
+			if (!m_thor.enabled)
+			{
+				m_thor = m_thor.gameObject.GetComponent<Thor>();
+			}
 		}
 
 		if (Input.GetMouseButtonDown(0))

@@ -32,6 +32,13 @@ public class EnemyTurn : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
+		foreach(Enemy e in m_enemy)
+		{
+			if(e.m_nActionPoints > 0)
+			{
+				return;
+			}
+		}
 		animator.SetBool("PlayerTurn", true);
     }
 

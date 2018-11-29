@@ -9,7 +9,7 @@ public class PlayerTurn : StateMachineBehaviour
 	public Freya m_freya;
 	public Loki m_loki;
 
-    public Button endturnbutton;
+    public GameObject endturnbutton;
 
 	public bool m_enemyTurnFirst;
 
@@ -18,7 +18,7 @@ public class PlayerTurn : StateMachineBehaviour
 		m_thor = GameObject.Find("Thor").GetComponent<BridalThor>();
 		m_freya = GameObject.Find("Freya").GetComponent<Freya>();
 		m_loki = GameObject.Find("Loki").GetComponent<Loki>();
-		endturnbutton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+		endturnbutton = GameObject.Find("EndTurnButton");
 	}
 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -28,9 +28,9 @@ public class PlayerTurn : StateMachineBehaviour
 			m_enemyTurnFirst = false;
 			animator.SetBool("EnemyTurn", true);
 		}
-		//endturnbutton.onClick.AddListener(animator.GetComponent)
 
-		endturnbutton.onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);
+		endturnbutton.GetComponent<Button>().onClick.AddListener(animator.GetComponent<EndPlayerTurn>().ExitPlayerTurn);
+
 		if (m_thor != null)
 		{
 			if (m_thor.enabled == false)
@@ -65,7 +65,7 @@ public class PlayerTurn : StateMachineBehaviour
 
 	public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 	{
-        endturnbutton.gameObject.SetActive(false);
+        endturnbutton.SetActive(false);
 	}
 
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
