@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class BridalThor : Hero {
 
 	public Image actionPointsBarImage;
 	public Image healthBarImage;
-	public Image backgroundThorImage;
+
+	GameObject thorPlane;
+	GameObject bridalThorPlane;
 
 	public bool bThor = false;
 
@@ -27,7 +30,9 @@ public class BridalThor : Hero {
 		healthMaxLabel = GameObject.Find("Health Max Thor").GetComponent<Text>();
 		actionPointsBarImage = GameObject.Find("Action Points Bar Thor").GetComponent<Image>();
 		healthBarImage = GameObject.Find("Health Bar Thor").GetComponent<Image>();
-		backgroundThorImage = GameObject.Find("BackgroundThor").GetComponent<Image>();
+
+		thorPlane = GameObject.Find("ThorPlane");
+		bridalThorPlane = GameObject.Find("BridalThorPlane");
 
 		healthLabel.text = m_nHealth.ToString();
 		healthMaxLabel.text = m_nHealthMax.ToString();
@@ -37,7 +42,7 @@ public class BridalThor : Hero {
 		actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
 		base.Start();
-
+		thorPlane.SetActive(false);
 		SetTile();
 	}
 
@@ -55,9 +60,11 @@ public class BridalThor : Hero {
 			thor.healthMaxLabel = healthMaxLabel;
 			thor.actionPointsBarImage = actionPointsBarImage;
 			thor.healthBarImage = healthBarImage;
-			thor.backgroundThorImage = backgroundThorImage;
 			thor.worldSpaceUI = worldSpaceUI;
-
+			thor.m_currentNode = m_currentNode;
+			bridalThorPlane.SetActive(false);
+			thorPlane.SetActive(true);
+			
 			this.enabled = false; 
 
 		}
@@ -123,13 +130,8 @@ public class BridalThor : Hero {
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 		worldSpaceUI.thorHealthOverheadLabel.text = healthLabel.text;
 
-		if (bThorSelected)
-		{
-			backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 150);
-		}
 		if (!bThorSelected)
 		{
-			backgroundThorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 55);
 			actionPointCostLabel.SetActive(false);
 			bMove = false;
 			bBasicAttack = false;
@@ -150,38 +152,15 @@ public class BridalThor : Hero {
 
 						if (bBasicAttack == true)
 						{
-							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nBasicAttackDamage;
-							bBasicAttack = false;
+							FaceTowards(hit.collider.GetComponent<Entity>());
+
+							StartCoroutine(basicAttack(m_animPresets[2], hit.collider.GetComponent<Enemy>()));
 						}
 						if (bAbility1Attack == true)
 						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-							hit.collider.GetComponent<Enemy>().m_bStunned = true;
-							bAbility1Attack = false;
-						}
-					}
-				}
-				else if(hit.collider.GetComponent<DestructibleObject>() != null)
-				{
-					if (hit.collider.GetComponent<DestructibleObject>().m_currentNode.prev != null)
-					{
-						if (bBasicAttack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
-							bBasicAttack = false;
-						}
-						if (bAbility1Attack == true)
-						{
-							m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-							m_grid.ClearBoardData();
-							hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nAbility1Attack;
-							bAbility1Attack = false;
+							FaceTowards(hit.collider.GetComponent<Entity>());
+
+							StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponent<Enemy>()));
 						}
 					}
 				}
@@ -243,6 +222,18 @@ public class BridalThor : Hero {
 				tempNode2.GetComponent<Renderer>().material = removeHighlight;
 			}
 		}
+	}
+
+	IEnumerator ability1Attack(AnimationPreset anim, Enemy enemy)
+	{
+		StartCoroutine(RunAnim(anim));
+		yield return new WaitForSeconds(anim.animationDuration);
+
+		m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
+		m_grid.ClearBoardData();
+		enemy.m_nHealth = enemy.m_nHealth - m_nAbility1Attack;
+		enemy.m_bStunned = true;
+		bAbility1Attack = false;
 	}
 
 	void Cancel()

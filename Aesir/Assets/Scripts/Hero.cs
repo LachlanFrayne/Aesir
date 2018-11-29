@@ -125,7 +125,14 @@ public abstract class Hero : Entity
 			m_nHealth = m_nHealthMax;
 		}
 
-        if (m_nHealth <= 0)
+		if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn"))
+		{
+			bLokiSelected = false;
+			bThorSelected = false;
+			bFreyaSelected = false;
+		}
+
+			if (m_nHealth <= 0)
         {
             GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
 			StartCoroutine(Death(m_animPresets[4]));
@@ -202,43 +209,46 @@ public abstract class Hero : Entity
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, 100))
 			{
-				if (bAttacking != true)
+				if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn"))
 				{
-					if (hit.collider.tag == "Thor")
+					if (bAttacking != true)
 					{
-						moveButton.onClick.RemoveAllListeners();
-						basicAttackButton.onClick.RemoveAllListeners();
-						ability1Button.onClick.RemoveAllListeners();
-						ability2Button.onClick.RemoveAllListeners();
-						cancelButton.onClick.RemoveAllListeners();
-						m_grid.ClearBoardData();
-						bThorSelected = true;
-						bLokiSelected = false;
-						bFreyaSelected = false;
-					}
-					if (hit.collider.tag == "Loki")
-					{
-						moveButton.onClick.RemoveAllListeners();
-						basicAttackButton.onClick.RemoveAllListeners();
-						ability1Button.onClick.RemoveAllListeners();
-						ability2Button.onClick.RemoveAllListeners();
-						cancelButton.onClick.RemoveAllListeners();
-						m_grid.ClearBoardData();
-						bLokiSelected = true;
-						bThorSelected = false;
-						bFreyaSelected = false;
-					}
-					if (hit.collider.tag == "Freya")
-					{
-						moveButton.onClick.RemoveAllListeners();
-						basicAttackButton.onClick.RemoveAllListeners();
-						ability1Button.onClick.RemoveAllListeners();
-						ability2Button.onClick.RemoveAllListeners();
-						cancelButton.onClick.RemoveAllListeners();
-						m_grid.ClearBoardData();
-						bFreyaSelected = true;
-						bThorSelected = false;
-						bLokiSelected = false;
+						if (hit.collider.tag == "Thor")
+						{
+							moveButton.onClick.RemoveAllListeners();
+							basicAttackButton.onClick.RemoveAllListeners();
+							ability1Button.onClick.RemoveAllListeners();
+							ability2Button.onClick.RemoveAllListeners();
+							cancelButton.onClick.RemoveAllListeners();
+							m_grid.ClearBoardData();
+							bThorSelected = true;
+							bLokiSelected = false;
+							bFreyaSelected = false;
+						}
+						if (hit.collider.tag == "Loki")
+						{
+							moveButton.onClick.RemoveAllListeners();
+							basicAttackButton.onClick.RemoveAllListeners();
+							ability1Button.onClick.RemoveAllListeners();
+							ability2Button.onClick.RemoveAllListeners();
+							cancelButton.onClick.RemoveAllListeners();
+							m_grid.ClearBoardData();
+							bLokiSelected = true;
+							bThorSelected = false;
+							bFreyaSelected = false;
+						}
+						if (hit.collider.tag == "Freya")
+						{
+							moveButton.onClick.RemoveAllListeners();
+							basicAttackButton.onClick.RemoveAllListeners();
+							ability1Button.onClick.RemoveAllListeners();
+							ability2Button.onClick.RemoveAllListeners();
+							cancelButton.onClick.RemoveAllListeners();
+							m_grid.ClearBoardData();
+							bFreyaSelected = true;
+							bThorSelected = false;
+							bLokiSelected = false;
+						}
 					}
 				}
 			}

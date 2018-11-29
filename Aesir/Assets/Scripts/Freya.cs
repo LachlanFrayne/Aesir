@@ -11,7 +11,6 @@ public class Freya : Hero
 
     public Image actionPointsBarImage;
     public Image healthBarImage;
-    public Image backgroundFreyaImage;
 
     [Header("Material")]
     public Material AttackHighlight;
@@ -30,7 +29,6 @@ public class Freya : Hero
         healthMaxLabel = GameObject.Find("Health Max Freya").GetComponent<Text>();
         actionPointsBarImage = GameObject.Find("Action Points Bar Freya").GetComponent<Image>();
         healthBarImage = GameObject.Find("Health Bar Freya").GetComponent<Image>();
-        backgroundFreyaImage = GameObject.Find("BackgroundFreya").GetComponent<Image>();
    
         actionPointCostLabel.SetActive(false);
 
@@ -109,13 +107,9 @@ public class Freya : Hero
         healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 		worldSpaceUI.freyaHealthOverheadLabel.text = healthLabel.text;
 
-		if (bFreyaSelected)
-        {
-            backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 150);
-        }
+
         if (!bFreyaSelected)
         {
-            backgroundFreyaImage.GetComponent<Image>().color = new Color32(255, 255, 0, 55);
             actionPointCostLabel.SetActive(false);
 			bMove = false;
 			bBasicAttack = false;

@@ -9,7 +9,6 @@ public class Loki : Hero
 
 	public Image actionPointsBarImage;
 	public Image healthBarImage;
-	public Image backgroundLokiImage;
 
 	[Header("Material")]
 	public Material AttackHighlight;
@@ -27,7 +26,6 @@ public class Loki : Hero
 		healthMaxLabel = GameObject.Find("Health Max Loki").GetComponent<Text>();
 		actionPointsBarImage = GameObject.Find("Action Points Bar Loki").GetComponent<Image>();
 		healthBarImage = GameObject.Find("Health Bar Loki").GetComponent<Image>();
-		backgroundLokiImage = GameObject.Find("BackgroundLoki").GetComponent<Image>();
 
 		actionPointCostLabel.SetActive(false);
 
@@ -106,13 +104,8 @@ public class Loki : Hero
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
 		worldSpaceUI.lokiHealthOverheadLabel.text = healthLabel.text;
 
-		if (bLokiSelected)
-		{
-			backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 150);
-		}
 		if (!bLokiSelected)
 		{
-			backgroundLokiImage.GetComponent<Image>().color = new Color32(0, 0, 255, 55);
 			actionPointCostLabel.SetActive(false);
 			bMove = false;
 			bBasicAttack = false;
@@ -140,21 +133,7 @@ public class Loki : Hero
 					}
 					if (bAbility1Attack == true)
 					{
-						m_nActionPoints = m_nActionPoints - m_nAbility1AttackCost;
-						m_grid.ClearBoardData();
-
-						Node temp = m_currentNode;      //Sets the current nodes for all
-						m_currentNode = hit.collider.GetComponent<Enemy>().m_currentNode;
-						hit.collider.GetComponent<Enemy>().m_currentNode = temp;
-
-						m_currentNode.contain = this.gameObject;
-						hit.collider.GetComponent<Enemy>().m_currentNode.contain = hit.collider.gameObject;
-
-						Vector3 temp1 = transform.position;
-						transform.position = hit.collider.GetComponent<Collider>().transform.position;
-						hit.collider.GetComponent<Collider>().transform.position = temp1;
-						hit.collider.GetComponent<Enemy>().m_nHealth = hit.collider.GetComponent<Enemy>().m_nHealth - m_nAbility1Attack;
-						bAbility1Attack = false;
+						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponent<Enemy>()));
 					}
 				}
 				else if (hit.collider.GetComponentInParent<Freya>() != null)
@@ -169,16 +148,6 @@ public class Loki : Hero
 					if (bAbility1Attack == true)
 					{
 						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<BridalThor>()));
-					}
-				}
-				else if (hit.collider.GetComponent<DestructibleObject>() != null)
-				{
-					if (bBasicAttack == true)
-					{
-						m_nActionPoints = m_nActionPoints - m_nBasicAttackCost;
-						m_grid.ClearBoardData();
-						hit.collider.GetComponent<DestructibleObject>().m_nHealth = hit.collider.GetComponent<DestructibleObject>().m_nHealth - m_nBasicAttackDamage;
-						bBasicAttack = false;
 					}
 				}
 			}
@@ -269,6 +238,11 @@ public class Loki : Hero
 
 		m_currentNode.contain = this.gameObject;
 		entity.m_currentNode.contain = entity.gameObject;
+
+		if(entity.GetComponent<Enemy>() != null)
+		{
+			entity.m_nHealth -= m_nAbility1Attack;
+		}
 
 		Vector3 temp1 = transform.position;
 		transform.position = entity.transform.position;
