@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 64934884189266534}
   - component: {fileID: 23254909402809682}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: ThorPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1701245852495382
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4266791314493254}
+  - component: {fileID: 33005696850477832}
+  - component: {fileID: 64385115594710578}
+  - component: {fileID: 23125125579156942}
+  m_Layer: 0
+  m_Name: BridalThorPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1726695763999860
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,8 +102,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005548123182278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0014337003, y: 0.017218173, z: -0.99985075}
-  m_LocalScale: {x: 0.089138925, y: 1, z: 0.20517012}
+  m_LocalPosition: {x: -0, y: -0, z: -1.637}
+  m_LocalScale: {x: 0.10112046, y: 0.99999994, z: 0.29781303}
   m_Children: []
   m_Father: {fileID: 4893798370576490}
   m_RootOrder: 0
@@ -103,6 +121,19 @@ Transform:
   m_Father: {fileID: 4713201342206428}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4266791314493254
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701245852495382}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000019231811, y: -0.00000023841858, z: -1.1738498}
+  m_LocalScale: {x: 0.08914003, y: 0.99999994, z: 0.20516999}
+  m_Children: []
+  m_Father: {fileID: 4893798370576490}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
 --- !u!4 &4713201342206428
 Transform:
   m_ObjectHideFlags: 1
@@ -129,9 +160,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4110483546822054}
+  - {fileID: 4266791314493254}
   m_Father: {fileID: 4713201342206428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 89.01, y: -115.05, z: -4.76}
+--- !u!23 &23125125579156942
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701245852495382}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: df422dedd915ce243a7a05b2bd47a238, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23254909402809682
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -166,12 +232,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33005696850477832
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701245852495382}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33240698014606450
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005548123182278}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64385115594710578
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701245852495382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &64934884189266534
 MeshCollider:
@@ -267,7 +354,7 @@ MonoBehaviour:
   ability2DisableImage: {fileID: 21300000, guid: 75211e32784283a41ab954edd2a60622,
     type: 3}
   worldSpaceUI: {fileID: 0}
-  speed: 0
+  speed: 1
   m_animPresets:
   - _animation: 1
     _frameRate: 13
@@ -290,7 +377,7 @@ MonoBehaviour:
     _offset: 0
     animationDuration: 1
   - _animation: 5
-    _frameRate: 13
+    _frameRate: 5
     _frames: 4
     _offset: 0
     animationDuration: 3
@@ -306,7 +393,6 @@ MonoBehaviour:
     animationDuration: 2
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
-  backgroundThorImage: {fileID: 0}
   bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
@@ -378,11 +464,50 @@ MonoBehaviour:
   ability2DisableImage: {fileID: 21300000, guid: 55c14e072701ef34baeb57c8f59f9d67,
     type: 3}
   worldSpaceUI: {fileID: 0}
-  speed: 0
-  m_animPresets: []
+  speed: 1
+  m_animPresets:
+  - _animation: 1
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 0
+  - _animation: 2
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 0
+  - _animation: 3
+    _frameRate: 13
+    _frames: 3
+    _offset: 0
+    animationDuration: 1
+  - _animation: 4
+    _frameRate: 13
+    _frames: 5
+    _offset: 0
+    animationDuration: 1
+  - _animation: 5
+    _frameRate: 5
+    _frames: 4
+    _offset: 0
+    animationDuration: 3
+  - _animation: 6
+    _frameRate: 13
+    _frames: 6
+    _offset: 0
+    animationDuration: 2
+  - _animation: 7
+    _frameRate: 13
+    _frames: 5
+    _offset: 0
+    animationDuration: 2
+  - _animation: 8
+    _frameRate: 13
+    _frames: 4
+    _offset: 0
+    animationDuration: 2
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
-  backgroundThorImage: {fileID: 0}
   bThor: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}
