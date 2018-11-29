@@ -52,6 +52,8 @@ public class LevelStartTurn : StateMachineBehaviour
 	{
 		levelStartDialog.StopAllCoroutines();
 
+		levelStartDialog.source.Stop();
+
 		levelStartDialog.dialogPanel.SetActive(false);
 
 		Transform ui = animator.GetComponent<EnemyLinker>().GetUI();
