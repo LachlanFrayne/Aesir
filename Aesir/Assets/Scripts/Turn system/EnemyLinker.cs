@@ -31,11 +31,19 @@ public class EnemyLinker : MonoBehaviour
         return m_enemyList;
     }
 
-	//public List<GameObject> GetUI()
-	//{
-	//	List<GameObject> ui;
-	//	return;
-	//}
+	public Transform GetUI()
+	{
+		Transform canvas = GameObject.Find("Canvas").transform;
+
+		//List<GameObject> ui = new List<GameObject>();
+
+		//foreach (GameObject g in canvas.transform)
+		//{
+		//	ui.Add(g);
+		//}
+
+		return canvas;
+	}
 
 	public IEnumerator EnemyDecisionManager(Animator animator)
 	{
