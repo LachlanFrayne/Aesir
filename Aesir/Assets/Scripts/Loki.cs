@@ -16,7 +16,9 @@ public class Loki : Hero
 
 	void Start()
 	{
-		worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
+		//worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
+		worldSpaceUI = FindObjectOfType<WorldSpaceUI>();
+
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
 		actionPointLabel = GameObject.Find("Action Points Loki").GetComponent<Text>();
