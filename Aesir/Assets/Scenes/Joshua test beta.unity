@@ -729,7 +729,7 @@ Prefab:
     - target: {fileID: 224899012866629270, guid: 9ab36bc848ae7a84f9861ab28c55873c,
         type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 224899012866629270, guid: 9ab36bc848ae7a84f9861ab28c55873c,
         type: 2}
@@ -9457,7 +9457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1405271941
 Prefab:
@@ -10701,7 +10701,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4056724648832372, guid: 7226ed2407b8acb40826da9299d87c79, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.04
+      value: 18.18
       objectReference: {fileID: 0}
     - target: {fileID: 4056724648832372, guid: 7226ed2407b8acb40826da9299d87c79, type: 2}
       propertyPath: m_LocalPosition.y
@@ -11166,11 +11166,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 114448591988727966, guid: 97a1086eca3cc9c4490daeeeccd89ed6,
-        type: 2}
-      propertyPath: dialogAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: ec53fd26c43633c4a94570166d1d5d54, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97a1086eca3cc9c4490daeeeccd89ed6, type: 2}
   m_IsPrefabParent: 0

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_zMin: 0
   m_height: 8
   m_speed: 15
-  m_borderSize: 25
+  m_borderSize: 0
 --- !u!124 &124134151124806090
 Behaviour:
   m_ObjectHideFlags: 1
