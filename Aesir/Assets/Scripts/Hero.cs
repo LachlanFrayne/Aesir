@@ -34,6 +34,7 @@ public abstract class Hero : Entity
 	public int m_nAbility2AttackCost;
 
 	public Grida m_grid;
+	public Camera camera;
 
 	public Hero bridalThor;
 	public Hero freya;
@@ -82,9 +83,12 @@ public abstract class Hero : Entity
 	public List<AnimationPreset> m_animPresets;
 	private Animator m_turnChecker;
 
+	public GameObject deathParticle;
+
     public void Start()
     {
-        moveSetButtons = GameObject.Find("MoveSet");
+		camera = Camera.main;
+		moveSetButtons = GameObject.Find("MoveSet");
         moveButton = GameObject.Find("Move").GetComponent<Button>();
         basicAttackButton = GameObject.Find("Basic Attack").GetComponent<Button>();
         ability1Button = GameObject.Find("Ability 1").GetComponent<Button>();
@@ -125,6 +129,8 @@ public abstract class Hero : Entity
 			m_nHealth = m_nHealthMax;
 		}
 
+		transform.LookAt(new Vector3(camera.transform.position.x, transform.position.y, camera.transform.position.z));
+
 		if (m_turnChecker.GetCurrentAnimatorStateInfo(0).IsName("PlayerTurn"))
 		{
 			bLokiSelected = false;
@@ -132,11 +138,11 @@ public abstract class Hero : Entity
 			bFreyaSelected = false;
 		}
 
-			if (m_nHealth <= 0)
-        {
-            GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
+		if (m_nHealth <= 0)
+		{
+			GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_heroes.Remove(this.gameObject);
 			StartCoroutine(Death(m_animPresets[4]));
-        }
+		}
 
 		if (bFinished == true)
 		{
@@ -573,7 +579,7 @@ public abstract class Hero : Entity
 	{
 		StartCoroutine(RunAnim(anim));
 		yield return new WaitForSeconds(anim.animationDuration);
-
+		Instantiate(deathParticle,gameObject.transform.position, new Quaternion(0,0,0,0));
 		Destroy(this.gameObject);
 	}
 }
