@@ -42,6 +42,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1496390330777452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4271454127213508}
+  - component: {fileID: 33623025677480120}
+  - component: {fileID: 23933820629032196}
+  - component: {fileID: 95659212534901908}
+  m_Layer: 0
+  m_Name: Loki_001_Unarmoured_001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1631301771806276
 GameObject:
   m_ObjectHideFlags: 1
@@ -87,6 +105,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4473960117621986}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4271454127213508
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496390330777452}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4473960117621986}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4473960117621986
@@ -100,6 +131,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4777593548288258}
+  - {fileID: 4271454127213508}
   - {fileID: 4034523627627522}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -131,6 +163,46 @@ Transform:
   m_Father: {fileID: 4777593548288258}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23933820629032196
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496390330777452}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100002, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100004, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100006, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100008, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100010, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  - {fileID: 2100012, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23982171719086276
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -172,6 +244,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1631301771806276}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33623025677480120
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496390330777452}
+  m_Mesh: {fileID: 4300000, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
 --- !u!64 &64770068443359114
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -198,6 +277,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4337687, y: 2.0389445, z: 0.34387228}
   m_Center: {x: 0.004119813, y: 0.99292195, z: 0.027901426}
+--- !u!95 &95659212534901908
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496390330777452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e655d3cbfcd54b04797d3514c02f9417, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114556546164295584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,9 +320,6 @@ MonoBehaviour:
   bMove: 0
   bAttack: 0
   bAttacking: 0
-  bBasicAttack: 0
-  bAbility1Attack: 0
-  bAbility2Attack: 0
   m_nAbility1Attack: 2
   m_nAbility1AttackRange: 3
   m_nAbility1AttackCost: 8
@@ -237,7 +330,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   bridalThor: {fileID: 0}
   freya: {fileID: 0}
-  loki: {fileID: 114556546164295584}
+  loki: {fileID: 0}
   m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
@@ -288,7 +381,7 @@ MonoBehaviour:
     _frameRate: 13
     _frames: 2
     _offset: 0
-    animationDuration: 1
+    animationDuration: 0
   - _animation: 5
     _frameRate: 5
     _frames: 6
@@ -303,11 +396,13 @@ MonoBehaviour:
     _frameRate: 13
     _frames: 6
     _offset: 0
-    animationDuration: 2
+    animationDuration: 3
   deathParticle: {fileID: 1874325792678094, guid: 77740f75a85ea0d4cbceae2dc3cd566b,
     type: 2}
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
+  bBasicAttack: 0
+  bAbility1Attack: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}

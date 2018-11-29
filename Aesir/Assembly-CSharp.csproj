@@ -60,6 +60,7 @@
      <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\EditorLabel.cs" />
      <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\EnableCameraDepthInForward.cs" />
      <Compile Include="Assets\3rd Party\ShaderForge\Example Assets\Scripts\SoftNormalsToVertexColor.cs" />
+     <Compile Include="Assets\Particles\Stun\RotateHeart.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -141,6 +142,7 @@
      <Compile Include="Assets\Scripts\Turn system\LevelEndTurn.cs" />
      <Compile Include="Assets\Scripts\Turn system\LevelStartTurn.cs" />
      <Compile Include="Assets\Scripts\Turn system\PlayerTurn.cs" />
+     <Compile Include="Assets\Scripts\UiCharacterRotation.cs" />
      <Compile Include="Assets\Scripts\WorldSpaceUI.cs" />
      <None Include="Assets\Particles\DELETE_ME.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
@@ -179,6 +181,7 @@
      <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
      <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\Vegetation.shader" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\Shader\pb_ReferenceUnlit.shader" />
+     <None Include="Assets\Shaders\HealthCircle.shader" />
      <None Include="Assets\Shaders\DELETE_ME.txt" />
      <None Include="Assets\3rd Party\ShaderForge\Example Assets\Shaders\VertexAnimation.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Blit.shader" />
@@ -217,6 +220,7 @@
      <None Include="Assets\Textures\Character Portraits\DELETEME.txt" />
      <None Include="Assets\Textures\Props\Tables and Chairs\Tables\DELETEME.txt" />
      <None Include="Assets\Textures\Building Objects\Arches\DELETEME.txt" />
+     <None Include="Assets\Shaders\HealthShader.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
      <None Include="Assets\3rd Party\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
