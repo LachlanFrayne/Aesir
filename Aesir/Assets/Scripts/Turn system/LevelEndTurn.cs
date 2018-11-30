@@ -40,7 +40,11 @@ public class LevelEndTurn : StateMachineBehaviour {
 
 			levelEndDialog.dialogPanel.SetActive(false);
 
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			if(SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings )
+			{
+				SceneManager.LoadScene(0);
+			}
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Return))

@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MalcomSetDressing.unity
     guid: 8b597da46a791ca409d59444ba124215
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 46d769a65d6b6ec479311043aadb5909

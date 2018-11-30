@@ -19,7 +19,6 @@ public class Freya : Hero
 
     void Start()
     {
-		worldSpaceUI = FindObjectOfType<WorldSpaceUI>();
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Freya");       
         actionPointLabel = GameObject.Find("Action Points Freya").GetComponent<Text>();
@@ -34,7 +33,6 @@ public class Freya : Hero
 
         healthLabel.text = m_nHealth.ToString();
         healthMaxLabel.text = m_nHealthMax.ToString();
-		worldSpaceUI.freyaHealthMaxOverheadLabel.text = healthMaxLabel.text;
 		actionPointLabel.text = m_nActionPoints.ToString();
         actionPointMaxLabel.text = m_nActionPointMax.ToString();
 
@@ -102,10 +100,8 @@ public class Freya : Hero
         actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
         healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
-		worldSpaceUI.freyaHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
 
         healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
-		worldSpaceUI.freyaHealthOverheadLabel.text = healthLabel.text;
 
 
         if (!bFreyaSelected)
@@ -177,7 +173,6 @@ public class Freya : Hero
     void BasicAttack()
     {
 		m_grid.ClearBoardData();
-		bAttacking = true;
 		bMove = false;
 		bAbility1Attack = false;
         actionPointCostLabel.SetActive(true);

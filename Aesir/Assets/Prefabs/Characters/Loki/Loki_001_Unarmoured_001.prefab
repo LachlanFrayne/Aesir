@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493035065664966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 34.61, y: 27.35, z: 7.44}
+  m_LocalPosition: {x: 18.97, y: -0.53, z: 11.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4777593548288258}
@@ -309,9 +309,9 @@ MonoBehaviour:
   m_nHealthMax: 10
   m_nActionPoints: 12
   m_nActionPointMax: 12
-  m_nBasicAttackDamage: 4
+  m_nBasicAttackDamage: 5
   m_nBasicAttackRange: 1
-  m_nBasicAttackCost: 4
+  m_nBasicAttackCost: 5
   m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   bThorSelected: 0
@@ -320,6 +320,9 @@ MonoBehaviour:
   bMove: 0
   bAttack: 0
   bAttacking: 0
+  bBasicAttack: 0
+  bAbility1Attack: 0
+  bAbility2Attack: 0
   m_nAbility1Attack: 2
   m_nAbility1AttackRange: 3
   m_nAbility1AttackCost: 8
@@ -331,7 +334,6 @@ MonoBehaviour:
   bridalThor: {fileID: 0}
   freya: {fileID: 0}
   loki: {fileID: 0}
-  m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
   actionPointLabel: {fileID: 0}
@@ -402,7 +404,5 @@ MonoBehaviour:
   m_tempNode: {fileID: 0}
   actionPointsBarImage: {fileID: 0}
   healthBarImage: {fileID: 0}
-  bBasicAttack: 0
-  bAbility1Attack: 0
   AttackHighlight: {fileID: 2100000, guid: 34a6d96a26325b548ad86218716c5120, type: 2}
   EnemyHighlight: {fileID: 2100000, guid: ddc6e3d0e8fada84a8ddd0b361bb795b, type: 2}

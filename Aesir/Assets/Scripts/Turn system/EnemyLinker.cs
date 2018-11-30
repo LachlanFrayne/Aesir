@@ -42,6 +42,7 @@ public class EnemyLinker : MonoBehaviour
 	{
 		foreach (Enemy e in GetComponent<Animator>().GetBehaviour<EnemyTurn>().m_enemy)
 		{
+			e.m_calcTargetDecision.MakeDecision();
 			while (e.m_nActionPoints > 0)
 			{
 				//e.m_inRangeDecision.MakeDecision();

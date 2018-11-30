@@ -5,20 +5,17 @@ using UnityEngine;
 public class MusicDelay : MonoBehaviour {
 
     public AudioSource music;
-    float timer;
-	void Start () {
-
-        music.enabled = false;
-        timer = 0;
-    }
+    public float timer;
+	
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        timer -= Time.deltaTime;
 
-        if(timer > 15)
+        if(timer < 0)
         {
-            music.enabled = true;
+			music.Play();
+			Destroy(this);
         }
     }
 

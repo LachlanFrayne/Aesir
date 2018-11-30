@@ -140,15 +140,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726695763999860}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.14685, y: 28.028654, z: 12.1}
+  m_LocalRotation: {x: -0, y: 0.9754572, z: -0, w: 0.22018908}
+  m_LocalPosition: {x: 18.840084, y: 0.17262053, z: 10.620057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4893798370576490}
   - {fileID: 4196594618493076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 154.56001, z: 0}
 --- !u!4 &4893798370576490
 Transform:
   m_ObjectHideFlags: 1
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_nActionPointMax: 12
   m_nBasicAttackDamage: 2
   m_nBasicAttackRange: 3
-  m_nBasicAttackCost: 6
+  m_nBasicAttackCost: 5
   m_nMovementActionPointCostPerTile: 2
   m_currentNode: {fileID: 0}
   bThorSelected: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   bAbility2Attack: 0
   m_nAbility1Attack: 1
   m_nAbility1AttackRange: 1
-  m_nAbility1AttackCost: 4
+  m_nAbility1AttackCost: 6
   m_nAbility2Attack: 0
   m_nAbility2AttackRange: 0
   m_nAbility2AttackCost: 0
@@ -326,7 +326,6 @@ MonoBehaviour:
   bridalThor: {fileID: 0}
   freya: {fileID: 0}
   loki: {fileID: 0}
-  m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
   actionPointLabel: {fileID: 0}
@@ -439,7 +438,6 @@ MonoBehaviour:
   bridalThor: {fileID: 0}
   freya: {fileID: 0}
   loki: {fileID: 0}
-  m_tempNodeBase: {fileID: 0}
   actionPointCostLabel: {fileID: 0}
   moveSetButtons: {fileID: 0}
   actionPointLabel: {fileID: 0}

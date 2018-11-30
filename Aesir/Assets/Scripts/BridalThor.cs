@@ -20,8 +20,6 @@ public class BridalThor : Hero {
 
 	void Start ()
 	{
-		//worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
-		worldSpaceUI = FindObjectOfType<WorldSpaceUI>();
 
 
 		actionPointCostLabel = GameObject.Find("Action Points Cost Thor");
@@ -38,7 +36,6 @@ public class BridalThor : Hero {
 
 		healthLabel.text = m_nHealth.ToString();
 		healthMaxLabel.text = m_nHealthMax.ToString();
-		worldSpaceUI.thorHealthMaxOverheadLabel.text = healthMaxLabel.text;
 
 		actionPointLabel.text = m_nActionPoints.ToString();
 		actionPointMaxLabel.text = m_nActionPointMax.ToString();
@@ -127,10 +124,8 @@ public class BridalThor : Hero {
 		actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
 		healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
-		worldSpaceUI.thorHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
 
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
-		worldSpaceUI.thorHealthOverheadLabel.text = healthLabel.text;
 
 		if (!bThorSelected)
 		{

@@ -215,7 +215,7 @@ MonoBehaviour:
   m_inRangeDecision: {fileID: 0}
   m_calcTargetDecision: {fileID: 0}
   m_enemyRangeHighlightMaterial: {fileID: 0}
-  m_mugShot: {fileID: 0}
+  m_mugShot: {fileID: 21300000, guid: 5cdf7ffef00fa1448977c2b5ea5536a9, type: 3}
   m_bStunned: 0
 --- !u!114 &114767264278223080
 MonoBehaviour:

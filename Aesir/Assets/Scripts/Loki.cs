@@ -16,10 +16,6 @@ public class Loki : Hero
 
 	void Start()
 	{
-		//worldSpaceUI = GameObject.Find("WorldSpaceUI").GetComponent<WorldSpaceUI>();
-		worldSpaceUI = FindObjectOfType<WorldSpaceUI>();
-
-
 		actionPointCostLabel = GameObject.Find("Action Points Cost Loki");
 		actionPointLabel = GameObject.Find("Action Points Loki").GetComponent<Text>();
 		actionPointMaxLabel = GameObject.Find("Action Points Max Loki").GetComponent<Text>();
@@ -33,7 +29,6 @@ public class Loki : Hero
 
 		healthLabel.text = m_nHealth.ToString();
 		healthMaxLabel.text = m_nHealthMax.ToString();
-		worldSpaceUI.lokiHealthMaxOverheadLabel.text = healthMaxLabel.text;
 
 		actionPointLabel.text = m_nActionPoints.ToString();
 		actionPointMaxLabel.text = m_nActionPointMax.ToString();
@@ -101,10 +96,9 @@ public class Loki : Hero
 		actionPointLabel.text = m_nActionPoints.ToString();      //Sets the ActionPoint text to the amount of actionPoints
 
 		healthBarImage.fillAmount = (1f / m_nHealthMax) * m_nHealth;
-		worldSpaceUI.lokiHealthBarOverheadImage.fillAmount = healthBarImage.fillAmount;
 
 		healthLabel.text = m_nHealth.ToString();      //Sets the health text to the amount of health left
-		worldSpaceUI.lokiHealthOverheadLabel.text = healthLabel.text;
+
 
 		if (!bLokiSelected)
 		{
@@ -136,20 +130,29 @@ public class Loki : Hero
 					if (bAbility1Attack == true)
 					{
 						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponent<Enemy>()));
+						bAbility1Attack = false;
 					}
 				}
 				else if (hit.collider.GetComponentInParent<Freya>() != null)
 				{
-					if (bAbility1Attack == true)
+					if (hit.collider.GetComponentInParent<Freya>().m_currentNode.prev != null)
 					{
-						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Freya>()));
+						if (bAbility1Attack == true)
+						{
+							StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<Freya>()));
+							bAbility1Attack = false;
+						}
 					}
 				}
 				else if (hit.collider.GetComponentInParent<BridalThor>() != null)
 				{
-					if (bAbility1Attack == true)
+					if (hit.collider.GetComponentInParent<BridalThor>().m_currentNode.prev != null)
 					{
-						StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<BridalThor>()));
+						if (bAbility1Attack == true)
+						{
+							StartCoroutine(ability1Attack(m_animPresets[5], hit.collider.GetComponentInParent<BridalThor>()));
+							bAbility1Attack = false;
+						}
 					}
 				}
 			}
@@ -167,7 +170,6 @@ public class Loki : Hero
 	{
 		m_grid.ClearBoardData();
 		bMove = false;
-		bAttacking = true;
 		bAbility1Attack = false;
 		actionPointCostLabel.SetActive(true);
 		bBasicAttack = true;

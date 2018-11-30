@@ -12,11 +12,15 @@ public class LevelStartTurn : StateMachineBehaviour
 	{
 		levelStartDialog = animator.GetComponent<LevelStartDialog>();
 
-		levelStartDialog.source.PlayOneShot(levelStartDialog.dialogAudio, 1f);
 
 		levelStartDialog.StartDialog();
 
-		timer = levelStartDialog.dialogAudio.length;
+		if (levelStartDialog.source != null)
+		{
+			levelStartDialog.source.PlayOneShot(levelStartDialog.dialogAudio, 1f);
+			timer = 15;// levelStartDialog.dialogAudio.length;
+
+		}
 
 		levelStartDialog.dialogPanel.SetActive(true);
 		levelStartDialog.dialogBox.text = "";

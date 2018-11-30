@@ -200,6 +200,7 @@ public class Enemy : Entity
 		if (m_nHealth <= 0)
 		{
 			GameObject.Find("TurnManager").GetComponent<EndGameTurn>().m_enemies.Remove(this.gameObject);
+			GameObject.Find("TurnManager").GetComponent<Animator>().GetBehaviour<EnemyTurn>().m_enemy.Remove(this);
 
 			GetComponentInChildren<Animator>().SetBool("GetHit", true);
 			GetComponentInChildren<Animator>().SetBool("Death", true);

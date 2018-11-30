@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: c724f3e893b513b439916afe9316a949,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -932,6 +933,7 @@ GameObject:
   - component: {fileID: 519066245}
   - component: {fileID: 519066244}
   - component: {fileID: 519066243}
+  - component: {fileID: 519066246}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -945,18 +947,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519066241}
-  m_LocalRotation: {x: -0, y: -0, z: 0.13644102, w: 0.9906482}
+  m_LocalRotation: {x: -0, y: -0, z: 0.1276786, w: 0.9918156}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 752550573}
   m_Father: {fileID: 719995018}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 15.684001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.6710005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68.1, y: -167.1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 65.2, y: -170.6}
+  m_SizeDelta: {x: 112.27, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &519066243
 MonoBehaviour:
@@ -1043,6 +1045,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519066241}
+--- !u!108 &519066246
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519066241}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!4 &521857425 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4845358188781914, guid: 50bfb1b1d0152fd4ca6ce9059f1245eb,
@@ -1187,7 +1225,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 719995015}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.022800917, w: 0.99974006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1197,10 +1235,10 @@ RectTransform:
   - {fileID: 519066242}
   m_Father: {fileID: 2087826243}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.6130002}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -16, y: 40}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &720580610
@@ -2074,6 +2112,7 @@ GameObject:
   - component: {fileID: 1041875266}
   - component: {fileID: 1041875265}
   - component: {fileID: 1041875264}
+  - component: {fileID: 1041875267}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -2087,18 +2126,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1041875262}
-  m_LocalRotation: {x: -0, y: -0, z: 0.12889326, w: 0.9916585}
+  m_LocalRotation: {x: -0, y: -0, z: 0.12767945, w: 0.99181545}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 745206811}
   m_Father: {fileID: 719995018}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.811001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.6710005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55.1, y: -111.7}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 54.54998, y: -125.54}
+  m_SizeDelta: {x: 112.27, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041875264
 MonoBehaviour:
@@ -2196,6 +2235,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1041875262}
+--- !u!108 &1041875267
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041875262}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1063615664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,6 +2282,7 @@ GameObject:
   - component: {fileID: 1063615668}
   - component: {fileID: 1063615667}
   - component: {fileID: 1063615666}
+  - component: {fileID: 1063615669}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -2220,18 +2296,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1063615664}
-  m_LocalRotation: {x: -0, y: -0, z: 0.11636735, w: 0.9932063}
+  m_LocalRotation: {x: -0, y: -0, z: 0.12767945, w: 0.99181545}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 76904320}
   m_Father: {fileID: 719995018}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.6710005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.9, y: -54.8}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 43.55998, y: -79.75}
+  m_SizeDelta: {x: 112.27, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1063615666
 MonoBehaviour:
@@ -2329,6 +2405,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1063615664}
+--- !u!108 &1063615669
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1063615664}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1079330705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2452,7 @@ GameObject:
   - component: {fileID: 1079330709}
   - component: {fileID: 1079330708}
   - component: {fileID: 1079330707}
+  - component: {fileID: 1079330710}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -2353,18 +2466,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079330705}
-  m_LocalRotation: {x: -0, y: -0, z: 0.116365656, w: 0.99320644}
+  m_LocalRotation: {x: -0, y: -0, z: 0.12767945, w: 0.99181545}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1437762289}
   m_Father: {fileID: 719995018}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.365001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.6710005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.399988, y: -0.2000122}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 33.699978, y: -36.039997}
+  m_SizeDelta: {x: 112.27, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1079330707
 MonoBehaviour:
@@ -2451,6 +2564,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079330705}
+--- !u!108 &1079330710
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079330705}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &1098153479
 Prefab:
   m_ObjectHideFlags: 0

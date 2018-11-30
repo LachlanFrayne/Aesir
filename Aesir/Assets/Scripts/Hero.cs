@@ -40,8 +40,6 @@ public abstract class Hero : Entity
 	public Hero freya;
 	public Hero loki;
 
-    public Node m_tempNodeBase;
-
     public GameObject actionPointCostLabel;
     public GameObject moveSetButtons;
 
@@ -114,7 +112,6 @@ public abstract class Hero : Entity
                     {
                         m_currentNode = m_grid.nodeBoardArray[columnTile, rowTile];        //Sets currentNode to the tile the character is on
                         transform.position = new Vector3(m_currentNode.transform.position.x, 0, m_currentNode.transform.position.z);        //Sets position to the center of the tile
-                        m_tempNodeBase = m_currentNode;        //Creates a temp node on the currentNode
                         m_currentNode.contain = this.gameObject;
                     }
                 }
@@ -333,8 +330,6 @@ public abstract class Hero : Entity
 		StartCoroutine(RunAnim(m_animPresets[6]));
 		speed = ((float)endNode.m_gScore / (float)m_nMovementActionPointCostPerTile) / m_animPresets[6].animationDuration;
 
-		
-
 		foreach (Node tile in path)     
 		{
 			Vector3 playerPosition = transform.position;
@@ -353,7 +348,6 @@ public abstract class Hero : Entity
 					if (transform.GetChild(0).localScale.x < 0)
 					{
 						transform.GetChild(0).localScale = new Vector3(Mathf.Abs(transform.GetChild(0).localScale.x), transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-						Debug.Log("Turn right");
 					}
 				}
 				else if (tile.neighbours[2] == path[path.IndexOf(tile) + 1] || tile.neighbours[3] == path[path.IndexOf(tile) + 1])
@@ -361,18 +355,19 @@ public abstract class Hero : Entity
 					if (transform.GetChild(0).localScale.x > 0)
 					{
 						transform.GetChild(0).localScale = new Vector3(-transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-						Debug.Log("Turn left");
 					}
 				}
 			}
 		}
-		bFinished = true;	
+		bFinished = true;
+		m_currentNode = path[path.Count - 1];
+		path[path.Count - 1].contain = this.gameObject;
 		SetTile();
 	}
 
 	IEnumerator Lerp(Vector3 playerPosition, Vector3 tilePosition, float startTime, float journeyLength)
 	{
-		while (transform.position != tilePosition)
+		while (!(transform.position.x > tilePosition.x - 0.1f && transform.position.x < tilePosition.x + 0.1f) || !(transform.position.y > tilePosition.y - 0.1f && transform.position.y < tilePosition.y + 0.1f) || !(transform.position.z > tilePosition.z - 0.1f && transform.position.z < tilePosition.z + 0.1f))
 		{
 
 			float distCovered = ((Time.time - startTime) * speed);
@@ -381,6 +376,7 @@ public abstract class Hero : Entity
 			transform.position = Vector3.Lerp(playerPosition, tilePosition, fracJourney);
 			yield return null;
 		}
+		
 	}
 	Material mat;
 	public IEnumerator RunAnim(AnimationPreset anim)

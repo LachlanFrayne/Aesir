@@ -18,7 +18,7 @@ public class EnemyTurn : StateMachineBehaviour
 			if (!e.m_bStunned)
 			{
 				e.m_nActionPoints = e.m_nActionPointMax;
-				e.m_calcTargetDecision.MakeDecision();
+			
 			}
 			else
 			{
