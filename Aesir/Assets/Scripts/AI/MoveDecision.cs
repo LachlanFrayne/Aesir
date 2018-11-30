@@ -65,7 +65,11 @@ public class MoveDecision : BaseDecision
                         if (currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile < n.m_gScore)     //if better path
                         {
                             n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-                            n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
+							if (m_self.m_targetedHero != null)
+							{
+
+								n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
+							}
                             n.m_fScore = n.m_hScore + n.m_gScore;
                             n.prev = currentNode;
                         }
@@ -73,7 +77,11 @@ public class MoveDecision : BaseDecision
 					else		//if not in openlist
                     {		//update neighbors info
                         n.m_gScore = currentNode.m_gScore + m_self.m_nMovementActionPointCostPerTile;
-						n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
+						if (m_self.m_targetedHero != null)
+						{
+							n.m_hScore = Vector3.Distance(currentNode.transform.position, m_self.m_targetedHero.transform.position);
+
+						}
                         n.m_fScore = n.m_hScore + n.m_gScore;
                         n.prev = currentNode;
 
